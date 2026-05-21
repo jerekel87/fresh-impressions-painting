@@ -3,6 +3,7 @@ import { useParams, Navigate } from 'react-router-dom';
 import { ArrowRight, Phone } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import EstimateForm from '../components/EstimateForm';
+import ReviewsTicker from '../components/ReviewsTicker';
 import Footer from '../components/Footer';
 
 /* ─── Service Data ────────────────────────────────────────────── */
@@ -412,6 +413,9 @@ export default function ServicePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Reviews ── */}
+      <ReviewsTicker />
 
       {/* ── FAQ ── */}
       <section className="py-20 sm:py-28 bg-white">
