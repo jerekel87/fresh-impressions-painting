@@ -4,6 +4,7 @@ import { ArrowRight, Phone } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import EstimateForm from '../components/EstimateForm';
 import ReviewsTicker from '../components/ReviewsTicker';
+import ScrollingGallery from '../components/ScrollingGallery';
 import Footer from '../components/Footer';
 
 /* ─── Service Data ────────────────────────────────────────────── */
@@ -13,6 +14,7 @@ interface ServiceData {
   slug: string;
   tagline: string;
   heroImage: string;
+  galleryImages: string[];
   description: string[];
   highlights: { label: string; value: string }[];
   process: { step: string; title: string; body: string }[];
@@ -26,6 +28,20 @@ const services: Record<string, ServiceData> = {
     slug: 'brick-and-stone-lime-wash',
     tagline: 'Breathable, timeless finishes that add character and charm to masonry surfaces.',
     heroImage: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    galleryImages: [
+      'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/209296/pexels-photo-209296.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/2724745/pexels-photo-2724745.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      'https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+    ],
     description: [
       'If you want to update the look of your brick or masonry home, there is a better option than traditional paint. At Fresh Impressions Painting, we offer limewash and mineral-based finishes that allow masonry to breathe naturally while creating stunning curb appeal. Unlike many paints that can trap moisture and eventually peel, mineral coatings bond with the surface and age beautifully.',
       'Choose a solid mineral finish for a soft matte appearance or a classic limewash look that reveals natural variation and timeless character. It is one of the most beautiful ways to refresh brick and stone the right way.',
@@ -292,6 +308,9 @@ export default function ServicePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Scrolling Gallery ── */}
+      <ScrollingGallery images={service.galleryImages} />
 
       {/* ── About Service ── */}
       <section id="about-service" className="py-20 sm:py-28 md:py-36 bg-white">
