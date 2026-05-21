@@ -23,6 +23,7 @@ Marketing site for Fresh Impressions Painting, a residential and commercial pain
 - **Display font**: Oswald (weights 400-700), used uppercase for headings
 - **Body text**: 15-16px, line-height 1.8-1.85, gray-500/gray-600
 - **H1 (page hero headings)**: Oswald uppercase, bold, `text-4xl sm:text-5xl md:text-6xl lg:text-7xl` (36px / 48px / 60px / 72px), line-height 1.05
+- **IMPORTANT**: NEVER use the ampersand character (&) in headings or titles. Always spell out "And" instead.
 - **Home hero H1** (special): Oswald uppercase, bold, `text-[clamp(2rem,7vw,5.5rem)]` (fluid 32px–88px), line-height 1.08
 - **H2 (section headings)**: Oswald uppercase, bold, `text-3xl sm:text-4xl md:text-5xl lg:text-6xl` (30px / 36px / 48px / 60px), line-height 1.05
 - **Section labels**: Brand-teal or brand-yellow, 12px, uppercase, tracking `0.2em`, font-semibold

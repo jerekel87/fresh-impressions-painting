@@ -103,7 +103,7 @@ export default function Navbar() {
               <a href="#service-areas" className="hover:text-white/70 transition-colors duration-200">Parker</a>
               <span>,</span>
               <a href="#service-areas" className="hover:text-white/70 transition-colors duration-200">Erath</a>
-              <span>&</span>
+              <span>and</span>
               <a href="#service-areas" className="hover:text-white/70 transition-colors duration-200">Somervell</a>
             </div>
           </div>

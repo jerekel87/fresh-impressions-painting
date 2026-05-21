@@ -171,7 +171,7 @@ export const services: Record<string, ServiceData> = {
   },
 
   'cabinet-finishing-and-refinishing': {
-    title: 'Cabinet Finishing & Refinishing',
+    title: 'Cabinet Finishing And Refinishing',
     slug: 'cabinet-finishing-and-refinishing',
     tagline: 'Expert refinishing that gives your kitchen a stunning, like-new transformation.',
     heroImage: 'https://images.pexels.com/photos/6585757/pexels-photo-6585757.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
@@ -275,7 +275,7 @@ export const services: Record<string, ServiceData> = {
   },
 
   'drywall-repair-and-finishing': {
-    title: 'Drywall Repair & Finishing',
+    title: 'Drywall Repair And Finishing',
     slug: 'drywall-repair-and-finishing',
     tagline: 'Seamless restoration \u2014 the invisible foundation for a flawless paint job.',
     heroImage: 'https://images.pexels.com/photos/5691593/pexels-photo-5691593.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
@@ -327,7 +327,7 @@ export const services: Record<string, ServiceData> = {
   },
 
   'metal-finishing-and-refinishing': {
-    title: 'Metal Finishing & Refinishing',
+    title: 'Metal Finishing And Refinishing',
     slug: 'metal-finishing-and-refinishing',
     tagline: 'Durable coatings for metal surfaces \u2014 gates, railings, fixtures, and more.',
     heroImage: 'https://images.pexels.com/photos/2310483/pexels-photo-2310483.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
