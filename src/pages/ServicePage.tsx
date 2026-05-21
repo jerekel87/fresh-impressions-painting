@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { ChevronDown, ArrowRight, Phone } from 'lucide-react';
 import Navbar from '../components/Navbar';
@@ -126,26 +126,23 @@ const services: Record<string, ServiceData> = {
 /* ─── Before/After Slider ─────────────────────────────────────── */
 
 function BeforeAfterSlider({ before, after, caption }: { before: string; after: string; caption: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50);
   const [dragging, setDragging] = useState(false);
-  const [hovered, setHovered] = useState(false);
 
-  const handleMove = (clientX: number, rect: DOMRect) => {
+  const updatePosition = (clientX: number) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
     const pct = Math.min(Math.max(((clientX - rect.left) / rect.width) * 100, 2), 98);
     setPosition(pct);
   };
 
   useEffect(() => {
     if (!dragging) return;
+    const onMove = (e: MouseEvent) => updatePosition(e.clientX);
+    const onTouchMove = (e: TouchEvent) => updatePosition(e.touches[0].clientX);
     const onUp = () => setDragging(false);
-    const onMove = (e: MouseEvent) => {
-      const el = document.querySelector(`[data-slider-caption="${caption}"]`);
-      if (el) handleMove(e.clientX, el.getBoundingClientRect());
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      const el = document.querySelector(`[data-slider-caption="${caption}"]`);
-      if (el) handleMove(e.touches[0].clientX, el.getBoundingClientRect());
-    };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
     window.addEventListener('touchmove', onTouchMove);
@@ -156,40 +153,33 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('touchend', onUp);
     };
-  }, [dragging, caption]);
+  }, [dragging]);
 
   return (
     <div className="space-y-3">
       <div
-        data-slider-caption={caption}
-        className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none cursor-col-resize rounded-lg shadow-sm"
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        onMouseDown={(e) => { setDragging(true); handleMove(e.clientX, e.currentTarget.getBoundingClientRect()); }}
-        onTouchStart={(e) => { setDragging(true); handleMove(e.touches[0].clientX, e.currentTarget.getBoundingClientRect()); }}
+        ref={containerRef}
+        className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none cursor-col-resize rounded-sm"
+        onMouseDown={(e) => { setDragging(true); updatePosition(e.clientX); }}
+        onTouchStart={(e) => { setDragging(true); updatePosition(e.touches[0].clientX); }}
       >
         <img src={after} alt="After" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 overflow-hidden" style={{ width: `${position}%` }}>
           <img src={before} alt="Before" className="absolute inset-0 h-full object-cover" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} />
         </div>
-        {/* Divider line */}
         <div
-          className="absolute top-0 bottom-0 w-[3px] bg-white/90 z-10 pointer-events-none"
+          className="absolute top-0 bottom-0 z-10 flex items-center justify-center pointer-events-none"
           style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
-        />
-        {/* Handle */}
-        <div
-          className={`absolute top-1/2 z-20 -translate-y-1/2 pointer-events-none transition-transform duration-200 ${dragging ? 'scale-90' : hovered ? 'scale-110' : 'scale-100'}`}
-          style={{ left: `${position}%`, transform: `translateX(-50%) translateY(-50%) ${dragging ? 'scale(0.9)' : hovered ? 'scale(1.1)' : 'scale(1)'}` }}
         >
-          <div className="w-11 h-11 rounded-full bg-white shadow-[0_2px_12px_rgba(0,0,0,0.25)] flex items-center justify-center cursor-col-resize">
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
-              <path d="M6 4L2 10L6 16M14 4L18 10L14 16" stroke="#10263C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+          <div className="absolute top-0 bottom-0 w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.4)]" />
+          <div className="relative w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center border-2 border-gray-100">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M6 4L2 10L6 16M14 4L18 10L14 16" stroke="#10263C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
         </div>
-        <span className={`absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded transition-opacity duration-200 ${hovered || dragging ? 'opacity-100' : 'opacity-70'}`}>Before</span>
-        <span className={`absolute top-3 right-3 bg-brand-yellow/90 backdrop-blur-sm text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded transition-opacity duration-200 ${hovered || dragging ? 'opacity-100' : 'opacity-70'}`}>After</span>
+        <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1">Before</span>
+        <span className="absolute top-3 right-3 bg-brand-yellow text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1">After</span>
       </div>
       <p className="text-gray-500 text-[13px] text-center leading-snug">{caption}</p>
     </div>
