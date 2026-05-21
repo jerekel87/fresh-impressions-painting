@@ -215,12 +215,11 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
 
 /* ─── FAQ Item ────────────────────────────────────────────────── */
 
-function FaqItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(defaultOpen);
+function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
   return (
     <div className={`border border-gray-100 px-5 sm:px-6 transition-all duration-300 ${open ? 'bg-gray-50/60 border-gray-200' : 'hover:border-gray-200'}`}>
       <button
-        onClick={() => setOpen(!open)}
+        onClick={onToggle}
         className="w-full flex items-center justify-between py-5 text-left gap-4"
       >
         <span className="text-[15px] sm:text-base font-semibold text-navy-900">{q}</span>
@@ -240,6 +239,7 @@ function FaqItem({ q, a, defaultOpen = false }: { q: string; a: string; defaultO
 export default function ServicePage() {
   const { slug } = useParams<{ slug: string }>();
   const service = slug ? services[slug] : null;
+  const [openFaq, setOpenFaq] = useState<number>(0);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
@@ -445,7 +445,7 @@ export default function ServicePage() {
             <div className="lg:col-span-8">
               <div className="space-y-3">
                 {service.faqs.map((faq, idx) => (
-                  <FaqItem key={idx} q={faq.q} a={faq.a} defaultOpen={idx === 0} />
+                  <FaqItem key={idx} q={faq.q} a={faq.a} open={openFaq === idx} onToggle={() => setOpenFaq(openFaq === idx ? -1 : idx)} />
                 ))}
               </div>
             </div>
