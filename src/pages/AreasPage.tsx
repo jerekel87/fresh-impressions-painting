@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { MapPin, CheckCircle } from 'lucide-react';
+import { MapPin, BadgeCheck } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import ServiceAreaMap from '../components/ServiceAreaMap';
 import EstimateForm from '../components/EstimateForm';
@@ -94,7 +94,7 @@ export default function AreasPage() {
               Where We Work
             </span>
             <h2
-              className="font-display uppercase text-3xl sm:text-4xl md:text-5xl font-bold text-navy-900"
+              className="font-display uppercase text-4xl sm:text-5xl lg:text-6xl font-bold text-navy-900"
               style={{ lineHeight: 1.05 }}
             >
               Counties we proudly serve
@@ -105,12 +105,12 @@ export default function AreasPage() {
             {counties.map((county) => (
               <div
                 key={county.name}
-                className="relative border border-gray-200 bg-white p-6 sm:p-8"
+                className="relative border-l-4 border-l-brand-teal bg-[#f8fafb] p-6 sm:p-8 shadow-sm"
               >
                 {county.isHQ && (
-                  <span className="absolute top-4 right-4 inline-flex items-center gap-1.5 bg-brand-yellow/10 text-brand-yellow border border-brand-yellow/20 text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1">
+                  <span className="absolute top-5 right-5 inline-flex items-center gap-1.5 bg-navy-900 text-brand-yellow text-[10px] font-bold uppercase tracking-wider px-3 py-1.5">
                     <MapPin className="w-3 h-3" />
-                    Headquarters
+                    HQ
                   </span>
                 )}
 
@@ -131,9 +131,9 @@ export default function AreasPage() {
                   {county.cities.map((city) => (
                     <span
                       key={city}
-                      className="inline-flex items-center gap-1 text-xs font-medium bg-gray-100 text-gray-700 px-2.5 py-1"
+                      className="inline-flex items-center gap-1.5 text-xs font-medium text-navy-900 bg-white border border-gray-200 px-2.5 py-1.5"
                     >
-                      <CheckCircle className="w-3 h-3 text-brand-teal/70" />
+                      <BadgeCheck className="w-3.5 h-3.5 text-brand-teal fill-brand-teal/20" />
                       {city}
                     </span>
                   ))}
