@@ -86,11 +86,10 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Your home should feel fresh, comfortable, and cared for\u2014and that is exactly what we help create at Fresh Impressions Painting. We do more than apply paint. We provide a thoughtful, organized experience that respects both your home and your time.',
-      'Every project begins with protecting furniture, flooring, appliances, windows, and personal belongings. We then create a room-by-room plan with you so the work flows smoothly and efficiently. From walls and ceilings to trim, doors, and detail work, we use premium products that provide beautiful color, lasting durability, and a finish you will be proud to live in every day.',
+      'Your home should feel fresh, comfortable, and cared for\u2014and that is exactly what we help create at Fresh Impressions Painting. We do more than apply paint. We provide a thoughtful, organized experience that respects both your home and your time. Every project begins with protecting furniture, flooring, appliances, windows, and personal belongings. We then create a room-by-room plan with you so the work flows smoothly and efficiently. From walls and ceilings to trim, doors, and detail work, we use premium products that provide beautiful color, lasting durability, and a finish you will be proud to live in every day.',
     ],
     highlights: [
-      { label: 'Coverage', value: 'Walls, Ceilings, Trim & Doors' },
+      { label: 'Coverage', value: 'Walls, Ceilings, Trim and Doors' },
       { label: 'Products', value: 'Premium Grade Paints' },
       { label: 'Protection', value: 'Full Home Coverage' },
       { label: 'Finish Options', value: 'Flat to Semi-Gloss' },
@@ -138,8 +137,7 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2724745/pexels-photo-2724745.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Your home\'s exterior is constantly exposed to sun, rain, wind, and changing temperatures. At Fresh Impressions Painting, we believe exterior painting should do more than look good\u2014it should protect your investment.',
-      'Our proven process includes washing, surface preparation, repairs, caulking, priming where needed, painting, and final touch-ups. We use premium coatings chosen for durability and long-term performance. The result is an exterior that looks refreshed, stands strong against the elements, and adds lasting curb appeal to your home.',
+      'Your home\'s exterior is constantly exposed to sun, rain, wind, and changing temperatures. At Fresh Impressions Painting, we believe exterior painting should do more than look good\u2014it should protect your investment. Our proven process includes washing, surface preparation, repairs, caulking, priming where needed, painting, and final touch-ups. We use premium coatings chosen for durability and long-term performance. The result is an exterior that looks refreshed, stands strong against the elements, and adds lasting curb appeal to your home.',
     ],
     highlights: [
       { label: 'Coverage', value: 'Siding, Trim, Fascia & Doors' },
@@ -190,8 +188,7 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Cabinets are one of the most used surfaces in any home, which means they require more than ordinary paint. At Fresh Impressions Painting, we specialize in cabinet refinishing built around two priorities: beauty and durability.',
-      'Our process includes detailed cleaning, sanding, surface preparation, priming, and the use of professional cabinet-grade coatings designed to resist wear, moisture, cleaning, and daily handling. We also use specialized spray equipment to create a smooth, factory-like finish with elegant sheen options. Whether you want a bright modern kitchen or a warm timeless look, we can transform your cabinets for a fraction of replacement cost\u2014without compromising quality.',
+      'Cabinets are one of the most used surfaces in any home, which means they require more than ordinary paint. At Fresh Impressions Painting, we specialize in cabinet refinishing built around two priorities: beauty and durability. Our process includes detailed cleaning, sanding, surface preparation, priming, and the use of professional cabinet-grade coatings designed to resist wear, moisture, cleaning, and daily handling. We also use specialized spray equipment to create a smooth, factory-like finish with elegant sheen options. Whether you want a bright modern kitchen or a warm timeless look, we can transform your cabinets for a fraction of replacement cost\u2014without compromising quality.',
     ],
     highlights: [
       { label: 'Surface Type', value: 'Wood, MDF & Laminate' },
@@ -242,8 +239,7 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'At Fresh Impressions Painting, we understand that the appearance of your business directly affects how customers see your brand. A clean, sharp, professional environment builds trust before a word is ever spoken.',
-      'We provide interior and exterior commercial painting for offices, retail stores, restaurants, warehouses, and more. Whether your project requires after-hours scheduling, careful coordination around employees and customers, or specialized equipment such as scissor lifts and boom lifts, we are prepared to handle it professionally. Our goal is simple: deliver beautiful, durable results with minimal disruption so you can stay focused on running your business.',
+      'At Fresh Impressions Painting, we understand that the appearance of your business directly affects how customers see your brand. A clean, sharp, professional environment builds trust before a word is ever spoken. We provide interior and exterior commercial painting for offices, retail stores, restaurants, warehouses, and more. Whether your project requires after-hours scheduling, careful coordination around employees and customers, or specialized equipment such as scissor lifts and boom lifts, we are prepared to handle it professionally. Our goal is simple: deliver beautiful, durable results with minimal disruption so you can stay focused on running your business.',
     ],
     highlights: [
       { label: 'Scheduling', value: 'After-Hours Available' },
@@ -294,8 +290,7 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Damaged drywall can make an otherwise beautiful home feel unfinished. Cracks, holes, water damage, settling seams, and poor texture repairs are common problems\u2014but they can be fixed the right way.',
-      'At Fresh Impressions Painting, we focus on repairs that last, not shortcuts that fail later. We properly secure loose drywall, repair damaged areas, blend seams, and carefully match surrounding textures. Our dust-controlled sanding systems help keep your home cleaner during the process. When complete, the repair blends naturally into the wall so the damage disappears.',
+      'Damaged drywall can make an otherwise beautiful home feel unfinished. Cracks, holes, water damage, settling seams, and poor texture repairs are common problems\u2014but they can be fixed the right way. At Fresh Impressions Painting, we focus on repairs that last, not shortcuts that fail later. We properly secure loose drywall, repair damaged areas, blend seams, and carefully match surrounding textures. Our dust-controlled sanding systems help keep your home cleaner during the process. When complete, the repair blends naturally into the wall so the damage disappears.',
     ],
     highlights: [
       { label: 'Repair Types', value: 'Cracks, Holes & Water Damage' },
@@ -346,8 +341,7 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/1669754/pexels-photo-1669754.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Metal surfaces such as fences, railings, gates, and structural steel need the right system to stop deterioration and extend their life.',
-      'At Fresh Impressions Painting, we begin by removing loose rust and failing coatings through scraping and sanding. We then apply high-performance rust-inhibiting primers followed by industrial-grade topcoats designed to withstand harsh weather and daily exposure. This process not only improves appearance\u2014it helps preserve and protect your investment for years to come.',
+      'Metal surfaces such as fences, railings, gates, and structural steel need the right system to stop deterioration and extend their life. At Fresh Impressions Painting, we begin by removing loose rust and failing coatings through scraping and sanding. We then apply high-performance rust-inhibiting primers followed by industrial-grade topcoats designed to withstand harsh weather and daily exposure. This process not only improves appearance\u2014it helps preserve and protect your investment for years to come.',
     ],
     highlights: [
       { label: 'Surfaces', value: 'Fences, Rails, Gates & Steel' },
@@ -398,8 +392,7 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'New construction deserves a painting partner who understands the pace, coordination, and quality standards that builders demand. At Fresh Impressions Painting, we work hand-in-hand with builders and general contractors to deliver flawless interior and exterior finishes on schedule.',
-      'From initial drywall priming through final touch-ups and punch list completion, we handle every phase of new construction painting with precision. We coordinate closely with other trades to stay on timeline, use professional spray and roll-and-brush techniques as appropriate, and deliver consistent, move-in ready results that homeowners and builders are proud of.',
+      'New construction deserves a painting partner who understands the pace, coordination, and quality standards that builders demand. At Fresh Impressions Painting, we work hand-in-hand with builders and general contractors to deliver flawless interior and exterior finishes on schedule. From initial drywall priming through final touch-ups and punch list completion, we handle every phase of new construction painting with precision. We coordinate closely with other trades to stay on timeline, use professional spray and roll-and-brush techniques as appropriate, and deliver consistent, move-in ready results that homeowners and builders are proud of.',
     ],
     highlights: [
       { label: 'Project Scope', value: 'Full Interior & Exterior' },
@@ -450,8 +443,7 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Exterior wood features bring warmth and character to a home, but sun and weather can quickly dry them out and wear them down. At Fresh Impressions Painting, we restore and protect wood surfaces such as posts, shutters, front doors, beams, and decorative accents.',
-      'Depending on the condition of the wood, we may recommend a maintenance coat, full stripping and re-staining, or premium clear protective finishes. Our goal is to preserve the natural beauty of the wood while helping it stand up to the elements. If your stained surfaces look tired, we can bring them back to life.',
+      'Exterior wood features bring warmth and character to a home, but sun and weather can quickly dry them out and wear them down. At Fresh Impressions Painting, we restore and protect wood surfaces such as posts, shutters, front doors, beams, and decorative accents. Depending on the condition of the wood, we may recommend a maintenance coat, full stripping and re-staining, or premium clear protective finishes. Our goal is to preserve the natural beauty of the wood while helping it stand up to the elements. If your stained surfaces look tired, we can bring them back to life.',
     ],
     highlights: [
       { label: 'Surfaces', value: 'Doors, Posts, Beams & Decks' },
