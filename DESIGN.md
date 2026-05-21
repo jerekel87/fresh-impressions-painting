@@ -183,7 +183,7 @@ Marketing site for Fresh Impressions Painting, a residential and commercial pain
     - Heading: "Ready to transform your space?"
     - Supporting paragraph
     - 2x2 grid of contact cards (white/80 bg, border, backdrop-blur):
-      - Call or Text: (817) 219-4990
+      - Call or Text: (817) 243-9116
       - Email: info@freshimpressionspainting.com
       - Service Area: North Central Texas
       - Response Time: Within one business day

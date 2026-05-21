@@ -326,7 +326,7 @@ export default function ServicePage() {
               <img
                 src={service.heroImage}
                 alt={service.title}
-                className="w-full h-[420px] sm:h-[520px] object-cover"
+                className="w-full aspect-[4/5] object-cover"
               />
               <div className="absolute -bottom-6 -left-6 hidden lg:block bg-brand-yellow p-6 w-[180px]">
                 <span className="block font-display uppercase text-4xl font-bold text-navy-900 leading-none">15+</span>
@@ -393,11 +393,11 @@ export default function ServicePage() {
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </a>
               <a
-                href="tel:+18172194990"
+                href="tel:+18172439116"
                 className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 border border-white/20 text-white font-bold text-[13px] tracking-[0.12em] uppercase hover:border-white/40 hover:bg-white/5 transition-all"
               >
                 <Phone className="w-4 h-4" />
-                (817) 219-4990
+                (817) 243-9116
               </a>
             </div>
 

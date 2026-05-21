@@ -43,7 +43,16 @@ export default function Navbar() {
   const navRef = useRef<HTMLElement>(null);
   const [dropdownLeft, setDropdownLeft] = useState<number | null>(null);
   const location = useLocation();
-  const [activeLink, setActiveLink] = useState(location.pathname === '/about' ? '/about' : '/');
+  const getActiveFromPath = (pathname: string) => {
+    if (pathname === '/about') return '/about';
+    if (pathname.startsWith('/services/')) return '/#services';
+    return '/';
+  };
+  const [activeLink, setActiveLink] = useState(getActiveFromPath(location.pathname));
+
+  useEffect(() => {
+    setActiveLink(getActiveFromPath(location.pathname));
+  }, [location.pathname]);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
