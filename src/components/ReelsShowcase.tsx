@@ -16,42 +16,22 @@ const reels = [
 ];
 
 function ReelCard({ url }: { url: string }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [parsed, setParsed] = useState(false);
-
-  useEffect(() => {
-    if (!parsed && containerRef.current && (window as any).FB) {
-      (window as any).FB.XFBML.parse(containerRef.current);
-      setParsed(true);
-    }
-  }, [parsed]);
-
-  useEffect(() => {
-    const handleFBReady = () => {
-      if (containerRef.current && !parsed) {
-        (window as any).FB.XFBML.parse(containerRef.current);
-        setParsed(true);
-      }
-    };
-    window.addEventListener('fb-sdk-ready', handleFBReady);
-    return () => window.removeEventListener('fb-sdk-ready', handleFBReady);
-  }, [parsed]);
+  const encodedUrl = encodeURIComponent(url);
+  const embedSrc = `https://www.facebook.com/plugins/video.php?href=${encodedUrl}&width=281&show_text=false&t=0`;
 
   return (
     <div
       data-card
       className="flex-shrink-0 w-[197px] sm:w-[253px] lg:w-[281px]"
     >
-      <div className="relative h-[350px] sm:h-[450px] lg:h-[500px] overflow-hidden bg-navy-800">
-        <div ref={containerRef} className="absolute inset-0 w-full h-full flex items-center justify-center bg-black">
-          <div
-            className="fb-video"
-            data-href={url}
-            data-width="281"
-            data-show-text="false"
-            data-allowfullscreen="true"
-          />
-        </div>
+      <div className="relative h-[350px] sm:h-[450px] lg:h-[500px] overflow-hidden rounded-sm bg-navy-800">
+        <iframe
+          src={embedSrc}
+          className="absolute inset-0 w-full h-full border-0"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+          allowFullScreen
+          loading="lazy"
+        />
       </div>
     </div>
   );
@@ -77,19 +57,6 @@ export default function ReelsShowcase() {
     return () => window.removeEventListener('resize', updatePadding);
   }, [updatePadding]);
 
-  useEffect(() => {
-    if (!(window as any).FB) {
-      const script = document.createElement('script');
-      script.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v19.0';
-      script.async = true;
-      script.defer = true;
-      script.crossOrigin = 'anonymous';
-      script.onload = () => {
-        window.dispatchEvent(new Event('fb-sdk-ready'));
-      };
-      document.body.appendChild(script);
-    }
-  }, []);
 
   const checkScroll = () => {
     if (!scrollRef.current) return;
@@ -177,7 +144,6 @@ export default function ReelsShowcase() {
         ))}
       </div>
 
-      <div id="fb-root" />
     </section>
   );
 }
