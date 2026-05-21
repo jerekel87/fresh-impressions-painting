@@ -22,15 +22,16 @@ Marketing site for Fresh Impressions Painting, a residential and commercial pain
 - **Body font**: Inter (weights 300-900)
 - **Display font**: Oswald (weights 400-700), used uppercase for headings
 - **Body text**: 15-16px, line-height 1.8-1.85, gray-500/gray-600
-- **Section headings**: Oswald uppercase, bold, `text-4xl md:text-5xl lg:text-7xl`, line-height 1.05
-- **Sub-section headings**: Oswald uppercase, bold, `text-3xl sm:text-4xl md:text-5xl lg:text-6xl`, line-height 1.05
+- **H1 (page hero headings)**: Oswald uppercase, bold, `text-4xl sm:text-5xl md:text-6xl lg:text-7xl` (36px / 48px / 60px / 72px), line-height 1.05
+- **Home hero H1** (special): Oswald uppercase, bold, `text-[clamp(2rem,7vw,5.5rem)]` (fluid 32px–88px), line-height 1.08
+- **H2 (section headings)**: Oswald uppercase, bold, `text-3xl sm:text-4xl md:text-5xl lg:text-6xl` (30px / 36px / 48px / 60px), line-height 1.05
 - **Section labels**: Brand-teal or brand-yellow, 12px, uppercase, tracking `0.2em`, font-semibold
 
 ### Inner Page Conventions
 - All inner pages share the Navbar and Footer from the home page
 - Inner pages begin with a navy-900 hero banner that accounts for the fixed navbar (pt-[120px] sm:pt-[140px])
 - Hero banners include a breadcrumb link back to home and a large Oswald heading
-- Section headings on inner pages MUST use the same sizing as the home page: `text-4xl md:text-5xl lg:text-7xl`
+- H1 hero headings on inner pages MUST use: `text-4xl sm:text-5xl md:text-6xl lg:text-7xl` with `line-height: 1.05`
 - Maintain the same spacing system, color tokens, and component patterns across all pages
 
 ### Spacing System

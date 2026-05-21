@@ -216,19 +216,34 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
 /* ─── FAQ Item ────────────────────────────────────────────────── */
 
 function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (open && contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    } else {
+      setHeight(0);
+    }
+  }, [open]);
+
   return (
-    <div className={`border border-gray-100 px-5 sm:px-6 transition-all duration-300 ${open ? 'bg-gray-50/60 border-gray-200' : 'hover:border-gray-200'}`}>
+    <div className={`border border-gray-100 px-5 sm:px-6 transition-colors duration-300 ${open ? 'bg-gray-50/60 border-gray-200' : 'hover:border-gray-200'}`}>
       <button
         onClick={onToggle}
         className="w-full flex items-center justify-between py-5 text-left gap-4"
       >
         <span className="text-[15px] sm:text-base font-semibold text-navy-900">{q}</span>
-        <span className="flex-shrink-0 text-navy-900 text-xl font-light select-none">
-          {open ? '\u2212' : '+'}
+        <span className={`flex-shrink-0 text-navy-900 text-xl font-light select-none transition-transform duration-300 ${open ? 'rotate-45' : 'rotate-0'}`}>
+          +
         </span>
       </button>
-      <div className={`overflow-hidden transition-all duration-300 ${open ? 'max-h-96 pb-5' : 'max-h-0'}`}>
-        <p className="text-gray-500 text-[15px] leading-[1.85]">{a}</p>
+      <div
+        ref={contentRef}
+        className="overflow-hidden transition-[height] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]"
+        style={{ height }}
+      >
+        <p className="text-gray-500 text-[15px] leading-[1.85] pb-5">{a}</p>
       </div>
     </div>
   );
@@ -260,7 +275,7 @@ export default function ServicePage() {
             Our Services
           </span>
           <h1
-            className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[72px] font-bold text-white max-w-3xl"
+            className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white max-w-3xl"
             style={{ lineHeight: 1.05 }}
           >
             {service.title}
@@ -360,55 +375,47 @@ export default function ServicePage() {
         </div>
       </section>
 
-      {/* ── Premium CTA ── */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop"
-            alt="Limewash exterior"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-900/95 via-navy-900/85 to-navy-900/60" />
+      {/* ── CTA ── */}
+      <section className="relative overflow-hidden bg-navy-900">
+        <div className="absolute inset-0 opacity-[0.07]">
+          <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 25% 50%, #2B98BE 0%, transparent 50%), radial-gradient(circle at 75% 50%, #FACF10 0%, transparent 50%)' }} />
         </div>
+        <div className="absolute inset-0 border-y border-white/[0.04]" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 md:py-40">
-          <div className="max-w-2xl">
-            <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-6">
-              Ready to Transform Your Home?
-            </span>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 md:py-36">
+          <div className="text-center max-w-3xl mx-auto">
             <h2
-              className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold text-white mb-6"
+              className="font-display uppercase text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-5"
               style={{ lineHeight: 1.05 }}
             >
-              Your brick deserves<br />better than paint.
+              Ready to get started?
             </h2>
-            <p className="text-white/55 text-base sm:text-lg leading-[1.85] mb-10 max-w-lg">
-              Get a free, no-obligation estimate and see how limewash can completely transform your home's exterior. Most projects are completed in just one to two days.
+            <p className="text-white/50 text-base sm:text-lg leading-[1.85] mb-10 max-w-xl mx-auto">
+              Get a free, no-obligation estimate. We respond within 24 hours and most projects are completed in just a few days.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase hover:bg-[#e6b930] transition-colors"
+                className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase hover:bg-[#e6b930] transition-colors"
               >
                 GET A FREE ESTIMATE
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </a>
               <a
-                href="tel:+18172439116"
-                className="group inline-flex items-center justify-center gap-2.5 px-8 py-4 border border-white/30 text-white font-bold text-[13px] tracking-[0.12em] uppercase hover:border-white/60 hover:bg-white/5 transition-all"
+                href="tel:+18172194990"
+                className="group inline-flex items-center justify-center gap-2.5 px-9 py-4 border border-white/20 text-white font-bold text-[13px] tracking-[0.12em] uppercase hover:border-white/40 hover:bg-white/5 transition-all"
               >
                 <Phone className="w-4 h-4" />
-                (817) 243-9116
+                (817) 219-4990
               </a>
             </div>
 
-            {/* Trust indicators */}
-            <div className="flex flex-wrap gap-6 mt-10">
-              {['Free Estimates', 'No Obligation', 'Licensed & Insured', '5-Star Rated'].map((item) => (
-                <div key={item} className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full bg-brand-yellow" />
-                  <span className="text-white/50 text-[13px] font-medium">{item}</span>
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mt-12">
+              {['Free Estimates', 'No Obligation', 'Licensed and Insured', '5-Star Rated'].map((item) => (
+                <div key={item} className="flex items-center gap-2.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-brand-teal" />
+                  <span className="text-white/40 text-[13px] font-medium">{item}</span>
                 </div>
               ))}
             </div>
