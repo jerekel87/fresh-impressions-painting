@@ -192,7 +192,7 @@ export default function ServicePage() {
                 className="font-display uppercase text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 mb-7"
                 style={{ lineHeight: 1.05 }}
               >
-                The right way<br />to refresh masonry.
+                {service.aboutTitle}
               </h2>
               <div className="space-y-4 mb-8">
                 {service.description.map((para, idx) => (

@@ -2,6 +2,7 @@ export interface ServiceData {
   title: string;
   slug: string;
   tagline: string;
+  aboutTitle: string;
   heroImage: string;
   galleryImages: string[];
   description: string[];
@@ -16,6 +17,7 @@ export const services: Record<string, ServiceData> = {
     title: 'Brick and Stone Lime Wash',
     slug: 'brick-and-stone-lime-wash',
     tagline: 'Breathable, timeless finishes that add character and charm to masonry surfaces.',
+    aboutTitle: 'The right way to refresh masonry.',
     heroImage: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
     galleryImages: [
       'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
@@ -36,14 +38,14 @@ export const services: Record<string, ServiceData> = {
       'Choose a solid mineral finish for a soft matte appearance or a classic limewash look that reveals natural variation and timeless character. It is one of the most beautiful ways to refresh brick and stone the right way.',
     ],
     highlights: [
-      { label: 'Surface Type', value: 'Brick, Stone & Masonry' },
+      { label: 'Surface Type', value: 'Brick, Stone and Masonry' },
       { label: 'Finish Style', value: 'Limewash or Mineral Coat' },
       { label: 'Breathability', value: 'Fully Breathable' },
       { label: 'Durability', value: '15\u201325 Years' },
     ],
     process: [
       { step: '01', title: 'Surface Inspection', body: 'We assess the masonry condition, check for efflorescence, cracks, or moisture issues that need addressing before any finish is applied.' },
-      { step: '02', title: 'Cleaning & Prep', body: 'The surface is pressure washed and dried completely. Any cracks or voids are repaired so the finish bonds evenly across the entire facade.' },
+      { step: '02', title: 'Cleaning and Prep', body: 'The surface is pressure washed and dried completely. Any cracks or voids are repaired so the finish bonds evenly across the entire facade.' },
       { step: '03', title: 'Color Consultation', body: 'We work with you to select the right tone and technique \u2014 whether a heavily washed antique look or a clean, modern mineral finish.' },
       { step: '04', title: 'Application', body: 'Limewash or mineral coating is applied by hand using brushes and controlled dilution techniques to achieve the exact look and coverage desired.' },
       { step: '05', title: 'Final Walkthrough', body: 'We walk the project with you to ensure every detail meets your expectations before we pack up and leave.' },
@@ -70,6 +72,7 @@ export const services: Record<string, ServiceData> = {
     title: 'Interior Painting',
     slug: 'interior-painting',
     tagline: 'Fresh, comfortable spaces that reflect your style and stand the test of daily life.',
+    aboutTitle: 'More than paint on a wall.',
     heroImage: 'https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
     galleryImages: [
       'https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
@@ -86,7 +89,8 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Your home should feel fresh, comfortable, and cared for\u2014and that is exactly what we help create at Fresh Impressions Painting. We do more than apply paint. We provide a thoughtful, organized experience that respects both your home and your time. Every project begins with protecting furniture, flooring, appliances, windows, and personal belongings. We then create a room-by-room plan with you so the work flows smoothly and efficiently. From walls and ceilings to trim, doors, and detail work, we use premium products that provide beautiful color, lasting durability, and a finish you will be proud to live in every day.',
+      'Your home should feel fresh, comfortable, and cared for\u2014and that is exactly what we help create at Fresh Impressions Painting. We do more than apply paint. We provide a thoughtful, organized experience that respects both your home and your time.',
+      'Every project begins with protecting furniture, flooring, appliances, windows, and personal belongings. We then create a room-by-room plan with you so the work flows smoothly and efficiently. From walls and ceilings to trim, doors, and detail work, we use premium products that provide beautiful color, lasting durability, and a finish you will be proud to live in every day.',
     ],
     highlights: [
       { label: 'Coverage', value: 'Walls, Ceilings, Trim and Doors' },
@@ -95,11 +99,11 @@ export const services: Record<string, ServiceData> = {
       { label: 'Finish Options', value: 'Flat to Semi-Gloss' },
     ],
     process: [
-      { step: '01', title: 'Consultation & Color Selection', body: 'We meet with you in your home to discuss vision, preferences, and timeline. We help select colors and finishes that complement your spaces.' },
-      { step: '02', title: 'Protection & Preparation', body: 'We thoroughly protect all furniture, flooring, fixtures, and belongings. Surfaces are cleaned, patched, sanded, and primed as needed.' },
+      { step: '01', title: 'Consultation and Color Selection', body: 'We meet with you in your home to discuss vision, preferences, and timeline. We help select colors and finishes that complement your spaces.' },
+      { step: '02', title: 'Protection and Preparation', body: 'We thoroughly protect all furniture, flooring, fixtures, and belongings. Surfaces are cleaned, patched, sanded, and primed as needed.' },
       { step: '03', title: 'Priming', body: 'Where required, we apply premium primer to ensure proper adhesion, uniform color, and maximum durability of the topcoat.' },
       { step: '04', title: 'Painting', body: 'We apply two coats of premium paint using brushes, rollers, and spray equipment as appropriate for each surface and finish type.' },
-      { step: '05', title: 'Detail Work & Touch-ups', body: 'All trim, doors, and edges are carefully cut in. We inspect every surface and address any imperfections before final walkthrough.' },
+      { step: '05', title: 'Detail Work and Touch-ups', body: 'All trim, doors, and edges are carefully cut in. We inspect every surface and address any imperfections before final walkthrough.' },
     ],
     beforeAfter: [
       { before: 'https://images.pexels.com/photos/1571459/pexels-photo-1571459.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Living room refreshed with modern neutral tones' },
@@ -121,6 +125,7 @@ export const services: Record<string, ServiceData> = {
     title: 'Exterior Painting',
     slug: 'exterior-painting',
     tagline: 'Professional coatings that protect and elevate your home\'s curb appeal for years to come.',
+    aboutTitle: 'Protection that performs beautifully.',
     heroImage: 'https://images.pexels.com/photos/6077368/pexels-photo-6077368.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
     galleryImages: [
       'https://images.pexels.com/photos/6077368/pexels-photo-6077368.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
@@ -137,19 +142,20 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2724745/pexels-photo-2724745.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Your home\'s exterior is constantly exposed to sun, rain, wind, and changing temperatures. At Fresh Impressions Painting, we believe exterior painting should do more than look good\u2014it should protect your investment. Our proven process includes washing, surface preparation, repairs, caulking, priming where needed, painting, and final touch-ups. We use premium coatings chosen for durability and long-term performance. The result is an exterior that looks refreshed, stands strong against the elements, and adds lasting curb appeal to your home.',
+      'Your home\'s exterior is constantly exposed to sun, rain, wind, and changing temperatures. At Fresh Impressions Painting, we believe exterior painting should do more than look good\u2014it should protect your investment.',
+      'Our proven process includes washing, surface preparation, repairs, caulking, priming where needed, painting, and final touch-ups. We use premium coatings chosen for durability and long-term performance. The result is an exterior that looks refreshed, stands strong against the elements, and adds lasting curb appeal to your home.',
     ],
     highlights: [
-      { label: 'Coverage', value: 'Siding, Trim, Fascia & Doors' },
-      { label: 'Prep Work', value: 'Wash, Repair & Caulk' },
+      { label: 'Coverage', value: 'Siding, Trim, Fascia and Doors' },
+      { label: 'Prep Work', value: 'Wash, Repair and Caulk' },
       { label: 'Coatings', value: 'Premium Weather-Resistant' },
       { label: 'Longevity', value: '8\u201312 Years' },
     ],
     process: [
       { step: '01', title: 'Property Assessment', body: 'We walk the entire exterior of your home, noting areas of peeling, cracking, rot, or caulk failure that need to be addressed before painting.' },
       { step: '02', title: 'Power Washing', body: 'All surfaces are thoroughly cleaned to remove dirt, mildew, and loose paint. This ensures maximum adhesion for the new coating.' },
-      { step: '03', title: 'Repairs & Prep', body: 'We scrape loose paint, fill cracks, replace rotted wood, re-caulk joints, and sand surfaces smooth. All landscaping and fixtures are protected.' },
-      { step: '04', title: 'Priming & Painting', body: 'Bare and repaired areas are primed. We then apply two coats of premium exterior paint by brush, roller, and spray as appropriate for each surface.' },
+      { step: '03', title: 'Repairs and Prep', body: 'We scrape loose paint, fill cracks, replace rotted wood, re-caulk joints, and sand surfaces smooth. All landscaping and fixtures are protected.' },
+      { step: '04', title: 'Priming and Painting', body: 'Bare and repaired areas are primed. We then apply two coats of premium exterior paint by brush, roller, and spray as appropriate for each surface.' },
       { step: '05', title: 'Final Inspection', body: 'We perform a detailed walkthrough of every surface to ensure complete coverage, clean lines, and your total satisfaction.' },
     ],
     beforeAfter: [
@@ -172,6 +178,7 @@ export const services: Record<string, ServiceData> = {
     title: 'Cabinet Finishing And Refinishing',
     slug: 'cabinet-finishing-and-refinishing',
     tagline: 'Expert refinishing that gives your kitchen a stunning, like-new transformation.',
+    aboutTitle: 'Built for beauty and daily use.',
     heroImage: 'https://images.pexels.com/photos/6585757/pexels-photo-6585757.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
     galleryImages: [
       'https://images.pexels.com/photos/6585757/pexels-photo-6585757.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
@@ -188,20 +195,21 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Cabinets are one of the most used surfaces in any home, which means they require more than ordinary paint. At Fresh Impressions Painting, we specialize in cabinet refinishing built around two priorities: beauty and durability. Our process includes detailed cleaning, sanding, surface preparation, priming, and the use of professional cabinet-grade coatings designed to resist wear, moisture, cleaning, and daily handling. We also use specialized spray equipment to create a smooth, factory-like finish with elegant sheen options. Whether you want a bright modern kitchen or a warm timeless look, we can transform your cabinets for a fraction of replacement cost\u2014without compromising quality.',
+      'Cabinets are one of the most used surfaces in any home, which means they require more than ordinary paint. At Fresh Impressions Painting, we specialize in cabinet refinishing built around two priorities: beauty and durability.',
+      'Our process includes detailed cleaning, sanding, surface preparation, priming, and the use of professional cabinet-grade coatings designed to resist wear, moisture, cleaning, and daily handling. We also use specialized spray equipment to create a smooth, factory-like finish with elegant sheen options. Whether you want a bright modern kitchen or a warm timeless look, we can transform your cabinets for a fraction of replacement cost\u2014without compromising quality.',
     ],
     highlights: [
-      { label: 'Surface Type', value: 'Wood, MDF & Laminate' },
+      { label: 'Surface Type', value: 'Wood, MDF and Laminate' },
       { label: 'Finish Quality', value: 'Factory-Smooth Spray' },
       { label: 'Coating Type', value: 'Cabinet-Grade Enamel' },
-      { label: 'Durability', value: 'Wear & Moisture Resistant' },
+      { label: 'Durability', value: 'Wear and Moisture Resistant' },
     ],
     process: [
-      { step: '01', title: 'Assessment & Planning', body: 'We evaluate your cabinet construction, condition, and discuss color and sheen preferences. We plan the workflow to minimize disruption to your kitchen.' },
-      { step: '02', title: 'Removal & Labeling', body: 'All doors, drawers, and hardware are carefully removed and labeled. This ensures a flawless finish on every surface and easy reassembly.' },
-      { step: '03', title: 'Cleaning & Sanding', body: 'Every surface is degreased, cleaned, and sanded to create the ideal bonding profile. This step is critical for long-lasting adhesion.' },
-      { step: '04', title: 'Priming & Spraying', body: 'A bonding primer is applied followed by multiple coats of cabinet-grade enamel using professional spray equipment for a smooth, even finish.' },
-      { step: '05', title: 'Reassembly & Inspection', body: 'Once cured, all doors, drawers, and hardware are reinstalled. We inspect every detail and ensure alignment, smooth operation, and a flawless look.' },
+      { step: '01', title: 'Assessment and Planning', body: 'We evaluate your cabinet construction, condition, and discuss color and sheen preferences. We plan the workflow to minimize disruption to your kitchen.' },
+      { step: '02', title: 'Removal and Labeling', body: 'All doors, drawers, and hardware are carefully removed and labeled. This ensures a flawless finish on every surface and easy reassembly.' },
+      { step: '03', title: 'Cleaning and Sanding', body: 'Every surface is degreased, cleaned, and sanded to create the ideal bonding profile. This step is critical for long-lasting adhesion.' },
+      { step: '04', title: 'Priming and Spraying', body: 'A bonding primer is applied followed by multiple coats of cabinet-grade enamel using professional spray equipment for a smooth, even finish.' },
+      { step: '05', title: 'Reassembly and Inspection', body: 'Once cured, all doors, drawers, and hardware are reinstalled. We inspect every detail and ensure alignment, smooth operation, and a flawless look.' },
     ],
     beforeAfter: [
       { before: 'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Dark oak cabinets refinished in modern white' },
@@ -223,6 +231,7 @@ export const services: Record<string, ServiceData> = {
     title: 'Commercial Painting',
     slug: 'commercial-painting',
     tagline: 'Professional solutions for offices and retail \u2014 minimal disruption guaranteed.',
+    aboutTitle: 'Your space is your brand.',
     heroImage: 'https://images.pexels.com/photos/6474475/pexels-photo-6474475.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
     galleryImages: [
       'https://images.pexels.com/photos/6474475/pexels-photo-6474475.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
@@ -239,17 +248,18 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'At Fresh Impressions Painting, we understand that the appearance of your business directly affects how customers see your brand. A clean, sharp, professional environment builds trust before a word is ever spoken. We provide interior and exterior commercial painting for offices, retail stores, restaurants, warehouses, and more. Whether your project requires after-hours scheduling, careful coordination around employees and customers, or specialized equipment such as scissor lifts and boom lifts, we are prepared to handle it professionally. Our goal is simple: deliver beautiful, durable results with minimal disruption so you can stay focused on running your business.',
+      'At Fresh Impressions Painting, we understand that the appearance of your business directly affects how customers see your brand. A clean, sharp, professional environment builds trust before a word is ever spoken.',
+      'We provide interior and exterior commercial painting for offices, retail stores, restaurants, warehouses, and more. Whether your project requires after-hours scheduling, careful coordination around employees and customers, or specialized equipment such as scissor lifts and boom lifts, we are prepared to handle it professionally. Our goal is simple: deliver beautiful, durable results with minimal disruption so you can stay focused on running your business.',
     ],
     highlights: [
       { label: 'Scheduling', value: 'After-Hours Available' },
-      { label: 'Equipment', value: 'Lifts & Spray Systems' },
-      { label: 'Property Types', value: 'Office, Retail & Industrial' },
+      { label: 'Equipment', value: 'Lifts and Spray Systems' },
+      { label: 'Property Types', value: 'Office, Retail and Industrial' },
       { label: 'Disruption', value: 'Minimal to None' },
     ],
     process: [
       { step: '01', title: 'Site Evaluation', body: 'We assess the property, discuss your timeline and operational needs, and develop a plan that minimizes disruption to your business.' },
-      { step: '02', title: 'Scheduling & Coordination', body: 'We work around your business hours \u2014 evenings, weekends, or phased sections \u2014 to keep your operation running smoothly throughout the project.' },
+      { step: '02', title: 'Scheduling and Coordination', body: 'We work around your business hours \u2014 evenings, weekends, or phased sections \u2014 to keep your operation running smoothly throughout the project.' },
       { step: '03', title: 'Surface Preparation', body: 'All surfaces are cleaned, patched, and prepped. Equipment and fixtures are protected. We maintain a clean, organized workspace throughout.' },
       { step: '04', title: 'Application', body: 'Using professional spray systems and traditional methods as appropriate, we apply durable commercial-grade coatings for a clean, uniform finish.' },
       { step: '05', title: 'Final Walkthrough', body: 'We inspect every surface with your property manager or owner to ensure the work meets professional standards and your expectations.' },
@@ -274,6 +284,7 @@ export const services: Record<string, ServiceData> = {
     title: 'Drywall Repair And Finishing',
     slug: 'drywall-repair-and-finishing',
     tagline: 'Seamless restoration \u2014 the invisible foundation for a flawless paint job.',
+    aboutTitle: 'Repairs that disappear completely.',
     heroImage: 'https://images.pexels.com/photos/5691593/pexels-photo-5691593.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
     galleryImages: [
       'https://images.pexels.com/photos/5691593/pexels-photo-5691593.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
@@ -290,20 +301,21 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Damaged drywall can make an otherwise beautiful home feel unfinished. Cracks, holes, water damage, settling seams, and poor texture repairs are common problems\u2014but they can be fixed the right way. At Fresh Impressions Painting, we focus on repairs that last, not shortcuts that fail later. We properly secure loose drywall, repair damaged areas, blend seams, and carefully match surrounding textures. Our dust-controlled sanding systems help keep your home cleaner during the process. When complete, the repair blends naturally into the wall so the damage disappears.',
+      'Damaged drywall can make an otherwise beautiful home feel unfinished. Cracks, holes, water damage, settling seams, and poor texture repairs are common problems\u2014but they can be fixed the right way.',
+      'At Fresh Impressions Painting, we focus on repairs that last, not shortcuts that fail later. We properly secure loose drywall, repair damaged areas, blend seams, and carefully match surrounding textures. Our dust-controlled sanding systems help keep your home cleaner during the process. When complete, the repair blends naturally into the wall so the damage disappears.',
     ],
     highlights: [
-      { label: 'Repair Types', value: 'Cracks, Holes & Water Damage' },
+      { label: 'Repair Types', value: 'Cracks, Holes and Water Damage' },
       { label: 'Texture Matching', value: 'Seamless Blending' },
       { label: 'Dust Control', value: 'Vacuum Sanding Systems' },
       { label: 'Result', value: 'Invisible Repairs' },
     ],
     process: [
       { step: '01', title: 'Damage Assessment', body: 'We evaluate the extent of the damage \u2014 whether structural settling, water intrusion, impact holes, or failed tape joints \u2014 and determine the appropriate repair method.' },
-      { step: '02', title: 'Securing & Repair', body: 'Loose drywall is re-secured. Damaged sections are cut out and replaced with new material. Seams are taped and mudded using professional techniques.' },
+      { step: '02', title: 'Securing and Repair', body: 'Loose drywall is re-secured. Damaged sections are cut out and replaced with new material. Seams are taped and mudded using professional techniques.' },
       { step: '03', title: 'Texture Matching', body: 'We carefully replicate the surrounding wall texture \u2014 whether knockdown, orange peel, smooth, or skip trowel \u2014 so the repair is invisible.' },
       { step: '04', title: 'Dust-Controlled Sanding', body: 'All joints and repairs are sanded smooth using vacuum-assisted systems that capture dust at the source, keeping your home significantly cleaner.' },
-      { step: '05', title: 'Prime & Paint Ready', body: 'Repaired areas are primed to seal the surface. The wall is now ready for a flawless paint application that makes the repair completely disappear.' },
+      { step: '05', title: 'Prime and Paint Ready', body: 'Repaired areas are primed to seal the surface. The wall is now ready for a flawless paint application that makes the repair completely disappear.' },
     ],
     beforeAfter: [
       { before: 'https://images.pexels.com/photos/5691593/pexels-photo-5691593.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Water-damaged ceiling repaired and painted seamlessly' },
@@ -325,6 +337,7 @@ export const services: Record<string, ServiceData> = {
     title: 'Metal Finishing And Refinishing',
     slug: 'metal-finishing-and-refinishing',
     tagline: 'Durable coatings for metal surfaces \u2014 gates, railings, fixtures, and more.',
+    aboutTitle: 'Stop rust. Extend the life.',
     heroImage: 'https://images.pexels.com/photos/2310483/pexels-photo-2310483.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
     galleryImages: [
       'https://images.pexels.com/photos/2310483/pexels-photo-2310483.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
@@ -341,17 +354,18 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/1669754/pexels-photo-1669754.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Metal surfaces such as fences, railings, gates, and structural steel need the right system to stop deterioration and extend their life. At Fresh Impressions Painting, we begin by removing loose rust and failing coatings through scraping and sanding. We then apply high-performance rust-inhibiting primers followed by industrial-grade topcoats designed to withstand harsh weather and daily exposure. This process not only improves appearance\u2014it helps preserve and protect your investment for years to come.',
+      'Metal surfaces such as fences, railings, gates, and structural steel need the right system to stop deterioration and extend their life.',
+      'At Fresh Impressions Painting, we begin by removing loose rust and failing coatings through scraping and sanding. We then apply high-performance rust-inhibiting primers followed by industrial-grade topcoats designed to withstand harsh weather and daily exposure. This process not only improves appearance\u2014it helps preserve and protect your investment for years to come.',
     ],
     highlights: [
-      { label: 'Surfaces', value: 'Fences, Rails, Gates & Steel' },
-      { label: 'Prep Method', value: 'Rust Removal & Sanding' },
+      { label: 'Surfaces', value: 'Fences, Rails, Gates and Steel' },
+      { label: 'Prep Method', value: 'Rust Removal and Sanding' },
       { label: 'Primer', value: 'Rust-Inhibiting Formula' },
       { label: 'Topcoat', value: 'Industrial-Grade Finish' },
     ],
     process: [
       { step: '01', title: 'Condition Assessment', body: 'We inspect all metal surfaces for rust depth, coating failure, and structural integrity. This determines the appropriate level of preparation needed.' },
-      { step: '02', title: 'Rust Removal & Prep', body: 'Loose rust, scale, and failed coatings are removed by scraping, wire brushing, and sanding. Surfaces are cleaned to bare or sound metal where needed.' },
+      { step: '02', title: 'Rust Removal and Prep', body: 'Loose rust, scale, and failed coatings are removed by scraping, wire brushing, and sanding. Surfaces are cleaned to bare or sound metal where needed.' },
       { step: '03', title: 'Rust-Inhibiting Primer', body: 'A high-performance rust-inhibiting primer is applied to seal the metal and prevent future corrosion from forming beneath the topcoat.' },
       { step: '04', title: 'Industrial Topcoat', body: 'We apply durable industrial-grade topcoats designed for exterior metal exposure. Multiple coats are used for maximum protection and appearance.' },
       { step: '05', title: 'Final Inspection', body: 'Every surface is inspected for complete coverage and coating integrity. We ensure the finish is uniform and will provide years of protection.' },
@@ -376,6 +390,7 @@ export const services: Record<string, ServiceData> = {
     title: 'New Construction Painting',
     slug: 'new-construction-painting',
     tagline: 'Complete painting solutions for new builds \u2014 from primer to final coat.',
+    aboutTitle: 'On schedule. On budget. Done right.',
     heroImage: 'https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
     galleryImages: [
       'https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
@@ -392,12 +407,13 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'New construction deserves a painting partner who understands the pace, coordination, and quality standards that builders demand. At Fresh Impressions Painting, we work hand-in-hand with builders and general contractors to deliver flawless interior and exterior finishes on schedule. From initial drywall priming through final touch-ups and punch list completion, we handle every phase of new construction painting with precision. We coordinate closely with other trades to stay on timeline, use professional spray and roll-and-brush techniques as appropriate, and deliver consistent, move-in ready results that homeowners and builders are proud of.',
+      'New construction deserves a painting partner who understands the pace, coordination, and quality standards that builders demand. At Fresh Impressions Painting, we work hand-in-hand with builders and general contractors to deliver flawless interior and exterior finishes on schedule.',
+      'From initial drywall priming through final touch-ups and punch list completion, we handle every phase of new construction painting with precision. We coordinate closely with other trades to stay on timeline, use professional spray and roll-and-brush techniques as appropriate, and deliver consistent, move-in ready results that homeowners and builders are proud of.',
     ],
     highlights: [
-      { label: 'Project Scope', value: 'Full Interior & Exterior' },
+      { label: 'Project Scope', value: 'Full Interior and Exterior' },
       { label: 'Coordination', value: 'Multi-Trade Scheduling' },
-      { label: 'Methods', value: 'Spray, Roll & Brush' },
+      { label: 'Methods', value: 'Spray, Roll and Brush' },
       { label: 'Finish', value: 'Move-In Ready Quality' },
     ],
     process: [
@@ -405,7 +421,7 @@ export const services: Record<string, ServiceData> = {
       { step: '02', title: 'Drywall Priming', body: 'All new drywall is sealed with high-quality primer to ensure uniform topcoat absorption and a consistent finish throughout the home.' },
       { step: '03', title: 'Interior Application', body: 'Walls, ceilings, trim, doors, and closets are painted using the appropriate techniques for each surface \u2014 spray for production efficiency, cut and roll for detail areas.' },
       { step: '04', title: 'Exterior Application', body: 'Siding, trim, fascia, soffits, garage doors, and all exterior painted surfaces receive proper priming and two coats of premium exterior paint.' },
-      { step: '05', title: 'Punch List & Final Touch-ups', body: 'After other trades finish and final cleanup is done, we return for a complete touch-up pass and punch list completion to ensure move-in ready quality.' },
+      { step: '05', title: 'Punch List and Final Touch-ups', body: 'After other trades finish and final cleanup is done, we return for a complete touch-up pass and punch list completion to ensure move-in ready quality.' },
     ],
     beforeAfter: [
       { before: 'https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Raw drywall to finished interior \u2014 ready for move-in' },
@@ -427,6 +443,7 @@ export const services: Record<string, ServiceData> = {
     title: 'Interior / Exterior Staining',
     slug: 'staining',
     tagline: 'Protective finishes that preserve and beautify wood surfaces inside and out.',
+    aboutTitle: 'Preserve the wood. Restore the beauty.',
     heroImage: 'https://images.pexels.com/photos/5997993/pexels-photo-5997993.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
     galleryImages: [
       'https://images.pexels.com/photos/5997993/pexels-photo-5997993.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
@@ -443,17 +460,18 @@ export const services: Record<string, ServiceData> = {
       'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
     ],
     description: [
-      'Exterior wood features bring warmth and character to a home, but sun and weather can quickly dry them out and wear them down. At Fresh Impressions Painting, we restore and protect wood surfaces such as posts, shutters, front doors, beams, and decorative accents. Depending on the condition of the wood, we may recommend a maintenance coat, full stripping and re-staining, or premium clear protective finishes. Our goal is to preserve the natural beauty of the wood while helping it stand up to the elements. If your stained surfaces look tired, we can bring them back to life.',
+      'Exterior wood features bring warmth and character to a home, but sun and weather can quickly dry them out and wear them down. At Fresh Impressions Painting, we restore and protect wood surfaces such as posts, shutters, front doors, beams, and decorative accents.',
+      'Depending on the condition of the wood, we may recommend a maintenance coat, full stripping and re-staining, or premium clear protective finishes. Our goal is to preserve the natural beauty of the wood while helping it stand up to the elements. If your stained surfaces look tired, we can bring them back to life.',
     ],
     highlights: [
-      { label: 'Surfaces', value: 'Doors, Posts, Beams & Decks' },
+      { label: 'Surfaces', value: 'Doors, Posts, Beams and Decks' },
       { label: 'Options', value: 'Transparent to Solid Stain' },
-      { label: 'Protection', value: 'UV & Weather Resistant' },
-      { label: 'Application', value: 'Brush, Spray & Wipe' },
+      { label: 'Protection', value: 'UV and Weather Resistant' },
+      { label: 'Application', value: 'Brush, Spray and Wipe' },
     ],
     process: [
       { step: '01', title: 'Wood Evaluation', body: 'We assess the condition of the wood \u2014 checking for gray weathering, peeling, UV damage, or rot. This determines whether maintenance coating, stripping, or replacement is needed.' },
-      { step: '02', title: 'Prep & Stripping', body: 'Depending on condition, surfaces are cleaned, sanded, or fully stripped of old finish. We open the grain to accept new stain evenly.' },
+      { step: '02', title: 'Prep and Stripping', body: 'Depending on condition, surfaces are cleaned, sanded, or fully stripped of old finish. We open the grain to accept new stain evenly.' },
       { step: '03', title: 'Stain Selection', body: 'We help you choose between transparent, semi-transparent, semi-solid, or solid stain based on the look you want and the level of protection needed.' },
       { step: '04', title: 'Application', body: 'Stain is applied by brush, spray, or wipe-on method depending on the surface type and product used. We ensure even penetration and consistent color.' },
       { step: '05', title: 'Protective Topcoat', body: 'Where appropriate, a UV-protective clear coat or sealant is applied to extend the life of the stain and shield the wood from sun and moisture.' },
