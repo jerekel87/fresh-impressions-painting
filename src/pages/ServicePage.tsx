@@ -342,16 +342,12 @@ export default function ServicePage() {
                 ))}
               </div>
             </div>
-            <div className="relative">
+            <div>
               <img
                 src={service.heroImage}
                 alt={service.title}
                 className="w-full aspect-[4/5] object-cover"
               />
-              <div className="absolute -bottom-6 -left-6 hidden lg:block bg-brand-yellow p-6 w-[180px]">
-                <span className="block font-display uppercase text-4xl font-bold text-navy-900 leading-none">15+</span>
-                <span className="block text-navy-900/70 text-[13px] font-semibold mt-1 leading-tight">Years of<br />durability</span>
-              </div>
             </div>
           </div>
         </div>
