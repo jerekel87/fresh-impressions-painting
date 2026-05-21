@@ -12,7 +12,7 @@ interface ServiceData {
   slug: string;
   tagline: string;
   heroImage: string;
-  description: string;
+  description: string[];
   highlights: { label: string; value: string }[];
   process: { step: string; title: string; body: string }[];
   beforeAfter: { before: string; after: string; caption: string }[];
@@ -21,12 +21,14 @@ interface ServiceData {
 
 const services: Record<string, ServiceData> = {
   'brick-and-stone-lime-wash': {
-    title: 'Brick & Stone Lime Wash',
+    title: 'Brick and Stone Lime Wash',
     slug: 'brick-and-stone-lime-wash',
     tagline: 'Breathable, timeless finishes that add character and charm to masonry surfaces.',
     heroImage: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
-    description:
-      'If you want to update the look of your brick or masonry home, there is a better option than traditional paint. At Fresh Impressions Painting, we offer limewash and mineral-based finishes that allow masonry to breathe naturally while creating stunning curb appeal. Unlike many paints that can trap moisture and eventually peel, mineral coatings bond with the surface and age beautifully. Choose a solid mineral finish for a soft matte appearance or a classic limewash look that reveals natural variation and timeless character. It is one of the most beautiful ways to refresh brick and stone the right way.',
+    description: [
+      'If you want to update the look of your brick or masonry home, there is a better option than traditional paint. At Fresh Impressions Painting, we offer limewash and mineral-based finishes that allow masonry to breathe naturally while creating stunning curb appeal. Unlike many paints that can trap moisture and eventually peel, mineral coatings bond with the surface and age beautifully.',
+      'Choose a solid mineral finish for a soft matte appearance or a classic limewash look that reveals natural variation and timeless character. It is one of the most beautiful ways to refresh brick and stone the right way.',
+    ],
     highlights: [
       { label: 'Surface Type', value: 'Brick, Stone & Masonry' },
       { label: 'Finish Style', value: 'Limewash or Mineral Coat' },
@@ -126,41 +128,68 @@ const services: Record<string, ServiceData> = {
 function BeforeAfterSlider({ before, after, caption }: { before: string; after: string; caption: string }) {
   const [position, setPosition] = useState(50);
   const [dragging, setDragging] = useState(false);
+  const [hovered, setHovered] = useState(false);
 
   const handleMove = (clientX: number, rect: DOMRect) => {
     const pct = Math.min(Math.max(((clientX - rect.left) / rect.width) * 100, 2), 98);
     setPosition(pct);
   };
 
+  useEffect(() => {
+    if (!dragging) return;
+    const onUp = () => setDragging(false);
+    const onMove = (e: MouseEvent) => {
+      const el = document.querySelector(`[data-slider-caption="${caption}"]`);
+      if (el) handleMove(e.clientX, el.getBoundingClientRect());
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      const el = document.querySelector(`[data-slider-caption="${caption}"]`);
+      if (el) handleMove(e.touches[0].clientX, el.getBoundingClientRect());
+    };
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onUp);
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('touchend', onUp);
+    return () => {
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseup', onUp);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onUp);
+    };
+  }, [dragging, caption]);
+
   return (
     <div className="space-y-3">
       <div
-        className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none cursor-col-resize rounded-sm"
-        onMouseMove={(e) => { if (dragging) handleMove(e.clientX, e.currentTarget.getBoundingClientRect()); }}
-        onMouseUp={() => setDragging(false)}
-        onMouseLeave={() => setDragging(false)}
-        onTouchMove={(e) => handleMove(e.touches[0].clientX, e.currentTarget.getBoundingClientRect())}
+        data-slider-caption={caption}
+        className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none cursor-col-resize rounded-lg shadow-sm"
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        onMouseDown={(e) => { setDragging(true); handleMove(e.clientX, e.currentTarget.getBoundingClientRect()); }}
+        onTouchStart={(e) => { setDragging(true); handleMove(e.touches[0].clientX, e.currentTarget.getBoundingClientRect()); }}
       >
         <img src={after} alt="After" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 overflow-hidden" style={{ width: `${position}%` }}>
           <img src={before} alt="Before" className="absolute inset-0 h-full object-cover" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} />
         </div>
-        {/* Slider handle — large touch target */}
+        {/* Divider line */}
         <div
-          className="absolute top-0 bottom-0 z-10 flex items-center justify-center"
-          style={{ left: `${position}%`, transform: 'translateX(-50%)', width: '48px' }}
-          onMouseDown={() => setDragging(true)}
-          onTouchStart={() => setDragging(true)}
+          className="absolute top-0 bottom-0 w-[3px] bg-white/90 z-10 pointer-events-none"
+          style={{ left: `${position}%`, transform: 'translateX(-50%)' }}
+        />
+        {/* Handle */}
+        <div
+          className={`absolute top-1/2 z-20 -translate-y-1/2 pointer-events-none transition-transform duration-200 ${dragging ? 'scale-90' : hovered ? 'scale-110' : 'scale-100'}`}
+          style={{ left: `${position}%`, transform: `translateX(-50%) translateY(-50%) ${dragging ? 'scale(0.9)' : hovered ? 'scale(1.1)' : 'scale(1)'}` }}
         >
-          <div className="absolute top-0 bottom-0 w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.4)]" />
-          <div className="relative w-12 h-12 rounded-full bg-white shadow-xl flex items-center justify-center cursor-col-resize border-2 border-gray-100">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M6 4L2 10L6 16M14 4L18 10L14 16" stroke="#10263C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <div className="w-11 h-11 rounded-full bg-white shadow-[0_2px_12px_rgba(0,0,0,0.25)] flex items-center justify-center cursor-col-resize">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+              <path d="M6 4L2 10L6 16M14 4L18 10L14 16" stroke="#10263C" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </div>
         </div>
-        <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1">Before</span>
-        <span className="absolute top-3 right-3 bg-brand-yellow text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1">After</span>
+        <span className={`absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded transition-opacity duration-200 ${hovered || dragging ? 'opacity-100' : 'opacity-70'}`}>Before</span>
+        <span className={`absolute top-3 right-3 bg-brand-yellow/90 backdrop-blur-sm text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded transition-opacity duration-200 ${hovered || dragging ? 'opacity-100' : 'opacity-70'}`}>After</span>
       </div>
       <p className="text-gray-500 text-[13px] text-center leading-snug">{caption}</p>
     </div>
@@ -209,7 +238,7 @@ export default function ServicePage() {
           <img src={service.heroImage} alt={service.title} className="w-full h-full object-cover opacity-25" />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/80 to-transparent" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 md:py-36">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
           <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-5">
             Our Services
           </span>
@@ -255,9 +284,13 @@ export default function ServicePage() {
               >
                 The right way<br />to refresh masonry.
               </h2>
-              <p className="text-gray-500 text-[15px] sm:text-base leading-[1.9] mb-8">
-                {service.description}
-              </p>
+              <div className="space-y-4 mb-8">
+                {service.description.map((para, idx) => (
+                  <p key={idx} className="text-gray-500 text-[15px] sm:text-base leading-[1.9]">
+                    {para}
+                  </p>
+                ))}
+              </div>
               <div className="grid grid-cols-2 gap-px bg-gray-100 border border-gray-100">
                 {service.highlights.map((h) => (
                   <div key={h.label} className="bg-white p-5">
@@ -282,7 +315,7 @@ export default function ServicePage() {
         </div>
       </section>
 
-      {/* ── Before & After ── */}
+      {/* ── Before and After ── */}
       <section className="py-20 sm:py-28 bg-[#f7f8fa]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-6">
@@ -294,7 +327,7 @@ export default function ServicePage() {
                 className="font-display uppercase text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900"
                 style={{ lineHeight: 1.05 }}
               >
-                Before & after.
+                Before and after.
               </h2>
             </div>
             <p className="text-gray-400 text-[14px] leading-[1.8] max-w-xs">
