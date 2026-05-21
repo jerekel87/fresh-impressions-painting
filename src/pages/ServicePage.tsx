@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { ChevronDown, ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, Phone } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import EstimateForm from '../components/EstimateForm';
 import Footer from '../components/Footer';
@@ -267,37 +267,27 @@ export default function ServicePage() {
       {/* ── Hero ── */}
       <section className="relative bg-navy-900 pt-[100px] sm:pt-[132px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={service.heroImage} alt={service.title} className="w-full h-full object-cover opacity-25" />
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/80 to-transparent" />
+          <img src={service.heroImage} alt={service.title} className="w-full h-full object-cover opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/85 to-navy-900/60" />
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 md:py-32">
-          <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-5">
-            Our Services
-          </span>
-          <h1
-            className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white max-w-3xl"
-            style={{ lineHeight: 1.05 }}
-          >
-            {service.title}
-          </h1>
-          <p className="text-white/55 text-base sm:text-lg mt-5 max-w-xl leading-[1.8]">
-            {service.tagline}
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-2.5 px-7 py-3.5 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase hover:bg-[#e6b930] transition-colors"
-            >
-              GET A FREE ESTIMATE
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-            </a>
-            <a
-              href="#about-service"
-              className="inline-flex items-center gap-2 text-white/60 hover:text-white text-[13px] font-semibold tracking-[0.08em] uppercase transition-colors"
-            >
-              Learn More
-              <ChevronDown className="w-4 h-4" />
-            </a>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-28">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-end">
+            <div>
+              <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-5">
+                Our Services
+              </span>
+              <h1
+                className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white"
+                style={{ lineHeight: 1.05 }}
+              >
+                {service.title}
+              </h1>
+            </div>
+            <div className="lg:pb-2">
+              <p className="text-white/50 text-base sm:text-lg leading-[1.85] max-w-md">
+                {service.tagline}
+              </p>
+            </div>
           </div>
         </div>
       </section>
