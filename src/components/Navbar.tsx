@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { X, Phone, ArrowRight, ChevronDown } from 'lucide-react';
 import logo from '../assets/freshimpressionspainting-web-logo.png';
 
@@ -19,17 +19,44 @@ const navLinks = [
   { label: 'HOME', href: '/' },
   { label: 'ABOUT', href: '/about' },
   { label: 'SERVICES', href: '/#services', hasDropdown: true },
-  { label: 'AREAS', href: '/#service-areas' },
+  { label: 'AREAS', href: '/areas' },
   { label: 'REVIEWS', href: '/#reviews' },
-  { label: 'CONTACT', href: '/#contact' },
+  { label: 'CONTACT', href: '/contact' },
 ];
 
 function NavAnchor({ href, className, onClick, children }: { href: string; className?: string; onClick?: () => void; children: React.ReactNode }) {
-  const isRoute = !href.includes('#');
-  if (isRoute) {
-    return <Link to={href} className={className} onClick={onClick}>{children}</Link>;
-  }
-  return <a href={href} className={className} onClick={onClick}>{children}</a>;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onClick?.();
+
+    if (href === '/') {
+      if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/');
+        setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 50);
+      }
+      return;
+    }
+
+    if (href.includes('#')) {
+      const hash = href.split('#')[1];
+      if (location.pathname === '/') {
+        const el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        navigate('/', { state: { scrollTo: hash } });
+      }
+      return;
+    }
+
+    navigate(href);
+  };
+
+  return <a href={href} className={className} onClick={handleClick}>{children}</a>;
 }
 
 export default function Navbar() {
@@ -45,6 +72,8 @@ export default function Navbar() {
   const location = useLocation();
   const getActiveFromPath = (pathname: string) => {
     if (pathname === '/about') return '/about';
+    if (pathname === '/contact') return '/contact';
+    if (pathname === '/areas') return '/areas';
     if (pathname.startsWith('/services/')) return '/#services';
     return '/';
   };
@@ -135,7 +164,7 @@ export default function Navbar() {
             }`}
           >
             {/* Logo */}
-            <Link to="/" className="flex-shrink-0 relative">
+            <NavAnchor href="/" className="flex-shrink-0 relative">
               <img
                 src={logo}
                 alt="Fresh Impressions Painting"
@@ -143,7 +172,7 @@ export default function Navbar() {
                   scrolled ? 'h-8 sm:h-11 lg:h-12' : 'h-9 sm:h-13 lg:h-[60px]'
                 }`}
               />
-            </Link>
+            </NavAnchor>
 
             {/* Center nav links */}
             <div className="hidden lg:flex items-center gap-1">
