@@ -128,7 +128,7 @@ const services: Record<string, ServiceData> = {
 function BeforeAfterSlider({ before, after, caption }: { before: string; after: string; caption: string }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50);
-  const [dragging, setDragging] = useState(false);
+  const draggingRef = useRef(false);
 
   const updatePosition = (clientX: number) => {
     const el = containerRef.current;
@@ -139,33 +139,60 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
   };
 
   useEffect(() => {
-    if (!dragging) return;
-    const onMove = (e: MouseEvent) => updatePosition(e.clientX);
-    const onTouchMove = (e: TouchEvent) => updatePosition(e.touches[0].clientX);
-    const onUp = () => setDragging(false);
-    window.addEventListener('mousemove', onMove);
-    window.addEventListener('mouseup', onUp);
-    window.addEventListener('touchmove', onTouchMove);
-    window.addEventListener('touchend', onUp);
-    return () => {
-      window.removeEventListener('mousemove', onMove);
-      window.removeEventListener('mouseup', onUp);
-      window.removeEventListener('touchmove', onTouchMove);
-      window.removeEventListener('touchend', onUp);
+    const el = containerRef.current;
+    if (!el) return;
+
+    const onMouseDown = (e: MouseEvent) => {
+      e.preventDefault();
+      draggingRef.current = true;
+      updatePosition(e.clientX);
     };
-  }, [dragging]);
+
+    const onTouchStart = (e: TouchEvent) => {
+      draggingRef.current = true;
+      updatePosition(e.touches[0].clientX);
+    };
+
+    const onMouseMove = (e: MouseEvent) => {
+      if (!draggingRef.current) return;
+      e.preventDefault();
+      updatePosition(e.clientX);
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!draggingRef.current) return;
+      updatePosition(e.touches[0].clientX);
+    };
+
+    const onEnd = () => { draggingRef.current = false; };
+
+    el.addEventListener('mousedown', onMouseDown);
+    el.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchmove', onTouchMove, { passive: true });
+    window.addEventListener('touchend', onEnd);
+
+    return () => {
+      el.removeEventListener('mousedown', onMouseDown);
+      el.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseup', onEnd);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onEnd);
+    };
+  }, []);
 
   return (
     <div className="space-y-3">
       <div
         ref={containerRef}
         className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none cursor-col-resize rounded-sm"
-        onMouseDown={(e) => { setDragging(true); updatePosition(e.clientX); }}
-        onTouchStart={(e) => { setDragging(true); updatePosition(e.touches[0].clientX); }}
+        onDragStart={(e) => e.preventDefault()}
       >
-        <img src={after} alt="After" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 overflow-hidden" style={{ width: `${position}%` }}>
-          <img src={before} alt="Before" className="absolute inset-0 h-full object-cover" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} />
+        <img src={after} alt="After" draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${position}%` }}>
+          <img src={before} alt="Before" draggable={false} className="absolute inset-0 h-full object-cover pointer-events-none" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} />
         </div>
         <div
           className="absolute top-0 bottom-0 z-10 flex items-center justify-center pointer-events-none"
@@ -178,8 +205,8 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
             </svg>
           </div>
         </div>
-        <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1">Before</span>
-        <span className="absolute top-3 right-3 bg-brand-yellow text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1">After</span>
+        <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none">Before</span>
+        <span className="absolute top-3 right-3 bg-brand-yellow text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none">After</span>
       </div>
       <p className="text-gray-500 text-[13px] text-center leading-snug">{caption}</p>
     </div>
