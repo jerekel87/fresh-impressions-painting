@@ -24,6 +24,14 @@ import photoFeb23 from '../assets/Photo_Feb_23_2022,_11_05_01_AM.jpg';
 import screenshotDrywall from '../assets/Screenshot_2026-05-22_at_7.11.56_PM.png';
 import photoJun28_2024 from '../assets/Photo_Jun_28_2024,_3_30_16_PM.jpg';
 import photoAug19 from '../assets/Photo_Aug_19_2024,_10_17_59_AM.jpg';
+import photoMar27 from '../assets/Photo_Mar_27_2026,_12_55_24_PM.jpg';
+import photoMar27_1 from '../assets/Photo_Mar_27_2026,_12_55_24_PM_(1).jpg';
+import photoMar27_2 from '../assets/Photo_Mar_27_2026,_12_55_24_PM_(2).jpg';
+import photoNov20 from '../assets/Photo_Nov_20_2023,_4_22_10_PM.jpg';
+import photoAug12 from '../assets/Photo_Aug_12_2025,_8_13_06_AM.jpg';
+import photoAug29 from '../assets/Photo_Aug_29_2025,_5_26_28_PM.jpg';
+import photoMay31 from '../assets/Photo_May_31_2024,_3_18_37_PM.jpg';
+import photoFeb27 from '../assets/Photo_Feb_27_2026,_3_40_59_PM.jpg';
 
 export interface ServiceData {
   title: string;
@@ -193,20 +201,20 @@ export const services: Record<string, ServiceData> = {
     slug: 'cabinet-finishing-and-refinishing',
     tagline: 'Expert refinishing that gives your kitchen a stunning, like-new transformation.',
     aboutTitle: 'Built for beauty and daily use.',
-    heroImage: 'https://images.pexels.com/photos/6585757/pexels-photo-6585757.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    heroImage: photoFeb27,
     galleryImages: [
-      'https://images.pexels.com/photos/6585757/pexels-photo-6585757.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/3935333/pexels-photo-3935333.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      photoAug29,
+      photoAug12,
+      photoFeb27,
+      photoMar27_1,
+      photoMar27_2,
+      photoMar27,
+      photoMay31,
+      photoNov20,
+      photoAug29,
+      photoAug12,
+      photoFeb27,
+      photoMar27_1,
     ],
     description: [
       'Cabinets are one of the most used surfaces in any home, which means they require more than ordinary paint. At Fresh Impressions Painting, we specialize in cabinet refinishing built around two priorities: beauty and durability.',
@@ -226,10 +234,10 @@ export const services: Record<string, ServiceData> = {
       { step: '05', title: 'Reassembly and Inspection', body: 'Once cured, all doors, drawers, and hardware are reinstalled. We inspect every detail and ensure alignment, smooth operation, and a flawless look.' },
     ],
     beforeAfter: [
-      { before: 'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Dark oak cabinets refinished in modern white' },
-      { before: 'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Outdated kitchen cabinets given a fresh, bright finish' },
-      { before: 'https://images.pexels.com/photos/3935333/pexels-photo-3935333.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Bathroom vanity refinished with moisture-resistant coating' },
-      { before: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Laundry room cabinets sprayed for a smooth factory finish' },
+      { before: photoAug29, after: photoNov20, caption: 'Kitchen cabinets refinished in crisp white enamel' },
+      { before: photoAug12, after: photoFeb27, caption: 'Modern kitchen with two-tone cabinet finishing' },
+      { before: photoMar27_2, after: photoMar27, caption: 'Custom built-in cabinetry with bold color finish' },
+      { before: photoMay31, after: photoMar27_1, caption: 'Pantry cabinets and shelving finished to match' },
     ],
     faqs: [
       { q: 'How long does cabinet refinishing take?', a: 'Most kitchen cabinet projects take 5 to 8 working days. This includes removal, preparation, multiple coats with proper curing time, and reinstallation. We work to minimize the time your kitchen is out of service.' },
