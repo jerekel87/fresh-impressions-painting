@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { MapPin, ChevronDown } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import ServiceAreaMap from '../components/ServiceAreaMap';
 import EstimateForm from '../components/EstimateForm';
@@ -10,7 +10,6 @@ interface County {
   mainCity: string;
   cities: string[];
   description: string;
-  cityCount: number;
   isHQ?: boolean;
 }
 
@@ -21,7 +20,6 @@ const counties: County[] = [
     cities: ['Granbury', 'Acton', 'Tolar', 'Lipan', 'Cresson'],
     description:
       'Our home base. Full coverage with priority scheduling for all residential and commercial projects.',
-    cityCount: 5,
     isHQ: true,
   },
   {
@@ -30,7 +28,6 @@ const counties: County[] = [
     cities: ['Weatherford', 'Aledo', 'Hudson Oaks', 'Willow Park', 'Springtown'],
     description:
       'Complete painting and finishing services across Parker County, from Weatherford to Aledo.',
-    cityCount: 5,
   },
   {
     name: 'Johnson County',
@@ -38,7 +35,6 @@ const counties: County[] = [
     cities: ['Cleburne', 'Burleson', 'Joshua', 'Alvarado', 'Keene'],
     description:
       'Serving the Johnson County community with interior, exterior, and commercial painting.',
-    cityCount: 5,
   },
   {
     name: 'Erath County',
@@ -46,7 +42,6 @@ const counties: County[] = [
     cities: ['Stephenville', 'Dublin', 'Lingleville', 'Bluff Dale'],
     description:
       'Extended coverage for residential painting and staining projects throughout Erath County.',
-    cityCount: 4,
   },
   {
     name: 'Somervell County',
@@ -54,12 +49,74 @@ const counties: County[] = [
     cities: ['Glen Rose', 'Rainbow', 'Nemo'],
     description:
       'Quality painting services in the Somervell County area, including historic properties.',
-    cityCount: 3,
   },
 ];
 
+function CountyRow({ county, isOpen, onToggle }: { county: County; isOpen: boolean; onToggle: () => void }) {
+  return (
+    <div className="border-b border-gray-100 last:border-b-0">
+      <button
+        onClick={onToggle}
+        className="w-full flex items-center gap-4 sm:gap-8 py-6 sm:py-8 text-left group"
+      >
+        <div className="flex-1 flex items-center gap-4 sm:gap-6 min-w-0">
+          <h3 className="font-display uppercase text-xl sm:text-2xl md:text-3xl font-bold text-navy-900 tracking-wide shrink-0">
+            {county.name}
+          </h3>
+          {county.isHQ && (
+            <span className="hidden sm:inline-flex items-center gap-1.5 bg-navy-900 text-brand-yellow text-[10px] font-bold uppercase tracking-[0.15em] px-3 py-1.5 shrink-0">
+              <MapPin className="w-3 h-3" />
+              Headquarters
+            </span>
+          )}
+        </div>
+
+        <div className="hidden md:block text-right shrink-0 mr-4">
+          <span className="text-gray-400 text-sm">{county.mainCity}, TX</span>
+        </div>
+
+        <ChevronDown
+          className={`w-5 h-5 text-gray-300 shrink-0 transition-transform duration-300 group-hover:text-navy-900 ${
+            isOpen ? 'rotate-180 text-brand-teal' : ''
+          }`}
+        />
+      </button>
+
+      <div
+        className={`grid transition-[grid-template-rows] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+          isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="pb-8 sm:pb-10">
+            {county.isHQ && (
+              <span className="sm:hidden inline-flex items-center gap-1.5 bg-navy-900 text-brand-yellow text-[10px] font-bold uppercase tracking-[0.15em] px-3 py-1.5 mb-4">
+                <MapPin className="w-3 h-3" />
+                Headquarters
+              </span>
+            )}
+            <p className="text-gray-500 text-[15px] sm:text-base leading-[1.85] mb-6 max-w-xl">
+              {county.description}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {county.cities.map((city) => (
+                <span
+                  key={city}
+                  className="text-[11px] font-medium text-gray-500 uppercase tracking-wider px-3 py-1.5 border border-gray-200"
+                >
+                  {city}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function AreasPage() {
-  const [expandedCounty, setExpandedCounty] = useState<string | null>('Hood County');
+  const [openIndex, setOpenIndex] = useState(0);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -94,105 +151,58 @@ export default function AreasPage() {
         </div>
       </section>
 
-      {/* Counties Section - Modern Bento + Accordion */}
-      <section className="py-20 sm:py-28 md:py-36 bg-[#0a1e30]">
+      {/* Counties - Accordion List */}
+      <section className="py-20 sm:py-28 md:py-36 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Stats Row */}
-          <div className="grid grid-cols-3 gap-8 mb-20">
-            <div>
-              <span className="text-5xl sm:text-6xl lg:text-7xl font-extralight text-white tracking-tight">5</span>
-              <p className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-white/40 mt-2 font-medium">Counties</p>
-            </div>
-            <div>
-              <span className="text-5xl sm:text-6xl lg:text-7xl font-extralight text-white tracking-tight">22</span>
-              <p className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-white/40 mt-2 font-medium">Cities Served</p>
-            </div>
-            <div>
-              <span className="text-5xl sm:text-6xl lg:text-7xl font-extralight text-brand-yellow tracking-tight">1</span>
-              <p className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-white/40 mt-2 font-medium">Standard of Quality</p>
-            </div>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            {/* Left column - heading + stats */}
+            <div className="lg:col-span-4">
+              <span className="inline-block text-brand-teal font-semibold text-xs uppercase tracking-[0.2em] mb-4">
+                Where We Work
+              </span>
+              <h2
+                className="font-display uppercase text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900 mb-6"
+                style={{ lineHeight: 1.05 }}
+              >
+                Counties we proudly serve.
+              </h2>
+              <p className="text-gray-500 text-[15px] leading-[1.85] mb-10">
+                We provide the same level of attention, professionalism, and quality to every project across every county we serve.
+              </p>
 
-          {/* Bento Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5">
-            {/* HQ Feature Tile */}
-            <div className="lg:col-span-5 lg:row-span-2 relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/[0.06] p-8 sm:p-10 lg:p-12 flex flex-col justify-between min-h-[360px] lg:min-h-[480px]">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-yellow/[0.04] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-              <div className="relative">
-                <div className="inline-flex items-center gap-2 bg-brand-yellow/10 border border-brand-yellow/20 rounded-full px-3.5 py-1.5 mb-6">
-                  <MapPin className="w-3.5 h-3.5 text-brand-yellow" />
-                  <span className="text-brand-yellow text-[11px] font-semibold uppercase tracking-wider">Headquarters</span>
+              {/* Stats grid */}
+              <div className="grid grid-cols-2 gap-px bg-gray-100 border border-gray-100">
+                <div className="bg-white p-5">
+                  <span className="block font-display text-3xl sm:text-4xl font-bold text-navy-900">5</span>
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mt-1">Counties</span>
                 </div>
-                <h3 className="font-display uppercase text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight" style={{ lineHeight: 1.1 }}>
-                  Hood<br />County
-                </h3>
-                <p className="text-white/40 text-sm sm:text-base mt-4 leading-relaxed max-w-sm">
-                  Our home base. Full coverage with priority scheduling for all residential and commercial projects.
-                </p>
-              </div>
-              <div className="relative mt-8">
-                <div className="flex flex-wrap gap-2">
-                  {counties[0].cities.map((city) => (
-                    <span
-                      key={city}
-                      className="text-sm text-white/70 bg-white/[0.06] border border-white/[0.08] rounded-full px-4 py-2"
-                    >
-                      {city}
-                    </span>
-                  ))}
+                <div className="bg-white p-5">
+                  <span className="block font-display text-3xl sm:text-4xl font-bold text-navy-900">22</span>
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mt-1">Cities Served</span>
+                </div>
+                <div className="bg-white p-5">
+                  <span className="block font-display text-3xl sm:text-4xl font-bold text-navy-900">10+</span>
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mt-1">Years Experience</span>
+                </div>
+                <div className="bg-white p-5">
+                  <span className="block font-display text-3xl sm:text-4xl font-bold text-navy-900">5.0</span>
+                  <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mt-1">Google Rating</span>
                 </div>
               </div>
             </div>
 
-            {/* Other Counties - Expandable List */}
-            <div className="lg:col-span-7 lg:row-span-2 flex flex-col gap-3">
-              {counties.slice(1).map((county) => {
-                const isExpanded = expandedCounty === county.name;
-                return (
-                  <div
+            {/* Right column - county accordion */}
+            <div className="lg:col-span-8">
+              <div className="border-t border-gray-100">
+                {counties.map((county, idx) => (
+                  <CountyRow
                     key={county.name}
-                    onClick={() => setExpandedCounty(isExpanded ? null : county.name)}
-                    className={`group relative overflow-hidden rounded-xl cursor-pointer transition-all duration-500 ease-out border ${
-                      isExpanded
-                        ? 'bg-white/[0.06] border-brand-teal/30 backdrop-blur-sm'
-                        : 'bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.12]'
-                    }`}
-                  >
-                    <div className="px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between">
-                      <div className="flex items-center gap-4 sm:gap-6">
-                        <span className="text-2xl sm:text-3xl font-extralight text-white/30 tabular-nums w-8">
-                          {county.cityCount}
-                        </span>
-                        <div>
-                          <h3 className="font-display uppercase text-lg sm:text-xl font-bold text-white tracking-wide">
-                            {county.name}
-                          </h3>
-                          <p className="text-white/40 text-sm mt-0.5">{county.mainCity}, TX</p>
-                        </div>
-                      </div>
-                      <ArrowRight className={`w-5 h-5 text-white/30 transition-transform duration-500 ${isExpanded ? 'rotate-90 text-brand-teal' : 'group-hover:text-white/60 group-hover:translate-x-1'}`} />
-                    </div>
-
-                    <div className={`overflow-hidden transition-all duration-500 ease-out ${isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
-                      <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0">
-                        <p className="text-white/50 text-sm leading-relaxed mb-4 pl-12 sm:pl-14">
-                          {county.description}
-                        </p>
-                        <div className="flex flex-wrap gap-2 pl-12 sm:pl-14">
-                          {county.cities.map((city) => (
-                            <span
-                              key={city}
-                              className="text-xs text-white/60 bg-white/[0.06] border border-white/[0.08] rounded-full px-3 py-1.5"
-                            >
-                              {city}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
+                    county={county}
+                    isOpen={openIndex === idx}
+                    onToggle={() => setOpenIndex(openIndex === idx ? -1 : idx)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
