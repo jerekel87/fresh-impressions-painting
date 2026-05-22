@@ -24,6 +24,10 @@ import photoFeb23 from '../assets/Photo_Feb_23_2022,_11_05_01_AM.jpg';
 import screenshotDrywall from '../assets/Screenshot_2026-05-22_at_7.11.56_PM.png';
 import photoJun28_2024 from '../assets/Photo_Jun_28_2024,_3_30_16_PM.jpg';
 import photoAug19 from '../assets/Photo_Aug_19_2024,_10_17_59_AM.jpg';
+import photoApr08 from '../assets/Photo_Apr_08_2026,_1_17_03_PM.jpg';
+import photoAug04 from '../assets/Photo_Aug_04_2023,_10_13_49_AM.jpg';
+import screenshotMetal1 from '../assets/Screenshot_2026-05-22_at_8.56.25_PM.png';
+import screenshotMetal2 from '../assets/Screenshot_2026-05-22_at_8.56.37_PM.png';
 import photoMar27 from '../assets/Photo_Mar_27_2026,_12_55_24_PM.jpg';
 import photoMar27_1 from '../assets/Photo_Mar_27_2026,_12_55_24_PM_(1).jpg';
 import photoMar27_2 from '../assets/Photo_Mar_27_2026,_12_55_24_PM_(2).jpg';
@@ -360,20 +364,20 @@ export const services: Record<string, ServiceData> = {
     slug: 'metal-finishing-and-refinishing',
     tagline: 'Durable coatings for metal surfaces \u2014 gates, railings, fixtures, and more.',
     aboutTitle: 'Stop rust. Extend the life.',
-    heroImage: 'https://images.pexels.com/photos/2310483/pexels-photo-2310483.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    heroImage: screenshotMetal1,
     galleryImages: [
-      'https://images.pexels.com/photos/2310483/pexels-photo-2310483.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1648768/pexels-photo-1648768.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2724745/pexels-photo-2724745.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1669754/pexels-photo-1669754.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      screenshotMetal1,
+      screenshotMetal2,
+      photoApr08,
+      photoAug04,
+      screenshotMetal1,
+      screenshotMetal2,
+      photoApr08,
+      photoAug04,
+      screenshotMetal1,
+      screenshotMetal2,
+      photoApr08,
+      photoAug04,
     ],
     description: [
       'Metal surfaces such as fences, railings, gates, and structural steel need the right system to stop deterioration and extend their life.',
@@ -393,10 +397,10 @@ export const services: Record<string, ServiceData> = {
       { step: '05', title: 'Final Inspection', body: 'Every surface is inspected for complete coverage and coating integrity. We ensure the finish is uniform and will provide years of protection.' },
     ],
     beforeAfter: [
-      { before: 'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Rusted iron fence restored with industrial-grade coating' },
-      { before: 'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Metal railing refinished for renewed curb appeal' },
-      { before: 'https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Gate hardware stripped and recoated for long-term protection' },
-      { before: 'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Structural steel treated and sealed against corrosion' },
+      { before: screenshotMetal1, after: screenshotMetal2, caption: 'Metal barn structure finished with protective industrial coating' },
+      { before: photoApr08, after: photoAug04, caption: 'Iron gate refinished with durable rust-resistant finish' },
+      { before: screenshotMetal2, after: screenshotMetal1, caption: 'Steel beams and roof supports coated for weather protection' },
+      { before: photoAug04, after: photoApr08, caption: 'Porch railing restored with fresh protective coating' },
     ],
     faqs: [
       { q: 'How do you prepare rusted metal for painting?', a: 'We remove loose rust and failed coatings by scraping, wire brushing, and sanding. The goal is to get down to sound metal so the primer can bond properly and stop future rust from developing beneath the finish.' },
