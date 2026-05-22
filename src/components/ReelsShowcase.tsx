@@ -97,7 +97,7 @@ export default function ReelsShowcase() {
               <button
                 onClick={() => scroll('left')}
                 disabled={!canScrollLeft}
-                className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
                   canScrollLeft
                     ? 'border-white/60 text-white hover:bg-white hover:text-navy-900 cursor-pointer'
                     : 'border-white/20 text-white/30 cursor-not-allowed'
@@ -109,7 +109,7 @@ export default function ReelsShowcase() {
               <button
                 onClick={() => scroll('right')}
                 disabled={!canScrollRight}
-                className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
                   canScrollRight
                     ? 'border-white/60 text-white hover:bg-white hover:text-navy-900 cursor-pointer'
                     : 'border-white/20 text-white/30 cursor-not-allowed'
@@ -122,7 +122,7 @@ export default function ReelsShowcase() {
                 href="https://www.facebook.com/freshimpressionspainting"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-7 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase hover:bg-brand-gold transition-colors duration-300 ml-2"
+                className="hidden sm:inline-flex items-center gap-2.5 px-7 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase hover:bg-brand-gold transition-colors duration-300 ml-2"
               >
                 Follow for More
                 <span className="text-base">&rarr;</span>

@@ -114,11 +114,11 @@ export default function ServicesPreview() {
               </p>
             </div>
             {/* Arrow controls */}
-            <div className="flex items-center gap-3 mt-6 sm:mt-0">
+            <div className="flex items-center gap-2.5 sm:gap-3 mt-6 sm:mt-0">
               <button
                 onClick={() => scroll('left')}
                 disabled={!canScrollLeft}
-                className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
                   canScrollLeft
                     ? 'border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white cursor-pointer'
                     : 'border-gray-200 text-gray-300 cursor-not-allowed'
@@ -130,7 +130,7 @@ export default function ServicesPreview() {
               <button
                 onClick={() => scroll('right')}
                 disabled={!canScrollRight}
-                className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
                   canScrollRight
                     ? 'border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white cursor-pointer'
                     : 'border-gray-200 text-gray-300 cursor-not-allowed'

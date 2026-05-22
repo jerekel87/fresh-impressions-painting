@@ -57,10 +57,10 @@ export default function ContactPage() {
               <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-1.5">Call or Text</span>
               <span className="text-navy-900 font-semibold text-[15px] group-hover:text-brand-teal transition-colors duration-300">(817) 243-9116</span>
             </a>
-            <a href="mailto:info@freshimpressionspainting.com" className="group bg-white py-8 sm:py-10 px-5 sm:px-8 hover:bg-[#f4f7fa] transition-colors duration-300">
+            <a href="mailto:info@freshimpressionspainting.com" className="group bg-white py-8 sm:py-10 px-4 sm:px-8 hover:bg-[#f4f7fa] transition-colors duration-300 overflow-hidden">
               <Mail className="w-5 h-5 text-brand-teal mb-4" strokeWidth={1.5} />
               <span className="block text-[10px] font-bold uppercase tracking-[0.18em] text-gray-400 mb-1.5">Email</span>
-              <span className="text-navy-900 font-semibold text-[15px] group-hover:text-brand-teal transition-colors duration-300 break-all">info@freshimpressions<wbr />painting.com</span>
+              <span className="text-navy-900 font-semibold text-[13px] sm:text-[15px] group-hover:text-brand-teal transition-colors duration-300 break-all leading-tight">info@freshimpressions<wbr />painting.com</span>
             </a>
             <div className="bg-white py-8 sm:py-10 px-5 sm:px-8">
               <MapPin className="w-5 h-5 text-brand-teal mb-4" strokeWidth={1.5} />

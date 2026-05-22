@@ -103,7 +103,7 @@ function ReviewLightbox({ review, onClose }: { review: typeof reviews[0]; onClos
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       <div
-        className="relative bg-white max-w-lg w-full p-8 sm:p-10 shadow-2xl animate-fade-in"
+        className="relative bg-white max-w-lg w-full p-6 sm:p-8 md:p-10 shadow-2xl animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
         <button

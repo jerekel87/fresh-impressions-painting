@@ -35,7 +35,7 @@ export default function EstimateForm() {
 
   if (submitted) {
     return (
-      <section id="contact" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="contact" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-xl mx-auto text-center">
           <CheckCircle className="w-16 h-16 text-brand-teal mx-auto mb-6" />
           <h3 className="text-3xl font-bold text-navy-900 mb-3">We've got your request.</h3>
@@ -48,7 +48,7 @@ export default function EstimateForm() {
   }
 
   return (
-    <section id="contact" className="py-24 sm:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${textureBg})` }} />
       <div className="absolute inset-0 bg-white/30" />
 
@@ -178,26 +178,26 @@ export default function EstimateForm() {
             </p>
 
             {/* Contact details - Grid layout */}
-            <div className="grid grid-cols-2 gap-4">
-              <a href="tel:+18172439116" className="group bg-white/80 backdrop-blur-sm border border-[#e8e0d8] p-5 hover:bg-white transition-colors">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <a href="tel:+18172439116" className="group bg-white/80 backdrop-blur-sm border border-[#e8e0d8] p-4 sm:p-5 hover:bg-white transition-colors">
                 <Phone className="w-5 h-5 text-brand-teal mb-3" strokeWidth={1.5} />
                 <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-1">Call or Text</span>
                 <span className="text-navy-900 font-medium text-[14px] group-hover:text-brand-teal transition-colors">(817) 243-9116</span>
               </a>
 
-              <a href="mailto:info@freshimpressionspainting.com" className="group bg-white/80 backdrop-blur-sm border border-[#e8e0d8] p-5 hover:bg-white transition-colors">
+              <a href="mailto:info@freshimpressionspainting.com" className="group bg-white/80 backdrop-blur-sm border border-[#e8e0d8] p-4 sm:p-5 hover:bg-white transition-colors overflow-hidden">
                 <Mail className="w-5 h-5 text-brand-teal mb-3" strokeWidth={1.5} />
                 <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-1">Email</span>
-                <span className="text-navy-900 font-medium text-[14px] group-hover:text-brand-teal transition-colors break-all">info@freshimpressions&#8203;painting.com</span>
+                <span className="text-navy-900 font-medium text-[13px] sm:text-[14px] group-hover:text-brand-teal transition-colors break-all leading-tight">info@freshimpressions&#8203;painting.com</span>
               </a>
 
-              <div className="bg-white/80 backdrop-blur-sm border border-[#e8e0d8] p-5">
+              <div className="bg-white/80 backdrop-blur-sm border border-[#e8e0d8] p-4 sm:p-5">
                 <MapPin className="w-5 h-5 text-brand-teal mb-3" strokeWidth={1.5} />
                 <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-1">Service Area</span>
                 <span className="text-navy-900 font-medium text-[14px]">North Central Texas</span>
               </div>
 
-              <div className="bg-white/80 backdrop-blur-sm border border-[#e8e0d8] p-5">
+              <div className="bg-white/80 backdrop-blur-sm border border-[#e8e0d8] p-4 sm:p-5">
                 <Clock className="w-5 h-5 text-brand-teal mb-3" strokeWidth={1.5} />
                 <span className="block text-[10px] font-semibold uppercase tracking-[0.2em] text-gray-400 mb-1">Response Time</span>
                 <span className="text-navy-900 font-medium text-[14px]">Within one business day</span>

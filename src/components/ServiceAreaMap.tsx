@@ -186,12 +186,10 @@ export default function ServiceAreaMap() {
           <div className="relative z-0 h-[400px] sm:h-[480px] lg:h-[560px]">
             <div ref={mapRef} className="absolute inset-0" />
 
-            {/* Info card overlay */}
+            {/* Info card overlay - hidden on mobile to avoid overlap with county tabs */}
             {selected && (
-              <div className="absolute bottom-0 left-0 z-[1000] max-w-[320px]">
-                {/* Blue backing layer */}
+              <div className="absolute bottom-0 left-0 z-[1000] max-w-[320px] hidden lg:block">
                 <div className="absolute inset-0 bg-brand-teal/10" />
-                {/* White card */}
                 <div className="relative bg-white p-5 sm:p-6 shadow-[0_8px_40px_rgba(0,0,0,0.08)]">
                   <div className="flex items-center gap-2 mb-2">
                     <MapPin className="w-3.5 h-3.5 text-brand-teal" />
@@ -219,16 +217,49 @@ export default function ServiceAreaMap() {
               </div>
             )}
 
+            {/* Mobile info card - below map on small screens */}
+            {selected && (
+              <div className="lg:hidden absolute bottom-3 left-3 right-3 z-[1000]">
+                <div className="bg-white/95 backdrop-blur-sm p-4 shadow-lg">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <span className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">
+                        {selected.name}
+                      </span>
+                      <h4 className="text-navy-900 font-bold text-base">
+                        {selected.mainCity}
+                      </h4>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5 max-w-[180px] justify-end">
+                      {selected.cities.slice(0, 3).map((city) => (
+                        <span
+                          key={city}
+                          className="text-[10px] font-medium text-gray-500 uppercase tracking-wider px-2 py-0.5 border border-gray-200"
+                        >
+                          {city}
+                        </span>
+                      ))}
+                      {selected.cities.length > 3 && (
+                        <span className="text-[10px] font-medium text-gray-400">
+                          +{selected.cities.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Mobile county selector */}
-            <div className="absolute top-4 left-4 right-4 z-[1000] lg:hidden">
-              <div className="flex gap-1 overflow-x-auto pb-1" style={{ scrollbarWidth: 'none' }}>
+            <div className="absolute top-3 left-3 right-3 z-[1000] lg:hidden">
+              <div className="flex gap-1.5 overflow-x-auto pb-1" style={{ scrollbarWidth: 'none' }}>
                 {counties.map((county) => {
                   const isActive = county.id === selectedId;
                   return (
                     <button
                       key={county.id}
                       onClick={() => selectCounty(county.id)}
-                      className={`flex-shrink-0 px-3 py-2 text-xs font-medium transition-all duration-200 ${
+                      className={`flex-shrink-0 px-3.5 py-2.5 text-xs font-medium transition-all duration-200 min-h-[40px] ${
                         isActive
                           ? 'bg-brand-yellow text-navy-900'
                           : 'bg-navy-900/80 backdrop-blur-sm text-white/70 border border-white/10'

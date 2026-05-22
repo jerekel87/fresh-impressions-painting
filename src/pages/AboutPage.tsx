@@ -47,7 +47,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             {/* Left: Photo collage */}
             <div className="relative">
-              <div className="grid grid-cols-12 grid-rows-12 gap-4 h-[560px] sm:h-[640px] lg:h-[720px]">
+              <div className="grid grid-cols-12 grid-rows-12 gap-3 sm:gap-4 h-[420px] sm:h-[640px] lg:h-[720px]">
                 <div className="col-span-7 row-span-12 overflow-hidden">
                   <img
                     src={familyPhoto}
