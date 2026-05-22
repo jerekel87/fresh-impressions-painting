@@ -174,12 +174,48 @@ function ReviewCard({ review, onSelect }: { review: typeof reviews[0]; onSelect:
   );
 }
 
+function MobileReviewCard({ review, onSelect }: { review: typeof reviews[0]; onSelect: () => void }) {
+  return (
+    <div
+      onClick={onSelect}
+      className="bg-white border border-gray-100 p-6 cursor-pointer active:bg-gray-50 transition-colors duration-200"
+    >
+      <div className="flex items-center gap-1 mb-4">
+        {Array.from({ length: review.rating }).map((_, i) => (
+          <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+        ))}
+      </div>
+
+      <p className="text-gray-600 text-[15px] leading-[1.8] mb-5 line-clamp-4">
+        "{review.text}"
+      </p>
+
+      <div className="flex items-center gap-3">
+        <div className="w-9 h-9 rounded-full bg-[#f4f7fa] border border-gray-100 flex items-center justify-center flex-shrink-0">
+          <span className="font-bold text-xs text-navy-900">
+            {review.author.charAt(0)}
+          </span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="font-semibold text-sm text-navy-900 truncate">{review.author}</p>
+        </div>
+        <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-gray-400 bg-gray-50 border border-gray-100 px-2.5 py-1 rounded-sm flex-shrink-0">
+          {review.source}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 export default function ReviewsTicker() {
   const [selectedReview, setSelectedReview] = useState<typeof reviews[0] | null>(null);
+  const [showAll, setShowAll] = useState(false);
+
+  const mobileReviews = showAll ? reviews : reviews.slice(0, 4);
 
   return (
     <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-[#f4f7fa] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-14 sm:mb-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-14 md:mb-20">
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 items-end">
           <div>
@@ -207,8 +243,25 @@ export default function ReviewsTicker() {
         </div>
       </div>
 
-      {/* Scrolling row 1 - left to right */}
-      <div className="relative mb-5 sm:mb-6">
+      {/* Mobile stacked reviews */}
+      <div className="sm:hidden px-4">
+        <div className="space-y-3">
+          {mobileReviews.map((review, idx) => (
+            <MobileReviewCard key={idx} review={review} onSelect={() => setSelectedReview(review)} />
+          ))}
+        </div>
+        {!showAll && (
+          <button
+            onClick={() => setShowAll(true)}
+            className="w-full mt-4 py-4 border border-gray-200 bg-white text-navy-900 font-bold text-[13px] tracking-[0.1em] uppercase hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200"
+          >
+            Show More Reviews ({reviews.length - 4} more)
+          </button>
+        )}
+      </div>
+
+      {/* Desktop scrolling row 1 - left to right */}
+      <div className="hidden sm:block relative mb-5 sm:mb-6">
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#f4f7fa] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#f4f7fa] to-transparent z-10 pointer-events-none" />
         <div className="flex animate-scroll-left">
@@ -218,8 +271,8 @@ export default function ReviewsTicker() {
         </div>
       </div>
 
-      {/* Scrolling row 2 - right to left */}
-      <div className="relative">
+      {/* Desktop scrolling row 2 - right to left */}
+      <div className="hidden sm:block relative">
         <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#f4f7fa] to-transparent z-10 pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#f4f7fa] to-transparent z-10 pointer-events-none" />
         <div className="flex animate-scroll-right">
