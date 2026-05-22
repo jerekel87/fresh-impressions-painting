@@ -12,6 +12,13 @@ import photoDec05 from '../assets/Photo_Dec_05_2022,_4_16_16_PM.jpg';
 import photoJun16 from '../assets/Photo_Jun_16_2022,_4_46_05_PM.jpg';
 import photoMar19 from '../assets/Photo_Mar_19_2026,_9_28_01_PM.png';
 import photoMar23 from '../assets/Photo_Mar_23_2026,_7_47_00_AM.jpg';
+import photoOct03 from '../assets/Photo_Oct_03_2022,_5_11_03_PM.jpg';
+import photoOct07 from '../assets/Photo_Oct_07_2022,_5_48_26_PM.jpg';
+import photoSep14 from '../assets/Photo_Sep_14_2019,_7_55_32_AM.jpg';
+import photoJul18 from '../assets/Photo_Jul_18_2025,_7_31_54_PM.jpg';
+import photoMar13 from '../assets/Photo_Mar_13_2025,_7_14_48_PM.jpg';
+import screenshotCommercial1 from '../assets/Screenshot_2026-05-22_at_7.00.16_PM.png';
+import screenshotCommercial2 from '../assets/Screenshot_2026-05-22_at_7.01.40_PM.png';
 
 export interface ServiceData {
   title: string;
@@ -234,20 +241,20 @@ export const services: Record<string, ServiceData> = {
     slug: 'commercial-painting',
     tagline: 'Professional solutions for offices and retail \u2014 minimal disruption guaranteed.',
     aboutTitle: 'Your space is your brand.',
-    heroImage: 'https://images.pexels.com/photos/6474475/pexels-photo-6474475.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    heroImage: photoMar13,
     galleryImages: [
-      'https://images.pexels.com/photos/6474475/pexels-photo-6474475.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1669754/pexels-photo-1669754.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      photoJul18,
+      screenshotCommercial1,
+      photoMar13,
+      photoOct03,
+      photoOct07,
+      photoSep14,
+      screenshotCommercial2,
+      photoJul18,
+      screenshotCommercial1,
+      photoMar13,
+      photoOct03,
+      photoOct07,
     ],
     description: [
       'At Fresh Impressions Painting, we understand that the appearance of your business directly affects how customers see your brand. A clean, sharp, professional environment builds trust before a word is ever spoken.',
@@ -267,10 +274,10 @@ export const services: Record<string, ServiceData> = {
       { step: '05', title: 'Final Walkthrough', body: 'We inspect every surface with your property manager or owner to ensure the work meets professional standards and your expectations.' },
     ],
     beforeAfter: [
-      { before: 'https://images.pexels.com/photos/1669754/pexels-photo-1669754.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Office space refreshed with clean, professional tones' },
-      { before: 'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Retail storefront repainted for brand consistency' },
-      { before: 'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Restaurant interior updated for a modern dining atmosphere' },
-      { before: 'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Warehouse walls and trim painted for a cleaner workspace' },
+      { before: photoOct03, after: photoOct07, caption: 'Office space refreshed with clean, professional tones' },
+      { before: photoJul18, after: screenshotCommercial1, caption: 'Church sanctuary repainted for a modern worship environment' },
+      { before: photoSep14, after: screenshotCommercial2, caption: 'Commercial building exterior updated with bold new colors' },
+      { before: photoMar13, after: photoJul18, caption: 'New construction commercial painting' },
     ],
     faqs: [
       { q: 'Can you work after business hours?', a: 'Yes. We regularly schedule commercial work for evenings, nights, and weekends to avoid disrupting your customers and employees. We coordinate closely with you to find the ideal schedule.' },
