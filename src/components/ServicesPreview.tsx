@@ -1,51 +1,60 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import interiorPainting1 from '../assets/interior-painting1.jpg';
+import photoDec05 from '../assets/Photo_Dec_05_2022,_4_16_16_PM.jpg';
+import photoJun16 from '../assets/Photo_Jun_16_2022,_4_46_05_PM.jpg';
+import photoFeb27 from '../assets/Photo_Feb_27_2026,_3_40_59_PM.jpg';
+import photoMar13 from '../assets/Photo_Mar_13_2025,_7_14_48_PM.jpg';
+import photoNov30 from '../assets/Photo_Nov_30_2018,_3_20_20_PM.jpg';
+import screenshotMetal1 from '../assets/Screenshot_2026-05-22_at_8.56.25_PM.png';
+import photoOct26_16 from '../assets/Photo_Oct_26_2021,_1_37_16_PM.jpg';
+import screenshotStain from '../assets/Screenshot_2026-05-22_at_9.33.33_PM.png';
 
 const services = [
   {
     title: 'Interior Painting',
     description: 'Flawless finishes that transform living spaces with warmth and lasting beauty.',
-    image: 'https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
+    image: interiorPainting1,
   },
   {
     title: 'Exterior Painting',
     description: 'Professional coatings that protect and elevate your home\'s curb appeal.',
-    image: 'https://images.pexels.com/photos/6077368/pexels-photo-6077368.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
+    image: photoDec05,
   },
   {
     title: 'Brick And Stone Lime Wash',
     description: 'Breathable, timeless finishes that add character and charm to masonry surfaces.',
-    image: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
+    image: photoJun16,
   },
   {
     title: 'Cabinet Finishing And Refinishing',
     description: 'Expert refinishing that gives your kitchen a stunning, like-new transformation.',
-    image: 'https://images.pexels.com/photos/6585757/pexels-photo-6585757.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
+    image: photoFeb27,
   },
   {
     title: 'Commercial Painting',
     description: 'Professional solutions for offices and retail — minimal disruption guaranteed.',
-    image: 'https://images.pexels.com/photos/6474475/pexels-photo-6474475.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
+    image: photoMar13,
   },
   {
     title: 'Drywall Repair And Finishing',
     description: 'Seamless restoration — the invisible foundation for a flawless paint job.',
-    image: 'https://images.pexels.com/photos/5691593/pexels-photo-5691593.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
+    image: photoNov30,
   },
   {
     title: 'Metal Finishing And Refinishing',
     description: 'Durable coatings for metal surfaces — gates, railings, fixtures, and more.',
-    image: 'https://images.pexels.com/photos/2310483/pexels-photo-2310483.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
+    image: screenshotMetal1,
   },
   {
     title: 'New Construction Painting',
     description: 'Complete painting solutions for new builds — from primer to final coat.',
-    image: 'https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
+    image: photoOct26_16,
   },
   {
     title: 'Staining',
     description: 'Protective finishes that preserve and beautify wood surfaces inside and out.',
-    image: 'https://images.pexels.com/photos/5997993/pexels-photo-5997993.jpeg?auto=compress&cs=tinysrgb&w=800&h=1000&fit=crop',
+    image: screenshotStain,
   },
 ];
 
