@@ -1,21 +1,24 @@
 import ScrollingGallery from './ScrollingGallery';
+import photoJun16 from '../assets/Photo_Jun_16_2022,_4_46_05_PM.jpg';
+import interiorPainting1 from '../assets/interior-painting1.jpg';
+import photoDec28 from '../assets/Photo_Dec_28_2023,_11_08_29_AM.jpg';
+import photoAug29 from '../assets/Photo_Aug_29_2025,_5_26_28_PM.jpg';
+import photoJul18 from '../assets/Photo_Jul_18_2025,_7_31_54_PM.jpg';
+import photoAug19 from '../assets/Photo_Aug_19_2024,_10_17_59_AM.jpg';
+import screenshotMetal1 from '../assets/Screenshot_2026-05-22_at_8.56.25_PM.png';
+import photoOct26_16 from '../assets/Photo_Oct_26_2021,_1_37_16_PM.jpg';
+import screenshotStain from '../assets/Screenshot_2026-05-22_at_9.33.33_PM.png';
 
 const images = [
-  'https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/1669754/pexels-photo-1669754.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/3935333/pexels-photo-3935333.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-  'https://images.pexels.com/photos/1648768/pexels-photo-1648768.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+  photoJun16,
+  interiorPainting1,
+  photoDec28,
+  photoAug29,
+  photoJul18,
+  photoAug19,
+  screenshotMetal1,
+  photoOct26_16,
+  screenshotStain,
 ];
 
 export default function ServiceAreas() {
