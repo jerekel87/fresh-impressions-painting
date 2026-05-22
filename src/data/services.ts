@@ -28,6 +28,13 @@ import photoApr08 from '../assets/Photo_Apr_08_2026,_1_17_03_PM.jpg';
 import photoAug04 from '../assets/Photo_Aug_04_2023,_10_13_49_AM.jpg';
 import screenshotMetal1 from '../assets/Screenshot_2026-05-22_at_8.56.25_PM.png';
 import screenshotMetal2 from '../assets/Screenshot_2026-05-22_at_8.56.37_PM.png';
+import photoOct26_38 from '../assets/Photo_Oct_26_2021,_1_38_18_PM.jpg';
+import photoJul16_09 from '../assets/Photo_Jul_16_2021,_3_09_42_PM.jpg';
+import photoJul16_12 from '../assets/Photo_Jul_16_2021,_3_12_27_PM.jpg';
+import photoJul16_12b from '../assets/Photo_Jul_16_2021,_3_12_49_PM.jpg';
+import photoOct26_16 from '../assets/Photo_Oct_26_2021,_1_37_16_PM.jpg';
+import photoDec21 from '../assets/Photo_Dec_21_2025,_10_20_33_AM.jpg';
+import photoOct26_08 from '../assets/Photo_Oct_26_2021,_1_37_08_PM.jpg';
 import photoMar27 from '../assets/Photo_Mar_27_2026,_12_55_24_PM.jpg';
 import photoMar27_1 from '../assets/Photo_Mar_27_2026,_12_55_24_PM_(1).jpg';
 import photoMar27_2 from '../assets/Photo_Mar_27_2026,_12_55_24_PM_(2).jpg';
@@ -417,20 +424,20 @@ export const services: Record<string, ServiceData> = {
     slug: 'new-construction-painting',
     tagline: 'Complete painting solutions for new builds \u2014 from primer to final coat.',
     aboutTitle: 'On schedule. On budget. Done right.',
-    heroImage: 'https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    heroImage: photoOct26_16,
     galleryImages: [
-      'https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/6077368/pexels-photo-6077368.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      photoDec21,
+      photoJul16_09,
+      photoJul16_12,
+      photoJul16_12b,
+      photoOct26_08,
+      photoOct26_16,
+      photoOct26_38,
+      photoDec21,
+      photoJul16_09,
+      photoJul16_12,
+      photoJul16_12b,
+      photoOct26_08,
     ],
     description: [
       'New construction deserves a painting partner who understands the pace, coordination, and quality standards that builders demand. At Fresh Impressions Painting, we work hand-in-hand with builders and general contractors to deliver flawless interior and exterior finishes on schedule.',
@@ -450,10 +457,10 @@ export const services: Record<string, ServiceData> = {
       { step: '05', title: 'Punch List and Final Touch-ups', body: 'After other trades finish and final cleanup is done, we return for a complete touch-up pass and punch list completion to ensure move-in ready quality.' },
     ],
     beforeAfter: [
-      { before: 'https://images.pexels.com/photos/2760243/pexels-photo-2760243.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Raw drywall to finished interior \u2014 ready for move-in' },
-      { before: 'https://images.pexels.com/photos/6077368/pexels-photo-6077368.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'New construction exterior painted and complete' },
-      { before: 'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Kitchen and living area with flawless wall finish' },
-      { before: 'https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Exterior trim and siding detailed to completion' },
+      { before: photoOct26_38, after: photoDec21, caption: 'New build bonus room painted with vaulted ceiling detail' },
+      { before: photoJul16_09, after: photoJul16_12, caption: 'Living area with custom built-ins painted to completion' },
+      { before: photoJul16_12b, after: photoOct26_08, caption: 'New construction kitchen cabinets and walls finished' },
+      { before: photoOct26_16, after: photoOct26_38, caption: 'Vaulted ceiling with exposed beams painted in new build' },
     ],
     faqs: [
       { q: 'Do you work with builders and general contractors?', a: 'Yes. We regularly partner with builders and GCs on new construction projects. We understand the pace and coordination required and work within the overall construction schedule to keep projects on time.' },
