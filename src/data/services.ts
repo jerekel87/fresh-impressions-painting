@@ -9,6 +9,9 @@ import photoJul15 from '../assets/Photo_Jul_15_2020,_2_24_07_PM.jpg';
 import photoNov17 from '../assets/Photo_Nov_17_2022,_2_30_09_PM.jpg';
 import photoNov28 from '../assets/Photo_Nov_28_2022,_1_00_42_PM.jpg';
 import photoDec05 from '../assets/Photo_Dec_05_2022,_4_16_16_PM.jpg';
+import photoJun16 from '../assets/Photo_Jun_16_2022,_4_46_05_PM.jpg';
+import photoMar19 from '../assets/Photo_Mar_19_2026,_9_28_01_PM.png';
+import photoMar23 from '../assets/Photo_Mar_23_2026,_7_47_00_AM.jpg';
 
 export interface ServiceData {
   title: string;
@@ -30,20 +33,11 @@ export const services: Record<string, ServiceData> = {
     slug: 'brick-and-stone-lime-wash',
     tagline: 'Breathable, timeless finishes that add character and charm to masonry surfaces.',
     aboutTitle: 'The right way to refresh masonry.',
-    heroImage: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    heroImage: photoJun16,
     galleryImages: [
-      'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1438832/pexels-photo-1438832.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/209296/pexels-photo-209296.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2724745/pexels-photo-2724745.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      photoJun16,
+      photoMar19,
+      photoMar23,
     ],
     description: [
       'If you want to update the look of your brick or masonry home, there is a better option than traditional paint. At Fresh Impressions Painting, we offer limewash and mineral-based finishes that allow masonry to breathe naturally while creating stunning curb appeal. Unlike many paints that can trap moisture and eventually peel, mineral coatings bond with the surface and age beautifully.',
