@@ -4,6 +4,11 @@ import photoJul28a from '../assets/Photo_Jul_28_2023,_3_03_54_PM.jpg';
 import photoJul28b from '../assets/Photo_Jul_28_2023,_3_05_30_PM.jpg';
 import photoJun28 from '../assets/Photo_Jun_28_2019,_3_36_49_PM.jpg';
 import photoAug26 from '../assets/Photo_Aug_26_2024,_8_24_29_AM.jpg';
+import photoDec28 from '../assets/Photo_Dec_28_2023,_11_08_29_AM.jpg';
+import photoJul15 from '../assets/Photo_Jul_15_2020,_2_24_07_PM.jpg';
+import photoNov17 from '../assets/Photo_Nov_17_2022,_2_30_09_PM.jpg';
+import photoNov28 from '../assets/Photo_Nov_28_2022,_1_00_42_PM.jpg';
+import photoDec05 from '../assets/Photo_Dec_05_2022,_4_16_16_PM.jpg';
 
 export interface ServiceData {
   title: string;
@@ -127,20 +132,13 @@ export const services: Record<string, ServiceData> = {
     slug: 'exterior-painting',
     tagline: 'Professional coatings that protect and elevate your home\'s curb appeal for years to come.',
     aboutTitle: 'Protection that performs beautifully.',
-    heroImage: 'https://images.pexels.com/photos/6077368/pexels-photo-6077368.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    heroImage: photoDec05,
     galleryImages: [
-      'https://images.pexels.com/photos/6077368/pexels-photo-6077368.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/280229/pexels-photo-280229.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2079234/pexels-photo-2079234.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1648768/pexels-photo-1648768.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1669754/pexels-photo-1669754.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/259950/pexels-photo-259950.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2724745/pexels-photo-2724745.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      photoDec28,
+      photoJul15,
+      photoNov17,
+      photoNov28,
+      photoDec05,
     ],
     description: [
       'Your home\'s exterior is constantly exposed to sun, rain, wind, and changing temperatures. At Fresh Impressions Painting, we believe exterior painting should do more than look good\u2014it should protect your investment.',
