@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { MapPin, BadgeCheck } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { MapPin, ArrowRight } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import ServiceAreaMap from '../components/ServiceAreaMap';
 import EstimateForm from '../components/EstimateForm';
@@ -10,6 +10,7 @@ interface County {
   mainCity: string;
   cities: string[];
   description: string;
+  cityCount: number;
   isHQ?: boolean;
 }
 
@@ -17,9 +18,10 @@ const counties: County[] = [
   {
     name: 'Hood County',
     mainCity: 'Granbury',
-    cities: ['Granbury (HQ)', 'Acton', 'Tolar', 'Lipan', 'Cresson'],
+    cities: ['Granbury', 'Acton', 'Tolar', 'Lipan', 'Cresson'],
     description:
       'Our home base. Full coverage with priority scheduling for all residential and commercial projects.',
+    cityCount: 5,
     isHQ: true,
   },
   {
@@ -28,6 +30,7 @@ const counties: County[] = [
     cities: ['Weatherford', 'Aledo', 'Hudson Oaks', 'Willow Park', 'Springtown'],
     description:
       'Complete painting and finishing services across Parker County, from Weatherford to Aledo.',
+    cityCount: 5,
   },
   {
     name: 'Johnson County',
@@ -35,6 +38,7 @@ const counties: County[] = [
     cities: ['Cleburne', 'Burleson', 'Joshua', 'Alvarado', 'Keene'],
     description:
       'Serving the Johnson County community with interior, exterior, and commercial painting.',
+    cityCount: 5,
   },
   {
     name: 'Erath County',
@@ -42,6 +46,7 @@ const counties: County[] = [
     cities: ['Stephenville', 'Dublin', 'Lingleville', 'Bluff Dale'],
     description:
       'Extended coverage for residential painting and staining projects throughout Erath County.',
+    cityCount: 4,
   },
   {
     name: 'Somervell County',
@@ -49,10 +54,13 @@ const counties: County[] = [
     cities: ['Glen Rose', 'Rainbow', 'Nemo'],
     description:
       'Quality painting services in the Somervell County area, including historic properties.',
+    cityCount: 3,
   },
 ];
 
 export default function AreasPage() {
+  const [expandedCounty, setExpandedCounty] = useState<string | null>('Hood County');
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -86,65 +94,111 @@ export default function AreasPage() {
         </div>
       </section>
 
-      {/* Counties Section */}
-      <section className="py-16 sm:py-24 md:py-32 bg-white">
+      {/* Counties Section - Modern Bento + Accordion */}
+      <section className="py-20 sm:py-28 md:py-36 bg-[#0a1e30]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 sm:mb-16">
-            <span className="inline-block text-brand-teal font-semibold text-xs uppercase tracking-[0.2em] mb-4">
-              Where We Work
-            </span>
-            <h2
-              className="font-display uppercase text-4xl sm:text-5xl lg:text-6xl font-bold text-navy-900"
-              style={{ lineHeight: 1.05 }}
-            >
-              Counties we proudly serve
-            </h2>
+          {/* Stats Row */}
+          <div className="grid grid-cols-3 gap-8 mb-20">
+            <div>
+              <span className="text-5xl sm:text-6xl lg:text-7xl font-extralight text-white tracking-tight">5</span>
+              <p className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-white/40 mt-2 font-medium">Counties</p>
+            </div>
+            <div>
+              <span className="text-5xl sm:text-6xl lg:text-7xl font-extralight text-white tracking-tight">22</span>
+              <p className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-white/40 mt-2 font-medium">Cities Served</p>
+            </div>
+            <div>
+              <span className="text-5xl sm:text-6xl lg:text-7xl font-extralight text-brand-yellow tracking-tight">1</span>
+              <p className="text-[11px] sm:text-xs uppercase tracking-[0.2em] text-white/40 mt-2 font-medium">Standard of Quality</p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {counties.map((county) => (
-              <div
-                key={county.name}
-                className="relative border-l-4 border-l-brand-teal bg-[#f8fafb] p-6 sm:p-8 shadow-sm"
-              >
-                {county.isHQ && (
-                  <span className="absolute top-5 right-5 inline-flex items-center gap-1.5 bg-navy-900 text-brand-yellow text-[10px] font-bold uppercase tracking-wider px-3 py-1.5">
-                    <MapPin className="w-3 h-3" />
-                    HQ
-                  </span>
-                )}
-
-                <div className="mb-4">
-                  <h3 className="font-display uppercase text-xl sm:text-2xl font-bold text-navy-900 tracking-wide">
-                    {county.name}
-                  </h3>
-                  <p className="text-brand-teal text-sm font-medium mt-1">
-                    {county.mainCity}, TX
-                  </p>
+          {/* Bento Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 lg:gap-5">
+            {/* HQ Feature Tile */}
+            <div className="lg:col-span-5 lg:row-span-2 relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] backdrop-blur-sm border border-white/[0.06] p-8 sm:p-10 lg:p-12 flex flex-col justify-between min-h-[360px] lg:min-h-[480px]">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-yellow/[0.04] rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 bg-brand-yellow/10 border border-brand-yellow/20 rounded-full px-3.5 py-1.5 mb-6">
+                  <MapPin className="w-3.5 h-3.5 text-brand-yellow" />
+                  <span className="text-brand-yellow text-[11px] font-semibold uppercase tracking-wider">Headquarters</span>
                 </div>
-
-                <p className="text-gray-600 text-[15px] leading-[1.8] mb-5">
-                  {county.description}
+                <h3 className="font-display uppercase text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight" style={{ lineHeight: 1.1 }}>
+                  Hood<br />County
+                </h3>
+                <p className="text-white/40 text-sm sm:text-base mt-4 leading-relaxed max-w-sm">
+                  Our home base. Full coverage with priority scheduling for all residential and commercial projects.
                 </p>
-
+              </div>
+              <div className="relative mt-8">
                 <div className="flex flex-wrap gap-2">
-                  {county.cities.map((city) => (
+                  {counties[0].cities.map((city) => (
                     <span
                       key={city}
-                      className="inline-flex items-center gap-1.5 text-xs font-medium text-navy-900 bg-white border border-gray-200 px-2.5 py-1.5"
+                      className="text-sm text-white/70 bg-white/[0.06] border border-white/[0.08] rounded-full px-4 py-2"
                     >
-                      <BadgeCheck className="w-3.5 h-3.5 text-brand-teal fill-brand-teal/20" />
                       {city}
                     </span>
                   ))}
                 </div>
               </div>
-            ))}
+            </div>
+
+            {/* Other Counties - Expandable List */}
+            <div className="lg:col-span-7 lg:row-span-2 flex flex-col gap-3">
+              {counties.slice(1).map((county) => {
+                const isExpanded = expandedCounty === county.name;
+                return (
+                  <div
+                    key={county.name}
+                    onClick={() => setExpandedCounty(isExpanded ? null : county.name)}
+                    className={`group relative overflow-hidden rounded-xl cursor-pointer transition-all duration-500 ease-out border ${
+                      isExpanded
+                        ? 'bg-white/[0.06] border-brand-teal/30 backdrop-blur-sm'
+                        : 'bg-white/[0.03] border-white/[0.06] hover:bg-white/[0.05] hover:border-white/[0.12]'
+                    }`}
+                  >
+                    <div className="px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between">
+                      <div className="flex items-center gap-4 sm:gap-6">
+                        <span className="text-2xl sm:text-3xl font-extralight text-white/30 tabular-nums w-8">
+                          {county.cityCount}
+                        </span>
+                        <div>
+                          <h3 className="font-display uppercase text-lg sm:text-xl font-bold text-white tracking-wide">
+                            {county.name}
+                          </h3>
+                          <p className="text-white/40 text-sm mt-0.5">{county.mainCity}, TX</p>
+                        </div>
+                      </div>
+                      <ArrowRight className={`w-5 h-5 text-white/30 transition-transform duration-500 ${isExpanded ? 'rotate-90 text-brand-teal' : 'group-hover:text-white/60 group-hover:translate-x-1'}`} />
+                    </div>
+
+                    <div className={`overflow-hidden transition-all duration-500 ease-out ${isExpanded ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'}`}>
+                      <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0">
+                        <p className="text-white/50 text-sm leading-relaxed mb-4 pl-12 sm:pl-14">
+                          {county.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2 pl-12 sm:pl-14">
+                          {county.cities.map((city) => (
+                            <span
+                              key={city}
+                              className="text-xs text-white/60 bg-white/[0.06] border border-white/[0.08] rounded-full px-3 py-1.5"
+                            >
+                              {city}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Map Section - Same as homepage */}
+      {/* Map Section */}
       <ServiceAreaMap />
 
       {/* Estimate Form */}
