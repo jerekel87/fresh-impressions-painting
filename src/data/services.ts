@@ -35,6 +35,13 @@ import photoJul16_12b from '../assets/Photo_Jul_16_2021,_3_12_49_PM.jpg';
 import photoOct26_16 from '../assets/Photo_Oct_26_2021,_1_37_16_PM.jpg';
 import photoDec21 from '../assets/Photo_Dec_21_2025,_10_20_33_AM.jpg';
 import photoOct26_08 from '../assets/Photo_Oct_26_2021,_1_37_08_PM.jpg';
+import photoSep28 from '../assets/Photo_Sep_28_2018,_4_01_26_PM.jpg';
+import photoMar18 from '../assets/Photo_Mar_18_2019,_3_51_56_PM.jpg';
+import photoMay10 from '../assets/Photo_May_10_2023,_1_48_35_PM.jpg';
+import photoMar20 from '../assets/Photo_Mar_20_2026,_4_13_34_PM.jpg';
+import photoMar09 from '../assets/Photo_Mar_09_2023,_2_21_17_PM.jpg';
+import screenshotStain from '../assets/Screenshot_2026-05-22_at_9.33.33_PM.png';
+import photoAug24 from '../assets/Photo_Aug_24_2024,_10_57_46_AM.jpg';
 import photoMar27 from '../assets/Photo_Mar_27_2026,_12_55_24_PM.jpg';
 import photoMar27_1 from '../assets/Photo_Mar_27_2026,_12_55_24_PM_(1).jpg';
 import photoMar27_2 from '../assets/Photo_Mar_27_2026,_12_55_24_PM_(2).jpg';
@@ -477,20 +484,20 @@ export const services: Record<string, ServiceData> = {
     slug: 'staining',
     tagline: 'Protective finishes that preserve and beautify wood surfaces inside and out.',
     aboutTitle: 'Preserve the wood. Restore the beauty.',
-    heroImage: 'https://images.pexels.com/photos/5997993/pexels-photo-5997993.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    heroImage: screenshotStain,
     galleryImages: [
-      'https://images.pexels.com/photos/5997993/pexels-photo-5997993.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1669799/pexels-photo-1669799.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1648768/pexels-photo-1648768.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/3935333/pexels-photo-3935333.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      screenshotStain,
+      photoAug24,
+      photoMar09,
+      photoMar20,
+      photoMay10,
+      photoSep28,
+      photoMar18,
+      screenshotStain,
+      photoAug24,
+      photoMar09,
+      photoMar20,
+      photoMay10,
     ],
     description: [
       'Exterior wood features bring warmth and character to a home, but sun and weather can quickly dry them out and wear them down. At Fresh Impressions Painting, we restore and protect wood surfaces such as posts, shutters, front doors, beams, and decorative accents.',
@@ -510,10 +517,10 @@ export const services: Record<string, ServiceData> = {
       { step: '05', title: 'Protective Topcoat', body: 'Where appropriate, a UV-protective clear coat or sealant is applied to extend the life of the stain and shield the wood from sun and moisture.' },
     ],
     beforeAfter: [
-      { before: 'https://images.pexels.com/photos/1648768/pexels-photo-1648768.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/5997993/pexels-photo-5997993.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Weathered front door stripped and re-stained' },
-      { before: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Cedar posts restored to rich natural tone' },
-      { before: 'https://images.pexels.com/photos/3935333/pexels-photo-3935333.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Deck boards sanded and sealed for lasting protection' },
-      { before: 'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Exterior beams refreshed with semi-transparent stain' },
+      { before: screenshotStain, after: photoAug24, caption: 'Mahogany front door stained with rich UV-protective finish' },
+      { before: photoMar09, after: photoMar20, caption: 'Wood ceiling and barn doors stained for natural warmth' },
+      { before: photoMay10, after: photoSep28, caption: 'Interior beams stained to complement living space' },
+      { before: photoMar18, after: photoMar09, caption: 'Floating staircase treads and handrail stained to perfection' },
     ],
     faqs: [
       { q: 'What is the difference between stain and paint for wood?', a: 'Stain penetrates the wood and enhances its natural grain and texture, while paint sits on top and covers the grain completely. Stain is ideal when you want to showcase the beauty of the wood itself.' },
