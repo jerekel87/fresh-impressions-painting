@@ -1,3 +1,10 @@
+import interiorPainting1 from '../assets/interior-painting1.jpg';
+import interiorPainting2 from '../assets/interior-painting2.jpg';
+import photoJul28a from '../assets/Photo_Jul_28_2023,_3_03_54_PM.jpg';
+import photoJul28b from '../assets/Photo_Jul_28_2023,_3_05_30_PM.jpg';
+import photoJun28 from '../assets/Photo_Jun_28_2019,_3_36_49_PM.jpg';
+import photoAug26 from '../assets/Photo_Aug_26_2024,_8_24_29_AM.jpg';
+
 export interface ServiceData {
   title: string;
   slug: string;
@@ -73,20 +80,14 @@ export const services: Record<string, ServiceData> = {
     slug: 'interior-painting',
     tagline: 'Fresh, comfortable spaces that reflect your style and stand the test of daily life.',
     aboutTitle: 'More than paint on a wall.',
-    heroImage: 'https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    heroImage: interiorPainting1,
     galleryImages: [
-      'https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/3935333/pexels-photo-3935333.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      interiorPainting1,
+      interiorPainting2,
+      photoJul28a,
+      photoJul28b,
+      photoJun28,
+      photoAug26,
     ],
     description: [
       'Your home should feel fresh, comfortable, and cared for\u2014and that is exactly what we help create at Fresh Impressions Painting. We do more than apply paint. We provide a thoughtful, organized experience that respects both your home and your time.',
