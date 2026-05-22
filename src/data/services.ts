@@ -19,6 +19,11 @@ import photoJul18 from '../assets/Photo_Jul_18_2025,_7_31_54_PM.jpg';
 import photoMar13 from '../assets/Photo_Mar_13_2025,_7_14_48_PM.jpg';
 import screenshotCommercial1 from '../assets/Screenshot_2026-05-22_at_7.00.16_PM.png';
 import screenshotCommercial2 from '../assets/Screenshot_2026-05-22_at_7.01.40_PM.png';
+import photoNov30 from '../assets/Photo_Nov_30_2018,_3_20_20_PM.jpg';
+import photoFeb23 from '../assets/Photo_Feb_23_2022,_11_05_01_AM.jpg';
+import screenshotDrywall from '../assets/Screenshot_2026-05-22_at_7.11.56_PM.png';
+import photoJun28_2024 from '../assets/Photo_Jun_28_2024,_3_30_16_PM.jpg';
+import photoAug19 from '../assets/Photo_Aug_19_2024,_10_17_59_AM.jpg';
 
 export interface ServiceData {
   title: string;
@@ -294,20 +299,20 @@ export const services: Record<string, ServiceData> = {
     slug: 'drywall-repair-and-finishing',
     tagline: 'Seamless restoration \u2014 the invisible foundation for a flawless paint job.',
     aboutTitle: 'Repairs that disappear completely.',
-    heroImage: 'https://images.pexels.com/photos/5691593/pexels-photo-5691593.jpeg?auto=compress&cs=tinysrgb&w=1600&h=900&fit=crop',
+    heroImage: photoNov30,
     galleryImages: [
-      'https://images.pexels.com/photos/5691593/pexels-photo-5691593.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/6474471/pexels-photo-6474471.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
-      'https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop',
+      photoAug19,
+      photoFeb23,
+      screenshotDrywall,
+      photoJun28_2024,
+      photoNov30,
+      photoAug19,
+      photoFeb23,
+      screenshotDrywall,
+      photoJun28_2024,
+      photoNov30,
+      photoAug19,
+      photoFeb23,
     ],
     description: [
       'Damaged drywall can make an otherwise beautiful home feel unfinished. Cracks, holes, water damage, settling seams, and poor texture repairs are common problems\u2014but they can be fixed the right way.',
@@ -327,10 +332,10 @@ export const services: Record<string, ServiceData> = {
       { step: '05', title: 'Prime and Paint Ready', body: 'Repaired areas are primed to seal the surface. The wall is now ready for a flawless paint application that makes the repair completely disappear.' },
     ],
     beforeAfter: [
-      { before: 'https://images.pexels.com/photos/5691593/pexels-photo-5691593.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Water-damaged ceiling repaired and painted seamlessly' },
-      { before: 'https://images.pexels.com/photos/2062426/pexels-photo-2062426.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2121121/pexels-photo-2121121.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Settling cracks repaired with texture-matched finish' },
-      { before: 'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Large hole patched and blended into surrounding wall' },
-      { before: 'https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', after: 'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop', caption: 'Failed tape joints repaired for a smooth, lasting finish' },
+      { before: photoAug19, after: photoNov30, caption: 'Room prepped and repaired with seamless drywall finishing' },
+      { before: photoFeb23, after: screenshotDrywall, caption: 'Crown molding area repaired with precision drywall work' },
+      { before: photoJun28_2024, after: photoNov30, caption: 'Ceiling texture matched and blended after repair' },
+      { before: photoAug19, after: photoFeb23, caption: 'Walls smoothed and finished for a flawless paint-ready surface' },
     ],
     faqs: [
       { q: 'Can you match my existing wall texture?', a: 'Yes. We are experienced in replicating all common textures including knockdown, orange peel, smooth, skip trowel, and others. The goal is always an invisible repair that blends seamlessly with the surrounding wall.' },
