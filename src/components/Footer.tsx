@@ -61,7 +61,7 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-2.5">
               <a
-                href="#"
+                href="https://www.facebook.com/freshimpressionspainting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/[0.05] border border-white/[0.08] hover:bg-brand-yellow hover:border-brand-yellow flex items-center justify-center text-white/60 hover:text-navy-900 transition-all duration-300"
@@ -70,13 +70,24 @@ export default function Footer() {
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                href="https://www.instagram.com/freshimpressionspainting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-white/[0.05] border border-white/[0.08] hover:bg-brand-yellow hover:border-brand-yellow flex items-center justify-center text-white/60 hover:text-navy-900 transition-all duration-300"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://nextdoor.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-white/[0.05] border border-white/[0.08] hover:bg-brand-yellow hover:border-brand-yellow flex items-center justify-center text-white/60 hover:text-navy-900 transition-all duration-300"
+                aria-label="Nextdoor"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12.012 2C6.506 2 2.04 6.506 2.04 12.012c0 5.506 4.466 9.988 9.972 9.988 5.506 0 9.988-4.482 9.988-9.988C22 6.506 17.518 2 12.012 2zm4.108 14.508h-2.556v-4.326c0-.924-.462-1.386-1.17-1.386-.792 0-1.386.594-1.386 1.518v4.194H8.452V9.384h2.424v1.062h.036c.396-.66 1.254-1.254 2.34-1.254 1.782 0 2.868 1.062 2.868 3.174v4.142z"/>
+                </svg>
               </a>
             </div>
           </div>

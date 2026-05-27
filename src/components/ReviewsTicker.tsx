@@ -124,7 +124,7 @@ function ReviewLightbox({ review, onClose }: { review: typeof reviews[0]; onClos
         </p>
 
         <div className="flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-full bg-[#f4f7fa] border border-gray-100 flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-cream-100 border border-gray-100 flex items-center justify-center flex-shrink-0">
             <span className="font-bold text-sm text-navy-900">
               {review.author.charAt(0)}
             </span>
@@ -158,7 +158,7 @@ function ReviewCard({ review, onSelect }: { review: typeof reviews[0]; onSelect:
       </p>
 
       <div className="flex items-center gap-3.5">
-        <div className="w-9 h-9 rounded-full bg-[#f4f7fa] border border-gray-100 flex items-center justify-center flex-shrink-0">
+        <div className="w-9 h-9 rounded-full bg-cream-100 border border-gray-100 flex items-center justify-center flex-shrink-0">
           <span className="font-bold text-xs text-navy-900">
             {review.author.charAt(0)}
           </span>
@@ -191,7 +191,7 @@ function MobileReviewCard({ review, onSelect }: { review: typeof reviews[0]; onS
       </p>
 
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-full bg-[#f4f7fa] border border-gray-100 flex items-center justify-center flex-shrink-0">
+        <div className="w-9 h-9 rounded-full bg-cream-100 border border-gray-100 flex items-center justify-center flex-shrink-0">
           <span className="font-bold text-xs text-navy-900">
             {review.author.charAt(0)}
           </span>
@@ -214,7 +214,7 @@ export default function ReviewsTicker() {
   const mobileReviews = showAll ? reviews : reviews.slice(0, 4);
 
   return (
-    <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-[#f4f7fa] overflow-hidden">
+    <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-cream-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-14 md:mb-20">
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 items-end">

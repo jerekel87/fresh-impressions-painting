@@ -15,6 +15,11 @@ export default {
           teal: '#2B98BE',
           cyan: '#23C5E8',
         },
+        cream: {
+          50: '#FFFEF8',
+          100: '#FFF9E8',
+          200: '#FFF3D1',
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],

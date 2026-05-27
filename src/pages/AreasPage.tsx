@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MapPin, ChevronDown } from 'lucide-react';
 import Navbar from '../components/Navbar';
-import ServiceAreaMap from '../components/ServiceAreaMap';
 import EstimateForm from '../components/EstimateForm';
 import Footer from '../components/Footer';
 
@@ -207,9 +206,6 @@ export default function AreasPage() {
           </div>
         </div>
       </section>
-
-      {/* Map Section */}
-      <ServiceAreaMap />
 
       {/* Estimate Form */}
       <EstimateForm />

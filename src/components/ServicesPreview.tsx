@@ -97,7 +97,7 @@ export default function ServicesPreview() {
   };
 
   return (
-    <section id="services" className="py-12 sm:py-20 md:py-32 bg-white overflow-hidden">
+    <section id="services" className="py-12 sm:py-20 md:py-32 bg-cream-50 overflow-hidden">
       {/* Header - uses same padding structure as AboutUs section */}
       <div className="px-4 sm:px-6 lg:px-8">
         <div ref={headerRef} className="max-w-7xl mx-auto">

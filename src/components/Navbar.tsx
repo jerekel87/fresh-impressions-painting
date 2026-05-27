@@ -113,6 +113,9 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-0">
+      {/* Accent stripe */}
+      <div className="h-[3px] bg-gradient-to-r from-brand-yellow via-brand-teal to-brand-yellow" />
+
       {/* Slim top bar - hides on scroll, hidden on mobile */}
       <div
         className={`hidden sm:block bg-navy-900 overflow-hidden transition-[max-height,opacity] ease-[cubic-bezier(0.4,0,0.2,1)] ${

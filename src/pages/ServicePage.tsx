@@ -222,7 +222,7 @@ export default function ServicePage() {
       </section>
 
       {/* ── Before and After ── */}
-      <section className="py-20 sm:py-28 bg-[#f7f8fa]">
+      <section className="py-20 sm:py-28 bg-cream-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-6">
             <div>
