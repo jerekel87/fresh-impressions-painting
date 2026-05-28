@@ -35,7 +35,7 @@ export default function AdminLayout() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0f1a24] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a1e30] flex items-center justify-center">
         <div className="w-6 h-6 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
       </div>
     );
@@ -61,14 +61,14 @@ export default function AdminLayout() {
   ];
 
   return (
-    <div className="h-screen bg-[#0f1a24] flex overflow-hidden">
+    <div className="h-screen bg-[#0a1e30] flex overflow-hidden">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#0b1620] border-r border-white/[0.06] flex flex-col transform transition-transform duration-300 lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#0c2236] border-r border-white/[0.06] flex flex-col transform transition-transform duration-300 lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
         <div className="px-4 py-4 border-b border-white/[0.06] flex items-center justify-between">
           <img src={logo} alt="Fresh Impressions" className="h-12 opacity-90" />
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/40 hover:text-white">
@@ -173,7 +173,7 @@ export default function AdminLayout() {
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 h-screen">
         {/* Top bar */}
-        <header className="flex-shrink-0 bg-[#0f1a24]/90 backdrop-blur-lg border-b border-white/[0.06] px-4 sm:px-6 lg:px-8 py-4">
+        <header className="flex-shrink-0 bg-[#0a1e30]/90 backdrop-blur-lg border-b border-white/[0.06] px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-white/50 hover:text-white">

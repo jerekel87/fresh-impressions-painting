@@ -213,7 +213,7 @@ function LeadDrawer({ lead, onClose, onUpdate }: { lead: Lead; onClose: () => vo
   return (
     <>
       <div className="fixed inset-0 bg-black/50 z-40" onClick={onClose} />
-      <div className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-[#0b1620] border-l border-white/[0.06] z-50 overflow-y-auto">
+      <div className="fixed right-0 top-0 bottom-0 w-full max-w-md bg-[#0c2236] border-l border-white/[0.06] z-50 overflow-y-auto">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <h3 className="text-white font-bold text-lg">{lead.first_name} {lead.last_name}</h3>
