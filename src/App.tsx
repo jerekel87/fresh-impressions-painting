@@ -11,6 +11,7 @@ import AboutEditor from './pages/admin/AboutEditor';
 import AreasEditor from './pages/admin/AreasEditor';
 import ContactEditor from './pages/admin/ContactEditor';
 import SeoEditor from './pages/admin/SeoEditor';
+import ServicesEditor from './pages/admin/ServicesEditor';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="about" element={<AboutEditor />} />
         <Route path="areas" element={<AreasEditor />} />
         <Route path="contact" element={<ContactEditor />} />
+        <Route path="services" element={<ServicesEditor />} />
         <Route path="seo" element={<SeoEditor />} />
       </Route>
     </Routes>
