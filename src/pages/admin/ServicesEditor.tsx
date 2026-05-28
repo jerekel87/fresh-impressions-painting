@@ -338,6 +338,7 @@ function BeforeAfterSection({ current, updateService }: { current: ServiceEntry;
               }}
               folder={`services/${current.slug}/before-after`}
               label="Before"
+              variant="light"
             />
             <ImageUpload
               value={ba.after}
@@ -348,6 +349,7 @@ function BeforeAfterSection({ current, updateService }: { current: ServiceEntry;
               }}
               folder={`services/${current.slug}/before-after`}
               label="After"
+              variant="light"
             />
           </div>
           <input

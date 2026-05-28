@@ -8,9 +8,10 @@ interface ImageUploadProps {
   folder?: string;
   label?: string;
   compact?: boolean;
+  variant?: 'dark' | 'light';
 }
 
-export default function ImageUpload({ value, onChange, folder = 'general', label, compact = false }: ImageUploadProps) {
+export default function ImageUpload({ value, onChange, folder = 'general', label, compact = false, variant = 'dark' }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -90,11 +91,13 @@ export default function ImageUpload({ value, onChange, folder = 'general', label
     );
   }
 
+  const isDark = variant === 'dark';
+
   return (
     <div className="space-y-2">
-      {label && <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40">{label}</label>}
+      {label && <label className={`block text-[11px] font-semibold uppercase tracking-[0.15em] ${isDark ? 'text-white/40' : 'text-gray-500'}`}>{label}</label>}
       {value ? (
-        <div className="relative rounded-lg overflow-hidden border border-white/[0.08]">
+        <div className={`relative rounded-lg overflow-hidden border ${isDark ? 'border-white/[0.08]' : 'border-gray-200'}`}>
           <img src={value} alt="" className="w-full h-40 object-cover" />
           <div className="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
             <button
@@ -122,21 +125,23 @@ export default function ImageUpload({ value, onChange, folder = 'general', label
           className={`border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all duration-200 ${
             dragOver
               ? 'border-brand-teal/50 bg-brand-teal/5'
-              : 'border-white/[0.1] hover:border-white/[0.2] hover:bg-white/[0.02]'
+              : isDark
+                ? 'border-white/[0.1] hover:border-white/[0.2] hover:bg-white/[0.02]'
+                : 'border-gray-300 hover:border-gray-400 hover:bg-gray-50'
           }`}
         >
           {uploading ? (
             <div className="flex flex-col items-center gap-2">
               <div className="w-6 h-6 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
-              <p className="text-white/40 text-xs">Uploading...</p>
+              <p className={`text-xs ${isDark ? 'text-white/40' : 'text-gray-400'}`}>Uploading...</p>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
-              <Upload className="w-6 h-6 text-white/20" />
-              <p className="text-white/40 text-xs">
+              <Upload className={`w-6 h-6 ${isDark ? 'text-white/20' : 'text-gray-300'}`} />
+              <p className={`text-xs ${isDark ? 'text-white/40' : 'text-gray-500'}`}>
                 Drop image here or <span className="text-brand-teal">browse</span>
               </p>
-              <p className="text-white/20 text-[10px]">PNG, JPG, WebP up to 10MB</p>
+              <p className={`text-[10px] ${isDark ? 'text-white/20' : 'text-gray-400'}`}>PNG, JPG, WebP up to 10MB</p>
             </div>
           )}
         </div>

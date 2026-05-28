@@ -395,6 +395,7 @@ export default function SeoEditor() {
                   onChange={(url) => updateField('og_image', url)}
                   folder={`seo/${activePage}`}
                   label="OG Image"
+                  variant="light"
                 />
                 <p className="mt-1.5 text-gray-400 text-[11px]">Recommended size: 1200x630px. This image appears when the page is shared on Facebook, Twitter, LinkedIn, etc.</p>
               </div>
