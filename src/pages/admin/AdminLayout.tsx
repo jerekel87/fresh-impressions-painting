@@ -88,7 +88,7 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-6 py-2.5 text-sm font-medium transition-all duration-150 ${
+                  `flex items-center gap-3 px-6 py-3.5 text-sm font-medium transition-all duration-150 ${
                     isActive
                       ? 'text-white bg-white/[0.05] border-l-2 border-brand-teal'
                       : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03] border-l-2 border-transparent'
@@ -112,7 +112,7 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-6 py-2.5 text-sm font-medium transition-all duration-150 ${
+                  `flex items-center gap-3 px-6 py-3.5 text-sm font-medium transition-all duration-150 ${
                     isActive
                       ? 'text-white bg-white/[0.05] border-l-2 border-brand-teal'
                       : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03] border-l-2 border-transparent'
@@ -136,7 +136,7 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-6 py-2.5 text-sm font-medium transition-all duration-150 ${
+                  `flex items-center gap-3 px-6 py-3.5 text-sm font-medium transition-all duration-150 ${
                     isActive
                       ? 'text-white bg-white/[0.05] border-l-2 border-brand-teal'
                       : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03] border-l-2 border-transparent'
