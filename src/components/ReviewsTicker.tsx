@@ -1,94 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Star, X } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
-const reviews = [
-  {
-    text: '100/10 experience! They were incredibly quick with response times, from coming out to give us a quote to the start-to-finish turnaround. I\'ve been unhappy with my cabinet stain for the last 4 years, and now I\'m absolutely obsessed with our cabinet refinish! Could not recommend a better group of guys!',
-    author: 'Hailee Schuetze-Roller',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'Highly Recommend! Fresh Impressions Painting went above and beyond our expectations. We had a small job, but it was treated like a huge one. They were prompt, thorough and nothing short of perfection.',
-    author: 'April Smith Evans',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'Cannot recommend this company enough! We had our cabinets custom made through Starnes Custom Cabinetry in Glen Rose, and they actually recommended Fresh Impressions to us. Ian was very thorough, making sure our newly installed cabinets and granite tops were cared for properly and protected the whole time. We asked for the whitest white, and that\'s exactly what he delivered. SUCH a beautiful job, and he was incredible to work with.',
-    author: 'Christy Scott Karnes',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'We just had our house repainted to freshen up the blue paint that had faded. It looks so good! Ian is a pleasure to work with and we couldn\'t be happier. Definitely recommend him.',
-    author: 'Amanda Pogue',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'We couldn\'t be more pleased with the professional work and experience that we received with Fresh Impressions Painting. I would highly recommend for your painting needs.',
-    author: 'Brian Pogue',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'I had a wonderful experience with Fresh Impressions Painting. They did an excellent job painting my home—everything looks clean, bright, and beautifully finished. They were professional, punctual, and took great care with every detail. Highly recommend their work!',
-    author: 'Teri Lucas',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'My Wife and I are extremely pleased with the professionalism, and job that was done on our house. Ian on the job site was very courteous and thoughtful and how he handled everything around the house not only did the house turn out wonderful as far as the paint/lime wash, but the cleanup and attention to detail was fantastic.',
-    author: 'Lou Dina Coppo',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'Highly Recommend! Ian was fantastic - explained in detail what would be done in each of the 3 projects we had - all drywall repairs and painting. Removed an old skylight panel and seamlessly blended the drywall texture to match the rest of the ceiling. Ian started at 8 each morning, placed protective drop mats to protect the floors, cleaned up very well when done and his quality of work was great! Will use him again.',
-    author: 'Patrick and Jodi Wall',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'Thank you, Ian, for the job you did. Prompt and professional. I won\'t hesitate to use you again if needed.',
-    author: 'Johnny Paul',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'Fresh Impressions did an absolutely amazing job painting not only our entire interior home but also all our cabinets (kitchen, baths, laundry room) and they look so, so great - very beautiful with a luxurious, professional finish. If you need your cabinets redone/refinished, Ian with Fresh Impressions is the man for you! We highly recommend Fresh Impressions!! Thank you so much, Ian!!!',
-    author: 'Michele Holmes',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'Ian did a wonderful job fixing a settlement crack in my house. He did a perfect job with the paint & texture. He\'s a great Christian man and a personal friend. I highly recommend him.',
-    author: 'Dale Walker',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'Ian did a fantastic job on our linen closet! Highly recommend!',
-    author: 'Kari McCullough Yeager',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'Ian is a master. I give him the highest rating possible. Bonus, he is super tidy, loved on my dogs and a man of his word. Perfection isn\'t always easy to find these days, but Ian does it!',
-    author: 'Laura Paulsen',
-    source: 'Facebook',
-    rating: 5,
-  },
-  {
-    text: 'We had Ian paint our kitchen, bathrooms and laundry cabinets, he did a great job. He is very professional, and patient. He helped us picked the color, and gave us great ideas. We recommend Fresh Impression Painting to do your job.',
-    author: 'Karem Rodriguez de Heartsill',
-    source: 'Facebook',
-    rating: 5,
-  },
+interface Review {
+  text: string;
+  author: string;
+  source: string;
+  rating: number;
+}
+
+const fallbackReviews: Review[] = [
+  { text: '100/10 experience! They were incredibly quick with response times, from coming out to give us a quote to the start-to-finish turnaround.', author: 'Hailee Schuetze-Roller', source: 'Facebook', rating: 5 },
+  { text: 'Highly Recommend! Fresh Impressions Painting went above and beyond our expectations.', author: 'April Smith Evans', source: 'Facebook', rating: 5 },
 ];
 
-function ReviewLightbox({ review, onClose }: { review: typeof reviews[0]; onClose: () => void }) {
+function ReviewLightbox({ review, onClose }: { review: Review; onClose: () => void }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     const handleEsc = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
@@ -141,7 +67,7 @@ function ReviewLightbox({ review, onClose }: { review: typeof reviews[0]; onClos
   );
 }
 
-function ReviewCard({ review, onSelect }: { review: typeof reviews[0]; onSelect: () => void }) {
+function ReviewCard({ review, onSelect }: { review: Review; onSelect: () => void }) {
   return (
     <div
       onClick={onSelect}
@@ -174,7 +100,7 @@ function ReviewCard({ review, onSelect }: { review: typeof reviews[0]; onSelect:
   );
 }
 
-function MobileReviewCard({ review, onSelect }: { review: typeof reviews[0]; onSelect: () => void }) {
+function MobileReviewCard({ review, onSelect }: { review: Review; onSelect: () => void }) {
   return (
     <div
       onClick={onSelect}
@@ -208,8 +134,19 @@ function MobileReviewCard({ review, onSelect }: { review: typeof reviews[0]; onS
 }
 
 export default function ReviewsTicker() {
-  const [selectedReview, setSelectedReview] = useState<typeof reviews[0] | null>(null);
+  const [reviews, setReviews] = useState<Review[]>(fallbackReviews);
+  const [selectedReview, setSelectedReview] = useState<Review | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const [header, setHeader] = useState({ headline: 'What our clients say about us.', subtitle: 'Real feedback from homeowners and businesses across North Central Texas who trust Fresh Impressions with their properties.' });
+
+  useEffect(() => {
+    supabase.from('reviews').select('text, author, source, rating').eq('is_active', true).order('display_order').then(({ data }) => {
+      if (data && data.length > 0) setReviews(data as Review[]);
+    });
+    supabase.from('site_content').select('content').eq('page', 'home').eq('section', 'reviews').maybeSingle().then(({ data }) => {
+      if (data?.content) setHeader(data.content as { headline: string; subtitle: string });
+    });
+  }, []);
 
   const mobileReviews = showAll ? reviews : reviews.slice(0, 4);
 
@@ -230,14 +167,13 @@ export default function ReviewsTicker() {
               className="font-display uppercase text-4xl md:text-5xl lg:text-7xl font-bold text-navy-900"
               style={{ lineHeight: 1.05 }}
             >
-              What our clients<br className="hidden md:block" />
-              say about us.
+              {header.headline}
             </h2>
           </div>
 
           <div className="lg:text-right">
             <p className="text-navy-900/60 text-base md:text-[1.05rem] leading-[1.85] max-w-md lg:ml-auto">
-              Real feedback from homeowners and businesses across North Central Texas who trust Fresh Impressions with their properties.
+              {header.subtitle}
             </p>
           </div>
         </div>

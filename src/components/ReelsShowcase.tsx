@@ -1,18 +1,11 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
-const reels = [
+const fallbackReels = [
   'https://www.facebook.com/reel/921210067580340',
   'https://www.facebook.com/reel/1290510649726298',
   'https://www.facebook.com/reel/3985571535079039',
-  'https://www.facebook.com/reel/1710680003696381',
-  'https://www.facebook.com/reel/890265277397527',
-  'https://www.facebook.com/reel/2000484744678214',
-  'https://www.facebook.com/reel/3180176322180446',
-  'https://www.facebook.com/reel/1500709478425154',
-  'https://www.facebook.com/reel/1879508016083529',
-  'https://www.facebook.com/reel/1646579833235504',
-  'https://www.facebook.com/reel/941575968635169',
 ];
 
 function ReelCard({ url }: { url: string }) {
@@ -43,6 +36,13 @@ export default function ReelsShowcase() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [scrollPadding, setScrollPadding] = useState(16);
+  const [reels, setReels] = useState<string[]>(fallbackReels);
+
+  useEffect(() => {
+    supabase.from('reels').select('url').eq('is_active', true).order('display_order').then(({ data }) => {
+      if (data && data.length > 0) setReels(data.map(r => r.url));
+    });
+  }, []);
 
   const updatePadding = useCallback(() => {
     if (headerRef.current) {

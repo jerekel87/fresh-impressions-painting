@@ -1,8 +1,32 @@
+import { useState, useEffect } from 'react';
 import { ArrowRight, Phone } from 'lucide-react';
 import heroBg from '../assets/hero-bg-image1.png';
 import logoFull from '../assets/fresh-impression-logofull.png';
+import { supabase } from '../lib/supabase';
+
+interface HeroContent {
+  headline: string;
+  subtitle: string;
+  cta_text: string;
+  phone: string;
+}
+
+const defaults: HeroContent = {
+  headline: 'Making Your Space Unrecognizably Fresh And New',
+  subtitle: 'Premium craftsmanship for homes and businesses that demand nothing less than flawless.',
+  cta_text: 'GET FREE ESTIMATE',
+  phone: '(817) 243-9116',
+};
 
 export default function Hero() {
+  const [content, setContent] = useState<HeroContent>(defaults);
+
+  useEffect(() => {
+    supabase.from('site_content').select('content').eq('page', 'home').eq('section', 'hero').maybeSingle().then(({ data }) => {
+      if (data?.content) setContent(data.content as HeroContent);
+    });
+  }, []);
+
   return (
     <section id="home" className="relative min-h-[560px] h-[85vh] sm:h-screen sm:min-h-[680px] max-h-[1100px]">
       {/* Full-bleed background */}
@@ -24,11 +48,11 @@ export default function Hero() {
         />
 
         <h1 className="font-display uppercase text-white text-[clamp(2rem,7vw,5.5rem)] font-bold leading-[1.08] tracking-tight max-w-4xl">
-          Making Your Space<br /> Unrecognizably<br /> Fresh And New
+          {content.headline.split('\n').map((line, i) => <span key={i}>{line}{i < content.headline.split('\n').length - 1 && <br />}</span>)}
         </h1>
 
         <p className="text-white/70 text-base sm:text-lg md:text-xl max-w-xl mt-4 sm:mt-6 leading-relaxed">
-          Premium craftsmanship for homes and businesses that demand nothing less than flawless.
+          {content.subtitle}
         </p>
 
         {/* CTA + Phone number side by side */}
@@ -37,16 +61,16 @@ export default function Hero() {
             href="#contact"
             className="inline-flex items-center gap-3 px-7 sm:px-9 py-3.5 sm:py-4 bg-brand-yellow text-navy-900 font-bold text-[13px] sm:text-[14px] tracking-[0.08em] uppercase"
           >
-            GET FREE ESTIMATE
+            {content.cta_text}
             <ArrowRight className="w-4 h-4" />
           </a>
 
           <a
-            href="tel:+18172439116"
+            href={`tel:${content.phone.replace(/[^+\d]/g, '')}`}
             className="flex items-center gap-2 text-white hover:text-brand-yellow transition-colors duration-300"
           >
             <Phone className="w-4 h-4" />
-            <span className="text-sm sm:text-base font-semibold tracking-wide">(817) 243-9116</span>
+            <span className="text-sm sm:text-base font-semibold tracking-wide">{content.phone}</span>
           </a>
         </div>
 
