@@ -77,10 +77,10 @@ export default function AdminLayout() {
         </div>
 
         <div className="flex-1 pt-6 overflow-y-auto">
-          <p className="px-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
+          <p className="px-6 mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
             Content
           </p>
-          <nav className="space-y-0.5 px-3">
+          <nav className="divide-y divide-white/[0.06]">
             {contentNav.map((item) => (
               <NavLink
                 key={item.to}
@@ -88,10 +88,10 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-150 ${
+                  `flex items-center gap-3 px-6 py-2.5 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? 'bg-white/[0.1] text-white'
-                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.05]'
+                      ? 'text-white bg-white/[0.05] border-l-2 border-brand-teal'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03] border-l-2 border-transparent'
                   }`
                 }
               >
@@ -101,10 +101,10 @@ export default function AdminLayout() {
             ))}
           </nav>
 
-          <p className="px-6 mt-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
+          <p className="px-6 mt-6 mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
             Business
           </p>
-          <nav className="space-y-0.5 px-3">
+          <nav className="divide-y divide-white/[0.06]">
             {businessNav.map((item) => (
               <NavLink
                 key={item.to}
@@ -112,10 +112,10 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-150 ${
+                  `flex items-center gap-3 px-6 py-2.5 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? 'bg-white/[0.1] text-white'
-                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.05]'
+                      ? 'text-white bg-white/[0.05] border-l-2 border-brand-teal'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03] border-l-2 border-transparent'
                   }`
                 }
               >
@@ -125,10 +125,10 @@ export default function AdminLayout() {
             ))}
           </nav>
 
-          <p className="px-6 mt-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
+          <p className="px-6 mt-6 mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
             System
           </p>
-          <nav className="space-y-0.5 px-3">
+          <nav className="divide-y divide-white/[0.06]">
             {systemNav.map((item) => (
               <NavLink
                 key={item.to}
@@ -136,10 +136,10 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-150 ${
+                  `flex items-center gap-3 px-6 py-2.5 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? 'bg-white/[0.1] text-white'
-                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.05]'
+                      ? 'text-white bg-white/[0.05] border-l-2 border-brand-teal'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03] border-l-2 border-transparent'
                   }`
                 }
               >
