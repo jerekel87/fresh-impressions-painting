@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { ArrowRight, Phone } from 'lucide-react';
+import { useSeo } from '../lib/useSeo';
 import Navbar from '../components/Navbar';
 import EstimateForm from '../components/EstimateForm';
 import ReviewsTicker from '../components/ReviewsTicker';
@@ -137,6 +138,7 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
 /* ─── Page ────────────────────────────────────────────────────── */
 
 export default function ServicePage() {
+  useSeo('services');
   const { slug } = useParams<{ slug: string }>();
   const service = slug ? services[slug] : null;
   const [openFaq, setOpenFaq] = useState<number>(0);

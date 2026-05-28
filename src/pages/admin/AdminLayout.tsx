@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { Home, LogOut, FileText, Menu, X, Users, MapPin, Phone } from 'lucide-react';
+import { Home, LogOut, FileText, Menu, X, Users, MapPin, Phone, Search } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import logo from '../../assets/freshimpressionspainting-web-logo.png';
 
@@ -46,6 +46,7 @@ export default function AdminLayout() {
     { to: '/admin/about', icon: Users, label: 'About Page', end: false },
     { to: '/admin/areas', icon: MapPin, label: 'Areas Page', end: false },
     { to: '/admin/contact', icon: Phone, label: 'Contact Page', end: false },
+    { to: '/admin/seo', icon: Search, label: 'SEO', end: false },
   ];
 
   return (
@@ -57,18 +58,18 @@ export default function AdminLayout() {
 
       {/* Sidebar */}
       <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#0b1620] border-r border-white/[0.06] flex flex-col transform transition-transform duration-300 lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="px-6 py-6 border-b border-white/[0.06] flex items-center justify-between">
-          <img src={logo} alt="Fresh Impressions" className="h-8 opacity-80" />
-          <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/40 hover:text-white">
+        <div className="px-6 py-8 border-b border-white/[0.06] flex items-center justify-center relative">
+          <img src={logo} alt="Fresh Impressions" className="h-10 opacity-90" />
+          <button onClick={() => setSidebarOpen(false)} className="lg:hidden absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white">
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="px-3 py-4 flex-1">
-          <p className="px-3 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
+        <div className="flex-1 pt-4">
+          <p className="px-6 mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
             Content
           </p>
-          <nav className="space-y-1">
+          <nav className="divide-y divide-white/[0.04]">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
@@ -76,10 +77,10 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  `flex items-center gap-3 px-6 py-3 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? 'bg-white/[0.08] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]'
-                      : 'text-white/45 hover:text-white/80 hover:bg-white/[0.04]'
+                      ? 'bg-white/[0.04] text-white border-l-2 border-brand-teal'
+                      : 'text-white/45 hover:text-white/80 hover:bg-white/[0.02] border-l-2 border-transparent'
                   }`
                 }
               >

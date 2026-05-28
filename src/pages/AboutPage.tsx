@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Star, Shield, Heart, Eye } from 'lucide-react';
+import { useSeo } from '../lib/useSeo';
 import Navbar from '../components/Navbar';
 import EstimateForm from '../components/EstimateForm';
 import Footer from '../components/Footer';
@@ -8,6 +9,7 @@ import sprayingPhoto from '../assets/Photo_Apr_27_2026,_4_53_17_PM_(1).jpg';
 import liftPhoto from '../assets/Photo_Nov_04_2025,_11_14_05_AM.jpg';
 
 export default function AboutPage() {
+  useSeo('about');
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

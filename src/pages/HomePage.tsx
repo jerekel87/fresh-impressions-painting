@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { useSeo } from '../lib/useSeo';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import ServiceAreas from '../components/ServiceAreas';
@@ -12,6 +13,7 @@ import EstimateForm from '../components/EstimateForm';
 import Footer from '../components/Footer';
 
 export default function HomePage() {
+  useSeo('home');
   const location = useLocation();
 
   useEffect(() => {

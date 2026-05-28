@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { MapPin, ChevronDown } from 'lucide-react';
+import { useSeo } from '../lib/useSeo';
 import Navbar from '../components/Navbar';
 import EstimateForm from '../components/EstimateForm';
 import Footer from '../components/Footer';
@@ -115,6 +116,7 @@ function CountyRow({ county, isOpen, onToggle }: { county: County; isOpen: boole
 }
 
 export default function AreasPage() {
+  useSeo('areas');
   const [openIndex, setOpenIndex] = useState(0);
 
   useEffect(() => {

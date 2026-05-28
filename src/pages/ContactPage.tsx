@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { useSeo } from '../lib/useSeo';
 import Navbar from '../components/Navbar';
 import EstimateForm from '../components/EstimateForm';
 import Footer from '../components/Footer';
@@ -15,6 +16,7 @@ const hours = [
 ];
 
 export default function ContactPage() {
+  useSeo('contact');
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
