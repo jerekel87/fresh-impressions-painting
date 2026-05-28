@@ -16,15 +16,12 @@ export default function Hero() {
       </div>
 
       {/* Content - centered, minimal */}
-      <div className="relative h-full flex flex-col items-center justify-center text-center px-4 sm:px-6">
+      <div className="relative h-full flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-5">
         <img
           src={logoFull}
           alt="Fresh Impressions Painting logo"
           className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain mb-4 sm:mb-6 drop-shadow-2xl"
         />
-        <p className="text-brand-yellow text-[11px] sm:text-[13px] font-semibold tracking-[0.25em] uppercase mb-4 sm:mb-6">
-          North Central Texas
-        </p>
 
         <h1 className="font-display uppercase text-white text-[clamp(2rem,7vw,5.5rem)] font-bold leading-[1.08] tracking-tight max-w-4xl">
           Making Your Space<br /> Unrecognizably<br /> Fresh And New
