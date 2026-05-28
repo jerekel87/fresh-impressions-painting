@@ -24,9 +24,30 @@ const PAGE_LABELS: Record<string, string> = {
   areas: 'Service Areas Page',
   contact: 'Contact Page',
   services: 'Services Page',
+  'service:brick-and-stone-lime-wash': 'Brick & Stone Lime Wash',
+  'service:interior-painting': 'Interior Painting',
+  'service:exterior-painting': 'Exterior Painting',
+  'service:cabinet-finishing-and-refinishing': 'Cabinet Refinishing',
+  'service:commercial-painting': 'Commercial Painting',
+  'service:drywall-repair-and-finishing': 'Drywall Repair',
+  'service:metal-finishing-and-refinishing': 'Metal Finishing',
+  'service:new-construction-painting': 'New Construction',
+  'service:staining': 'Staining',
 };
 
-const PAGE_ORDER = ['global', 'home', 'about', 'areas', 'contact', 'services'];
+const SITE_PAGES = ['global', 'home', 'about', 'areas', 'contact', 'services'];
+const SERVICE_PAGES = [
+  'service:brick-and-stone-lime-wash',
+  'service:interior-painting',
+  'service:exterior-painting',
+  'service:cabinet-finishing-and-refinishing',
+  'service:commercial-painting',
+  'service:drywall-repair-and-finishing',
+  'service:metal-finishing-and-refinishing',
+  'service:new-construction-painting',
+  'service:staining',
+];
+const PAGE_ORDER = [...SITE_PAGES, ...SERVICE_PAGES];
 
 function StatusBadge({ saving, saved }: { saving: boolean; saved: boolean }) {
   if (saving) return (
@@ -146,20 +167,43 @@ export default function SeoEditor() {
       )}
 
       {/* Page selector */}
-      <div className="flex flex-wrap gap-2 mb-6">
-        {PAGE_ORDER.map((page) => (
-          <button
-            key={page}
-            onClick={() => setActivePage(page)}
-            className={`px-4 py-2 text-xs font-semibold rounded-md transition-all duration-150 ${
-              activePage === page
-                ? 'bg-brand-teal/20 text-brand-teal border border-brand-teal/30'
-                : 'bg-white/[0.03] text-white/40 border border-white/[0.06] hover:text-white/70 hover:border-white/[0.12]'
-            }`}
-          >
-            {PAGE_LABELS[page] || page}
-          </button>
-        ))}
+      <div className="mb-6 space-y-4">
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/25 mb-2">Site Pages</p>
+          <div className="flex flex-wrap gap-2">
+            {SITE_PAGES.map((page) => (
+              <button
+                key={page}
+                onClick={() => setActivePage(page)}
+                className={`px-3 py-2 text-xs font-semibold rounded-md transition-all duration-150 ${
+                  activePage === page
+                    ? 'bg-brand-teal/20 text-brand-teal border border-brand-teal/30'
+                    : 'bg-white/[0.03] text-white/40 border border-white/[0.06] hover:text-white/70 hover:border-white/[0.12]'
+                }`}
+              >
+                {PAGE_LABELS[page] || page}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.15em] text-white/25 mb-2">Service Pages</p>
+          <div className="flex flex-wrap gap-2">
+            {SERVICE_PAGES.map((page) => (
+              <button
+                key={page}
+                onClick={() => setActivePage(page)}
+                className={`px-3 py-2 text-xs font-semibold rounded-md transition-all duration-150 ${
+                  activePage === page
+                    ? 'bg-brand-teal/20 text-brand-teal border border-brand-teal/30'
+                    : 'bg-white/[0.03] text-white/40 border border-white/[0.06] hover:text-white/70 hover:border-white/[0.12]'
+                }`}
+              >
+                {PAGE_LABELS[page] || page}
+              </button>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Section tabs */}

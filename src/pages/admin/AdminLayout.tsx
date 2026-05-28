@@ -92,23 +92,23 @@ export default function AdminLayout() {
           </nav>
         </div>
 
-        <div className="p-4 border-t border-white/[0.06]">
-          <div className="flex items-center gap-3 px-2 mb-3">
-            <div className="w-8 h-8 rounded-full bg-brand-teal/20 flex items-center justify-center">
+        <div className="px-4 py-4 border-t border-white/[0.06]">
+          <div className="flex items-center gap-3 px-2">
+            <div className="w-8 h-8 rounded-full bg-brand-teal/20 flex items-center justify-center flex-shrink-0">
               <span className="text-brand-teal text-xs font-bold">{user?.email?.charAt(0).toUpperCase()}</span>
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-white/70 text-xs font-medium truncate">{user?.email}</p>
               <p className="text-white/30 text-[10px]">Administrator</p>
             </div>
+            <button
+              onClick={handleLogout}
+              title="Sign Out"
+              className="text-white/30 hover:text-red-400 transition-colors flex-shrink-0"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center gap-2.5 px-3 py-2 text-white/40 hover:text-red-400 hover:bg-red-400/5 text-sm transition-all duration-200"
-          >
-            <LogOut className="w-4 h-4" />
-            Sign Out
-          </button>
         </div>
       </aside>
 
