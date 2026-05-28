@@ -124,7 +124,7 @@ function ReviewLightbox({ review, onClose }: { review: typeof reviews[0]; onClos
         </p>
 
         <div className="flex items-center gap-3.5">
-          <div className="w-10 h-10 rounded-full bg-cream-100 border border-gray-100 flex items-center justify-center flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-white border border-navy-900/10 flex items-center justify-center flex-shrink-0">
             <span className="font-bold text-sm text-navy-900">
               {review.author.charAt(0)}
             </span>
@@ -158,7 +158,7 @@ function ReviewCard({ review, onSelect }: { review: typeof reviews[0]; onSelect:
       </p>
 
       <div className="flex items-center gap-3.5">
-        <div className="w-9 h-9 rounded-full bg-cream-100 border border-gray-100 flex items-center justify-center flex-shrink-0">
+        <div className="w-9 h-9 rounded-full bg-white border border-navy-900/10 flex items-center justify-center flex-shrink-0">
           <span className="font-bold text-xs text-navy-900">
             {review.author.charAt(0)}
           </span>
@@ -191,7 +191,7 @@ function MobileReviewCard({ review, onSelect }: { review: typeof reviews[0]; onS
       </p>
 
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-full bg-cream-100 border border-gray-100 flex items-center justify-center flex-shrink-0">
+        <div className="w-9 h-9 rounded-full bg-white border border-navy-900/10 flex items-center justify-center flex-shrink-0">
           <span className="font-bold text-xs text-navy-900">
             {review.author.charAt(0)}
           </span>
@@ -214,16 +214,16 @@ export default function ReviewsTicker() {
   const mobileReviews = showAll ? reviews : reviews.slice(0, 4);
 
   return (
-    <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-cream-100 overflow-hidden">
+    <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-brand-yellow overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-14 md:mb-20">
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 items-end">
           <div>
             <div className="inline-flex items-center gap-0.5 mb-5">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                <Star key={i} className="w-4 h-4 fill-navy-900 text-navy-900" />
               ))}
-              <span className="text-sm font-medium text-gray-600 ml-2">5-Star Rated</span>
+              <span className="text-sm font-bold text-navy-900/70 ml-2">5-Star Rated</span>
             </div>
 
             <h2
@@ -236,7 +236,7 @@ export default function ReviewsTicker() {
           </div>
 
           <div className="lg:text-right">
-            <p className="text-gray-500 text-base md:text-[1.05rem] leading-[1.85] max-w-md lg:ml-auto">
+            <p className="text-navy-900/60 text-base md:text-[1.05rem] leading-[1.85] max-w-md lg:ml-auto">
               Real feedback from homeowners and businesses across North Central Texas who trust Fresh Impressions with their properties.
             </p>
           </div>
@@ -253,7 +253,7 @@ export default function ReviewsTicker() {
         {!showAll && (
           <button
             onClick={() => setShowAll(true)}
-            className="w-full mt-4 py-4 border border-gray-200 bg-white text-navy-900 font-bold text-[13px] tracking-[0.1em] uppercase hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200"
+            className="w-full mt-4 py-4 border-2 border-navy-900 bg-white text-navy-900 font-bold text-[13px] tracking-[0.1em] uppercase hover:bg-navy-900 hover:text-white active:bg-navy-800 transition-colors duration-200"
           >
             Show More Reviews ({reviews.length - 4} more)
           </button>
