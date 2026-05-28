@@ -16,7 +16,7 @@ export default function Hero() {
       </div>
 
       {/* Content - centered, minimal */}
-      <div className="relative h-full flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-5">
+      <div className="relative h-full flex flex-col items-center justify-center text-center px-4 sm:px-6 translate-y-5">
         <img
           src={logoFull}
           alt="Fresh Impressions Painting logo"
