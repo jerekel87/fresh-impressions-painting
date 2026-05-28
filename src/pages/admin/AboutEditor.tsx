@@ -111,7 +111,7 @@ export default function AboutEditor() {
       </div>
 
       {error && (
-        <div className="mb-6 flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-3 text-red-400 text-sm">
+        <div className="mb-6 flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-3 text-red-400 text-sm rounded-md">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           {error}
           <button onClick={() => setError('')} className="ml-auto text-red-400/60 hover:text-red-400">&times;</button>
@@ -135,33 +135,28 @@ export default function AboutEditor() {
       </div>
 
       {activeTab === 'hero' && (
-        <div className="space-y-6">
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <h3 className="text-white font-semibold text-sm mb-5">Hero Banner</h3>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
-                <textarea
-                  value={hero.headline}
-                  onChange={(e) => setHero({ ...hero, headline: e.target.value })}
-                  rows={2}
-                  placeholder="Built on faith, driven by craft."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
-                <textarea
-                  value={hero.subtitle}
-                  onChange={(e) => setHero({ ...hero, subtitle: e.target.value })}
-                  rows={2}
-                  placeholder="The story behind Fresh Impressions Painting..."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                />
-              </div>
-            </div>
+        <div className="space-y-5">
+          <div>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+            <textarea
+              value={hero.headline}
+              onChange={(e) => setHero({ ...hero, headline: e.target.value })}
+              rows={2}
+              placeholder="Built on faith, driven by craft."
+              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+            />
           </div>
-          <button onClick={() => saveContent('hero', hero)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50">
+          <div>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+            <textarea
+              value={hero.subtitle}
+              onChange={(e) => setHero({ ...hero, subtitle: e.target.value })}
+              rows={2}
+              placeholder="The story behind Fresh Impressions Painting..."
+              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+            />
+          </div>
+          <button onClick={() => saveContent('hero', hero)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Hero
           </button>
@@ -169,33 +164,28 @@ export default function AboutEditor() {
       )}
 
       {activeTab === 'story' && (
-        <div className="space-y-6">
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <h3 className="text-white font-semibold text-sm mb-5">Story Section</h3>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Paragraph 1</label>
-                <textarea
-                  value={story.paragraph1}
-                  onChange={(e) => setStory({ ...story, paragraph1: e.target.value })}
-                  rows={5}
-                  placeholder="Owner Ian Rosenkranz has proudly served..."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Paragraph 2</label>
-                <textarea
-                  value={story.paragraph2}
-                  onChange={(e) => setStory({ ...story, paragraph2: e.target.value })}
-                  rows={5}
-                  placeholder="From a young age, Ian developed discipline..."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                />
-              </div>
-            </div>
+        <div className="space-y-5">
+          <div>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Paragraph 1</label>
+            <textarea
+              value={story.paragraph1}
+              onChange={(e) => setStory({ ...story, paragraph1: e.target.value })}
+              rows={6}
+              placeholder="Owner Ian Rosenkranz has proudly served..."
+              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm leading-relaxed focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+            />
           </div>
-          <button onClick={() => saveContent('story', story)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50">
+          <div>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Paragraph 2</label>
+            <textarea
+              value={story.paragraph2}
+              onChange={(e) => setStory({ ...story, paragraph2: e.target.value })}
+              rows={6}
+              placeholder="From a young age, Ian developed discipline..."
+              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm leading-relaxed focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+            />
+          </div>
+          <button onClick={() => saveContent('story', story)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Story
           </button>
@@ -203,86 +193,89 @@ export default function AboutEditor() {
       )}
 
       {activeTab === 'values' && (
-        <div className="space-y-6">
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <h3 className="text-white font-semibold text-sm mb-5">Values Section Header</h3>
-            <div className="space-y-5">
+        <div className="space-y-8">
+          {/* Section header fields */}
+          <div className="space-y-5">
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+              <input
+                type="text"
+                value={values.headline}
+                onChange={(e) => setValues({ ...values, headline: e.target.value })}
+                placeholder="More than color on walls."
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+              <textarea
+                value={values.subtitle}
+                onChange={(e) => setValues({ ...values, subtitle: e.target.value })}
+                rows={3}
+                placeholder="Ian is passionate about serving others..."
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              />
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="border-t border-white/[0.06]" />
+
+          {/* Values list header */}
+          <div className="flex items-center justify-between">
+            <h3 className="text-white font-semibold text-sm">Values ({values.values.length})</h3>
+            <button
+              onClick={() => setValues({ ...values, values: [...values.values, { title: '', description: '' }] })}
+              className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors"
+            >
+              <Plus className="w-3.5 h-3.5" /> Add Value
+            </button>
+          </div>
+
+          {/* Values - flat list with dividers */}
+          {values.values.map((value, idx) => (
+            <div key={idx} className="space-y-3 pb-8 border-b border-white/[0.06] last:border-b-0 last:pb-0">
+              <div className="flex items-center justify-between">
+                <span className="text-white/20 text-xs font-mono">{String(idx + 1).padStart(2, '0')}</span>
+                <button
+                  onClick={() => setValues({ ...values, values: values.values.filter((_, i) => i !== idx) })}
+                  className="p-1.5 text-white/30 hover:text-red-400 transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
+              </div>
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+                <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Title</label>
                 <input
                   type="text"
-                  value={values.headline}
-                  onChange={(e) => setValues({ ...values, headline: e.target.value })}
-                  placeholder="More than color on walls."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
+                  value={value.title}
+                  onChange={(e) => {
+                    const newValues = [...values.values];
+                    newValues[idx] = { ...value, title: e.target.value };
+                    setValues({ ...values, values: newValues });
+                  }}
+                  placeholder="Integrity"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+                <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Description</label>
                 <textarea
-                  value={values.subtitle}
-                  onChange={(e) => setValues({ ...values, subtitle: e.target.value })}
+                  value={value.description}
+                  onChange={(e) => {
+                    const newValues = [...values.values];
+                    newValues[idx] = { ...value, description: e.target.value };
+                    setValues({ ...values, values: newValues });
+                  }}
                   rows={3}
-                  placeholder="Ian is passionate about serving others..."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
+                  placeholder="Value description..."
+                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
                 />
               </div>
             </div>
-          </div>
+          ))}
 
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <div className="flex items-center justify-between mb-5">
-              <h3 className="text-white font-semibold text-sm">Values ({values.values.length})</h3>
-              <button
-                onClick={() => setValues({ ...values, values: [...values.values, { title: '', description: '' }] })}
-                className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors"
-              >
-                <Plus className="w-3.5 h-3.5" /> Add Value
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              {values.values.map((value, idx) => (
-                <div key={idx} className="bg-white/[0.02] border border-white/[0.06] p-4 space-y-3">
-                  <div className="flex items-start gap-3">
-                    <span className="text-white/20 text-xs font-bold mt-3 w-5">{String(idx + 1).padStart(2, '0')}</span>
-                    <div className="flex-1 space-y-3">
-                      <input
-                        type="text"
-                        value={value.title}
-                        onChange={(e) => {
-                          const newValues = [...values.values];
-                          newValues[idx] = { ...value, title: e.target.value };
-                          setValues({ ...values, values: newValues });
-                        }}
-                        placeholder="Value title (e.g., Integrity)"
-                        className="w-full bg-white/[0.04] border border-white/[0.06] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                      />
-                      <textarea
-                        value={value.description}
-                        onChange={(e) => {
-                          const newValues = [...values.values];
-                          newValues[idx] = { ...value, description: e.target.value };
-                          setValues({ ...values, values: newValues });
-                        }}
-                        rows={2}
-                        placeholder="Value description..."
-                        className="w-full bg-white/[0.04] border border-white/[0.06] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                      />
-                    </div>
-                    <button
-                      onClick={() => setValues({ ...values, values: values.values.filter((_, i) => i !== idx) })}
-                      className="w-9 h-9 flex items-center justify-center text-white/30 hover:text-red-400 hover:bg-red-400/10 transition-all mt-1"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <button onClick={() => saveContent('values', values)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50">
+          <button onClick={() => saveContent('values', values)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Values
           </button>

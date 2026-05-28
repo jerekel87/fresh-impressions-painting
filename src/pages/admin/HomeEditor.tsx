@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Save, Plus, Trash2, GripVertical, Check, AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { Save, Plus, Trash2, Check, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface HeroContent {
@@ -130,7 +130,7 @@ export default function HomeEditor() {
     if (err) setError(err.message);
   };
 
-  const updateReview = async (id: string, updates: Partial<Review>) => {
+  const updateReview = (id: string, updates: Partial<Review>) => {
     setReviews(reviews.map(r => r.id === id ? { ...r, ...updates } : r));
   };
 
@@ -203,7 +203,6 @@ export default function HomeEditor() {
 
   return (
     <div className="max-w-4xl">
-      {/* Page title */}
       <div className="flex items-center justify-between mb-8">
         <div>
           <h2 className="text-white font-display uppercase text-2xl font-bold tracking-wide">Home Page</h2>
@@ -213,14 +212,13 @@ export default function HomeEditor() {
       </div>
 
       {error && (
-        <div className="mb-6 flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-3 text-red-400 text-sm">
+        <div className="mb-6 flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-3 text-red-400 text-sm rounded-md">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           {error}
           <button onClick={() => setError('')} className="ml-auto text-red-400/60 hover:text-red-400">&times;</button>
         </div>
       )}
 
-      {/* Tabs */}
       <div className="flex gap-1 mb-8 border-b border-white/[0.06] overflow-x-auto">
         {tabs.map((tab) => (
           <button
@@ -239,51 +237,46 @@ export default function HomeEditor() {
 
       {/* Hero Editor */}
       {activeTab === 'hero' && (
-        <div className="space-y-6">
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <h3 className="text-white font-semibold text-sm mb-5">Hero Section</h3>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
-                <textarea
-                  value={hero.headline}
-                  onChange={(e) => setHero({ ...hero, headline: e.target.value })}
-                  rows={2}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
-                <textarea
-                  value={hero.subtitle}
-                  onChange={(e) => setHero({ ...hero, subtitle: e.target.value })}
-                  rows={2}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                />
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">CTA Button Text</label>
-                  <input
-                    type="text"
-                    value={hero.cta_text}
-                    onChange={(e) => setHero({ ...hero, cta_text: e.target.value })}
-                    className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Phone Number</label>
-                  <input
-                    type="text"
-                    value={hero.phone}
-                    onChange={(e) => setHero({ ...hero, phone: e.target.value })}
-                    className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                  />
-                </div>
-              </div>
+        <div className="space-y-5">
+          <div>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+            <textarea
+              value={hero.headline}
+              onChange={(e) => setHero({ ...hero, headline: e.target.value })}
+              rows={2}
+              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+            />
+          </div>
+          <div>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+            <textarea
+              value={hero.subtitle}
+              onChange={(e) => setHero({ ...hero, subtitle: e.target.value })}
+              rows={2}
+              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+            />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">CTA Button Text</label>
+              <input
+                type="text"
+                value={hero.cta_text}
+                onChange={(e) => setHero({ ...hero, cta_text: e.target.value })}
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Phone Number</label>
+              <input
+                type="text"
+                value={hero.phone}
+                onChange={(e) => setHero({ ...hero, phone: e.target.value })}
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              />
             </div>
           </div>
-          <button onClick={saveHero} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50">
+          <button onClick={saveHero} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Hero
           </button>
@@ -292,96 +285,96 @@ export default function HomeEditor() {
 
       {/* About Editor */}
       {activeTab === 'about' && (
-        <div className="space-y-6">
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <h3 className="text-white font-semibold text-sm mb-5">About Section</h3>
-            <div className="space-y-5">
+        <div className="space-y-8">
+          <div className="space-y-5">
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+              <input
+                type="text"
+                value={about.headline}
+                onChange={(e) => setAbout({ ...about, headline: e.target.value })}
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Description</label>
+              <textarea
+                value={about.description}
+                onChange={(e) => setAbout({ ...about, description: e.target.value })}
+                rows={4}
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Founder Name</label>
                 <input
                   type="text"
-                  value={about.headline}
-                  onChange={(e) => setAbout({ ...about, headline: e.target.value })}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
+                  value={about.founder_name}
+                  onChange={(e) => setAbout({ ...about, founder_name: e.target.value })}
+                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Description</label>
-                <textarea
-                  value={about.description}
-                  onChange={(e) => setAbout({ ...about, description: e.target.value })}
-                  rows={4}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
+                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Founder Title</label>
+                <input
+                  type="text"
+                  value={about.founder_title}
+                  onChange={(e) => setAbout({ ...about, founder_title: e.target.value })}
+                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
                 />
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Founder Name</label>
-                  <input
-                    type="text"
-                    value={about.founder_name}
-                    onChange={(e) => setAbout({ ...about, founder_name: e.target.value })}
-                    className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Founder Title</label>
-                  <input
-                    type="text"
-                    value={about.founder_title}
-                    onChange={(e) => setAbout({ ...about, founder_title: e.target.value })}
-                    className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                  />
-                </div>
+            </div>
+          </div>
+
+          <div className="border-t border-white/[0.06]" />
+
+          <div className="flex items-center justify-between">
+            <h3 className="text-white font-semibold text-sm">Statistics ({about.stats.length})</h3>
+            <button
+              onClick={() => setAbout({ ...about, stats: [...about.stats, { value: '', label: '' }] })}
+              className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors"
+            >
+              <Plus className="w-3.5 h-3.5" /> Add Stat
+            </button>
+          </div>
+
+          <div className="space-y-3">
+            {about.stats.map((stat, idx) => (
+              <div key={idx} className="grid grid-cols-[1fr_2fr_auto] gap-3 items-center">
+                <input
+                  type="text"
+                  value={stat.value}
+                  onChange={(e) => {
+                    const newStats = [...about.stats];
+                    newStats[idx] = { ...stat, value: e.target.value };
+                    setAbout({ ...about, stats: newStats });
+                  }}
+                  placeholder="Value"
+                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                />
+                <input
+                  type="text"
+                  value={stat.label}
+                  onChange={(e) => {
+                    const newStats = [...about.stats];
+                    newStats[idx] = { ...stat, label: e.target.value };
+                    setAbout({ ...about, stats: newStats });
+                  }}
+                  placeholder="Label"
+                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                />
+                <button
+                  onClick={() => setAbout({ ...about, stats: about.stats.filter((_, i) => i !== idx) })}
+                  className="p-1.5 text-white/30 hover:text-red-400 transition-colors"
+                >
+                  <Trash2 className="w-4 h-4" />
+                </button>
               </div>
-            </div>
+            ))}
           </div>
 
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <h3 className="text-white font-semibold text-sm mb-5">Statistics</h3>
-            <div className="space-y-4">
-              {about.stats.map((stat, idx) => (
-                <div key={idx} className="grid grid-cols-[1fr_2fr_auto] gap-3 items-center">
-                  <input
-                    type="text"
-                    value={stat.value}
-                    onChange={(e) => {
-                      const newStats = [...about.stats];
-                      newStats[idx] = { ...stat, value: e.target.value };
-                      setAbout({ ...about, stats: newStats });
-                    }}
-                    placeholder="Value"
-                    className="bg-white/[0.04] border border-white/[0.08] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                  />
-                  <input
-                    type="text"
-                    value={stat.label}
-                    onChange={(e) => {
-                      const newStats = [...about.stats];
-                      newStats[idx] = { ...stat, label: e.target.value };
-                      setAbout({ ...about, stats: newStats });
-                    }}
-                    placeholder="Label"
-                    className="bg-white/[0.04] border border-white/[0.08] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                  />
-                  <button
-                    onClick={() => setAbout({ ...about, stats: about.stats.filter((_, i) => i !== idx) })}
-                    className="w-9 h-9 flex items-center justify-center text-white/30 hover:text-red-400 hover:bg-red-400/10 transition-all"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              ))}
-              <button
-                onClick={() => setAbout({ ...about, stats: [...about.stats, { value: '', label: '' }] })}
-                className="inline-flex items-center gap-2 text-brand-teal text-sm font-medium hover:text-brand-teal/80 transition-colors"
-              >
-                <Plus className="w-4 h-4" /> Add Stat
-              </button>
-            </div>
-          </div>
-
-          <button onClick={saveAbout} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50">
+          <button onClick={saveAbout} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save About
           </button>
@@ -390,143 +383,128 @@ export default function HomeEditor() {
 
       {/* Reviews Editor */}
       {activeTab === 'reviews' && (
-        <div className="space-y-6">
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <h3 className="text-white font-semibold text-sm mb-5">Section Header</h3>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
-                <input
-                  type="text"
-                  value={reviewsHeader.headline}
-                  onChange={(e) => setReviewsHeader({ ...reviewsHeader, headline: e.target.value })}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
-                <textarea
-                  value={reviewsHeader.subtitle}
-                  onChange={(e) => setReviewsHeader({ ...reviewsHeader, subtitle: e.target.value })}
-                  rows={2}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                />
-              </div>
+        <div className="space-y-8">
+          <div className="space-y-5">
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+              <input
+                type="text"
+                value={reviewsHeader.headline}
+                onChange={(e) => setReviewsHeader({ ...reviewsHeader, headline: e.target.value })}
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              />
             </div>
-            <button onClick={saveReviewsHeader} disabled={saving} className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 bg-brand-teal text-white font-semibold text-[12px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50">
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+              <textarea
+                value={reviewsHeader.subtitle}
+                onChange={(e) => setReviewsHeader({ ...reviewsHeader, subtitle: e.target.value })}
+                rows={2}
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              />
+            </div>
+            <button onClick={saveReviewsHeader} disabled={saving} className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-teal text-white font-semibold text-[12px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
               <Save className="w-3.5 h-3.5" />
               Save Header
             </button>
           </div>
 
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <div className="flex items-center justify-between mb-5">
-              <h3 className="text-white font-semibold text-sm">Reviews ({reviews.length})</h3>
-              <button onClick={addReview} className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
-                <Plus className="w-3.5 h-3.5" /> Add Review
-              </button>
-            </div>
+          <div className="border-t border-white/[0.06]" />
 
-            <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-              {reviews.map((review) => (
-                <div key={review.id} className="bg-white/[0.02] border border-white/[0.06] p-4 space-y-3">
-                  <div className="flex items-start gap-3">
-                    <GripVertical className="w-4 h-4 text-white/20 mt-1 flex-shrink-0" />
-                    <div className="flex-1 space-y-3">
-                      <textarea
-                        value={review.text}
-                        onChange={(e) => updateReview(review.id, { text: e.target.value })}
-                        rows={3}
-                        placeholder="Review text..."
-                        className="w-full bg-white/[0.04] border border-white/[0.06] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                      />
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <input
-                          type="text"
-                          value={review.author}
-                          onChange={(e) => updateReview(review.id, { author: e.target.value })}
-                          placeholder="Author"
-                          className="bg-white/[0.04] border border-white/[0.06] px-3 py-2 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                        />
-                        <input
-                          type="text"
-                          value={review.source}
-                          onChange={(e) => updateReview(review.id, { source: e.target.value })}
-                          placeholder="Source"
-                          className="bg-white/[0.04] border border-white/[0.06] px-3 py-2 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                        />
-                        <select
-                          value={review.rating}
-                          onChange={(e) => updateReview(review.id, { rating: Number(e.target.value) })}
-                          className="bg-white/[0.04] border border-white/[0.06] px-3 py-2 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                        >
-                          {[5, 4, 3, 2, 1].map(n => <option key={n} value={n}>{n} Stars</option>)}
-                        </select>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-between pl-7">
-                    <button
-                      onClick={() => { updateReview(review.id, { is_active: !review.is_active }); }}
-                      className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${review.is_active ? 'text-emerald-400' : 'text-white/30'}`}
-                    >
-                      {review.is_active ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
-                      {review.is_active ? 'Visible' : 'Hidden'}
-                    </button>
-                    <div className="flex items-center gap-2">
-                      <button onClick={() => saveReview(review)} className="text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
-                        Save
-                      </button>
-                      <button onClick={() => deleteReview(review.id)} className="text-white/30 hover:text-red-400 transition-colors">
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+          <div className="flex items-center justify-between">
+            <h3 className="text-white font-semibold text-sm">Reviews ({reviews.length})</h3>
+            <button onClick={addReview} className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
+              <Plus className="w-3.5 h-3.5" /> Add Review
+            </button>
           </div>
+
+          {reviews.map((review) => (
+            <div key={review.id} className="space-y-3 pb-8 border-b border-white/[0.06] last:border-b-0 last:pb-0">
+              <textarea
+                value={review.text}
+                onChange={(e) => updateReview(review.id, { text: e.target.value })}
+                rows={3}
+                placeholder="Review text..."
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              />
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <input
+                  type="text"
+                  value={review.author}
+                  onChange={(e) => updateReview(review.id, { author: e.target.value })}
+                  placeholder="Author"
+                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                />
+                <input
+                  type="text"
+                  value={review.source}
+                  onChange={(e) => updateReview(review.id, { source: e.target.value })}
+                  placeholder="Source"
+                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                />
+                <select
+                  value={review.rating}
+                  onChange={(e) => updateReview(review.id, { rating: Number(e.target.value) })}
+                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                >
+                  {[5, 4, 3, 2, 1].map(n => <option key={n} value={n}>{n} Stars</option>)}
+                </select>
+              </div>
+              <div className="flex items-center justify-between">
+                <button
+                  onClick={() => { updateReview(review.id, { is_active: !review.is_active }); }}
+                  className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${review.is_active ? 'text-emerald-400' : 'text-white/30'}`}
+                >
+                  {review.is_active ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
+                  {review.is_active ? 'Visible' : 'Hidden'}
+                </button>
+                <div className="flex items-center gap-3">
+                  <button onClick={() => saveReview(review)} className="text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
+                    Save
+                  </button>
+                  <button onClick={() => deleteReview(review.id)} className="text-white/30 hover:text-red-400 transition-colors">
+                    <Trash2 className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       )}
 
       {/* Reels Editor */}
       {activeTab === 'reels' && (
-        <div className="space-y-6">
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <div className="flex items-center justify-between mb-5">
-              <h3 className="text-white font-semibold text-sm">Facebook Reels ({reels.length})</h3>
-              <button onClick={addReel} className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
-                <Plus className="w-3.5 h-3.5" /> Add Reel
+        <div className="space-y-8">
+          <div className="flex items-center justify-between">
+            <h3 className="text-white font-semibold text-sm">Facebook Reels ({reels.length})</h3>
+            <button onClick={addReel} className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
+              <Plus className="w-3.5 h-3.5" /> Add Reel
+            </button>
+          </div>
+
+          {reels.map((reel) => (
+            <div key={reel.id} className="flex items-center gap-3 pb-4 border-b border-white/[0.06] last:border-b-0 last:pb-0">
+              <input
+                type="text"
+                value={reel.url}
+                onChange={(e) => updateReel(reel.id, { url: e.target.value })}
+                placeholder="https://www.facebook.com/reel/..."
+                className="flex-1 bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              />
+              <button
+                onClick={() => { updateReel(reel.id, { is_active: !reel.is_active }); saveReel({ ...reel, is_active: !reel.is_active }); }}
+                className={`p-2 transition-colors ${reel.is_active ? 'text-emerald-400' : 'text-white/30'}`}
+              >
+                {reel.is_active ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
+              </button>
+              <button onClick={() => saveReel(reel)} className="text-brand-teal text-xs font-semibold hover:text-brand-teal/80 px-2 py-1 transition-colors">
+                Save
+              </button>
+              <button onClick={() => deleteReel(reel.id)} className="p-2 text-white/30 hover:text-red-400 transition-colors">
+                <Trash2 className="w-4 h-4" />
               </button>
             </div>
-
-            <div className="space-y-3">
-              {reels.map((reel) => (
-                <div key={reel.id} className="flex items-center gap-3 bg-white/[0.02] border border-white/[0.06] p-3">
-                  <GripVertical className="w-4 h-4 text-white/20 flex-shrink-0" />
-                  <input
-                    type="text"
-                    value={reel.url}
-                    onChange={(e) => updateReel(reel.id, { url: e.target.value })}
-                    placeholder="https://www.facebook.com/reel/..."
-                    className="flex-1 bg-white/[0.04] border border-white/[0.06] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                  />
-                  <button
-                    onClick={() => { updateReel(reel.id, { is_active: !reel.is_active }); saveReel({ ...reel, is_active: !reel.is_active }); }}
-                    className={`p-2 transition-colors ${reel.is_active ? 'text-emerald-400' : 'text-white/30'}`}
-                  >
-                    {reel.is_active ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-                  </button>
-                  <button onClick={() => saveReel(reel)} className="text-brand-teal text-xs font-semibold hover:text-brand-teal/80 px-2 py-1 transition-colors">
-                    Save
-                  </button>
-                  <button onClick={() => deleteReel(reel.id)} className="p-2 text-white/30 hover:text-red-400 transition-colors">
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
+          ))}
         </div>
       )}
     </div>

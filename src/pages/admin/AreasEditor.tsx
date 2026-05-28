@@ -147,33 +147,28 @@ export default function AreasEditor() {
       </div>
 
       {activeTab === 'hero' && (
-        <div className="space-y-6">
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <h3 className="text-white font-semibold text-sm mb-5">Hero Banner</h3>
-            <div className="space-y-5">
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
-                <textarea
-                  value={hero.headline}
-                  onChange={(e) => setHero({ ...hero, headline: e.target.value })}
-                  rows={2}
-                  placeholder="Five counties. One standard of excellence."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
-                <textarea
-                  value={hero.subtitle}
-                  onChange={(e) => setHero({ ...hero, subtitle: e.target.value })}
-                  rows={2}
-                  placeholder="From our headquarters in Granbury..."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                />
-              </div>
-            </div>
+        <div className="space-y-5">
+          <div>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+            <textarea
+              value={hero.headline}
+              onChange={(e) => setHero({ ...hero, headline: e.target.value })}
+              rows={2}
+              placeholder="Five counties. One standard of excellence."
+              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+            />
           </div>
-          <button onClick={() => saveContent('hero', hero)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50">
+          <div>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+            <textarea
+              value={hero.subtitle}
+              onChange={(e) => setHero({ ...hero, subtitle: e.target.value })}
+              rows={2}
+              placeholder="From our headquarters in Granbury..."
+              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+            />
+          </div>
+          <button onClick={() => saveContent('hero', hero)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Hero
           </button>
@@ -181,116 +176,115 @@ export default function AreasEditor() {
       )}
 
       {activeTab === 'counties' && (
-        <div className="space-y-6">
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <h3 className="text-white font-semibold text-sm mb-5">Section Header</h3>
-            <div className="space-y-5">
+        <div className="space-y-8">
+          {/* Section header fields */}
+          <div className="space-y-5">
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Section Headline</label>
+              <input
+                type="text"
+                value={counties.headline}
+                onChange={(e) => setCounties({ ...counties, headline: e.target.value })}
+                placeholder="Counties we proudly serve."
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              />
+            </div>
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Section Subtitle</label>
+              <textarea
+                value={counties.subtitle}
+                onChange={(e) => setCounties({ ...counties, subtitle: e.target.value })}
+                rows={2}
+                placeholder="We provide the same level of attention..."
+                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              />
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="border-t border-white/[0.06]" />
+
+          {/* Counties list header */}
+          <div className="flex items-center justify-between">
+            <h3 className="text-white font-semibold text-sm">Counties ({counties.counties.length})</h3>
+            <button onClick={addCounty} className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
+              <Plus className="w-3.5 h-3.5" /> Add County
+            </button>
+          </div>
+
+          {/* Counties - flat list with dividers */}
+          {counties.counties.map((county, idx) => (
+            <div key={idx} className="space-y-4 pb-8 border-b border-white/[0.06] last:border-b-0 last:pb-0">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-white/20 text-xs font-mono">{String(idx + 1).padStart(2, '0')}</span>
+                  {county.isHQ && (
+                    <span className="inline-flex items-center gap-1 text-amber-400 text-[10px] font-bold uppercase tracking-wider bg-amber-400/10 px-2 py-0.5 rounded">
+                      <MapPin className="w-3 h-3" /> HQ
+                    </span>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => updateCounty(idx, { isHQ: !county.isHQ })}
+                    className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded transition-colors ${county.isHQ ? 'text-amber-400 bg-amber-400/10' : 'text-white/30 hover:text-white/60 hover:bg-white/[0.04]'}`}
+                  >
+                    {county.isHQ ? 'HQ' : 'Set HQ'}
+                  </button>
+                  <button onClick={() => removeCounty(idx)} className="p-1.5 text-white/30 hover:text-red-400 transition-colors">
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">County Name</label>
+                  <input
+                    type="text"
+                    value={county.name}
+                    onChange={(e) => updateCounty(idx, { name: e.target.value })}
+                    placeholder="Hood County"
+                    className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Main City</label>
+                  <input
+                    type="text"
+                    value={county.mainCity}
+                    onChange={(e) => updateCounty(idx, { mainCity: e.target.value })}
+                    placeholder="Granbury"
+                    className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  />
+                </div>
+              </div>
+
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+                <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Description</label>
+                <textarea
+                  value={county.description}
+                  onChange={(e) => updateCounty(idx, { description: e.target.value })}
+                  rows={2}
+                  placeholder="Full coverage with priority scheduling..."
+                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Cities (comma-separated)</label>
                 <input
                   type="text"
-                  value={counties.headline}
-                  onChange={(e) => setCounties({ ...counties, headline: e.target.value })}
-                  placeholder="Counties we proudly serve."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
-                <textarea
-                  value={counties.subtitle}
-                  onChange={(e) => setCounties({ ...counties, subtitle: e.target.value })}
-                  rows={2}
-                  placeholder="We provide the same level of attention..."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
+                  value={county.cities.join(', ')}
+                  onChange={(e) => updateCounty(idx, { cities: e.target.value.split(',').map(c => c.trim()).filter(Boolean) })}
+                  placeholder="Granbury, Acton, Tolar, Lipan"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
                 />
               </div>
             </div>
-          </div>
+          ))}
 
-          <div className="bg-white/[0.02] border border-white/[0.06] p-6">
-            <div className="flex items-center justify-between mb-5">
-              <h3 className="text-white font-semibold text-sm">Counties ({counties.counties.length})</h3>
-              <button onClick={addCounty} className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
-                <Plus className="w-3.5 h-3.5" /> Add County
-              </button>
-            </div>
-
-            <div className="space-y-4 max-h-[700px] overflow-y-auto pr-2">
-              {counties.counties.map((county, idx) => (
-                <div key={idx} className="bg-white/[0.02] border border-white/[0.06] p-4 space-y-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <span className="text-white/20 text-xs font-bold">{String(idx + 1).padStart(2, '0')}</span>
-                      {county.isHQ && (
-                        <span className="inline-flex items-center gap-1 text-brand-yellow text-[10px] font-bold uppercase tracking-wider">
-                          <MapPin className="w-3 h-3" /> HQ
-                        </span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => updateCounty(idx, { isHQ: !county.isHQ })}
-                        className={`text-[10px] font-bold uppercase tracking-wider px-2 py-1 transition-colors ${county.isHQ ? 'text-brand-yellow bg-brand-yellow/10' : 'text-white/30 hover:text-white/60'}`}
-                      >
-                        {county.isHQ ? 'HQ' : 'Set HQ'}
-                      </button>
-                      <button onClick={() => removeCounty(idx)} className="w-8 h-8 flex items-center justify-center text-white/30 hover:text-red-400 hover:bg-red-400/10 transition-all">
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                      <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">County Name</label>
-                      <input
-                        type="text"
-                        value={county.name}
-                        onChange={(e) => updateCounty(idx, { name: e.target.value })}
-                        placeholder="Hood County"
-                        className="w-full bg-white/[0.04] border border-white/[0.06] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Main City</label>
-                      <input
-                        type="text"
-                        value={county.mainCity}
-                        onChange={(e) => updateCounty(idx, { mainCity: e.target.value })}
-                        placeholder="Granbury"
-                        className="w-full bg-white/[0.04] border border-white/[0.06] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Description</label>
-                    <textarea
-                      value={county.description}
-                      onChange={(e) => updateCounty(idx, { description: e.target.value })}
-                      rows={2}
-                      placeholder="Full coverage with priority scheduling..."
-                      className="w-full bg-white/[0.04] border border-white/[0.06] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Cities (comma-separated)</label>
-                    <input
-                      type="text"
-                      value={county.cities.join(', ')}
-                      onChange={(e) => updateCounty(idx, { cities: e.target.value.split(',').map(c => c.trim()).filter(Boolean) })}
-                      placeholder="Granbury, Acton, Tolar, Lipan"
-                      className="w-full bg-white/[0.04] border border-white/[0.06] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <button onClick={() => saveContent('counties', counties)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50">
+          <button onClick={() => saveContent('counties', counties)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Counties
           </button>
