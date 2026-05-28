@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Save, Check, AlertCircle, Plus, Trash2, ChevronDown, ChevronRight, GripVertical } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import ImageUpload from '../../components/admin/ImageUpload';
 
 interface Highlight { label: string; value: string; }
 interface ProcessStep { step: string; title: string; body: string; }
@@ -320,35 +321,35 @@ function BeforeAfterSection({ current, updateService }: { current: ServiceEntry;
   return (
     <div className="pt-4 space-y-4">
       {current.before_after.map((ba, i) => (
-        <div key={i} className="bg-white/[0.02] border border-white/[0.04] rounded-lg p-4 space-y-3">
+        <div key={i} className="bg-white/[0.02] border border-white/[0.04] rounded-lg p-4 space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-white/30 text-xs">Comparison {i + 1}</span>
             <button onClick={() => updateService({ before_after: current.before_after.filter((_, idx) => idx !== i) })} className="text-red-400/50 hover:text-red-400">
               <Trash2 className="w-3.5 h-3.5" />
             </button>
           </div>
-          <input
-            type="text"
-            value={ba.before}
-            onChange={(e) => {
-              const arr = [...current.before_after];
-              arr[i] = { ...arr[i], before: e.target.value };
-              updateService({ before_after: arr });
-            }}
-            placeholder="Before image URL"
-            className="w-full bg-white/[0.04] border border-white/[0.08] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
-          />
-          <input
-            type="text"
-            value={ba.after}
-            onChange={(e) => {
-              const arr = [...current.before_after];
-              arr[i] = { ...arr[i], after: e.target.value };
-              updateService({ before_after: arr });
-            }}
-            placeholder="After image URL"
-            className="w-full bg-white/[0.04] border border-white/[0.08] px-3 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
-          />
+          <div className="grid grid-cols-2 gap-4">
+            <ImageUpload
+              value={ba.before}
+              onChange={(url) => {
+                const arr = [...current.before_after];
+                arr[i] = { ...arr[i], before: url };
+                updateService({ before_after: arr });
+              }}
+              folder={`services/${current.slug}/before-after`}
+              label="Before"
+            />
+            <ImageUpload
+              value={ba.after}
+              onChange={(url) => {
+                const arr = [...current.before_after];
+                arr[i] = { ...arr[i], after: url };
+                updateService({ before_after: arr });
+              }}
+              folder={`services/${current.slug}/before-after`}
+              label="After"
+            />
+          </div>
           <input
             type="text"
             value={ba.caption}

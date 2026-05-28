@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Save, Check, AlertCircle, Globe, FileText, Tag, Code, Eye } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import ImageUpload from '../../components/admin/ImageUpload';
 
 interface SeoEntry {
   id: string;
@@ -389,13 +390,11 @@ export default function SeoEditor() {
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">OG Image URL</label>
-                <input
-                  type="text"
+                <ImageUpload
                   value={current.og_image}
-                  onChange={(e) => updateField('og_image', e.target.value)}
-                  placeholder="https://example.com/images/share-image.jpg"
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  onChange={(url) => updateField('og_image', url)}
+                  folder={`seo/${activePage}`}
+                  label="OG Image"
                 />
                 <p className="mt-1.5 text-white/20 text-[11px]">Recommended size: 1200x630px. This image appears when the page is shared on Facebook, Twitter, LinkedIn, etc.</p>
               </div>
