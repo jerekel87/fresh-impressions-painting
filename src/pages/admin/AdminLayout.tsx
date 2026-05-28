@@ -58,8 +58,8 @@ export default function AdminLayout() {
 
       {/* Sidebar */}
       <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#0b1620] border-r border-white/[0.06] flex flex-col transform transition-transform duration-300 lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="px-6 py-8 border-b border-white/[0.06] flex items-center justify-center relative">
-          <img src={logo} alt="Fresh Impressions" className="h-10 opacity-90" />
+        <div className="px-4 py-4 border-b border-white/[0.06] flex items-center justify-center relative">
+          <img src={logo} alt="Fresh Impressions" className="h-12 opacity-90" />
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white">
             <X className="w-5 h-5" />
           </button>
