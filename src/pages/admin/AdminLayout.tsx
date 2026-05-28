@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { Home, LogOut, FileText, Menu, X } from 'lucide-react';
+import { Home, LogOut, FileText, Menu, X, Users, MapPin, Phone } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import logo from '../../assets/freshimpressionspainting-web-logo.png';
 
@@ -43,6 +43,9 @@ export default function AdminLayout() {
 
   const navItems = [
     { to: '/admin', icon: Home, label: 'Home Page', end: true },
+    { to: '/admin/about', icon: Users, label: 'About Page', end: false },
+    { to: '/admin/areas', icon: MapPin, label: 'Areas Page', end: false },
+    { to: '/admin/contact', icon: Phone, label: 'Contact Page', end: false },
   ];
 
   return (

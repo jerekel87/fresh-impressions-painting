@@ -7,6 +7,9 @@ import AreasPage from './pages/AreasPage';
 import LoginPage from './pages/admin/LoginPage';
 import AdminLayout from './pages/admin/AdminLayout';
 import HomeEditor from './pages/admin/HomeEditor';
+import AboutEditor from './pages/admin/AboutEditor';
+import AreasEditor from './pages/admin/AreasEditor';
+import ContactEditor from './pages/admin/ContactEditor';
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
       <Route path="/admin/login" element={<LoginPage />} />
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<HomeEditor />} />
+        <Route path="about" element={<AboutEditor />} />
+        <Route path="areas" element={<AreasEditor />} />
+        <Route path="contact" element={<ContactEditor />} />
       </Route>
     </Routes>
   );
