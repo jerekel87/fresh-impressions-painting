@@ -90,8 +90,8 @@ export default function AdminLayout() {
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-6 py-3.5 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? 'text-white bg-white/[0.05] border-l-2 border-brand-teal'
-                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03] border-l-2 border-transparent'
+                      ? 'text-white bg-white/[0.05]'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03]'
                   }`
                 }
               >
@@ -114,8 +114,8 @@ export default function AdminLayout() {
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-6 py-3.5 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? 'text-white bg-white/[0.05] border-l-2 border-brand-teal'
-                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03] border-l-2 border-transparent'
+                      ? 'text-white bg-white/[0.05]'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03]'
                   }`
                 }
               >
@@ -138,8 +138,8 @@ export default function AdminLayout() {
                 className={({ isActive }) =>
                   `flex items-center gap-3 px-6 py-3.5 text-sm font-medium transition-all duration-150 ${
                     isActive
-                      ? 'text-white bg-white/[0.05] border-l-2 border-brand-teal'
-                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03] border-l-2 border-transparent'
+                      ? 'text-white bg-white/[0.05]'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.03]'
                   }`
                 }
               >
