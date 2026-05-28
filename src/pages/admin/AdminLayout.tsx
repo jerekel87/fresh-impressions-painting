@@ -65,8 +65,8 @@ export default function AdminLayout() {
           </button>
         </div>
 
-        <div className="flex-1 pt-4">
-          <p className="px-6 mb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
+        <div className="flex-1 pt-6">
+          <p className="px-6 mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
             Content
           </p>
           <nav className="divide-y divide-white/[0.04]">
@@ -77,7 +77,7 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-6 py-3 text-sm font-medium transition-all duration-150 ${
+                  `flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all duration-150 ${
                     isActive
                       ? 'bg-white/[0.04] text-white border-l-2 border-brand-teal'
                       : 'text-white/45 hover:text-white/80 hover:bg-white/[0.02] border-l-2 border-transparent'
