@@ -95,7 +95,7 @@ export default function AdminManagement() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-6 h-6 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-[#10263C] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -104,12 +104,12 @@ export default function AdminManagement() {
     <div className="max-w-2xl">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-white font-display uppercase text-2xl font-bold tracking-wide">Admin Users</h2>
-          <p className="text-white/40 text-sm mt-1">Manage who has access to this dashboard</p>
+          <h2 className="text-gray-900 font-display uppercase text-2xl font-bold tracking-wide">Admin Users</h2>
+          <p className="text-gray-500 text-sm mt-1">Manage who has access to this dashboard</p>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-yellow text-navy-900 font-bold text-xs tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors rounded-md"
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-[#10263C] text-white font-bold text-xs tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors rounded-md"
         >
           <UserPlus className="w-4 h-4" />
           Add Admin
@@ -117,45 +117,45 @@ export default function AdminManagement() {
       </div>
 
       {error && (
-        <div className="mb-6 flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-3 text-red-400 text-sm rounded-md">
+        <div className="mb-6 flex items-center gap-2 bg-red-50 border border-red-200 px-4 py-3 text-red-700 text-sm rounded-md">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           {error}
-          <button onClick={() => setError('')} className="ml-auto text-red-400/60 hover:text-red-400">&times;</button>
+          <button onClick={() => setError('')} className="ml-auto text-red-400/60 hover:text-red-700">&times;</button>
         </div>
       )}
 
       {success && (
-        <div className="mb-6 flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-4 py-3 text-emerald-400 text-sm rounded-md">
+        <div className="mb-6 flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-4 py-3 text-emerald-700 text-sm rounded-md">
           <Check className="w-4 h-4 flex-shrink-0" />
           {success}
         </div>
       )}
 
       {showForm && (
-        <form onSubmit={handleCreate} className="mb-8 border border-white/[0.06] rounded-lg p-5 space-y-4">
-          <h3 className="text-white font-medium text-sm flex items-center gap-2">
-            <UserPlus className="w-4 h-4 text-brand-teal" />
+        <form onSubmit={handleCreate} className="mb-8 border border-gray-200 rounded-lg p-5 space-y-4">
+          <h3 className="text-gray-900 font-medium text-sm flex items-center gap-2">
+            <UserPlus className="w-4 h-4 text-[#10263C]" />
             Create New Admin
           </h3>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Email</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="newadmin@example.com"
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md placeholder:text-gray-400"
               required
             />
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Password</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Minimum 8 characters"
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md placeholder:text-gray-400"
               required
               minLength={8}
             />
@@ -164,7 +164,7 @@ export default function AdminManagement() {
             <button
               type="submit"
               disabled={creating}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-yellow text-navy-900 font-bold text-xs tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#10263C] text-white font-bold text-xs tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md"
             >
               {creating ? (
                 <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -176,7 +176,7 @@ export default function AdminManagement() {
             <button
               type="button"
               onClick={() => { setShowForm(false); setEmail(''); setPassword(''); }}
-              className="px-4 py-2.5 text-white/40 hover:text-white text-xs font-medium transition-colors"
+              className="px-4 py-2.5 text-gray-500 hover:text-gray-900 text-xs font-medium transition-colors"
             >
               Cancel
             </button>
@@ -184,46 +184,46 @@ export default function AdminManagement() {
         </form>
       )}
 
-      <div className="border border-white/[0.06] rounded-lg overflow-hidden">
+      <div className="border border-gray-200 rounded-lg overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="border-b border-white/[0.06]">
-              <th className="text-left px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30">User</th>
-              <th className="text-left px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30">Added</th>
+            <tr className="border-b border-gray-200">
+              <th className="text-left px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">User</th>
+              <th className="text-left px-5 py-3 text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500">Added</th>
               <th className="w-16"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/[0.04]">
+          <tbody className="divide-y divide-gray-200">
             {admins.map((admin) => (
-              <tr key={admin.id} className="hover:bg-white/[0.02]">
+              <tr key={admin.id} className="hover:bg-gray-50">
                 <td className="px-5 py-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-brand-teal/20 flex items-center justify-center flex-shrink-0">
-                      <span className="text-brand-teal text-xs font-bold">{admin.email.charAt(0).toUpperCase()}</span>
+                    <div className="w-8 h-8 rounded-full bg-[#10263C]/10 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#10263C] text-xs font-bold">{admin.email.charAt(0).toUpperCase()}</span>
                     </div>
                     <div>
-                      <p className="text-white text-sm font-medium">{admin.email}</p>
+                      <p className="text-gray-900 text-sm font-medium">{admin.email}</p>
                       {admin.id === currentUserId && (
-                        <span className="text-brand-teal text-[10px] font-medium">You</span>
+                        <span className="text-[#10263C] text-[10px] font-medium">You</span>
                       )}
                     </div>
                   </div>
                 </td>
-                <td className="px-5 py-4 text-white/30 text-xs">
+                <td className="px-5 py-4 text-gray-400 text-xs">
                   {new Date(admin.created_at).toLocaleDateString()}
                 </td>
                 <td className="px-5 py-4 text-right">
                   {admin.id !== currentUserId && (
                     <button
                       onClick={() => handleDelete(admin)}
-                      className="text-white/20 hover:text-red-400 transition-colors"
+                      className="text-gray-400 hover:text-red-500 transition-colors"
                       title="Remove admin"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
                   )}
                   {admin.id === currentUserId && (
-                    <Shield className="w-4 h-4 text-white/10 inline" />
+                    <Shield className="w-4 h-4 text-gray-200 inline" />
                   )}
                 </td>
               </tr>

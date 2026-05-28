@@ -48,13 +48,13 @@ type Tab = 'hero' | 'about' | 'reviews' | 'reels';
 
 function StatusBadge({ saving, saved }: { saving: boolean; saved: boolean }) {
   if (saving) return (
-    <span className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-medium">
-      <div className="w-3 h-3 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
+    <span className="inline-flex items-center gap-1.5 text-[#10263C] text-xs font-medium">
+      <div className="w-3 h-3 border-2 border-[#10263C] border-t-transparent rounded-full animate-spin" />
       Saving...
     </span>
   );
   if (saved) return (
-    <span className="inline-flex items-center gap-1.5 text-emerald-400 text-xs font-medium">
+    <span className="inline-flex items-center gap-1.5 text-emerald-600 text-xs font-medium">
       <Check className="w-3.5 h-3.5" />
       Saved
     </span>
@@ -189,7 +189,7 @@ export default function HomeEditor() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-6 h-6 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-[#10263C] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -205,29 +205,29 @@ export default function HomeEditor() {
     <div className="max-w-4xl">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-white font-display uppercase text-2xl font-bold tracking-wide">Home Page</h2>
-          <p className="text-white/40 text-sm mt-1">Edit the content shown on your homepage</p>
+          <h2 className="text-gray-900 font-display uppercase text-2xl font-bold tracking-wide">Home Page</h2>
+          <p className="text-gray-500 text-sm mt-1">Edit the content shown on your homepage</p>
         </div>
         <StatusBadge saving={saving} saved={saved} />
       </div>
 
       {error && (
-        <div className="mb-6 flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-3 text-red-400 text-sm rounded-md">
+        <div className="mb-6 flex items-center gap-2 bg-red-50 border border-red-200 px-4 py-3 text-red-700 text-sm rounded-md">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           {error}
-          <button onClick={() => setError('')} className="ml-auto text-red-400/60 hover:text-red-400">&times;</button>
+          <button onClick={() => setError('')} className="ml-auto text-red-400 hover:text-red-600">&times;</button>
         </div>
       )}
 
-      <div className="flex gap-1 mb-8 border-b border-white/[0.06] overflow-x-auto">
+      <div className="flex gap-1 mb-8 border-b border-gray-200 overflow-x-auto">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`px-5 py-3 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
               activeTab === tab.id
-                ? 'text-brand-teal border-brand-teal'
-                : 'text-white/40 border-transparent hover:text-white/70 hover:border-white/10'
+                ? 'text-[#10263C] border-[#10263C]'
+                : 'text-gray-400 border-transparent hover:text-gray-700 hover:border-gray-300'
             }`}
           >
             {tab.label}
@@ -239,44 +239,44 @@ export default function HomeEditor() {
       {activeTab === 'hero' && (
         <div className="space-y-5">
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Headline</label>
             <textarea
               value={hero.headline}
               onChange={(e) => setHero({ ...hero, headline: e.target.value })}
               rows={2}
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
             />
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Subtitle</label>
             <textarea
               value={hero.subtitle}
               onChange={(e) => setHero({ ...hero, subtitle: e.target.value })}
               rows={2}
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
             />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">CTA Button Text</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">CTA Button Text</label>
               <input
                 type="text"
                 value={hero.cta_text}
                 onChange={(e) => setHero({ ...hero, cta_text: e.target.value })}
-                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
               />
             </div>
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Phone Number</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Phone Number</label>
               <input
                 type="text"
                 value={hero.phone}
                 onChange={(e) => setHero({ ...hero, phone: e.target.value })}
-                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
               />
             </div>
           </div>
-          <button onClick={saveHero} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={saveHero} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Hero
           </button>
@@ -288,52 +288,52 @@ export default function HomeEditor() {
         <div className="space-y-8">
           <div className="space-y-5">
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Headline</label>
               <input
                 type="text"
                 value={about.headline}
                 onChange={(e) => setAbout({ ...about, headline: e.target.value })}
-                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
               />
             </div>
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Description</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Description</label>
               <textarea
                 value={about.description}
                 onChange={(e) => setAbout({ ...about, description: e.target.value })}
                 rows={4}
-                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+                className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
               />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Founder Name</label>
+                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Founder Name</label>
                 <input
                   type="text"
                   value={about.founder_name}
                   onChange={(e) => setAbout({ ...about, founder_name: e.target.value })}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Founder Title</label>
+                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Founder Title</label>
                 <input
                   type="text"
                   value={about.founder_title}
                   onChange={(e) => setAbout({ ...about, founder_title: e.target.value })}
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
                 />
               </div>
             </div>
           </div>
 
-          <div className="border-t border-white/[0.06]" />
+          <div className="border-t border-gray-200" />
 
           <div className="flex items-center justify-between">
-            <h3 className="text-white font-semibold text-sm">Statistics ({about.stats.length})</h3>
+            <h3 className="text-gray-900 font-semibold text-sm">Statistics ({about.stats.length})</h3>
             <button
               onClick={() => setAbout({ ...about, stats: [...about.stats, { value: '', label: '' }] })}
-              className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors"
+              className="inline-flex items-center gap-1.5 text-[#10263C] text-xs font-semibold hover:text-[#10263C]/70 transition-colors"
             >
               <Plus className="w-3.5 h-3.5" /> Add Stat
             </button>
@@ -351,7 +351,7 @@ export default function HomeEditor() {
                     setAbout({ ...about, stats: newStats });
                   }}
                   placeholder="Value"
-                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  className="bg-white border border-gray-300 px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
                 />
                 <input
                   type="text"
@@ -362,11 +362,11 @@ export default function HomeEditor() {
                     setAbout({ ...about, stats: newStats });
                   }}
                   placeholder="Label"
-                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  className="bg-white border border-gray-300 px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
                 />
                 <button
                   onClick={() => setAbout({ ...about, stats: about.stats.filter((_, i) => i !== idx) })}
-                  className="p-1.5 text-white/30 hover:text-red-400 transition-colors"
+                  className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
@@ -374,7 +374,7 @@ export default function HomeEditor() {
             ))}
           </div>
 
-          <button onClick={saveAbout} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={saveAbout} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save About
           </button>
@@ -386,46 +386,46 @@ export default function HomeEditor() {
         <div className="space-y-8">
           <div className="space-y-5">
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Headline</label>
               <input
                 type="text"
                 value={reviewsHeader.headline}
                 onChange={(e) => setReviewsHeader({ ...reviewsHeader, headline: e.target.value })}
-                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
               />
             </div>
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Subtitle</label>
               <textarea
                 value={reviewsHeader.subtitle}
                 onChange={(e) => setReviewsHeader({ ...reviewsHeader, subtitle: e.target.value })}
                 rows={2}
-                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+                className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
               />
             </div>
-            <button onClick={saveReviewsHeader} disabled={saving} className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-yellow text-navy-900 font-bold text-[12px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
+            <button onClick={saveReviewsHeader} disabled={saving} className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#10263C] text-white font-bold text-[12px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
               <Save className="w-3.5 h-3.5" />
               Save Header
             </button>
           </div>
 
-          <div className="border-t border-white/[0.06]" />
+          <div className="border-t border-gray-200" />
 
           <div className="flex items-center justify-between">
-            <h3 className="text-white font-semibold text-sm">Reviews ({reviews.length})</h3>
-            <button onClick={addReview} className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
+            <h3 className="text-gray-900 font-semibold text-sm">Reviews ({reviews.length})</h3>
+            <button onClick={addReview} className="inline-flex items-center gap-1.5 text-[#10263C] text-xs font-semibold hover:text-[#10263C]/70 transition-colors">
               <Plus className="w-3.5 h-3.5" /> Add Review
             </button>
           </div>
 
           {reviews.map((review) => (
-            <div key={review.id} className="space-y-3 pb-8 border-b border-white/[0.06] last:border-b-0 last:pb-0">
+            <div key={review.id} className="space-y-3 pb-8 border-b border-gray-200 last:border-b-0 last:pb-0">
               <textarea
                 value={review.text}
                 onChange={(e) => updateReview(review.id, { text: e.target.value })}
                 rows={3}
                 placeholder="Review text..."
-                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+                className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
               />
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                 <input
@@ -433,19 +433,19 @@ export default function HomeEditor() {
                   value={review.author}
                   onChange={(e) => updateReview(review.id, { author: e.target.value })}
                   placeholder="Author"
-                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  className="bg-white border border-gray-300 px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
                 />
                 <input
                   type="text"
                   value={review.source}
                   onChange={(e) => updateReview(review.id, { source: e.target.value })}
                   placeholder="Source"
-                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  className="bg-white border border-gray-300 px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
                 />
                 <select
                   value={review.rating}
                   onChange={(e) => updateReview(review.id, { rating: Number(e.target.value) })}
-                  className="bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  className="bg-white border border-gray-300 px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
                 >
                   {[5, 4, 3, 2, 1].map(n => <option key={n} value={n}>{n} Stars</option>)}
                 </select>
@@ -453,16 +453,16 @@ export default function HomeEditor() {
               <div className="flex items-center justify-between">
                 <button
                   onClick={() => { updateReview(review.id, { is_active: !review.is_active }); }}
-                  className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${review.is_active ? 'text-emerald-400' : 'text-white/30'}`}
+                  className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors ${review.is_active ? 'text-emerald-600' : 'text-gray-400'}`}
                 >
                   {review.is_active ? <Eye className="w-3.5 h-3.5" /> : <EyeOff className="w-3.5 h-3.5" />}
                   {review.is_active ? 'Visible' : 'Hidden'}
                 </button>
                 <div className="flex items-center gap-3">
-                  <button onClick={() => saveReview(review)} className="text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
+                  <button onClick={() => saveReview(review)} className="text-[#10263C] text-xs font-semibold hover:text-[#10263C]/70 transition-colors">
                     Save
                   </button>
-                  <button onClick={() => deleteReview(review.id)} className="text-white/30 hover:text-red-400 transition-colors">
+                  <button onClick={() => deleteReview(review.id)} className="text-gray-400 hover:text-red-500 transition-colors">
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -476,31 +476,31 @@ export default function HomeEditor() {
       {activeTab === 'reels' && (
         <div className="space-y-8">
           <div className="flex items-center justify-between">
-            <h3 className="text-white font-semibold text-sm">Facebook Reels ({reels.length})</h3>
-            <button onClick={addReel} className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors">
+            <h3 className="text-gray-900 font-semibold text-sm">Facebook Reels ({reels.length})</h3>
+            <button onClick={addReel} className="inline-flex items-center gap-1.5 text-[#10263C] text-xs font-semibold hover:text-[#10263C]/70 transition-colors">
               <Plus className="w-3.5 h-3.5" /> Add Reel
             </button>
           </div>
 
           {reels.map((reel) => (
-            <div key={reel.id} className="flex items-center gap-3 pb-4 border-b border-white/[0.06] last:border-b-0 last:pb-0">
+            <div key={reel.id} className="flex items-center gap-3 pb-4 border-b border-gray-200 last:border-b-0 last:pb-0">
               <input
                 type="text"
                 value={reel.url}
                 onChange={(e) => updateReel(reel.id, { url: e.target.value })}
                 placeholder="https://www.facebook.com/reel/..."
-                className="flex-1 bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                className="flex-1 bg-white border border-gray-300 px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
               />
               <button
                 onClick={() => { updateReel(reel.id, { is_active: !reel.is_active }); saveReel({ ...reel, is_active: !reel.is_active }); }}
-                className={`p-2 transition-colors ${reel.is_active ? 'text-emerald-400' : 'text-white/30'}`}
+                className={`p-2 transition-colors ${reel.is_active ? 'text-emerald-600' : 'text-gray-400'}`}
               >
                 {reel.is_active ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
               </button>
-              <button onClick={() => saveReel(reel)} className="text-brand-teal text-xs font-semibold hover:text-brand-teal/80 px-2 py-1 transition-colors">
+              <button onClick={() => saveReel(reel)} className="text-[#10263C] text-xs font-semibold hover:text-[#10263C]/70 px-2 py-1 transition-colors">
                 Save
               </button>
-              <button onClick={() => deleteReel(reel.id)} className="p-2 text-white/30 hover:text-red-400 transition-colors">
+              <button onClick={() => deleteReel(reel.id)} className="p-2 text-gray-400 hover:text-red-500 transition-colors">
                 <Trash2 className="w-4 h-4" />
               </button>
             </div>

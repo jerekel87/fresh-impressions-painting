@@ -35,8 +35,8 @@ export default function AdminLayout() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0a1e30] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-[#10263C] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -61,15 +61,15 @@ export default function AdminLayout() {
   ];
 
   return (
-    <div className="h-screen bg-[#0a1e30] flex overflow-hidden">
+    <div className="h-screen bg-gray-50 flex overflow-hidden">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={() => setSidebarOpen(false)} />
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#0c2236] border-r border-white/[0.06] flex flex-col transform transition-transform duration-300 lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="px-4 py-4 border-b border-white/[0.06] flex items-center justify-between">
+      <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#10263C] flex flex-col transform transition-transform duration-300 lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+        <div className="px-4 py-4 border-b border-white/[0.08] flex items-center justify-between">
           <img src={logo} alt="Fresh Impressions" className="h-12 opacity-90" />
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/40 hover:text-white">
             <X className="w-5 h-5" />
@@ -77,10 +77,10 @@ export default function AdminLayout() {
         </div>
 
         <div className="flex-1 pt-6 overflow-y-auto">
-          <p className="px-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
+          <p className="px-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
             Content
           </p>
-          <nav className="divide-y divide-white/[0.04]">
+          <nav className="space-y-0.5 px-3">
             {contentNav.map((item) => (
               <NavLink
                 key={item.to}
@@ -88,10 +88,10 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all duration-150 ${
+                  `flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-150 ${
                     isActive
-                      ? 'bg-white/[0.06] text-white'
-                      : 'text-white/45 hover:text-white/80 hover:bg-white/[0.02]'
+                      ? 'bg-white/[0.1] text-white'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.05]'
                   }`
                 }
               >
@@ -101,10 +101,10 @@ export default function AdminLayout() {
             ))}
           </nav>
 
-          <p className="px-6 mt-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
+          <p className="px-6 mt-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
             Business
           </p>
-          <nav className="divide-y divide-white/[0.04]">
+          <nav className="space-y-0.5 px-3">
             {businessNav.map((item) => (
               <NavLink
                 key={item.to}
@@ -112,10 +112,10 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all duration-150 ${
+                  `flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-150 ${
                     isActive
-                      ? 'bg-white/[0.06] text-white'
-                      : 'text-white/45 hover:text-white/80 hover:bg-white/[0.02]'
+                      ? 'bg-white/[0.1] text-white'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.05]'
                   }`
                 }
               >
@@ -125,10 +125,10 @@ export default function AdminLayout() {
             ))}
           </nav>
 
-          <p className="px-6 mt-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
+          <p className="px-6 mt-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/30">
             System
           </p>
-          <nav className="divide-y divide-white/[0.04]">
+          <nav className="space-y-0.5 px-3">
             {systemNav.map((item) => (
               <NavLink
                 key={item.to}
@@ -136,10 +136,10 @@ export default function AdminLayout() {
                 end={item.end}
                 onClick={() => setSidebarOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all duration-150 ${
+                  `flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-all duration-150 ${
                     isActive
-                      ? 'bg-white/[0.06] text-white'
-                      : 'text-white/45 hover:text-white/80 hover:bg-white/[0.02]'
+                      ? 'bg-white/[0.1] text-white'
+                      : 'text-white/50 hover:text-white/80 hover:bg-white/[0.05]'
                   }`
                 }
               >
@@ -150,14 +150,14 @@ export default function AdminLayout() {
           </nav>
         </div>
 
-        <div className="px-4 py-4 border-t border-white/[0.06]">
+        <div className="px-4 py-4 border-t border-white/[0.08]">
           <div className="flex items-center gap-3 px-2">
             <div className="w-8 h-8 rounded-full bg-brand-teal/20 flex items-center justify-center flex-shrink-0">
               <span className="text-brand-teal text-xs font-bold">{user?.email?.charAt(0).toUpperCase()}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-white/70 text-xs font-medium truncate">{user?.email}</p>
-              <p className="text-white/30 text-[10px]">Administrator</p>
+              <p className="text-white/80 text-xs font-medium truncate">{user?.email}</p>
+              <p className="text-white/40 text-[10px]">Administrator</p>
             </div>
             <button
               onClick={handleLogout}
@@ -173,21 +173,21 @@ export default function AdminLayout() {
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0 h-screen">
         {/* Top bar */}
-        <header className="flex-shrink-0 bg-[#0a1e30]/90 backdrop-blur-lg border-b border-white/[0.06] px-4 sm:px-6 lg:px-8 py-4">
+        <header className="flex-shrink-0 bg-white border-b border-gray-200 px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-white/50 hover:text-white">
+              <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-gray-500 hover:text-gray-900">
                 <Menu className="w-5 h-5" />
               </button>
               <div className="flex items-center gap-2">
-                <Settings className="w-4 h-4 text-brand-teal" />
-                <h1 className="text-white font-semibold text-sm">Content Management</h1>
+                <Settings className="w-4 h-4 text-[#10263C]" />
+                <h1 className="text-gray-900 font-semibold text-sm">Content Management</h1>
               </div>
             </div>
             <a
               href="/"
               target="_blank"
-              className="text-[11px] font-semibold uppercase tracking-[0.1em] text-white/30 hover:text-white/60 transition-colors"
+              className="text-[11px] font-semibold uppercase tracking-[0.1em] text-gray-400 hover:text-gray-700 transition-colors"
             >
               View Site &rarr;
             </a>

@@ -27,13 +27,13 @@ type Tab = 'hero' | 'story' | 'values';
 
 function StatusBadge({ saving, saved }: { saving: boolean; saved: boolean }) {
   if (saving) return (
-    <span className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-medium">
-      <div className="w-3 h-3 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
+    <span className="inline-flex items-center gap-1.5 text-[#10263C] text-xs font-medium">
+      <div className="w-3 h-3 border-2 border-[#10263C] border-t-transparent rounded-full animate-spin" />
       Saving...
     </span>
   );
   if (saved) return (
-    <span className="inline-flex items-center gap-1.5 text-emerald-400 text-xs font-medium">
+    <span className="inline-flex items-center gap-1.5 text-emerald-600 text-xs font-medium">
       <Check className="w-3.5 h-3.5" />
       Saved
     </span>
@@ -89,7 +89,7 @@ export default function AboutEditor() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-6 h-6 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-[#10263C] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -104,29 +104,29 @@ export default function AboutEditor() {
     <div className="max-w-4xl">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-white font-display uppercase text-2xl font-bold tracking-wide">About Page</h2>
-          <p className="text-white/40 text-sm mt-1">Edit the content shown on the About page</p>
+          <h2 className="text-gray-900 font-display uppercase text-2xl font-bold tracking-wide">About Page</h2>
+          <p className="text-gray-500 text-sm mt-1">Edit the content shown on the About page</p>
         </div>
         <StatusBadge saving={saving} saved={saved} />
       </div>
 
       {error && (
-        <div className="mb-6 flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-3 text-red-400 text-sm rounded-md">
+        <div className="mb-6 flex items-center gap-2 bg-red-50 border border-red-200 px-4 py-3 text-red-700 text-sm rounded-md">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           {error}
-          <button onClick={() => setError('')} className="ml-auto text-red-400/60 hover:text-red-400">&times;</button>
+          <button onClick={() => setError('')} className="ml-auto text-red-400 hover:text-red-600">&times;</button>
         </div>
       )}
 
-      <div className="flex gap-1 mb-8 border-b border-white/[0.06] overflow-x-auto">
+      <div className="flex gap-1 mb-8 border-b border-gray-200 overflow-x-auto">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`px-5 py-3 text-sm font-medium transition-all duration-200 border-b-2 whitespace-nowrap ${
               activeTab === tab.id
-                ? 'text-brand-teal border-brand-teal'
-                : 'text-white/40 border-transparent hover:text-white/70 hover:border-white/10'
+                ? 'text-[#10263C] border-[#10263C]'
+                : 'text-gray-400 border-transparent hover:text-gray-700 hover:border-gray-300'
             }`}
           >
             {tab.label}
@@ -137,26 +137,26 @@ export default function AboutEditor() {
       {activeTab === 'hero' && (
         <div className="space-y-5">
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Headline</label>
             <textarea
               value={hero.headline}
               onChange={(e) => setHero({ ...hero, headline: e.target.value })}
               rows={2}
               placeholder="Built on faith, driven by craft."
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
             />
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Subtitle</label>
             <textarea
               value={hero.subtitle}
               onChange={(e) => setHero({ ...hero, subtitle: e.target.value })}
               rows={2}
               placeholder="The story behind Fresh Impressions Painting..."
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
             />
           </div>
-          <button onClick={() => saveContent('hero', hero)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={() => saveContent('hero', hero)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Hero
           </button>
@@ -166,26 +166,26 @@ export default function AboutEditor() {
       {activeTab === 'story' && (
         <div className="space-y-5">
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Paragraph 1</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Paragraph 1</label>
             <textarea
               value={story.paragraph1}
               onChange={(e) => setStory({ ...story, paragraph1: e.target.value })}
               rows={6}
               placeholder="Owner Ian Rosenkranz has proudly served..."
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm leading-relaxed focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm leading-relaxed focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
             />
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Paragraph 2</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Paragraph 2</label>
             <textarea
               value={story.paragraph2}
               onChange={(e) => setStory({ ...story, paragraph2: e.target.value })}
               rows={6}
               placeholder="From a young age, Ian developed discipline..."
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm leading-relaxed focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm leading-relaxed focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
             />
           </div>
-          <button onClick={() => saveContent('story', story)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={() => saveContent('story', story)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Story
           </button>
@@ -197,36 +197,36 @@ export default function AboutEditor() {
           {/* Section header fields */}
           <div className="space-y-5">
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Headline</label>
               <input
                 type="text"
                 value={values.headline}
                 onChange={(e) => setValues({ ...values, headline: e.target.value })}
                 placeholder="More than color on walls."
-                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
               />
             </div>
             <div>
-              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Subtitle</label>
               <textarea
                 value={values.subtitle}
                 onChange={(e) => setValues({ ...values, subtitle: e.target.value })}
                 rows={3}
                 placeholder="Ian is passionate about serving others..."
-                className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+                className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
               />
             </div>
           </div>
 
           {/* Divider */}
-          <div className="border-t border-white/[0.06]" />
+          <div className="border-t border-gray-200" />
 
           {/* Values list header */}
           <div className="flex items-center justify-between">
-            <h3 className="text-white font-semibold text-sm">Values ({values.values.length})</h3>
+            <h3 className="text-gray-900 font-semibold text-sm">Values ({values.values.length})</h3>
             <button
               onClick={() => setValues({ ...values, values: [...values.values, { title: '', description: '' }] })}
-              className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-semibold hover:text-brand-teal/80 transition-colors"
+              className="inline-flex items-center gap-1.5 text-[#10263C] text-xs font-semibold hover:text-[#10263C]/70 transition-colors"
             >
               <Plus className="w-3.5 h-3.5" /> Add Value
             </button>
@@ -234,18 +234,18 @@ export default function AboutEditor() {
 
           {/* Values - flat list with dividers */}
           {values.values.map((value, idx) => (
-            <div key={idx} className="space-y-3 pb-8 border-b border-white/[0.06] last:border-b-0 last:pb-0">
+            <div key={idx} className="space-y-3 pb-8 border-b border-gray-200 last:border-b-0 last:pb-0">
               <div className="flex items-center justify-between">
-                <span className="text-white/20 text-xs font-mono">{String(idx + 1).padStart(2, '0')}</span>
+                <span className="text-gray-400 text-xs font-mono">{String(idx + 1).padStart(2, '0')}</span>
                 <button
                   onClick={() => setValues({ ...values, values: values.values.filter((_, i) => i !== idx) })}
-                  className="p-1.5 text-white/30 hover:text-red-400 transition-colors"
+                  className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
                 >
                   <Trash2 className="w-4 h-4" />
                 </button>
               </div>
               <div>
-                <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Title</label>
+                <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-1.5">Title</label>
                 <input
                   type="text"
                   value={value.title}
@@ -255,11 +255,11 @@ export default function AboutEditor() {
                     setValues({ ...values, values: newValues });
                   }}
                   placeholder="Integrity"
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+                  className="w-full bg-white border border-gray-300 px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-white/30 mb-1.5">Description</label>
+                <label className="block text-[10px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-1.5">Description</label>
                 <textarea
                   value={value.description}
                   onChange={(e) => {
@@ -269,13 +269,13 @@ export default function AboutEditor() {
                   }}
                   rows={3}
                   placeholder="Value description..."
-                  className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+                  className="w-full bg-white border border-gray-300 px-4 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
                 />
               </div>
             </div>
           ))}
 
-          <button onClick={() => saveContent('values', values)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={() => saveContent('values', values)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Values
           </button>

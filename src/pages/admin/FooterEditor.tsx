@@ -29,13 +29,13 @@ type Tab = 'social' | 'footer' | 'quote';
 
 function StatusBadge({ saving, saved }: { saving: boolean; saved: boolean }) {
   if (saving) return (
-    <span className="inline-flex items-center gap-1.5 text-brand-teal text-xs font-medium">
-      <div className="w-3 h-3 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
+    <span className="inline-flex items-center gap-1.5 text-[#10263C] text-xs font-medium">
+      <div className="w-3 h-3 border-2 border-[#10263C] border-t-transparent rounded-full animate-spin" />
       Saving...
     </span>
   );
   if (saved) return (
-    <span className="inline-flex items-center gap-1.5 text-emerald-400 text-xs font-medium">
+    <span className="inline-flex items-center gap-1.5 text-emerald-600 text-xs font-medium">
       <Check className="w-3.5 h-3.5" />
       Saved
     </span>
@@ -94,7 +94,7 @@ export default function FooterEditor() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="w-6 h-6 border-2 border-brand-teal border-t-transparent rounded-full animate-spin" />
+        <div className="w-6 h-6 border-2 border-[#10263C] border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
@@ -109,29 +109,29 @@ export default function FooterEditor() {
     <div className="max-w-4xl">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h2 className="text-white font-display uppercase text-2xl font-bold tracking-wide">Footer & Global</h2>
-          <p className="text-white/40 text-sm mt-1">Social links, footer content, and quote form section</p>
+          <h2 className="text-gray-900 font-display uppercase text-2xl font-bold tracking-wide">Footer & Global</h2>
+          <p className="text-gray-500 text-sm mt-1">Social links, footer content, and quote form section</p>
         </div>
         <StatusBadge saving={saving} saved={saved} />
       </div>
 
       {error && (
-        <div className="mb-6 flex items-center gap-2 bg-red-500/10 border border-red-500/20 px-4 py-3 text-red-400 text-sm rounded-md">
+        <div className="mb-6 flex items-center gap-2 bg-red-50 border border-red-200 px-4 py-3 text-red-700 text-sm rounded-md">
           <AlertCircle className="w-4 h-4 flex-shrink-0" />
           {error}
-          <button onClick={() => setError('')} className="ml-auto text-red-400/60 hover:text-red-400">&times;</button>
+          <button onClick={() => setError('')} className="ml-auto text-red-400 hover:text-red-600">&times;</button>
         </div>
       )}
 
-      <div className="flex gap-1 mb-8 border-b border-white/[0.06]">
+      <div className="flex gap-1 mb-8 border-b border-gray-200">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`px-5 py-3 text-xs font-semibold tracking-[0.08em] uppercase transition-all relative ${
               activeTab === tab.id
-                ? 'text-white after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-brand-yellow'
-                : 'text-white/35 hover:text-white/60'
+                ? 'text-gray-900 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-[#10263C]'
+                : 'text-gray-500 hover:text-gray-600'
             }`}
           >
             {tab.label}
@@ -147,7 +147,7 @@ export default function FooterEditor() {
           <SocialField label="Google Business" value={social.google} onChange={(v) => setSocial({ ...social, google: v })} placeholder="https://g.page/yourbusiness" />
           <SocialField label="Yelp" value={social.yelp} onChange={(v) => setSocial({ ...social, yelp: v })} placeholder="https://www.yelp.com/biz/..." />
           <SocialField label="TikTok" value={social.tiktok} onChange={(v) => setSocial({ ...social, tiktok: v })} placeholder="https://www.tiktok.com/@yourpage" />
-          <button onClick={() => saveContent('social_links', social)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={() => saveContent('social_links', social)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Social Links
           </button>
@@ -157,56 +157,56 @@ export default function FooterEditor() {
       {activeTab === 'footer' && (
         <div className="space-y-5">
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Footer Description</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Footer Description</label>
             <textarea
               value={footer.description}
               onChange={(e) => setFooter({ ...footer, description: e.target.value })}
               rows={3}
               placeholder="Expert residential and commercial painting..."
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors resize-none rounded-md"
             />
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">CTA Headline</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">CTA Headline</label>
             <input
               type="text"
               value={footer.cta_headline}
               onChange={(e) => setFooter({ ...footer, cta_headline: e.target.value })}
               placeholder="Let's start your project."
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
             />
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">CTA Subtitle</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">CTA Subtitle</label>
             <input
               type="text"
               value={footer.cta_subtitle}
               onChange={(e) => setFooter({ ...footer, cta_subtitle: e.target.value })}
               placeholder="Get a free, no-obligation estimate..."
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
             />
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">CTA Button Text</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">CTA Button Text</label>
             <input
               type="text"
               value={footer.cta_button_text}
               onChange={(e) => setFooter({ ...footer, cta_button_text: e.target.value })}
               placeholder="REQUEST ESTIMATE"
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
             />
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Copyright Name</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Copyright Name</label>
             <input
               type="text"
               value={footer.copyright}
               onChange={(e) => setFooter({ ...footer, copyright: e.target.value })}
               placeholder="Fresh Impressions Painting"
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
             />
           </div>
-          <button onClick={() => saveContent('footer', footer)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={() => saveContent('footer', footer)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Footer
           </button>
@@ -216,38 +216,38 @@ export default function FooterEditor() {
       {activeTab === 'quote' && (
         <div className="space-y-5">
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Headline</label>
             <input
               type="text"
               value={quote.headline}
               onChange={(e) => setQuote({ ...quote, headline: e.target.value })}
               placeholder="Request a"
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
             />
-            <p className="mt-1.5 text-white/20 text-[11px]">Text before the accent color word(s)</p>
+            <p className="mt-1.5 text-gray-400 text-[11px]">Text before the accent color word(s)</p>
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Headline Accent</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Headline Accent</label>
             <input
               type="text"
               value={quote.headline_accent}
               onChange={(e) => setQuote({ ...quote, headline_accent: e.target.value })}
               placeholder="free quote."
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
             />
-            <p className="mt-1.5 text-white/20 text-[11px]">Text displayed in accent color</p>
+            <p className="mt-1.5 text-gray-400 text-[11px]">Text displayed in accent color</p>
           </div>
           <div>
-            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">Subtitle</label>
+            <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Subtitle</label>
             <input
               type="text"
               value={quote.subtitle}
               onChange={(e) => setQuote({ ...quote, subtitle: e.target.value })}
               placeholder="Fill out the form below and we'll be in touch shortly."
-              className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+              className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
             />
           </div>
-          <button onClick={() => saveContent('quote_section', quote)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={() => saveContent('quote_section', quote)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Quote Section
           </button>
@@ -260,13 +260,13 @@ export default function FooterEditor() {
 function SocialField({ label, value, onChange, placeholder }: { label: string; value: string; onChange: (v: string) => void; placeholder: string }) {
   return (
     <div>
-      <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-white/40 mb-2">{label}</label>
+      <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">{label}</label>
       <input
         type="url"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors rounded-md"
+        className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
       />
     </div>
   );
