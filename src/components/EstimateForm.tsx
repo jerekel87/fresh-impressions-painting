@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { CheckCircle, Phone, Mail, MapPin, Clock, User, MessageSquare, ArrowRight } from 'lucide-react';
 import textureBg from '../assets/DSC_TEXTURE_S_3.jpg';
+import { supabase } from '../lib/supabase';
 
 const serviceOptions = [
   'Interior Painting',
@@ -28,8 +29,20 @@ export default function EstimateForm() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
+    await supabase.from('leads').insert({
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      email: formData.email,
+      phone: formData.phone,
+      service_type: formData.serviceType,
+      description: formData.description,
+    });
+    setSubmitting(false);
     setSubmitted(true);
   };
 
@@ -153,10 +166,11 @@ export default function EstimateForm() {
               {/* Submit */}
               <button
                 type="submit"
-                className="group w-full inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-brand-yellow hover:bg-[#e6b930] text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase transition-all duration-300"
+                disabled={submitting}
+                className="group w-full inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-brand-yellow hover:bg-[#e6b930] text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase transition-all duration-300 disabled:opacity-60"
               >
-                GET ESTIMATE
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                {submitting ? 'SUBMITTING...' : 'GET ESTIMATE'}
+                {!submitting && <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />}
               </button>
 
               <p className="text-gray-400 text-xs text-center pt-1">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { Home, LogOut, FileText, Menu, X, Users, MapPin, Phone, Search, Paintbrush } from 'lucide-react';
+import { Home, LogOut, FileText, Menu, X, Users, MapPin, Phone, Search, Paintbrush, Inbox, Settings, ShieldCheck } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import logo from '../../assets/freshimpressionspainting-web-logo.png';
 
@@ -41,13 +41,22 @@ export default function AdminLayout() {
     );
   }
 
-  const navItems = [
+  const contentNav = [
     { to: '/admin', icon: Home, label: 'Home Page', end: true },
     { to: '/admin/about', icon: Users, label: 'About Page', end: false },
     { to: '/admin/areas', icon: MapPin, label: 'Areas Page', end: false },
     { to: '/admin/contact', icon: Phone, label: 'Contact Page', end: false },
     { to: '/admin/services', icon: Paintbrush, label: 'Services', end: false },
     { to: '/admin/seo', icon: Search, label: 'SEO', end: false },
+  ];
+
+  const businessNav = [
+    { to: '/admin/leads', icon: Inbox, label: 'Leads', end: false },
+  ];
+
+  const systemNav = [
+    { to: '/admin/settings', icon: Settings, label: 'Profile', end: false },
+    { to: '/admin/admins', icon: ShieldCheck, label: 'Admin Users', end: false },
   ];
 
   return (
@@ -59,19 +68,67 @@ export default function AdminLayout() {
 
       {/* Sidebar */}
       <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#0b1620] border-r border-white/[0.06] flex flex-col transform transition-transform duration-300 lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="px-4 py-4 border-b border-white/[0.06] flex items-center justify-center relative">
+        <div className="px-4 py-4 border-b border-white/[0.06] flex items-center justify-between">
           <img src={logo} alt="Fresh Impressions" className="h-12 opacity-90" />
-          <button onClick={() => setSidebarOpen(false)} className="lg:hidden absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white">
+          <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/40 hover:text-white">
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        <div className="flex-1 pt-6">
-          <p className="px-6 mb-4 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
+        <div className="flex-1 pt-6 overflow-y-auto">
+          <p className="px-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
             Content
           </p>
           <nav className="divide-y divide-white/[0.04]">
-            {navItems.map((item) => (
+            {contentNav.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.end}
+                onClick={() => setSidebarOpen(false)}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all duration-150 ${
+                    isActive
+                      ? 'bg-white/[0.06] text-white'
+                      : 'text-white/45 hover:text-white/80 hover:bg-white/[0.02]'
+                  }`
+                }
+              >
+                <item.icon className="w-4 h-4" />
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+
+          <p className="px-6 mt-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
+            Business
+          </p>
+          <nav className="divide-y divide-white/[0.04]">
+            {businessNav.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.end}
+                onClick={() => setSidebarOpen(false)}
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-6 py-4 text-sm font-medium transition-all duration-150 ${
+                    isActive
+                      ? 'bg-white/[0.06] text-white'
+                      : 'text-white/45 hover:text-white/80 hover:bg-white/[0.02]'
+                  }`
+                }
+              >
+                <item.icon className="w-4 h-4" />
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+
+          <p className="px-6 mt-6 mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/25">
+            System
+          </p>
+          <nav className="divide-y divide-white/[0.04]">
+            {systemNav.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
