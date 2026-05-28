@@ -180,7 +180,7 @@ export default function AdminLayout() {
                 <Menu className="w-5 h-5" />
               </button>
               <div className="flex items-center gap-2">
-                <FileText className="w-4 h-4 text-brand-teal" />
+                <Settings className="w-4 h-4 text-brand-teal" />
                 <h1 className="text-white font-semibold text-sm">Content Management</h1>
               </div>
             </div>
