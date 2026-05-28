@@ -15,6 +15,7 @@ import ServicesEditor from './pages/admin/ServicesEditor';
 import LeadsPage from './pages/admin/LeadsPage';
 import ProfileSettings from './pages/admin/ProfileSettings';
 import AdminManagement from './pages/admin/AdminManagement';
+import FooterEditor from './pages/admin/FooterEditor';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="contact" element={<ContactEditor />} />
         <Route path="services" element={<ServicesEditor />} />
         <Route path="seo" element={<SeoEditor />} />
+        <Route path="footer" element={<FooterEditor />} />
         <Route path="leads" element={<LeadsPage />} />
         <Route path="settings" element={<ProfileSettings />} />
         <Route path="admins" element={<AdminManagement />} />

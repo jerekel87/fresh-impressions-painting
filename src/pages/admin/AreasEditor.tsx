@@ -168,7 +168,7 @@ export default function AreasEditor() {
               className="w-full bg-white/[0.04] border border-white/[0.08] px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-teal/50 transition-colors resize-none rounded-md"
             />
           </div>
-          <button onClick={() => saveContent('hero', hero)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={() => saveContent('hero', hero)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Hero
           </button>
@@ -284,7 +284,7 @@ export default function AreasEditor() {
             </div>
           ))}
 
-          <button onClick={() => saveContent('counties', counties)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
+          <button onClick={() => saveContent('counties', counties)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Counties
           </button>

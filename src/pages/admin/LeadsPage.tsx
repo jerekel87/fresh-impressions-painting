@@ -288,7 +288,7 @@ function LeadDrawer({ lead, onClose, onUpdate }: { lead: Lead; onClose: () => vo
             <button
               onClick={saveNotes}
               disabled={saving || notes === lead.notes}
-              className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-brand-teal text-white font-semibold text-xs tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md"
+              className="mt-3 inline-flex items-center gap-2 px-4 py-2 bg-brand-yellow text-navy-900 font-bold text-xs tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md"
             >
               <Save className="w-3.5 h-3.5" />
               {saving ? 'Saving...' : 'Save Notes'}

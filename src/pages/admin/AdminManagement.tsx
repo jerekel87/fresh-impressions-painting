@@ -109,7 +109,7 @@ export default function AdminManagement() {
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-teal text-white font-semibold text-xs tracking-[0.05em] hover:bg-brand-teal/80 transition-colors rounded-md"
+          className="inline-flex items-center gap-2 px-4 py-2.5 bg-brand-yellow text-navy-900 font-bold text-xs tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors rounded-md"
         >
           <UserPlus className="w-4 h-4" />
           Add Admin
@@ -164,7 +164,7 @@ export default function AdminManagement() {
             <button
               type="submit"
               disabled={creating}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-teal text-white font-semibold text-xs tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-yellow text-navy-900 font-bold text-xs tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md"
             >
               {creating ? (
                 <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />

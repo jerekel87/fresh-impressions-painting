@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CheckCircle, Phone, Mail, MapPin, Clock, User, MessageSquare, ArrowRight } from 'lucide-react';
 import textureBg from '../assets/DSC_TEXTURE_S_3.jpg';
 import { supabase } from '../lib/supabase';
@@ -16,6 +16,7 @@ const serviceOptions = [
 
 export default function EstimateForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [quoteContent, setQuoteContent] = useState({ headline: 'Request a', headline_accent: 'free quote.', subtitle: "Fill out the form below and we'll be in touch shortly." });
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -24,6 +25,12 @@ export default function EstimateForm() {
     serviceType: '',
     description: '',
   });
+
+  useEffect(() => {
+    supabase.from('site_content').select('content').eq('page', 'global').eq('section', 'quote_section').maybeSingle().then(({ data }) => {
+      if (data?.content) setQuoteContent(data.content as typeof quoteContent);
+    });
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -71,10 +78,10 @@ export default function EstimateForm() {
           {/* Left side - Form */}
           <div className="bg-white/90 backdrop-blur-sm border border-[#e8e0d8] p-6 sm:p-8 lg:p-10">
             <h3 className="font-display uppercase text-3xl sm:text-4xl font-bold text-navy-900 leading-tight mb-2">
-              Request a <span className="text-brand-teal">free quote.</span>
+              {quoteContent.headline} <span className="text-brand-teal">{quoteContent.headline_accent}</span>
             </h3>
             <p className="text-gray-500 text-[15px] mb-8">
-              Fill out the form below and we'll be in touch shortly.
+              {quoteContent.subtitle}
             </p>
 
             <form onSubmit={handleSubmit} className="space-y-4">

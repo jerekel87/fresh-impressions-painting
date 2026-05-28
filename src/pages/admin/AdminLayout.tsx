@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { Home, LogOut, FileText, Menu, X, Users, MapPin, Phone, Search, Paintbrush, Inbox, Settings, ShieldCheck } from 'lucide-react';
+import { Home, LogOut, Menu, X, Users, MapPin, Phone, Search, Paintbrush, Inbox, Settings, ShieldCheck, Globe } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import logo from '../../assets/freshimpressionspainting-web-logo.png';
 
@@ -47,6 +47,7 @@ export default function AdminLayout() {
     { to: '/admin/areas', icon: MapPin, label: 'Areas Page', end: false },
     { to: '/admin/contact', icon: Phone, label: 'Contact Page', end: false },
     { to: '/admin/services', icon: Paintbrush, label: 'Services', end: false },
+    { to: '/admin/footer', icon: Globe, label: 'Footer & Social', end: false },
     { to: '/admin/seo', icon: Search, label: 'SEO', end: false },
   ];
 

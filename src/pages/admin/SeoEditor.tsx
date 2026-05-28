@@ -324,7 +324,7 @@ export default function SeoEditor() {
                 <p className="mt-1.5 text-white/20 text-[11px]">Controls how search engines index and follow links on this page.</p>
               </div>
 
-              <button onClick={saveEntry} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
+              <button onClick={saveEntry} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
                 <Save className="w-4 h-4" />
                 Save Meta Tags
               </button>
@@ -399,7 +399,7 @@ export default function SeoEditor() {
                 <p className="mt-1.5 text-white/20 text-[11px]">Recommended size: 1200x630px. This image appears when the page is shared on Facebook, Twitter, LinkedIn, etc.</p>
               </div>
 
-              <button onClick={saveEntry} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
+              <button onClick={saveEntry} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
                 <Save className="w-4 h-4" />
                 Save Social Settings
               </button>
@@ -442,7 +442,7 @@ export default function SeoEditor() {
                 <p className="mt-1.5 text-white/20 text-[11px]">Additional HTML injected into the page head. Use for Google Search Console verification, analytics scripts, or custom meta tags.</p>
               </div>
 
-              <button onClick={saveEntry} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-teal text-white font-semibold text-[13px] tracking-[0.05em] hover:bg-brand-teal/80 transition-colors disabled:opacity-50 rounded-md">
+              <button onClick={saveEntry} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-brand-gold transition-colors disabled:opacity-50 rounded-md">
                 <Save className="w-4 h-4" />
                 Save Advanced Settings
               </button>
