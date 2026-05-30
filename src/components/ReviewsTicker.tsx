@@ -151,7 +151,7 @@ export default function ReviewsTicker() {
   const mobileReviews = showAll ? reviews : reviews.slice(0, 4);
 
   return (
-    <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-brand-yellow overflow-hidden">
+    <section id="reviews" className="py-16 sm:py-24 md:py-32 bg-[#f4f3ed] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-14 md:mb-20">
         {/* Header */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-20 items-end">
@@ -198,8 +198,8 @@ export default function ReviewsTicker() {
 
       {/* Desktop scrolling row 1 - left to right */}
       <div className="hidden sm:block relative mb-5 sm:mb-6">
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#f4f7fa] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#f4f7fa] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#f4f3ed] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#f4f3ed] to-transparent z-10 pointer-events-none" />
         <div className="flex animate-scroll-left">
           {[...reviews, ...reviews].map((review, idx) => (
             <ReviewCard key={idx} review={review} onSelect={() => setSelectedReview(review)} />
@@ -209,8 +209,8 @@ export default function ReviewsTicker() {
 
       {/* Desktop scrolling row 2 - right to left */}
       <div className="hidden sm:block relative">
-        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#f4f7fa] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#f4f7fa] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-[#f4f3ed] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-[#f4f3ed] to-transparent z-10 pointer-events-none" />
         <div className="flex animate-scroll-right">
           {[...reviews.slice(7), ...reviews.slice(0, 7), ...reviews.slice(7), ...reviews.slice(0, 7)].map((review, idx) => (
             <ReviewCard key={idx} review={review} onSelect={() => setSelectedReview(review)} />
