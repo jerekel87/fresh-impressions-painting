@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import logo from '../assets/freshimpressionspainting-web-logo.png';
 import { supabase } from '../lib/supabase';
+import { useSocialLinks } from '../lib/useSocialLinks';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -20,15 +21,6 @@ const services = [
   'Commercial',
 ];
 
-interface SocialLinks {
-  facebook: string;
-  instagram: string;
-  nextdoor: string;
-  google: string;
-  yelp: string;
-  tiktok: string;
-}
-
 interface FooterContent {
   description: string;
   cta_headline: string;
@@ -38,12 +30,7 @@ interface FooterContent {
 }
 
 export default function Footer() {
-  const [social, setSocial] = useState<SocialLinks>({
-    facebook: 'https://www.facebook.com/freshimpressionspainting',
-    instagram: 'https://www.instagram.com/freshimpressionspainting',
-    nextdoor: 'https://nextdoor.com',
-    google: '', yelp: '', tiktok: '',
-  });
+  const social = useSocialLinks();
   const [footer, setFooter] = useState<FooterContent>({
     description: 'Expert residential and commercial painting across North Central Texas. Quality craftsmanship, lasting results.',
     cta_headline: "Let's start your project.",
@@ -56,7 +43,6 @@ export default function Footer() {
     supabase.from('site_content').select('section, content').eq('page', 'global').then(({ data }) => {
       if (data) {
         for (const row of data) {
-          if (row.section === 'social_links') setSocial(row.content as SocialLinks);
           if (row.section === 'footer') setFooter(row.content as FooterContent);
         }
       }

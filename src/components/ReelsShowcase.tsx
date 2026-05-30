@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useSocialLinks } from '../lib/useSocialLinks';
 
 const fallbackReels = [
   'https://www.facebook.com/reel/921210067580340',
@@ -37,6 +38,7 @@ export default function ReelsShowcase() {
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [scrollPadding, setScrollPadding] = useState(16);
   const [reels, setReels] = useState<string[]>(fallbackReels);
+  const social = useSocialLinks();
 
   useEffect(() => {
     supabase.from('reels').select('url').eq('is_active', true).order('display_order').then(({ data }) => {
@@ -119,7 +121,7 @@ export default function ReelsShowcase() {
                 <ChevronRight className="w-5 h-5" />
               </button>
               <a
-                href="https://www.facebook.com/freshimpressionspainting"
+                href={social.facebook || '#'}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden sm:inline-flex items-center gap-2.5 px-7 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase hover:bg-brand-gold transition-colors duration-300 ml-2"
