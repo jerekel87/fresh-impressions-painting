@@ -37,6 +37,8 @@ export default function Hero() {
           src={heroBg}
           alt="Fresh Impressions Painting van in front of a home"
           className="w-full h-full object-cover object-[center_70%] sm:object-center"
+          width={1920}
+          height={1080}
           fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-900/80 via-navy-900/60 to-navy-900/80 sm:from-navy-900/70 sm:via-navy-900/50 sm:to-navy-900/80" />
@@ -48,6 +50,8 @@ export default function Hero() {
           src={logoFull}
           alt="Fresh Impressions Painting logo"
           className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain mb-4 sm:mb-6 drop-shadow-2xl"
+          width={176}
+          height={176}
         />
 
         <h1 className="font-display uppercase text-white text-[clamp(2rem,7vw,5.5rem)] font-bold leading-[1.08] tracking-tight max-w-4xl">

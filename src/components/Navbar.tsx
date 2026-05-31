@@ -174,6 +174,8 @@ export default function Navbar() {
                 className={`w-auto max-w-[160px] sm:max-w-none transition-all duration-700 ${
                   scrolled ? 'h-8 sm:h-11 lg:h-12' : 'h-9 sm:h-13 lg:h-[60px]'
                 }`}
+                width={160}
+                height={60}
               />
             </NavAnchor>
 
@@ -320,7 +322,7 @@ export default function Navbar() {
       >
         {/* Mobile menu header */}
         <div className="flex items-center justify-between px-6 h-[72px] border-b border-white/[0.06]">
-          <img src={logo} alt="Fresh Impressions Painting" className="h-10 w-auto" />
+          <img src={logo} alt="Fresh Impressions Painting" className="h-10 w-auto" width={107} height={40} />
           <button
             onClick={() => setIsOpen(false)}
             className="w-11 h-11 flex items-center justify-center text-white"

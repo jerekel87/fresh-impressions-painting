@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, lazy, Suspense } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSeo } from '../lib/useSeo';
 import Navbar from '../components/Navbar';
@@ -6,11 +6,12 @@ import Hero from '../components/Hero';
 import ServiceAreas from '../components/ServiceAreas';
 import AboutUs from '../components/AboutUs';
 import ServicesPreview from '../components/ServicesPreview';
-import ServiceAreaMap from '../components/ServiceAreaMap';
-import ReviewsTicker from '../components/ReviewsTicker';
-import ReelsShowcase from '../components/ReelsShowcase';
-import EstimateForm from '../components/EstimateForm';
-import Footer from '../components/Footer';
+
+const ServiceAreaMap = lazy(() => import('../components/ServiceAreaMap'));
+const ReviewsTicker = lazy(() => import('../components/ReviewsTicker'));
+const ReelsShowcase = lazy(() => import('../components/ReelsShowcase'));
+const EstimateForm = lazy(() => import('../components/EstimateForm'));
+const Footer = lazy(() => import('../components/Footer'));
 
 export default function HomePage() {
   useSeo('home');
@@ -34,11 +35,13 @@ export default function HomePage() {
       <ServiceAreas />
       <AboutUs />
       <ServicesPreview />
-      <ServiceAreaMap />
-      <ReviewsTicker />
-      <ReelsShowcase />
-      <EstimateForm />
-      <Footer />
+      <Suspense fallback={null}>
+        <ServiceAreaMap />
+        <ReviewsTicker />
+        <ReelsShowcase />
+        <EstimateForm />
+        <Footer />
+      </Suspense>
     </div>
   );
 }

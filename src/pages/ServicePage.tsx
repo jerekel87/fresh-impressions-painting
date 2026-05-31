@@ -156,7 +156,7 @@ export default function ServicePage() {
       {/* ── Hero ── */}
       <section className="relative bg-navy-900 pt-[100px] sm:pt-[132px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={service.heroImage} alt={service.title} className="w-full h-full object-cover opacity-20" />
+          <img src={service.heroImage} alt={service.title} className="w-full h-full object-cover opacity-20" width={1920} height={1080} />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/85 to-navy-900/60" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-28">
@@ -260,7 +260,10 @@ export default function ServicePage() {
                 src={service.heroImage}
                 alt={service.title}
                 className="w-full aspect-[4/5] object-cover"
+                width={640}
+                height={800}
                 loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

@@ -105,6 +105,8 @@ export default function ServiceAreas() {
               src={item.image}
               alt={item.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              width={280}
+              height={280}
               loading="lazy"
               decoding="async"
             />

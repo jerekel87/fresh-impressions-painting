@@ -161,6 +161,8 @@ export default function ServicesPreview() {
               src={service.image}
               alt={service.title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              width={360}
+              height={460}
               loading="lazy"
               decoding="async"
             />

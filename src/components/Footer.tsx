@@ -93,7 +93,7 @@ export default function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-4">
             <a href="#home" className="inline-block mb-5">
-              <img src={logo} alt="Fresh Impressions Painting" className="h-12 w-auto" />
+              <img src={logo} alt="Fresh Impressions Painting" className="h-12 w-auto" width={128} height={48} loading="lazy" />
             </a>
             <p className="text-white/50 text-sm leading-[1.8] max-w-xs mb-6">
               {footer.description}

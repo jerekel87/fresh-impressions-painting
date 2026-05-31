@@ -47,7 +47,10 @@ export default function ScrollingGallery({ images }: ScrollingGalleryProps) {
               src={src}
               alt=""
               className="w-full h-full object-cover"
+              width={300}
+              height={300}
               loading="lazy"
+              decoding="async"
             />
           </div>
         ))}
