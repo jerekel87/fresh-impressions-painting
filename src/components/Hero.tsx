@@ -2,14 +2,18 @@ import { useState, useEffect } from 'react';
 import { ArrowRight, Phone } from 'lucide-react';
 import heroBg from '../assets/hero-bg-image1.png';
 import logoFull from '../assets/fresh-impression-logofull.png';
-import { supabase } from '../lib/supabase';
-import { useSocialLinks } from '../lib/useSocialLinks';
 
 interface HeroContent {
   headline: string;
   subtitle: string;
   cta_text: string;
   phone: string;
+}
+
+interface SocialLinks {
+  facebook: string;
+  instagram: string;
+  nextdoor: string;
 }
 
 const defaults: HeroContent = {
@@ -19,17 +23,36 @@ const defaults: HeroContent = {
   phone: '(817) 243-9116',
 };
 
+const defaultSocial: SocialLinks = {
+  facebook: 'https://www.facebook.com/freshimpressionspainting',
+  instagram: 'https://www.instagram.com/freshimpressionspainting',
+  nextdoor: 'https://nextdoor.com',
+};
+
 export default function Hero() {
   const [content, setContent] = useState<HeroContent>(defaults);
-  const social = useSocialLinks();
+  const [social, setSocial] = useState<SocialLinks>(defaultSocial);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      supabase.from('site_content').select('content').eq('page', 'home').eq('section', 'hero').maybeSingle().then(({ data }) => {
-        if (data?.content) setContent(data.content as HeroContent);
+    import('../lib/supabase').then(({ supabase }) => {
+      supabase.from('site_content').select('section, content').eq('page', 'home').then(({ data }) => {
+        if (data) {
+          for (const row of data) {
+            if (row.section === 'hero') setContent(row.content as HeroContent);
+          }
+        }
       });
-    }, 0);
-    return () => clearTimeout(timer);
+      supabase.from('site_content').select('content').eq('page', 'global').eq('section', 'social_links').maybeSingle().then(({ data }) => {
+        if (data?.content) {
+          const links = data.content as Record<string, string>;
+          setSocial({
+            facebook: links.facebook || defaultSocial.facebook,
+            instagram: links.instagram || defaultSocial.instagram,
+            nextdoor: links.nextdoor || defaultSocial.nextdoor,
+          });
+        }
+      });
+    });
   }, []);
 
   return (
