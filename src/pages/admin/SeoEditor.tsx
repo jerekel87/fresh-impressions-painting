@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from 'react';
-import { Save, Check, AlertCircle, Globe, FileText, Tag, Code, Eye } from 'lucide-react';
+import { Save, Check, AlertCircle, Globe, Tag, Code, Eye } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import ImageUpload from '../../components/admin/ImageUpload';
 
@@ -48,7 +48,6 @@ const SERVICE_PAGES = [
   'service:new-construction-painting',
   'service:staining',
 ];
-const PAGE_ORDER = [...SITE_PAGES, ...SERVICE_PAGES];
 
 function StatusBadge({ saving, saved }: { saving: boolean; saved: boolean }) {
   if (saving) return (

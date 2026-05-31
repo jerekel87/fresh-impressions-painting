@@ -37,6 +37,7 @@ export default function Hero() {
           src={heroBg}
           alt="Fresh Impressions Painting van in front of a home"
           className="w-full h-full object-cover object-[center_70%] sm:object-center"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-900/80 via-navy-900/60 to-navy-900/80 sm:from-navy-900/70 sm:via-navy-900/50 sm:to-navy-900/80" />
       </div>

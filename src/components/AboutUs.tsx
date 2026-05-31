@@ -82,6 +82,7 @@ export default function AboutUs() {
               src={aboutImg}
               alt="Ian Rosenkranz, owner of Fresh Impressions Painting"
               className="w-full aspect-[4/5] object-cover object-top"
+              loading="lazy"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-900/80 to-transparent pt-16 pb-6 px-6">
               <p className="text-white font-bold text-lg">{content.founder_name}</p>

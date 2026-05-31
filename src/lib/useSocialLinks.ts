@@ -34,7 +34,7 @@ function fetchSocialLinks(): Promise<SocialLinks> {
         const result = data?.content ? (data.content as SocialLinks) : defaults;
         cached = result;
         return result;
-      });
+      }) as Promise<SocialLinks>;
   }
   return fetchPromise;
 }

@@ -260,6 +260,7 @@ export default function ServicePage() {
                 src={service.heroImage}
                 alt={service.title}
                 className="w-full aspect-[4/5] object-cover"
+                loading="lazy"
               />
             </div>
           </div>
