@@ -6,9 +6,9 @@ export default defineConfig({
   plugins: [
     react(),
     ViteImageOptimizer({
-      png: { quality: 65 },
-      jpeg: { quality: 65 },
-      jpg: { quality: 65 },
+      png: { quality: 70 },
+      jpeg: { quality: 70 },
+      jpg: { quality: 70 },
     }),
   ],
   optimizeDeps: {
@@ -17,14 +17,6 @@ export default defineConfig({
   build: {
     target: 'es2020',
     cssCodeSplit: true,
-    modulePreload: {
-      resolveDependencies: (_filename, deps, { hostType }) => {
-        if (hostType === 'html') {
-          return deps.filter(dep => !dep.includes('vendor-supabase'));
-        }
-        return deps;
-      },
-    },
     rollupOptions: {
       output: {
         manualChunks: {

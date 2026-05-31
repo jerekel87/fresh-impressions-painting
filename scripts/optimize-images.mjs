@@ -1,24 +1,10 @@
-import { readdir, stat, rename, writeFile } from 'node:fs/promises';
-import { join, basename, extname } from 'node:path';
+import { readdir, stat, mkdir } from 'node:fs/promises';
+import { join, extname, basename } from 'node:path';
 
 const ASSETS_DIR = 'src/assets';
-const QUALITY_JPEG = 72;
-const QUALITY_WEBP = 75;
-
-const SIZE_RULES = [
-  { pattern: /hero/i, maxWidth: 1600 },
-  { pattern: /logo/i, maxWidth: 400 },
-  { pattern: /about/i, maxWidth: 800 },
-  { pattern: /interior-painting|screenshot/i, maxWidth: 600 },
-  { pattern: /.*/, maxWidth: 800 },
-];
-
-function getMaxWidth(filename) {
-  for (const rule of SIZE_RULES) {
-    if (rule.pattern.test(filename)) return rule.maxWidth;
-  }
-  return 800;
-}
+const MAX_WIDTH = 1200;
+const HERO_MAX_WIDTH = 1920;
+const QUALITY = 75;
 
 async function run() {
   let sharp;
@@ -44,7 +30,8 @@ async function run() {
       continue;
     }
 
-    const maxW = getMaxWidth(file);
+    const isHero = file.toLowerCase().includes('hero');
+    const maxW = isHero ? HERO_MAX_WIDTH : MAX_WIDTH;
 
     try {
       const img = sharp(filePath);
@@ -55,16 +42,12 @@ async function run() {
         continue;
       }
 
-      const ext = file.toLowerCase().endsWith('.png') ? 'png' : 'jpeg';
-      let pipeline = img.resize({ width: maxW, withoutEnlargement: true });
+      await img
+        .resize({ width: maxW, withoutEnlargement: true })
+        .jpeg({ quality: QUALITY, mozjpeg: true })
+        .toFile(filePath + '.tmp');
 
-      if (ext === 'jpeg') {
-        pipeline = pipeline.jpeg({ quality: QUALITY_JPEG, mozjpeg: true });
-      } else {
-        pipeline = pipeline.png({ quality: QUALITY_JPEG, compressionLevel: 9 });
-      }
-
-      await pipeline.toFile(filePath + '.tmp');
+      const { rename } = await import('node:fs/promises');
       await rename(filePath + '.tmp', filePath);
       optimized++;
       console.log(`  [optimized] ${file}: ${meta.width}px -> ${maxW}px`);
