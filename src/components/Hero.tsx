@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Phone } from 'lucide-react';
-import heroBg from '../assets/hero-bg-image1.png';
+import heroBg from '../assets/hero-bg-image.jpg';
 import logoFull from '../assets/fresh-impression-logofull.png';
 import { supabase } from '../lib/supabase';
 import { useSocialLinks } from '../lib/useSocialLinks';
