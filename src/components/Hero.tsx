@@ -24,9 +24,12 @@ export default function Hero() {
   const social = useSocialLinks();
 
   useEffect(() => {
-    supabase.from('site_content').select('content').eq('page', 'home').eq('section', 'hero').maybeSingle().then(({ data }) => {
-      if (data?.content) setContent(data.content as HeroContent);
-    });
+    const timer = setTimeout(() => {
+      supabase.from('site_content').select('content').eq('page', 'home').eq('section', 'hero').maybeSingle().then(({ data }) => {
+        if (data?.content) setContent(data.content as HeroContent);
+      });
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -39,6 +42,7 @@ export default function Hero() {
           className="w-full h-full object-cover object-[center_70%] sm:object-center"
           width={1920}
           height={1080}
+          sizes="100vw"
           fetchPriority="high"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-900/80 via-navy-900/60 to-navy-900/80 sm:from-navy-900/70 sm:via-navy-900/50 sm:to-navy-900/80" />
@@ -52,6 +56,7 @@ export default function Hero() {
           className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 object-contain mb-4 sm:mb-6 drop-shadow-2xl"
           width={176}
           height={176}
+          sizes="(max-width: 640px) 112px, (max-width: 768px) 144px, 176px"
         />
 
         <h1 className="font-display uppercase text-white text-[clamp(2rem,7vw,5.5rem)] font-bold leading-[1.08] tracking-tight max-w-4xl">

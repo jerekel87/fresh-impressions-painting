@@ -163,6 +163,7 @@ export default function ServicesPreview() {
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               width={360}
               height={460}
+              sizes="(max-width: 640px) 300px, (max-width: 1024px) 340px, 360px"
               loading="lazy"
               decoding="async"
             />

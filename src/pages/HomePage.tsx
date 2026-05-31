@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { useSeo } from '../lib/useSeo';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import ServiceAreas from '../components/ServiceAreas';
-import AboutUs from '../components/AboutUs';
-import ServicesPreview from '../components/ServicesPreview';
 
+const ServiceAreas = lazy(() => import('../components/ServiceAreas'));
+const AboutUs = lazy(() => import('../components/AboutUs'));
+const ServicesPreview = lazy(() => import('../components/ServicesPreview'));
 const ServiceAreaMap = lazy(() => import('../components/ServiceAreaMap'));
 const ReviewsTicker = lazy(() => import('../components/ReviewsTicker'));
 const ReelsShowcase = lazy(() => import('../components/ReelsShowcase'));
@@ -32,10 +32,10 @@ export default function HomePage() {
     <div className="min-h-screen">
       <Navbar />
       <Hero />
-      <ServiceAreas />
-      <AboutUs />
-      <ServicesPreview />
       <Suspense fallback={null}>
+        <ServiceAreas />
+        <AboutUs />
+        <ServicesPreview />
         <ServiceAreaMap />
         <ReviewsTicker />
         <ReelsShowcase />

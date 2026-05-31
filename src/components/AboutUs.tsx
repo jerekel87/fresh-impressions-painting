@@ -84,6 +84,7 @@ export default function AboutUs() {
               className="w-full aspect-[4/5] object-cover object-top"
               width={640}
               height={800}
+              sizes="(max-width: 1024px) 100vw, 50vw"
               loading="lazy"
               decoding="async"
             />

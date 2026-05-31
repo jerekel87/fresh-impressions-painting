@@ -66,5 +66,11 @@
 /* Optimize rendering for below-fold sections */
 section:not(:first-of-type) {
   content-visibility: auto;
-  contain-intrinsic-size: auto 600px;
+  contain-intrinsic-size: auto 500px;
+}
+
+@media (min-width: 640px) {
+  section:not(:first-of-type) {
+    contain-intrinsic-size: auto 600px;
+  }
 }

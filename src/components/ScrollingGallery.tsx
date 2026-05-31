@@ -49,6 +49,7 @@ export default function ScrollingGallery({ images }: ScrollingGalleryProps) {
               className="w-full h-full object-cover"
               width={300}
               height={300}
+              sizes="(max-width: 640px) 200px, 300px"
               loading="lazy"
               decoding="async"
             />
