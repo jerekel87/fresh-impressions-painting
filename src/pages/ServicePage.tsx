@@ -12,7 +12,7 @@ import { services } from '../data/services';
 
 /* ─── Before/After Slider ─────────────────────────────────────── */
 
-function BeforeAfterSlider({ before, after, caption }: { before: string; after: string; caption: string }) {
+function BeforeAfterSlider({ before, after, caption }: { before: string; after: string; caption: string; }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState(50);
   const draggingRef = useRef(false);
@@ -77,9 +77,9 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
         className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none cursor-col-resize rounded-sm"
         onDragStart={(e) => e.preventDefault()}
       >
-        <img src={after} alt="After" draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+        <img src={after} alt={`After: ${caption}`} draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
         <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${position}%` }}>
-          <img src={before} alt="Before" draggable={false} className="absolute inset-0 h-full object-cover pointer-events-none" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} />
+          <img src={before} alt={`Before: ${caption}`} draggable={false} className="absolute inset-0 h-full object-cover pointer-events-none" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} />
         </div>
         <div
           className="absolute top-0 bottom-0 z-10 flex items-center justify-center pointer-events-none"

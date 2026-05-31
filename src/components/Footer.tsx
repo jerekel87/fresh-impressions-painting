@@ -92,7 +92,7 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="lg:col-span-4">
-            <a href="#home" className="inline-block mb-5">
+            <a href="/" className="inline-block mb-5">
               <img src={logo} alt="Fresh Impressions Painting" className="h-12 w-auto" width={128} height={48} loading="lazy" />
             </a>
             <p className="text-white/50 text-sm leading-[1.8] max-w-xs mb-6">
@@ -204,12 +204,12 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} {footer.copyright}. All rights reserved.
             </p>
             <div className="flex items-center gap-5">
-              <a href="#" className="text-white/30 hover:text-white/60 text-xs transition-colors duration-200">
+              <span className="text-white/30 text-xs">
                 Privacy Policy
-              </a>
-              <a href="#" className="text-white/30 hover:text-white/60 text-xs transition-colors duration-200">
+              </span>
+              <span className="text-white/30 text-xs">
                 Terms of Service
-              </a>
+              </span>
             </div>
           </div>
         </div>

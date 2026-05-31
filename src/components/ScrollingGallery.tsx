@@ -45,7 +45,7 @@ export default function ScrollingGallery({ images }: ScrollingGalleryProps) {
           >
             <img
               src={src}
-              alt=""
+              alt="Fresh Impressions Painting project gallery"
               className="w-full h-full object-cover"
               width={300}
               height={300}

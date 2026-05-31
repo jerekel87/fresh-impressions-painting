@@ -88,9 +88,11 @@ export default function EstimateForm() {
               {/* Name row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="relative">
+                  <label htmlFor="firstName" className="sr-only">First name</label>
                   <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" strokeWidth={1.5} />
                   <input
                     type="text"
+                    id="firstName"
                     name="firstName"
                     required
                     value={formData.firstName}
@@ -100,9 +102,11 @@ export default function EstimateForm() {
                   />
                 </div>
                 <div className="relative">
+                  <label htmlFor="lastName" className="sr-only">Last name</label>
                   <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" strokeWidth={1.5} />
                   <input
                     type="text"
+                    id="lastName"
                     name="lastName"
                     value={formData.lastName}
                     onChange={handleChange}
@@ -114,9 +118,11 @@ export default function EstimateForm() {
 
               {/* Email */}
               <div className="relative">
+                <label htmlFor="email" className="sr-only">Email address</label>
                 <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" strokeWidth={1.5} />
                 <input
                   type="email"
+                  id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -127,9 +133,11 @@ export default function EstimateForm() {
 
               {/* Phone */}
               <div className="relative">
+                <label htmlFor="phone" className="sr-only">Phone number</label>
                 <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" strokeWidth={1.5} />
                 <input
                   type="tel"
+                  id="phone"
                   name="phone"
                   required
                   value={formData.phone}
@@ -141,7 +149,9 @@ export default function EstimateForm() {
 
               {/* Service select */}
               <div className="relative">
+                <label htmlFor="serviceType" className="sr-only">Service type</label>
                 <select
+                  id="serviceType"
                   name="serviceType"
                   value={formData.serviceType}
                   onChange={handleChange}
@@ -159,8 +169,10 @@ export default function EstimateForm() {
 
               {/* Description */}
               <div className="relative">
+                <label htmlFor="description" className="sr-only">Project description</label>
                 <MessageSquare className="absolute left-4 top-4 w-4 h-4 text-gray-400" strokeWidth={1.5} />
                 <textarea
+                  id="description"
                   name="description"
                   rows={4}
                   value={formData.description}

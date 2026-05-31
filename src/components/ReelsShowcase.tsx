@@ -21,6 +21,7 @@ function ReelCard({ url }: { url: string }) {
       <div className="relative h-[350px] sm:h-[450px] lg:h-[500px] overflow-hidden rounded-sm bg-navy-800">
         <iframe
           src={embedSrc}
+          title="Fresh Impressions Painting project reel"
           className="absolute inset-0 w-full h-full border-0"
           allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
           allowFullScreen

@@ -35,6 +35,7 @@ function ReviewLightbox({ review, onClose }: { review: Review; onClose: () => vo
         <button
           onClick={onClose}
           className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-700 transition-colors"
+          aria-label="Close review"
         >
           <X className="w-5 h-5" />
         </button>
