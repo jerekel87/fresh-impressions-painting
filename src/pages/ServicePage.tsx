@@ -9,6 +9,7 @@ import ReviewsTicker from '../components/ReviewsTicker';
 import ScrollingGallery from '../components/ScrollingGallery';
 import Footer from '../components/Footer';
 import { services } from '../data/services';
+import { supabase } from '../lib/supabase';
 
 /* ─── Before/After Slider ─────────────────────────────────────── */
 
@@ -141,13 +142,45 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
 export default function ServicePage() {
   useSeo('services');
   const { slug } = useParams<{ slug: string }>();
-  const service = slug ? services[slug] : null;
+  const staticService = slug ? services[slug] : null;
   const [openFaq, setOpenFaq] = useState<number>(0);
   const social = useSocialLinks();
+  const [cmsData, setCmsData] = useState<{
+    title?: string;
+    tagline?: string;
+    about_title?: string;
+    description?: string[];
+    highlights?: { label: string; value: string }[];
+    before_after?: { before: string; after: string; caption: string }[];
+    faqs?: { q: string; a: string }[];
+  } | null>(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
 
-  if (!service) return <Navigate to="/" replace />;
+  useEffect(() => {
+    if (!slug) return;
+    supabase
+      .from('services')
+      .select('title, tagline, about_title, description, highlights, before_after, faqs')
+      .eq('slug', slug)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (data) setCmsData(data);
+      });
+  }, [slug]);
+
+  if (!staticService) return <Navigate to="/" replace />;
+
+  const service = {
+    ...staticService,
+    title: cmsData?.title || staticService.title,
+    tagline: cmsData?.tagline || staticService.tagline,
+    aboutTitle: cmsData?.about_title || staticService.aboutTitle,
+    description: cmsData?.description?.length ? cmsData.description : staticService.description,
+    highlights: cmsData?.highlights?.length ? cmsData.highlights : staticService.highlights,
+    beforeAfter: cmsData?.before_after?.length ? cmsData.before_after : staticService.beforeAfter,
+    faqs: cmsData?.faqs?.length ? cmsData.faqs : staticService.faqs,
+  };
 
   return (
     <div className="min-h-screen bg-white">
