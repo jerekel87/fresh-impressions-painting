@@ -255,28 +255,38 @@ export default function Navbar() {
               </a>
             </div>
 
-            {/* Mobile hamburger */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden w-11 h-11 flex flex-col items-center justify-center gap-1.5 text-white"
-              aria-label="Toggle menu"
-            >
-              <span
-                className={`block w-6 h-[2px] bg-current transition-all duration-300 ${
-                  isOpen ? 'rotate-45 translate-y-[4px]' : ''
-                }`}
-              />
-              <span
-                className={`block w-6 h-[2px] bg-current transition-all duration-300 ${
-                  isOpen ? 'opacity-0 scale-x-0' : ''
-                }`}
-              />
-              <span
-                className={`block w-6 h-[2px] bg-current transition-all duration-300 ${
-                  isOpen ? '-rotate-45 -translate-y-[4px]' : ''
-                }`}
-              />
-            </button>
+            {/* Mobile phone + hamburger */}
+            <div className="lg:hidden flex items-center">
+              <a
+                href="tel:+18172439116"
+                className="w-11 h-11 flex items-center justify-center text-white/70 hover:text-brand-yellow transition-colors"
+                aria-label="Call us"
+              >
+                <Phone className="w-5 h-5" />
+              </a>
+              <span className="w-px h-6 bg-white/20" />
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="w-11 h-11 flex flex-col items-center justify-center gap-1.5 text-white"
+                aria-label="Toggle menu"
+              >
+                <span
+                  className={`block w-6 h-[2px] bg-current transition-all duration-300 ${
+                    isOpen ? 'rotate-45 translate-y-[4px]' : ''
+                  }`}
+                />
+                <span
+                  className={`block w-6 h-[2px] bg-current transition-all duration-300 ${
+                    isOpen ? 'opacity-0 scale-x-0' : ''
+                  }`}
+                />
+                <span
+                  className={`block w-6 h-[2px] bg-current transition-all duration-300 ${
+                    isOpen ? '-rotate-45 -translate-y-[4px]' : ''
+                  }`}
+                />
+              </button>
+            </div>
           </div>
         </div>
 

@@ -53,18 +53,29 @@ export default function AdminManagement() {
       return;
     }
 
-    const res = await fetch(
-      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-admin`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${session.access_token}`,
-          'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      }
-    );
+    let res: Response;
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      res = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-admin`,
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${session.access_token}`,
+            'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+          signal: controller.signal,
+        }
+      );
+      clearTimeout(timeout);
+    } catch {
+      setError('Request timed out. Please try again.');
+      setCreating(false);
+      return;
+    }
 
     const result = await res.json();
 

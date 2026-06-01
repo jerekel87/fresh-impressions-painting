@@ -40,7 +40,9 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
+    const adminClient = createClient(supabaseUrl, supabaseServiceKey, {
+      auth: { autoRefreshToken: false, persistSession: false },
+    });
 
     const { data: adminCheck } = await adminClient
       .from("admin_users")
@@ -77,6 +79,24 @@ Deno.serve(async (req: Request) => {
       );
     }
 
+    // Check if user already exists in admin_users
+    const { data: existingAdmin } = await adminClient
+      .from("admin_users")
+      .select("id")
+      .eq("email", email)
+      .maybeSingle();
+
+    if (existingAdmin) {
+      return new Response(
+        JSON.stringify({ error: "This email is already an admin" }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // Try to create the auth user
     const { data: newUser, error: createError } =
       await adminClient.auth.admin.createUser({
         email,
@@ -84,16 +104,36 @@ Deno.serve(async (req: Request) => {
         email_confirm: true,
       });
 
+    let userId: string;
+
     if (createError) {
-      return new Response(JSON.stringify({ error: createError.message }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+      // If user already exists in auth but not in admin_users, look them up
+      if (createError.message.includes("already been registered") || createError.message.includes("already exists")) {
+        const { data: existingUsers } = await adminClient.auth.admin.listUsers();
+        const existingUser = existingUsers?.users?.find(u => u.email === email);
+        if (!existingUser) {
+          return new Response(JSON.stringify({ error: createError.message }), {
+            status: 400,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          });
+        }
+        userId = existingUser.id;
+        // Update their password
+        await adminClient.auth.admin.updateUserById(userId, { password, email_confirm: true });
+      } else {
+        return new Response(JSON.stringify({ error: createError.message }), {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    } else {
+      userId = newUser.user.id;
     }
 
+    // Insert into admin_users
     const { error: insertError } = await adminClient
       .from("admin_users")
-      .insert({ id: newUser.user.id, email });
+      .upsert({ id: userId, email }, { onConflict: "id" });
 
     if (insertError) {
       return new Response(JSON.stringify({ error: insertError.message }), {
@@ -105,7 +145,7 @@ Deno.serve(async (req: Request) => {
     return new Response(
       JSON.stringify({
         success: true,
-        user: { id: newUser.user.id, email },
+        user: { id: userId, email },
       }),
       {
         status: 200,
