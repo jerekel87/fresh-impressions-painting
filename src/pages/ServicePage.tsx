@@ -77,9 +77,9 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
         className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none cursor-col-resize rounded-sm"
         onDragStart={(e) => e.preventDefault()}
       >
-        <img src={after} alt={`After: ${caption}`} draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+        <img src={after} alt={`After: ${caption}`} draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" width={640} height={340} loading="lazy" decoding="async" />
         <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${position}%` }}>
-          <img src={before} alt={`Before: ${caption}`} draggable={false} className="absolute inset-0 h-full object-cover pointer-events-none" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} />
+          <img src={before} alt={`Before: ${caption}`} draggable={false} className="absolute inset-0 h-full object-cover pointer-events-none" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} width={640} height={340} loading="lazy" decoding="async" />
         </div>
         <div
           className="absolute top-0 bottom-0 z-10 flex items-center justify-center pointer-events-none"
@@ -156,7 +156,7 @@ export default function ServicePage() {
       {/* ── Hero ── */}
       <section className="relative bg-navy-900 pt-[100px] sm:pt-[132px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={service.heroImage} alt={service.title} className="w-full h-full object-cover opacity-20" width={1920} height={1080} />
+          <img src={service.heroImage} alt={service.title} className="w-full h-full object-cover opacity-20" width={1920} height={1080} fetchPriority="high" decoding="async" />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/85 to-navy-900/60" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-28">

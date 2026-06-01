@@ -176,6 +176,7 @@ export default function Navbar() {
                 }`}
                 width={160}
                 height={60}
+                decoding="async"
               />
             </NavAnchor>
 
@@ -322,7 +323,7 @@ export default function Navbar() {
       >
         {/* Mobile menu header */}
         <div className="flex items-center justify-between px-6 h-[72px] border-b border-white/[0.06]">
-          <img src={logo} alt="Fresh Impressions Painting" className="h-10 w-auto" width={107} height={40} />
+          <img src={logo} alt="Fresh Impressions Painting" className="h-10 w-auto" width={107} height={40} loading="lazy" decoding="async" />
           <button
             onClick={() => setIsOpen(false)}
             className="w-11 h-11 flex items-center justify-center text-white"

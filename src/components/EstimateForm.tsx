@@ -69,7 +69,7 @@ export default function EstimateForm() {
 
   return (
     <section id="contact" className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${textureBg})` }} />
+      <img src={textureBg} alt="" className="absolute inset-0 w-full h-full object-cover" width={1920} height={1080} loading="lazy" decoding="async" aria-hidden="true" />
       <div className="absolute inset-0 bg-white/30" />
 
       <div className="max-w-7xl mx-auto relative">
