@@ -40,14 +40,16 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    const { data: adminCheck } = await userClient
+    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
+
+    const { data: adminCheck } = await adminClient
       .from("admin_users")
       .select("id")
       .eq("id", requestingUser.id)
       .maybeSingle();
 
     if (!adminCheck) {
-      return new Response(JSON.stringify({ error: "Forbidden" }), {
+      return new Response(JSON.stringify({ error: "Forbidden: you are not an admin" }), {
         status: 403,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -74,8 +76,6 @@ Deno.serve(async (req: Request) => {
         }
       );
     }
-
-    const adminClient = createClient(supabaseUrl, supabaseServiceKey);
 
     const { data: newUser, error: createError } =
       await adminClient.auth.admin.createUser({
