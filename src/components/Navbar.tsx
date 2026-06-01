@@ -163,7 +163,7 @@ export default function Navbar() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
           <div
             className={`flex items-center justify-between transition-all duration-700 ${
-              scrolled ? 'h-[60px] sm:h-[72px]' : 'h-[64px] sm:h-[88px]'
+              scrolled ? 'h-[60px] sm:h-[72px]' : 'h-[72px] sm:h-[88px]'
             }`}
           >
             {/* Logo */}
@@ -172,7 +172,7 @@ export default function Navbar() {
                 src={logo}
                 alt="Fresh Impressions Painting"
                 className={`w-auto max-w-[160px] sm:max-w-none transition-all duration-700 ${
-                  scrolled ? 'h-8 sm:h-11 lg:h-12' : 'h-9 sm:h-13 lg:h-[60px]'
+                  scrolled ? 'h-8 sm:h-11 lg:h-12' : 'h-10 sm:h-13 lg:h-[60px]'
                 }`}
                 width={160}
                 height={60}
