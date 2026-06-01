@@ -256,10 +256,10 @@ export default function Navbar() {
             </div>
 
             {/* Mobile phone + hamburger */}
-            <div className="lg:hidden flex items-center">
+            <div className="lg:hidden flex items-center gap-3">
               <a
                 href="tel:+18172439116"
-                className="w-11 h-11 flex items-center justify-center text-white/70 hover:text-brand-yellow transition-colors"
+                className="flex items-center justify-center text-white/70 hover:text-brand-yellow transition-colors"
                 aria-label="Call us"
               >
                 <Phone className="w-5 h-5" />
