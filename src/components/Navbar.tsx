@@ -321,6 +321,9 @@ export default function Navbar() {
         }`}
         style={{ zIndex: 100 }}
       >
+        {/* Yellow accent stripe */}
+        <div className="h-[3px] bg-brand-yellow flex-shrink-0" />
+
         {/* Mobile menu header */}
         <div className="flex items-center justify-between px-6 h-[72px] border-b border-white/[0.06]">
           <img src={logo} alt="Fresh Impressions Painting" className="h-10 w-auto" width={107} height={40} loading="lazy" decoding="async" />
