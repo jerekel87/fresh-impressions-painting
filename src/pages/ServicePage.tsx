@@ -308,9 +308,9 @@ export default function ServicePage() {
         <section className="py-20 sm:py-28 bg-navy-900 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <div className="relative aspect-[9/16] max-h-[600px] mx-auto lg:mx-0 w-full max-w-[340px] rounded-lg overflow-hidden group">
+              <div className="relative aspect-video w-full rounded-lg overflow-hidden group cursor-pointer">
                 <img
-                  src="https://images.pexels.com/photos/6444268/pexels-photo-6444268.jpeg?auto=compress&cs=tinysrgb&w=600&h=1067&fit=crop"
+                  src="https://images.pexels.com/photos/6444268/pexels-photo-6444268.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop"
                   alt="Peeling cabinet paint"
                   className="w-full h-full object-cover"
                   loading="lazy"
@@ -325,18 +325,32 @@ export default function ServicePage() {
                 </div>
               </div>
               <div>
-                <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-5">
+                <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-4">
                   A bad movie
                 </span>
                 <h2
-                  className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white"
+                  className="font-display uppercase text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-7"
                   style={{ lineHeight: 1.05 }}
                 >
                   Don't let this be your cabinets.
                 </h2>
-                <p className="text-white/50 text-base sm:text-lg leading-[1.85] mt-6 max-w-md">
+                <p className="text-gray-400 text-[15px] sm:text-base leading-[1.9] mb-8">
                   Cheap paint, poor prep, and shortcuts lead to peeling, chipping, and frustration within months. Your cabinets deserve better.
                 </p>
+                <ul className="space-y-3">
+                  {[
+                    'Peeling and chipping within the first year',
+                    'Visible brush strokes and uneven coverage',
+                    'No sanding or deglossing before paint',
+                    'Wrong product used for high-moisture areas',
+                    'Doors that stick shut after repainting',
+                  ].map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-1.5 w-2 h-2 rounded-full bg-brand-yellow flex-shrink-0" />
+                      <span className="text-gray-300 text-[15px] leading-[1.7]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>
