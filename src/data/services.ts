@@ -22,6 +22,7 @@ import screenshotCommercial2 from '../assets/Screenshot_2026-05-22_at_7.01.40_PM
 import photoNov30 from '../assets/Photo_Nov_30_2018,_3_20_20_PM.jpg';
 import photoFeb23 from '../assets/Photo_Feb_23_2022,_11_05_01_AM.jpg';
 import screenshotDrywall from '../assets/Screenshot_2026-05-22_at_7.11.56_PM.png';
+import drywallHeader from '../assets/Drywall_header_photo.jpg';
 import photoJun28_2024 from '../assets/Photo_Jun_28_2024,_3_30_16_PM.jpg';
 import photoAug19 from '../assets/Photo_Aug_19_2024,_10_17_59_AM.jpg';
 import photoApr08 from '../assets/Photo_Apr_08_2026,_1_17_03_PM.jpg';
@@ -72,6 +73,7 @@ export interface ServiceData {
   tagline: string;
   aboutTitle: string;
   heroImage: string;
+  heroImagePosition?: string;
   galleryImages: string[];
   description: string[];
   highlights: { label: string; value: string }[];
@@ -340,7 +342,8 @@ export const services: Record<string, ServiceData> = {
     slug: 'drywall-repair-and-finishing',
     tagline: 'Seamless restoration \u2014 the invisible foundation for a flawless paint job.',
     aboutTitle: 'Repairs that disappear completely.',
-    heroImage: photoNov30,
+    heroImage: drywallHeader,
+    heroImagePosition: 'top center',
     galleryImages: [
       photoAug19,
       photoFeb23,
