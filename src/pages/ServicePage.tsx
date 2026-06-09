@@ -303,6 +303,46 @@ export default function ServicePage() {
         </div>
       </section>
 
+      {/* ── Bad Movie (Cabinet page only) ── */}
+      {slug === 'cabinet-finishing-and-refinishing' && (
+        <section className="py-20 sm:py-28 bg-navy-900 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div className="relative aspect-[9/16] max-h-[600px] mx-auto lg:mx-0 w-full max-w-[340px] rounded-lg overflow-hidden group">
+                <img
+                  src="https://images.pexels.com/photos/6444268/pexels-photo-6444268.jpeg?auto=compress&cs=tinysrgb&w=600&h=1067&fit=crop"
+                  alt="Peeling cabinet paint"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors duration-300">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-7 h-7 sm:w-8 sm:h-8 text-navy-900 ml-1" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-5">
+                  A bad movie
+                </span>
+                <h2
+                  className="font-display uppercase text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white"
+                  style={{ lineHeight: 1.05 }}
+                >
+                  Don't let this be your cabinets.
+                </h2>
+                <p className="text-white/50 text-base sm:text-lg leading-[1.85] mt-6 max-w-md">
+                  Cheap paint, poor prep, and shortcuts lead to peeling, chipping, and frustration within months. Your cabinets deserve better.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── Before and After ── */}
       <section className="py-20 sm:py-28 bg-[#f4f3ed]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
