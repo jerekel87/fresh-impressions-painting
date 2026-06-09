@@ -238,7 +238,11 @@ export default function ServicePage() {
     aboutTitle: cmsData?.about_title || staticService.aboutTitle,
     description: cmsData?.description?.length ? cmsData.description : staticService.description,
     highlights: cmsData?.highlights?.length ? cmsData.highlights : staticService.highlights,
-    beforeAfter: cmsData?.before_after?.length ? cmsData.before_after : staticService.beforeAfter,
+    beforeAfter: (() => {
+      const staticSeries = staticService.beforeAfter.filter((ba: BeforeAfterItem) => 'type' in ba && ba.type === 'series');
+      const pairs = cmsData?.before_after?.length ? cmsData.before_after : staticService.beforeAfter.filter((ba: BeforeAfterItem) => !('type' in ba && ba.type === 'series'));
+      return [...staticSeries, ...pairs];
+    })(),
     faqs: cmsData?.faqs?.length ? cmsData.faqs : staticService.faqs,
   };
 
