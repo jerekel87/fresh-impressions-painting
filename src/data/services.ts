@@ -74,6 +74,7 @@ export interface ServiceData {
   aboutTitle: string;
   heroImage: string;
   heroImagePosition?: string;
+  aboutImage?: string;
   galleryImages: string[];
   description: string[];
   highlights: { label: string; value: string }[];
@@ -344,6 +345,7 @@ export const services: Record<string, ServiceData> = {
     aboutTitle: 'Repairs that disappear completely.',
     heroImage: drywallHeader,
     heroImagePosition: 'top center',
+    aboutImage: photoNov30,
     galleryImages: [
       photoAug19,
       photoFeb23,

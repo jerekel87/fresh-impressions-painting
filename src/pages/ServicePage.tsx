@@ -354,7 +354,7 @@ export default function ServicePage() {
             </div>
             <div>
               <img
-                src={service.heroImage}
+                src={service.aboutImage || service.heroImage}
                 alt={service.title}
                 className="w-full aspect-[4/5] object-cover"
                 width={640}
