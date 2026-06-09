@@ -344,7 +344,7 @@ export const services: Record<string, ServiceData> = {
     tagline: 'Seamless restoration \u2014 the invisible foundation for a flawless paint job.',
     aboutTitle: 'Repairs that disappear completely.',
     heroImage: drywallHeader,
-    heroImagePosition: 'center 60%',
+    heroImagePosition: 'center 40%',
     aboutImage: photoNov30,
     galleryImages: [
       photoAug19,
