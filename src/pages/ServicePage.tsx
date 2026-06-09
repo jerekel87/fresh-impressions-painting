@@ -305,22 +305,24 @@ export default function ServicePage() {
 
       {/* ── Bad Movie (Cabinet page only) ── */}
       {slug === 'cabinet-finishing-and-refinishing' && (
-        <section className="py-20 sm:py-28 bg-navy-900 overflow-hidden">
+        <section className="py-28 sm:py-36 bg-navy-900 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-              <div className="relative aspect-video w-full rounded-lg overflow-hidden group cursor-pointer">
-                <img
-                  src="https://images.pexels.com/photos/6444268/pexels-photo-6444268.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop"
-                  alt="Peeling cabinet paint"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors duration-300">
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-7 h-7 sm:w-8 sm:h-8 text-navy-900 ml-1" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
+              <div className="bg-black rounded-lg overflow-hidden flex items-center group cursor-pointer">
+                <div className="relative aspect-video w-full">
+                  <img
+                    src="https://images.pexels.com/photos/6444268/pexels-photo-6444268.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop"
+                    alt="Peeling cabinet paint"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors duration-300">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-7 h-7 sm:w-8 sm:h-8 text-navy-900 ml-1" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
                   </div>
                 </div>
               </div>
