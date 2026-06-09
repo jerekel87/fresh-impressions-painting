@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { ArrowRight, Phone } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Phone } from 'lucide-react';
 import { useSeo } from '../lib/useSeo';
 import { useSocialLinks } from '../lib/useSocialLinks';
 import Navbar from '../components/Navbar';
@@ -9,6 +9,7 @@ import ReviewsTicker from '../components/ReviewsTicker';
 import ScrollingGallery from '../components/ScrollingGallery';
 import Footer from '../components/Footer';
 import { services } from '../data/services';
+import type { BeforeAfterItem } from '../data/services';
 import { supabase } from '../lib/supabase';
 
 /* ─── Before/After Slider ─────────────────────────────────────── */
@@ -95,6 +96,65 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
         </div>
         <span className="absolute top-3 left-3 bg-black/60 text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none">Before</span>
         <span className="absolute top-3 right-3 bg-brand-yellow text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none">After</span>
+      </div>
+      <p className="text-gray-500 text-[13px] text-center leading-snug">{caption}</p>
+    </div>
+  );
+}
+
+/* ─── Photo Series Slider ─────────────────────────────────────── */
+
+function PhotoSeriesSlider({ images, caption, seriesLabel }: { images: string[]; caption: string; seriesLabel?: string }) {
+  const [current, setCurrent] = useState(0);
+
+  const prev = () => setCurrent(i => (i - 1 + images.length) % images.length);
+  const next = () => setCurrent(i => (i + 1) % images.length);
+
+  return (
+    <div className="space-y-3">
+      <div className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none rounded-sm bg-gray-200">
+        <img
+          src={images[current]}
+          alt={`${caption} — photo ${current + 1}`}
+          draggable={false}
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
+          width={640}
+          height={340}
+          loading="lazy"
+          decoding="async"
+        />
+        <button
+          onClick={prev}
+          aria-label="Previous photo"
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors z-10"
+        >
+          <ChevronLeft className="w-5 h-5" />
+        </button>
+        <button
+          onClick={next}
+          aria-label="Next photo"
+          className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/70 transition-colors z-10"
+        >
+          <ChevronRight className="w-5 h-5" />
+        </button>
+        {seriesLabel && (
+          <span className="absolute top-3 left-3 bg-navy-900/80 text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none">
+            {seriesLabel}
+          </span>
+        )}
+        <span className="absolute top-3 right-3 bg-brand-yellow text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none">
+          {current + 1} / {images.length}
+        </span>
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+          {images.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrent(i)}
+              aria-label={`Photo ${i + 1}`}
+              className={`w-1.5 h-1.5 rounded-full transition-colors duration-200 ${i === current ? 'bg-white' : 'bg-white/40 hover:bg-white/70'}`}
+            />
+          ))}
+        </div>
       </div>
       <p className="text-gray-500 text-[13px] text-center leading-snug">{caption}</p>
     </div>
@@ -380,8 +440,10 @@ export default function ServicePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {service.beforeAfter.map((ba, idx) => (
-              <BeforeAfterSlider key={idx} {...ba} />
+            {service.beforeAfter.map((ba: BeforeAfterItem, idx) => (
+              'type' in ba && ba.type === 'series'
+                ? <PhotoSeriesSlider key={idx} images={ba.images} caption={ba.caption} seriesLabel={ba.seriesLabel} />
+                : <BeforeAfterSlider key={idx} before={ba.before} after={ba.after} caption={ba.caption} />
             ))}
           </div>
         </div>

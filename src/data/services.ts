@@ -51,6 +51,21 @@ import photoAug29 from '../assets/Photo_Aug_29_2025,_5_26_28_PM.jpg';
 import photoMay31 from '../assets/Photo_May_31_2024,_3_18_37_PM.jpg';
 import photoFeb27 from '../assets/Photo_Feb_27_2026,_3_40_59_PM.jpg';
 
+export type BeforeAfterPair = {
+  before: string;
+  after: string;
+  caption: string;
+};
+
+export type PhotoSeries = {
+  type: 'series';
+  images: string[];
+  caption: string;
+  seriesLabel?: string;
+};
+
+export type BeforeAfterItem = BeforeAfterPair | PhotoSeries;
+
 export interface ServiceData {
   title: string;
   slug: string;
@@ -61,7 +76,7 @@ export interface ServiceData {
   description: string[];
   highlights: { label: string; value: string }[];
   process: { step: string; title: string; body: string }[];
-  beforeAfter: { before: string; after: string; caption: string }[];
+  beforeAfter: BeforeAfterItem[];
   faqs: { q: string; a: string }[];
 }
 
@@ -464,6 +479,18 @@ export const services: Record<string, ServiceData> = {
       { step: '05', title: 'Punch List and Final Touch-ups', body: 'After other trades finish and final cleanup is done, we return for a complete touch-up pass and punch list completion to ensure move-in ready quality.' },
     ],
     beforeAfter: [
+      {
+        type: 'series',
+        seriesLabel: 'Series N-2',
+        images: [photoJul16_09, photoJul16_12, photoJul16_12b, photoOct26_08, photoOct26_16],
+        caption: 'Complete new construction home — Series N-2 (5 photos)',
+      },
+      {
+        type: 'series',
+        seriesLabel: 'Series N-C',
+        images: [photoDec21, photoOct26_38, photoOct26_16, photoJul16_12, photoJul16_09],
+        caption: 'Complete new construction home — Series N-C (5 photos)',
+      },
       { before: photoOct26_38, after: photoDec21, caption: 'New build bonus room painted with vaulted ceiling detail' },
       { before: photoJul16_09, after: photoJul16_12, caption: 'Living area with custom built-ins painted to completion' },
       { before: photoJul16_12b, after: photoOct26_08, caption: 'New construction kitchen cabinets and walls finished' },
