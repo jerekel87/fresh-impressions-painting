@@ -440,14 +440,47 @@ export default function ServicePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {service.beforeAfter.map((ba: BeforeAfterItem, idx) => (
-              'type' in ba && ba.type === 'series'
-                ? <PhotoSeriesSlider key={idx} images={ba.images} caption={ba.caption} seriesLabel={ba.seriesLabel} />
-                : <BeforeAfterSlider key={idx} before={ba.before} after={ba.after} caption={ba.caption} />
-            ))}
+            {service.beforeAfter
+              .filter((ba: BeforeAfterItem) => !('type' in ba && ba.type === 'series'))
+              .map((ba: BeforeAfterItem, idx) => (
+                <BeforeAfterSlider key={idx} before={(ba as any).before} after={(ba as any).after} caption={ba.caption} />
+              ))}
           </div>
         </div>
       </section>
+
+      {/* ── Photo Series (New Construction only) ── */}
+      {(() => {
+        const seriesItems = service.beforeAfter.filter((ba: BeforeAfterItem): ba is import('../data/services').PhotoSeries => 'type' in ba && ba.type === 'series');
+        if (seriesItems.length === 0) return null;
+        return (
+          <section className="py-20 sm:py-28 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-6">
+                <div>
+                  <span className="inline-block text-brand-teal font-semibold text-xs uppercase tracking-[0.2em] mb-4">
+                    Job Series
+                  </span>
+                  <h2
+                    className="font-display uppercase text-4xl md:text-5xl lg:text-6xl font-bold text-navy-900"
+                    style={{ lineHeight: 1.05 }}
+                  >
+                    Full job walkthroughs.
+                  </h2>
+                </div>
+                <p className="text-gray-400 text-[14px] leading-[1.8] max-w-xs">
+                  Browse all photos from the same project using the arrows.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                {seriesItems.map((ba, idx) => (
+                  <PhotoSeriesSlider key={idx} images={ba.images} caption={ba.caption} seriesLabel={ba.seriesLabel} />
+                ))}
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* ── CTA ── */}
       <section className="relative overflow-hidden bg-navy-900">
