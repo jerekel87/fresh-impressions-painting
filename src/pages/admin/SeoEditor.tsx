@@ -242,7 +242,7 @@ export default function SeoEditor() {
                     {current.title || 'Page Title'}
                   </p>
                   <p className="text-[#006621] text-sm truncate">
-                    {current.canonical_url || 'https://freshimpressionspainting.com'}
+                    {current.canonical_url || 'https://www.fipainting.com'}
                   </p>
                   <p className="text-[#545454] text-sm line-clamp-2">
                     {current.description || 'Meta description will appear here...'}
@@ -302,7 +302,7 @@ export default function SeoEditor() {
                   type="text"
                   value={current.canonical_url}
                   onChange={(e) => updateField('canonical_url', e.target.value)}
-                  placeholder="https://freshimpressionspainting.com/about"
+                  placeholder="https://www.fipainting.com/about"
                   className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
                 />
                 <p className="mt-1.5 text-gray-400 text-[11px]">The preferred URL for this page. Helps prevent duplicate content issues.</p>
@@ -351,7 +351,7 @@ export default function SeoEditor() {
                     </div>
                   )}
                   <div className="p-3 space-y-1">
-                    <p className="text-gray-400 text-[10px] uppercase tracking-wider">freshimpressionspainting.com</p>
+                    <p className="text-gray-400 text-[10px] uppercase tracking-wider">fipainting.com</p>
                     <p className="text-gray-900 font-semibold text-sm leading-tight">
                       {current.og_title || current.title || 'Page Title'}
                     </p>
