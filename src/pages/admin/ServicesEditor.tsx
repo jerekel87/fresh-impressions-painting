@@ -278,6 +278,25 @@ function BasicsSection({ current, updateService }: { current: ServiceEntry; upda
   );
 }
 
+const WARNING_VIDEO_INFO: Record<string, { label: string; description: string }> = {
+  'cabinet-finishing-and-refinishing': {
+    label: 'Cabinet Warning Video',
+    description: 'This video plays automatically in the "Don\'t let this be your cabinets" section. Upload footage showing bad cabinet finish work.',
+  },
+  'metal-finishing-and-refinishing': {
+    label: 'Metal Finishing Warning Video',
+    description: 'This video plays automatically in the "Don\'t let rust win" section. Upload footage showing rusted or poorly coated metal surfaces.',
+  },
+  'exterior-painting': {
+    label: 'Exterior Painting Warning Video',
+    description: 'This video plays automatically in the "Don\'t let shortcuts cost you twice" section. Upload footage showing peeling or failed exterior paint work.',
+  },
+  'drywall-repair-and-finishing': {
+    label: 'Drywall Warning Video',
+    description: 'This video plays automatically in the "Don\'t settle for repairs that show" section. Upload footage showing visible patches, bad texture matching, or poor drywall repairs.',
+  },
+};
+
 function WarningVideoSection({ current, updateService }: { current: ServiceEntry; updateService: (u: Partial<ServiceEntry>) => void }) {
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
@@ -318,9 +337,11 @@ function WarningVideoSection({ current, updateService }: { current: ServiceEntry
       <div className="flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
         <Video className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
         <div>
-          <p className="text-amber-800 text-xs font-semibold mb-1">Cabinet Warning Video</p>
+          <p className="text-amber-800 text-xs font-semibold mb-1">
+            {WARNING_VIDEO_INFO[current.slug]?.label ?? 'Warning Video'}
+          </p>
           <p className="text-amber-700 text-[11px] leading-relaxed">
-            This video plays automatically in the "Don't let this be your cabinets" section. Upload the video showing bad cabinet finish work. It will autoplay muted on the service page.
+            {WARNING_VIDEO_INFO[current.slug]?.description ?? 'Upload a video that autoplays muted in the warning section on this service page.'}
           </p>
         </div>
       </div>
