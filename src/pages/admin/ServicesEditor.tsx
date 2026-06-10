@@ -98,12 +98,17 @@ export default function ServicesEditor() {
     );
   }
 
-  const isCabinet = current?.slug === 'cabinet-finishing-and-refinishing';
+  const hasWarningVideo = [
+    'cabinet-finishing-and-refinishing',
+    'metal-finishing-and-refinishing',
+    'exterior-painting',
+    'drywall-repair-and-finishing',
+  ].includes(current?.slug ?? '');
   const isNewConstruction = current?.slug === 'new-construction-painting';
 
   const sections = [
     { id: 'basics', label: 'Basic Info' },
-    ...(isCabinet ? [{ id: 'warningvideo', label: 'Warning Video' }] : []),
+    ...(hasWarningVideo ? [{ id: 'warningvideo', label: 'Warning Video' }] : []),
     { id: 'highlights', label: 'Highlights' },
     { id: 'process', label: 'Process Steps' },
     { id: 'beforeafter', label: 'Before & After' },

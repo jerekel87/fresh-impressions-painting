@@ -197,6 +197,69 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
   );
 }
 
+/* ─── Warning Video Config ────────────────────────────────────── */
+
+const WARNING_VIDEO_SLUGS: Record<string, {
+  headline: string;
+  body: string;
+  bullets: string[];
+  fallbackSrc: string;
+  fallbackAlt: string;
+}> = {
+  'cabinet-finishing-and-refinishing': {
+    headline: "Don't let this be your cabinets.",
+    body: "Cheap paint, poor prep, and shortcuts lead to peeling, chipping, and frustration within months. Your cabinets deserve better.",
+    bullets: [
+      'Peeling and chipping within the first year',
+      'Visible brush strokes and uneven coverage',
+      'No sanding or deglossing before paint',
+      'Wrong product used for high-moisture areas',
+      'Doors that stick shut after repainting',
+    ],
+    fallbackSrc: 'https://images.pexels.com/photos/6444268/pexels-photo-6444268.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop',
+    fallbackAlt: 'Peeling cabinet paint',
+  },
+  'metal-finishing-and-refinishing': {
+    headline: "Don't let rust win.",
+    body: "The wrong primer, inadequate prep, and cheap topcoats leave metal surfaces vulnerable — and once rust gets underneath a coating, it spreads fast.",
+    bullets: [
+      'Surface rust spreading beneath poorly applied paint',
+      'Wrong primer with no rust-inhibiting properties',
+      'Peeling and flaking within the first season',
+      'Moisture trapped under the coating accelerates corrosion',
+      'No surface prep means the new coat won\'t bond',
+    ],
+    fallbackSrc: 'https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop',
+    fallbackAlt: 'Rusted metal surface',
+  },
+  'exterior-painting': {
+    headline: "Don't let shortcuts cost you twice.",
+    body: "Skipped prep, cheap paint, and poor application leave your home's exterior peeling within years — or worse, letting moisture into your walls.",
+    bullets: [
+      'Peeling and blistering from inadequate surface prep',
+      'Mildew trapped under paint that wasn\'t properly cleaned',
+      'Caulk failures letting moisture inside your walls',
+      'Color fading in two years instead of ten',
+      'Lap marks and holidays from rushed application',
+    ],
+    fallbackSrc: 'https://images.pexels.com/photos/209296/pexels-photo-209296.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop',
+    fallbackAlt: 'Peeling exterior paint',
+  },
+  'drywall-repair-and-finishing': {
+    headline: "Don't settle for repairs that show.",
+    body: "Quick-fix patches and mismatched textures don't disappear — they stand out more under fresh paint. Every imperfection gets magnified.",
+    bullets: [
+      'Visible seam lines and patch edges under new paint',
+      'Texture mismatches that catch every angle of light',
+      'Repairs that crack again within the first year',
+      'Poorly taped joints that bubble and peel over time',
+      'Uneven surfaces that highlight every flaw',
+    ],
+    fallbackSrc: 'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop',
+    fallbackAlt: 'Drywall patch showing through paint',
+  },
+};
+
 /* ─── Page ────────────────────────────────────────────────────── */
 
 export default function ServicePage() {
@@ -378,74 +441,71 @@ export default function ServicePage() {
         </div>
       </section>
 
-      {/* ── Bad Movie (Cabinet page only) ── */}
-      {slug === 'cabinet-finishing-and-refinishing' && (
-        <section className="py-28 sm:py-36 bg-navy-900 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
-              <div className="bg-black rounded-lg overflow-hidden flex items-center">
-                <div className="relative aspect-video w-full">
-                  {service.warningVideo ? (
-                    <video
-                      src={service.warningVideo}
-                      className="w-full h-full object-cover"
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                    />
-                  ) : (
-                    <>
-                      <img
-                        src="https://images.pexels.com/photos/6444268/pexels-photo-6444268.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop"
-                        alt="Peeling cabinet paint"
+      {/* ── Warning Video ── */}
+      {slug && WARNING_VIDEO_SLUGS[slug] && (() => {
+        const cfg = WARNING_VIDEO_SLUGS[slug];
+        return (
+          <section className="py-28 sm:py-36 bg-navy-900 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
+                <div className="bg-black rounded-lg overflow-hidden flex items-center">
+                  <div className="relative aspect-video w-full">
+                    {service.warningVideo ? (
+                      <video
+                        src={service.warningVideo}
                         className="w-full h-full object-cover"
-                        loading="lazy"
-                        decoding="async"
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
                       />
-                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 flex items-center justify-center shadow-xl">
-                          <svg className="w-7 h-7 sm:w-8 sm:h-8 text-navy-900 ml-1" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8 5v14l11-7z" />
-                          </svg>
+                    ) : (
+                      <>
+                        <img
+                          src={cfg.fallbackSrc}
+                          alt={cfg.fallbackAlt}
+                          className="w-full h-full object-cover"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 flex items-center justify-center shadow-xl">
+                            <svg className="w-7 h-7 sm:w-8 sm:h-8 text-navy-900 ml-1" viewBox="0 0 24 24" fill="currentColor">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
                         </div>
-                      </div>
-                    </>
-                  )}
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div>
+                  <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-4">
+                    A bad movie
+                  </span>
+                  <h2
+                    className="font-display uppercase text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-7"
+                    style={{ lineHeight: 1.05 }}
+                  >
+                    {cfg.headline}
+                  </h2>
+                  <p className="text-gray-400 text-[15px] sm:text-base leading-[1.9] mb-8">
+                    {cfg.body}
+                  </p>
+                  <ul className="space-y-3">
+                    {cfg.bullets.map((item) => (
+                      <li key={item} className="flex items-start gap-3">
+                        <span className="mt-1.5 w-2 h-2 rounded-full bg-brand-yellow flex-shrink-0" />
+                        <span className="text-gray-300 text-[15px] leading-[1.7]">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
-              <div>
-                <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-4">
-                  A bad movie
-                </span>
-                <h2
-                  className="font-display uppercase text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-7"
-                  style={{ lineHeight: 1.05 }}
-                >
-                  Don't let this be your cabinets.
-                </h2>
-                <p className="text-gray-400 text-[15px] sm:text-base leading-[1.9] mb-8">
-                  Cheap paint, poor prep, and shortcuts lead to peeling, chipping, and frustration within months. Your cabinets deserve better.
-                </p>
-                <ul className="space-y-3">
-                  {[
-                    'Peeling and chipping within the first year',
-                    'Visible brush strokes and uneven coverage',
-                    'No sanding or deglossing before paint',
-                    'Wrong product used for high-moisture areas',
-                    'Doors that stick shut after repainting',
-                  ].map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <span className="mt-1.5 w-2 h-2 rounded-full bg-brand-yellow flex-shrink-0" />
-                      <span className="text-gray-300 text-[15px] leading-[1.7]">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
             </div>
-          </div>
-        </section>
-      )}
+          </section>
+        );
+      })()}
 
       {/* ── Before and After ── */}
       <section className="py-20 sm:py-28 bg-[#f4f3ed]">
