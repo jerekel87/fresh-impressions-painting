@@ -6,9 +6,32 @@ export default defineConfig({
   plugins: [
     react(),
     ViteImageOptimizer({
-      png: { quality: 70 },
-      jpeg: { quality: 70 },
-      jpg: { quality: 70 },
+      // JPEG/JPG: mozjpeg progressive, quality 72 — good balance of size vs. quality
+      jpg: {
+        quality: 72,
+        progressive: true,
+        mozjpeg: true,
+      },
+      jpeg: {
+        quality: 72,
+        progressive: true,
+        mozjpeg: true,
+      },
+      // PNG: max compression level, adaptive filtering
+      png: {
+        quality: 75,
+        compressionLevel: 9,
+        adaptiveFiltering: true,
+      },
+      // WebP fallback if Vite encounters any — keep sharp
+      webp: {
+        lossless: false,
+        quality: 75,
+        effort: 6,
+      },
+      // Cache busting: always re-optimize on build
+      cache: false,
+      logStats: true,
     }),
   ],
   optimizeDeps: {

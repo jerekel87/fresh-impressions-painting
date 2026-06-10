@@ -1,25 +1,52 @@
-import { readdir, stat, mkdir } from 'node:fs/promises';
-import { join, extname, basename } from 'node:path';
+import { readdir, stat, rename } from 'node:fs/promises';
+import { join, extname } from 'node:path';
 
 const ASSETS_DIR = 'src/assets';
-const MAX_WIDTH = 1200;
-const HERO_MAX_WIDTH = 1920;
-const QUALITY = 75;
+
+// Max output dimensions — images wider/taller than these are downscaled
+const MAX_WIDTHS = {
+  hero: 1920,
+  default: 1400,
+};
+
+// Target quality settings (lower = smaller file, still looks great on screen)
+const JPEG_QUALITY = 72;   // mozjpeg — noticeably better compression than libjpeg at same quality
+const PNG_QUALITY  = [0.6, 0.8]; // min/max for pngquant-style lossy PNG
+const WEBP_QUALITY = 75;
+
+// Skip logos and very small UI assets — lossless compression matters there
+const SKIP_PATTERNS = [/logo/i, /favicon/i];
+
+function shouldSkip(filename) {
+  return SKIP_PATTERNS.some(p => p.test(filename));
+}
+
+function isHero(filename) {
+  return /hero/i.test(filename);
+}
+
+function fmtKB(bytes) {
+  return Math.round(bytes / 1024) + ' KB';
+}
 
 async function run() {
   let sharp;
   try {
     sharp = (await import('sharp')).default;
   } catch {
-    console.log('[optimize-images] sharp not available, skipping image optimization.');
-    console.log('[optimize-images] Install sharp with: npm install --save-dev sharp');
+    console.log('[optimize-images] sharp not available — skipping. Install with: npm i -D sharp');
     return;
   }
 
   const files = await readdir(ASSETS_DIR);
   const imageFiles = files.filter(f => /\.(jpg|jpeg|png)$/i.test(f));
-  let optimized = 0;
-  let skipped = 0;
+
+  let totalBefore = 0;
+  let totalAfter  = 0;
+  let processed   = 0;
+  let skipped     = 0;
+
+  console.log(`\n[optimize-images] Processing ${imageFiles.length} source images…\n`);
 
   for (const file of imageFiles) {
     const filePath = join(ASSETS_DIR, file);
@@ -30,34 +57,72 @@ async function run() {
       continue;
     }
 
-    const isHero = file.toLowerCase().includes('hero');
-    const maxW = isHero ? HERO_MAX_WIDTH : MAX_WIDTH;
+    if (shouldSkip(file)) {
+      skipped++;
+      continue;
+    }
+
+    const ext   = extname(file).toLowerCase();
+    const maxW  = isHero(file) ? MAX_WIDTHS.hero : MAX_WIDTHS.default;
+    const sizeBefore = fileStat.size;
+    totalBefore += sizeBefore;
 
     try {
-      const img = sharp(filePath);
+      const img  = sharp(filePath);
       const meta = await img.metadata();
 
-      if (!meta.width || meta.width <= maxW) {
-        skipped++;
-        continue;
+      const resizeOpts = meta.width && meta.width > maxW
+        ? { width: maxW, withoutEnlargement: true }
+        : { withoutEnlargement: true };
+
+      const tmpPath = filePath + '.tmp';
+
+      if (ext === '.png') {
+        await img
+          .resize(resizeOpts)
+          .png({ quality: Math.round(PNG_QUALITY[1] * 100), compressionLevel: 9, adaptiveFiltering: true })
+          .toFile(tmpPath);
+      } else {
+        await img
+          .resize(resizeOpts)
+          .jpeg({ quality: JPEG_QUALITY, mozjpeg: true, progressive: true })
+          .toFile(tmpPath);
       }
 
-      await img
-        .resize({ width: maxW, withoutEnlargement: true })
-        .jpeg({ quality: QUALITY, mozjpeg: true })
-        .toFile(filePath + '.tmp');
+      const sizeAfter = (await stat(tmpPath)).size;
 
-      const { rename } = await import('node:fs/promises');
-      await rename(filePath + '.tmp', filePath);
-      optimized++;
-      console.log(`  [optimized] ${file}: ${meta.width}px -> ${maxW}px`);
+      // Only replace if we actually made it smaller
+      if (sizeAfter < sizeBefore) {
+        await rename(tmpPath, filePath);
+        totalAfter += sizeAfter;
+        const saved = Math.round((1 - sizeAfter / sizeBefore) * 100);
+        console.log(`  ✓  ${file.padEnd(60)} ${fmtKB(sizeBefore).padStart(8)} → ${fmtKB(sizeAfter).padStart(8)}  (−${saved}%)`);
+        processed++;
+      } else {
+        // Already well-compressed — keep original
+        const { unlink } = await import('node:fs/promises');
+        await unlink(tmpPath);
+        totalAfter += sizeBefore;
+        console.log(`  –  ${file.padEnd(60)} ${fmtKB(sizeBefore).padStart(8)}  (already optimal)`);
+        skipped++;
+      }
     } catch (err) {
-      console.log(`  [skip] ${file}: ${err.message}`);
+      totalAfter += fileStat.size;
+      console.log(`  !  ${file.padEnd(60)} ${err.message}`);
       skipped++;
     }
   }
 
-  console.log(`[optimize-images] Done. Optimized: ${optimized}, Skipped: ${skipped}`);
+  console.log('\n' + '─'.repeat(80));
+  console.log(`  Total before : ${fmtKB(totalBefore)} (${(totalBefore / 1024 / 1024).toFixed(1)} MB)`);
+  console.log(`  Total after  : ${fmtKB(totalAfter)}  (${(totalAfter / 1024 / 1024).toFixed(1)} MB)`);
+  if (totalBefore > 0) {
+    const savedPct = Math.round((1 - totalAfter / totalBefore) * 100);
+    const savedMB  = ((totalBefore - totalAfter) / 1024 / 1024).toFixed(1);
+    console.log(`  Saved        : ${savedMB} MB  (${savedPct}%)`);
+  }
+  console.log(`  Compressed   : ${processed}   Skipped: ${skipped}`);
+  console.log('─'.repeat(80) + '\n');
 }
 
 run().catch(console.error);
