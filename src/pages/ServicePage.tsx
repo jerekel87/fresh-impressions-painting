@@ -453,7 +453,7 @@ export default function ServicePage() {
                     {service.warningVideo ? (
                       <video
                         src={service.warningVideo}
-                        className="w-full h-full object-cover"
+                        className={`w-full h-full object-cover ${slug === 'drywall-repair-and-finishing' ? 'object-top' : 'object-center'}`}
                         autoPlay
                         muted
                         loop
