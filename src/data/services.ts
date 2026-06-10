@@ -345,7 +345,7 @@ export const services: Record<string, ServiceData> = {
     aboutTitle: 'Repairs that disappear completely.',
     heroImage: drywallHeader,
     heroImagePosition: 'center 40%',
-    aboutImage: photoNov30,
+    aboutImage: drywallHeader,
     galleryImages: [
       photoAug19,
       photoFeb23,
