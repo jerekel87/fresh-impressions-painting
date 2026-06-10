@@ -14,8 +14,8 @@ const JPEG_QUALITY = 72;   // mozjpeg — noticeably better compression than lib
 const PNG_QUALITY  = [0.6, 0.8]; // min/max for pngquant-style lossy PNG
 const WEBP_QUALITY = 75;
 
-// Skip logos and very small UI assets — lossless compression matters there
-const SKIP_PATTERNS = [/logo/i, /favicon/i];
+// Skip logos, favicons, and hero images — these need full quality
+const SKIP_PATTERNS = [/logo/i, /favicon/i, /hero/i];
 
 function shouldSkip(filename) {
   return SKIP_PATTERNS.some(p => p.test(filename));

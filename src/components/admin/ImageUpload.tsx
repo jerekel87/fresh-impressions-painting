@@ -11,6 +11,41 @@ interface ImageUploadProps {
   variant?: 'dark' | 'light';
 }
 
+// Compress + resize before upload so Supabase storage holds smaller files.
+// Max 1400px wide, JPEG quality 0.78 — sharp enough for before/after comparisons.
+async function compressImage(file: File, maxWidth = 1400, quality = 0.78): Promise<File> {
+  return new Promise((resolve) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      let { width, height } = img;
+      if (width > maxWidth) {
+        height = Math.round(height * (maxWidth / width));
+        width = maxWidth;
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      canvas.getContext('2d')!.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        (blob) => {
+          if (blob) {
+            const compressed = new File([blob], file.name.replace(/\.[^.]+$/, '.jpg'), { type: 'image/jpeg' });
+            resolve(compressed);
+          } else {
+            resolve(file);
+          }
+        },
+        'image/jpeg',
+        quality,
+      );
+    };
+    img.onerror = () => { URL.revokeObjectURL(objectUrl); resolve(file); };
+    img.src = objectUrl;
+  });
+}
+
 export default function ImageUpload({ value, onChange, folder = 'general', label, compact = false, variant = 'dark' }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
@@ -20,10 +55,11 @@ export default function ImageUpload({ value, onChange, folder = 'general', label
     if (!file.type.startsWith('image/')) return;
     setUploading(true);
 
-    const ext = file.name.split('.').pop();
+    const toUpload = file.type === 'image/svg+xml' ? file : await compressImage(file);
+    const ext = toUpload.name.split('.').pop();
     const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
 
-    const { error } = await supabase.storage.from('images').upload(fileName, file, {
+    const { error } = await supabase.storage.from('images').upload(fileName, toUpload, {
       cacheControl: '31536000',
       upsert: false,
     });

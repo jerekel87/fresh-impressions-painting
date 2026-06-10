@@ -12,6 +12,14 @@ import { services } from '../data/services';
 import type { BeforeAfterItem } from '../data/services';
 import { supabase } from '../lib/supabase';
 
+// Apply Supabase image transformation for any image stored in Supabase Storage.
+// Pexels and other external URLs pass through unchanged.
+function supabaseImgUrl(url: string, width = 1400, quality = 75): string {
+  if (!url || !url.includes('/storage/v1/object/public/')) return url;
+  const base = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
+  return `${base}?width=${width}&quality=${quality}`;
+}
+
 /* ─── Before/After Slider ─────────────────────────────────────── */
 
 function BeforeAfterSlider({ before, after, caption }: { before: string; after: string; caption: string; }) {
@@ -531,7 +539,7 @@ export default function ServicePage() {
             {service.beforeAfter
               .filter((ba: BeforeAfterItem) => !('type' in ba && ba.type === 'series'))
               .map((ba: BeforeAfterItem, idx) => (
-                <BeforeAfterSlider key={idx} before={(ba as any).before} after={(ba as any).after} caption={ba.caption} />
+                <BeforeAfterSlider key={idx} before={supabaseImgUrl((ba as any).before)} after={supabaseImgUrl((ba as any).after)} caption={ba.caption} />
               ))}
           </div>
         </div>

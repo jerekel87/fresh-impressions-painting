@@ -6,6 +6,8 @@ export default defineConfig({
   plugins: [
     react(),
     ViteImageOptimizer({
+      // Hero images are excluded — they need full quality for the large display area
+      exclude: /hero/i,
       // JPEG/JPG: mozjpeg progressive, quality 72 — good balance of size vs. quality
       jpg: {
         quality: 72,
@@ -29,7 +31,6 @@ export default defineConfig({
         quality: 75,
         effort: 6,
       },
-      // Cache busting: always re-optimize on build
       cache: false,
       logStats: true,
     }),
