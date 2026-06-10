@@ -1,0 +1,4 @@
+ALTER TABLE services
+  ADD COLUMN IF NOT EXISTS hero_image text DEFAULT NULL,
+  ADD COLUMN IF NOT EXISTS warning_video text DEFAULT NULL,
+  ADD COLUMN IF NOT EXISTS photo_series jsonb NOT NULL DEFAULT '[]';

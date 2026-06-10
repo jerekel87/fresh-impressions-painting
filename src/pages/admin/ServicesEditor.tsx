@@ -1,5 +1,5 @@
-import { useEffect, useState, useCallback } from 'react';
-import { Save, Check, AlertCircle, Plus, Trash2, ChevronDown, ChevronRight, GripVertical } from 'lucide-react';
+import { useEffect, useState, useCallback, useRef } from 'react';
+import { Save, Check, AlertCircle, Plus, Trash2, ChevronDown, ChevronRight, GripVertical, Upload, Video } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import ImageUpload from '../../components/admin/ImageUpload';
 
@@ -7,6 +7,7 @@ interface Highlight { label: string; value: string; }
 interface ProcessStep { step: string; title: string; body: string; }
 interface BeforeAfter { before: string; after: string; caption: string; }
 interface Faq { q: string; a: string; }
+interface PhotoSeriesEntry { seriesLabel: string; caption: string; images: string[]; }
 
 interface ServiceEntry {
   id: string;
@@ -19,6 +20,9 @@ interface ServiceEntry {
   process: ProcessStep[];
   before_after: BeforeAfter[];
   faqs: Faq[];
+  hero_image: string | null;
+  warning_video: string | null;
+  photo_series: PhotoSeriesEntry[];
 }
 
 export default function ServicesEditor() {
@@ -32,10 +36,19 @@ export default function ServicesEditor() {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    const { data } = await supabase.from('services').select('*').order('title');
+    const { data } = await supabase
+      .from('services')
+      .select('*')
+      .order('title');
     if (data) {
-      setServices(data as ServiceEntry[]);
-      if (!activeSlug && data.length > 0) setActiveSlug(data[0].slug);
+      const normalized = (data as ServiceEntry[]).map(s => ({
+        ...s,
+        hero_image: s.hero_image ?? null,
+        warning_video: s.warning_video ?? null,
+        photo_series: s.photo_series ?? [],
+      }));
+      setServices(normalized);
+      if (!activeSlug && normalized.length > 0) setActiveSlug(normalized[0].slug);
     }
     setLoading(false);
   }, [activeSlug]);
@@ -65,6 +78,9 @@ export default function ServicesEditor() {
         process: current.process,
         before_after: current.before_after,
         faqs: current.faqs,
+        hero_image: current.hero_image,
+        warning_video: current.warning_video,
+        photo_series: current.photo_series,
         updated_at: new Date().toISOString(),
       })
       .eq('id', current.id);
@@ -82,11 +98,16 @@ export default function ServicesEditor() {
     );
   }
 
+  const isCabinet = current?.slug === 'cabinet-finishing-and-refinishing';
+  const isNewConstruction = current?.slug === 'new-construction-painting';
+
   const sections = [
     { id: 'basics', label: 'Basic Info' },
+    ...(isCabinet ? [{ id: 'warningvideo', label: 'Warning Video' }] : []),
     { id: 'highlights', label: 'Highlights' },
     { id: 'process', label: 'Process Steps' },
     { id: 'beforeafter', label: 'Before & After' },
+    ...(isNewConstruction ? [{ id: 'photoseries', label: 'Photo Series' }] : []),
     { id: 'faqs', label: 'FAQs' },
   ];
 
@@ -126,7 +147,7 @@ export default function ServicesEditor() {
         {services.map((s) => (
           <button
             key={s.slug}
-            onClick={() => setActiveSlug(s.slug)}
+            onClick={() => { setActiveSlug(s.slug); setExpandedSection('basics'); }}
             className={`px-3 py-2 text-xs font-semibold rounded-md transition-all duration-150 ${
               activeSlug === s.slug
                 ? 'bg-[#10263C]/10 text-[#10263C] border border-[#10263C]/30'
@@ -161,6 +182,9 @@ export default function ServicesEditor() {
                   {section.id === 'basics' && (
                     <BasicsSection current={current} updateService={updateService} />
                   )}
+                  {section.id === 'warningvideo' && (
+                    <WarningVideoSection current={current} updateService={updateService} />
+                  )}
                   {section.id === 'highlights' && (
                     <HighlightsSection current={current} updateService={updateService} />
                   )}
@@ -169,6 +193,9 @@ export default function ServicesEditor() {
                   )}
                   {section.id === 'beforeafter' && (
                     <BeforeAfterSection current={current} updateService={updateService} />
+                  )}
+                  {section.id === 'photoseries' && (
+                    <PhotoSeriesSection current={current} updateService={updateService} />
                   )}
                   {section.id === 'faqs' && (
                     <FaqsSection current={current} updateService={updateService} />
@@ -209,6 +236,17 @@ function BasicsSection({ current, updateService }: { current: ServiceEntry; upda
       <InputField label="Tagline" value={current.tagline} onChange={(v) => updateService({ tagline: v })} placeholder="Short description shown below the title" />
       <InputField label="About Section Title" value={current.about_title} onChange={(v) => updateService({ about_title: v })} placeholder="e.g. 'More than paint on a wall.'" />
       <div className="pt-4">
+        <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-3">Hero Image</label>
+        <p className="text-[11px] text-gray-400 mb-3">Upload to override the default static hero banner image for this service page.</p>
+        <ImageUpload
+          value={current.hero_image ?? ''}
+          onChange={(url) => updateService({ hero_image: url || null })}
+          folder={`services/${current.slug}/hero`}
+          label=""
+          variant="light"
+        />
+      </div>
+      <div className="pt-4">
         <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Description Paragraphs</label>
         {current.description.map((para, i) => (
           <div key={i} className="flex gap-2 mb-3">
@@ -232,6 +270,244 @@ function BasicsSection({ current, updateService }: { current: ServiceEntry; upda
         </button>
       </div>
     </>
+  );
+}
+
+function WarningVideoSection({ current, updateService }: { current: ServiceEntry; updateService: (u: Partial<ServiceEntry>) => void }) {
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const uploadVideo = async (file: File) => {
+    if (!file.type.startsWith('video/')) {
+      setUploadError('Please select a video file.');
+      return;
+    }
+    setUploading(true);
+    setUploadError('');
+
+    const ext = file.name.split('.').pop();
+    const fileName = `services/${current.slug}/video/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+
+    const { error } = await supabase.storage.from('images').upload(fileName, file, {
+      cacheControl: '31536000',
+      upsert: false,
+    });
+
+    if (error) {
+      setUploadError(`Upload failed: ${error.message}`);
+    } else {
+      const { data: urlData } = supabase.storage.from('images').getPublicUrl(fileName);
+      updateService({ warning_video: urlData.publicUrl });
+    }
+    setUploading(false);
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) uploadVideo(file);
+  };
+
+  return (
+    <div className="pt-4 space-y-4">
+      <div className="flex items-start gap-3 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+        <Video className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+        <div>
+          <p className="text-amber-800 text-xs font-semibold mb-1">Cabinet Warning Video</p>
+          <p className="text-amber-700 text-[11px] leading-relaxed">
+            This video plays automatically in the "Don't let this be your cabinets" section. Upload the video showing bad cabinet finish work. It will autoplay muted on the service page.
+          </p>
+        </div>
+      </div>
+
+      {uploadError && (
+        <p className="text-red-600 text-xs">{uploadError}</p>
+      )}
+
+      {current.warning_video ? (
+        <div className="space-y-3">
+          <video
+            src={current.warning_video}
+            className="w-full rounded-lg border border-gray-200 bg-black"
+            style={{ maxHeight: 280 }}
+            controls
+            muted
+          />
+          <div className="flex gap-2">
+            <button
+              onClick={() => inputRef.current?.click()}
+              disabled={uploading}
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold bg-gray-100 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-200 transition-colors disabled:opacity-50"
+            >
+              <Upload className="w-3.5 h-3.5" />
+              {uploading ? 'Uploading...' : 'Replace Video'}
+            </button>
+            <button
+              onClick={() => updateService({ warning_video: null })}
+              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold bg-red-50 border border-red-200 rounded-md text-red-600 hover:bg-red-100 transition-colors"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              Remove
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div
+          onClick={() => inputRef.current?.click()}
+          className="border-2 border-dashed border-gray-300 rounded-lg p-10 text-center cursor-pointer hover:border-gray-400 hover:bg-gray-50 transition-all duration-200"
+        >
+          {uploading ? (
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-6 h-6 border-2 border-[#10263C] border-t-transparent rounded-full animate-spin" />
+              <p className="text-xs text-gray-500">Uploading video...</p>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-2">
+              <Video className="w-8 h-8 text-gray-300" />
+              <p className="text-sm text-gray-500">Drop video here or <span className="text-[#10263C] font-medium">browse</span></p>
+              <p className="text-[11px] text-gray-400">MP4, MOV, WebM — video will autoplay muted</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      <div className="pt-1">
+        <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Or paste a video URL</label>
+        <input
+          type="url"
+          value={current.warning_video ?? ''}
+          onChange={(e) => updateService({ warning_video: e.target.value || null })}
+          placeholder="https://..."
+          className="w-full bg-white border border-gray-300 px-4 py-3 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
+        />
+      </div>
+
+      <input ref={inputRef} type="file" accept="video/*" className="hidden" onChange={handleFileSelect} />
+    </div>
+  );
+}
+
+function PhotoSeriesSection({ current, updateService }: { current: ServiceEntry; updateService: (u: Partial<ServiceEntry>) => void }) {
+  const updateSeries = (updated: PhotoSeriesEntry[]) => updateService({ photo_series: updated });
+
+  const addSeries = () => updateSeries([...current.photo_series, { seriesLabel: '', caption: '', images: ['', ''] }]);
+  const removeSeries = (idx: number) => updateSeries(current.photo_series.filter((_, i) => i !== idx));
+
+  const updateSeriesField = (idx: number, field: keyof PhotoSeriesEntry, value: string) => {
+    const updated = [...current.photo_series];
+    updated[idx] = { ...updated[idx], [field]: value };
+    updateSeries(updated);
+  };
+
+  const updateImage = (seriesIdx: number, imgIdx: number, url: string) => {
+    const updated = [...current.photo_series];
+    const images = [...updated[seriesIdx].images];
+    images[imgIdx] = url;
+    updated[seriesIdx] = { ...updated[seriesIdx], images };
+    updateSeries(updated);
+  };
+
+  const addImage = (seriesIdx: number) => {
+    const updated = [...current.photo_series];
+    updated[seriesIdx] = { ...updated[seriesIdx], images: [...updated[seriesIdx].images, ''] };
+    updateSeries(updated);
+  };
+
+  const removeImage = (seriesIdx: number, imgIdx: number) => {
+    const updated = [...current.photo_series];
+    updated[seriesIdx] = {
+      ...updated[seriesIdx],
+      images: updated[seriesIdx].images.filter((_, i) => i !== imgIdx),
+    };
+    updateSeries(updated);
+  };
+
+  return (
+    <div className="pt-4 space-y-6">
+      <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <p className="text-blue-700 text-[11px] leading-relaxed">
+          Photo series display as a slideshow of images from the same job. Each series appears as its own slot in the "Full job walkthroughs" section below the before &amp; after comparisons. These override the default static series from the codebase when saved.
+        </p>
+      </div>
+
+      {current.photo_series.length === 0 && (
+        <p className="text-gray-400 text-sm text-center py-6 border border-dashed border-gray-200 rounded-lg">
+          No photo series yet. Add one below to override the default series.
+        </p>
+      )}
+
+      {current.photo_series.map((series, sIdx) => (
+        <div key={sIdx} className="border border-gray-200 rounded-lg overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 bg-gray-50 border-b border-gray-200">
+            <span className="text-gray-700 text-xs font-semibold uppercase tracking-wider">Series {sIdx + 1}</span>
+            <button onClick={() => removeSeries(sIdx)} className="text-red-400 hover:text-red-500">
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
+          </div>
+          <div className="p-4 space-y-4">
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-1.5">Series Label</label>
+                <input
+                  type="text"
+                  value={series.seriesLabel}
+                  onChange={(e) => updateSeriesField(sIdx, 'seriesLabel', e.target.value)}
+                  placeholder="e.g. Series N-2"
+                  className="w-full bg-white border border-gray-300 px-3 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
+                />
+              </div>
+              <div>
+                <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-1.5">Caption</label>
+                <input
+                  type="text"
+                  value={series.caption}
+                  onChange={(e) => updateSeriesField(sIdx, 'caption', e.target.value)}
+                  placeholder="e.g. Complete new construction home"
+                  className="w-full bg-white border border-gray-300 px-3 py-2.5 text-gray-900 text-sm focus:outline-none focus:border-[#10263C] focus:ring-1 focus:ring-[#10263C] transition-colors rounded-md"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-3">
+                Photos ({series.images.length})
+              </label>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {series.images.map((img, imgIdx) => (
+                  <div key={imgIdx} className="relative group">
+                    <ImageUpload
+                      value={img}
+                      onChange={(url) => updateImage(sIdx, imgIdx, url)}
+                      folder={`services/${current.slug}/series`}
+                      label={`Photo ${imgIdx + 1}`}
+                      variant="light"
+                    />
+                    {series.images.length > 2 && (
+                      <button
+                        onClick={() => removeImage(sIdx, imgIdx)}
+                        className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm z-10"
+                      >
+                        <Trash2 className="w-2.5 h-2.5" />
+                      </button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <button
+                onClick={() => addImage(sIdx)}
+                className="mt-3 inline-flex items-center gap-1.5 text-[#10263C] text-xs font-semibold hover:text-[#10263C]/70"
+              >
+                <Plus className="w-3.5 h-3.5" /> Add Photo to Series
+              </button>
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <button onClick={addSeries} className="inline-flex items-center gap-1.5 text-[#10263C] text-xs font-semibold hover:text-[#10263C]/70">
+        <Plus className="w-3.5 h-3.5" /> Add Photo Series
+      </button>
+    </div>
   );
 }
 

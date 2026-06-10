@@ -213,6 +213,9 @@ export default function ServicePage() {
     highlights?: { label: string; value: string }[];
     before_after?: { before: string; after: string; caption: string }[];
     faqs?: { q: string; a: string }[];
+    hero_image?: string | null;
+    warning_video?: string | null;
+    photo_series?: Array<{ seriesLabel: string; caption: string; images: string[] }>;
   } | null>(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
@@ -221,7 +224,7 @@ export default function ServicePage() {
     if (!slug) return;
     supabase
       .from('services')
-      .select('title, tagline, about_title, description, highlights, before_after, faqs')
+      .select('title, tagline, about_title, description, highlights, before_after, faqs, hero_image, warning_video, photo_series')
       .eq('slug', slug)
       .maybeSingle()
       .then(({ data }) => {
@@ -238,10 +241,18 @@ export default function ServicePage() {
     aboutTitle: cmsData?.about_title || staticService.aboutTitle,
     description: cmsData?.description?.length ? cmsData.description : staticService.description,
     highlights: cmsData?.highlights?.length ? cmsData.highlights : staticService.highlights,
+    heroImage: cmsData?.hero_image || staticService.heroImage,
+    warningVideo: cmsData?.warning_video ?? null,
     beforeAfter: (() => {
       const staticSeries = staticService.beforeAfter.filter((ba: BeforeAfterItem) => 'type' in ba && ba.type === 'series');
       const pairs = cmsData?.before_after?.length ? cmsData.before_after : staticService.beforeAfter.filter((ba: BeforeAfterItem) => !('type' in ba && ba.type === 'series'));
       return [...staticSeries, ...pairs];
+    })(),
+    photoSeries: (() => {
+      if (cmsData?.photo_series?.length) return cmsData.photo_series;
+      return staticService.beforeAfter
+        .filter((ba: BeforeAfterItem): ba is import('../data/services').PhotoSeries => 'type' in ba && ba.type === 'series')
+        .map((ba) => ({ seriesLabel: ba.seriesLabel ?? '', caption: ba.caption, images: ba.images }));
     })(),
     faqs: cmsData?.faqs?.length ? cmsData.faqs : staticService.faqs,
   };
@@ -372,22 +383,35 @@ export default function ServicePage() {
         <section className="py-28 sm:py-36 bg-navy-900 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-stretch">
-              <div className="bg-black rounded-lg overflow-hidden flex items-center group cursor-pointer">
+              <div className="bg-black rounded-lg overflow-hidden flex items-center">
                 <div className="relative aspect-video w-full">
-                  <img
-                    src="https://images.pexels.com/photos/6444268/pexels-photo-6444268.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop"
-                    alt="Peeling cabinet paint"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-black/30 flex items-center justify-center group-hover:bg-black/40 transition-colors duration-300">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-7 h-7 sm:w-8 sm:h-8 text-navy-900 ml-1" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
-                    </div>
-                  </div>
+                  {service.warningVideo ? (
+                    <video
+                      src={service.warningVideo}
+                      className="w-full h-full object-cover"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  ) : (
+                    <>
+                      <img
+                        src="https://images.pexels.com/photos/6444268/pexels-photo-6444268.jpeg?auto=compress&cs=tinysrgb&w=960&h=540&fit=crop"
+                        alt="Peeling cabinet paint"
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/90 flex items-center justify-center shadow-xl">
+                          <svg className="w-7 h-7 sm:w-8 sm:h-8 text-navy-900 ml-1" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
               <div>
@@ -455,8 +479,7 @@ export default function ServicePage() {
 
       {/* ── Photo Series (New Construction only) ── */}
       {(() => {
-        const seriesItems = service.beforeAfter.filter((ba: BeforeAfterItem): ba is import('../data/services').PhotoSeries => 'type' in ba && ba.type === 'series');
-        if (seriesItems.length === 0) return null;
+        if (!service.photoSeries || service.photoSeries.length === 0) return null;
         return (
           <section className="py-20 sm:py-28 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -477,8 +500,8 @@ export default function ServicePage() {
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                {seriesItems.map((ba, idx) => (
-                  <PhotoSeriesSlider key={idx} images={ba.images} caption={ba.caption} seriesLabel={ba.seriesLabel} />
+                {service.photoSeries.map((series, idx) => (
+                  <PhotoSeriesSlider key={idx} images={series.images} caption={series.caption} seriesLabel={series.seriesLabel} />
                 ))}
               </div>
             </div>
