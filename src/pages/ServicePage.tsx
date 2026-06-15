@@ -84,12 +84,12 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
     <div className="space-y-3">
       <div
         ref={containerRef}
-        className="relative w-full aspect-[4/5] bg-gray-900 overflow-hidden select-none cursor-col-resize rounded-sm"
+        className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none cursor-col-resize rounded-sm"
         onDragStart={(e) => e.preventDefault()}
       >
-        <img src={after} alt={`After: ${caption}`} draggable={false} className="absolute inset-0 w-full h-full object-contain pointer-events-none" width={640} height={800} loading="lazy" decoding="async" />
+        <img src={after} alt={`After: ${caption}`} draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" width={640} height={340} loading="lazy" decoding="async" />
         <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ width: `${position}%` }}>
-          <img src={before} alt={`Before: ${caption}`} draggable={false} className="absolute inset-0 h-full object-contain pointer-events-none" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} width={640} height={800} loading="lazy" decoding="async" />
+          <img src={before} alt={`Before: ${caption}`} draggable={false} className="absolute inset-0 h-full object-cover pointer-events-none" style={{ width: `${10000 / position}%`, maxWidth: 'none' }} width={640} height={340} loading="lazy" decoding="async" />
         </div>
         <div
           className="absolute top-0 bottom-0 z-10 flex items-center justify-center pointer-events-none"
@@ -120,14 +120,14 @@ function PhotoSeriesSlider({ images, caption, seriesLabel }: { images: string[];
 
   return (
     <div className="space-y-3">
-      <div className="relative w-full aspect-[4/5] overflow-hidden select-none rounded-sm bg-gray-900">
+      <div className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none rounded-sm bg-gray-200">
         <img
           src={images[current]}
           alt={`${caption} — photo ${current + 1}`}
           draggable={false}
-          className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300"
+          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
           width={640}
-          height={800}
+          height={340}
           loading="lazy"
           decoding="async"
         />
@@ -489,7 +489,7 @@ export default function ServicePage() {
                 </div>
                 <div>
                   <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-4">
-                    What to avoid
+                    A bad movie
                   </span>
                   <h2
                     className="font-display uppercase text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-7"
