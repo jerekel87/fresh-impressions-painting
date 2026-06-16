@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Save, Plus, Trash2, Check, AlertCircle } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
+import ImageUpload from '../../components/admin/ImageUpload';
 
 interface HeroContent {
   headline: string;
@@ -23,7 +24,13 @@ interface ValuesContent {
   values: Value[];
 }
 
-type Tab = 'hero' | 'story' | 'values';
+interface PhotosContent {
+  photo1: string;
+  photo2: string;
+  photo3: string;
+}
+
+type Tab = 'hero' | 'story' | 'photos' | 'values';
 
 function StatusBadge({ saving, saved }: { saving: boolean; saved: boolean }) {
   if (saving) return (
@@ -50,6 +57,7 @@ export default function AboutEditor() {
 
   const [hero, setHero] = useState<HeroContent>({ headline: '', subtitle: '' });
   const [story, setStory] = useState<StoryContent>({ paragraph1: '', paragraph2: '' });
+  const [photos, setPhotos] = useState<PhotosContent>({ photo1: '', photo2: '', photo3: '' });
   const [values, setValues] = useState<ValuesContent>({ headline: '', subtitle: '', values: [] });
 
   const fetchData = useCallback(async () => {
@@ -60,6 +68,7 @@ export default function AboutEditor() {
       for (const row of data) {
         if (row.section === 'hero') setHero(row.content as HeroContent);
         if (row.section === 'story') setStory(row.content as StoryContent);
+        if (row.section === 'photos') setPhotos(row.content as PhotosContent);
         if (row.section === 'values') setValues(row.content as ValuesContent);
       }
     }
@@ -97,6 +106,7 @@ export default function AboutEditor() {
   const tabs: { id: Tab; label: string }[] = [
     { id: 'hero', label: 'Hero' },
     { id: 'story', label: 'Story' },
+    { id: 'photos', label: 'Photos' },
     { id: 'values', label: 'Values' },
   ];
 
@@ -188,6 +198,59 @@ export default function AboutEditor() {
           <button onClick={() => saveContent('story', story)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
             <Save className="w-4 h-4" />
             Save Story
+          </button>
+        </div>
+      )}
+
+      {activeTab === 'photos' && (
+        <div className="space-y-6">
+          <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <p className="text-blue-700 text-[11px] leading-relaxed">
+              These three images form the photo collage on the About page. <strong>Photo 1</strong> takes up the full left column. <strong>Photos 2 and 3</strong> stack in the right column. Leave a slot empty to keep the current default image.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-1">Photo 1 — Large Left Column</label>
+              <p className="text-[11px] text-gray-400 mb-3">Full-height portrait image. Best with a person or job site shot.</p>
+              <ImageUpload
+                value={photos.photo1}
+                onChange={(url) => setPhotos({ ...photos, photo1: url })}
+                folder="about/photos"
+                label=""
+                variant="light"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-1">Photo 2 — Top Right</label>
+              <p className="text-[11px] text-gray-400 mb-3">Upper half of the right column.</p>
+              <ImageUpload
+                value={photos.photo2}
+                onChange={(url) => setPhotos({ ...photos, photo2: url })}
+                folder="about/photos"
+                label=""
+                variant="light"
+              />
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-1">Photo 3 — Bottom Right</label>
+              <p className="text-[11px] text-gray-400 mb-3">Lower half of the right column.</p>
+              <ImageUpload
+                value={photos.photo3}
+                onChange={(url) => setPhotos({ ...photos, photo3: url })}
+                folder="about/photos"
+                label=""
+                variant="light"
+              />
+            </div>
+          </div>
+
+          <button onClick={() => saveContent('photos', photos)} disabled={saving} className="inline-flex items-center gap-2 px-6 py-3 bg-[#10263C] text-white font-bold text-[13px] tracking-[0.08em] uppercase hover:bg-[#0c2236] transition-colors disabled:opacity-50 rounded-md">
+            <Save className="w-4 h-4" />
+            Save Photos
           </button>
         </div>
       )}
