@@ -109,7 +109,7 @@ export default function ServiceAreas() {
     <section className="bg-navy-900 py-0 overflow-hidden">
       <div
         ref={scrollRef}
-        className="flex gap-0 items-center will-change-transform"
+        className="flex gap-0 items-start will-change-transform"
         style={{ width: 'max-content' }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -119,7 +119,7 @@ export default function ServiceAreas() {
           <Link
             key={idx}
             to={`/services/${item.slug}`}
-            className="group relative w-[200px] sm:w-[280px] flex-shrink-0 overflow-hidden"
+            className="group relative w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] flex-shrink-0 overflow-hidden"
           >
             <img
               src={item.image}
