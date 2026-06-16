@@ -119,15 +119,13 @@ export default function ServiceAreas() {
           <Link
             key={idx}
             to={`/services/${item.slug}`}
-            className="group relative w-[200px] sm:w-[280px] aspect-[4/5] flex-shrink-0 overflow-hidden"
+            className="group relative h-[200px] sm:h-[300px] flex-shrink-0 overflow-hidden bg-navy-900"
           >
             <img
               src={item.image}
               alt={item.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              width={280}
-              height={350}
-              sizes="(max-width: 640px) 200px, 280px"
+              className="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+              height={300}
               loading="lazy"
               decoding="async"
             />
