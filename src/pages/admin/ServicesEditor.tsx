@@ -23,6 +23,8 @@ interface ServiceEntry {
   hero_image: string | null;
   warning_video: string | null;
   photo_series: PhotoSeriesEntry[];
+  gallery_images: string[];
+  about_image: string | null;
 }
 
 export default function ServicesEditor() {
@@ -46,6 +48,8 @@ export default function ServicesEditor() {
         hero_image: s.hero_image ?? null,
         warning_video: s.warning_video ?? null,
         photo_series: s.photo_series ?? [],
+        gallery_images: s.gallery_images ?? [],
+        about_image: s.about_image ?? null,
       }));
       setServices(normalized);
       if (!activeSlug && normalized.length > 0) setActiveSlug(normalized[0].slug);
@@ -81,6 +85,8 @@ export default function ServicesEditor() {
         hero_image: current.hero_image,
         warning_video: current.warning_video,
         photo_series: current.photo_series,
+        gallery_images: current.gallery_images,
+        about_image: current.about_image,
         updated_at: new Date().toISOString(),
       })
       .eq('id', current.id);
@@ -108,6 +114,7 @@ export default function ServicesEditor() {
 
   const sections = [
     { id: 'basics', label: 'Basic Info' },
+    { id: 'gallery', label: 'Scrolling Gallery' },
     ...(hasWarningVideo ? [{ id: 'warningvideo', label: 'Warning Video' }] : []),
     { id: 'highlights', label: 'Highlights' },
     { id: 'process', label: 'Process Steps' },
@@ -187,6 +194,9 @@ export default function ServicesEditor() {
                   {section.id === 'basics' && (
                     <BasicsSection current={current} updateService={updateService} />
                   )}
+                  {section.id === 'gallery' && (
+                    <GallerySection current={current} updateService={updateService} />
+                  )}
                   {section.id === 'warningvideo' && (
                     <WarningVideoSection current={current} updateService={updateService} />
                   )}
@@ -252,6 +262,17 @@ function BasicsSection({ current, updateService }: { current: ServiceEntry; upda
         />
       </div>
       <div className="pt-4">
+        <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-3">About Section Image</label>
+        <p className="text-[11px] text-gray-400 mb-3">Shown in the about section on the right side. Falls back to the hero image if not set.</p>
+        <ImageUpload
+          value={current.about_image ?? ''}
+          onChange={(url) => updateService({ about_image: url || null })}
+          folder={`services/${current.slug}/about`}
+          label=""
+          variant="light"
+        />
+      </div>
+      <div className="pt-4">
         <label className="block text-[11px] font-semibold uppercase tracking-[0.15em] text-gray-500 mb-2">Description Paragraphs</label>
         {current.description.map((para, i) => (
           <div key={i} className="flex gap-2 mb-3">
@@ -275,6 +296,65 @@ function BasicsSection({ current, updateService }: { current: ServiceEntry; upda
         </button>
       </div>
     </>
+  );
+}
+
+function GallerySection({ current, updateService }: { current: ServiceEntry; updateService: (u: Partial<ServiceEntry>) => void }) {
+  const updateImage = (idx: number, url: string) => {
+    const imgs = [...current.gallery_images];
+    imgs[idx] = url;
+    updateService({ gallery_images: imgs });
+  };
+
+  const removeImage = (idx: number) => {
+    updateService({ gallery_images: current.gallery_images.filter((_, i) => i !== idx) });
+  };
+
+  const addImage = () => {
+    updateService({ gallery_images: [...current.gallery_images, ''] });
+  };
+
+  return (
+    <div className="pt-4 space-y-4">
+      <div className="flex items-start gap-3 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <p className="text-blue-700 text-[11px] leading-relaxed">
+          These images scroll right-to-left just below the hero banner on this service page. When saved, they replace the default static gallery. Add as many as you like — 8 or more is ideal for a smooth loop.
+        </p>
+      </div>
+
+      {current.gallery_images.length === 0 && (
+        <p className="text-gray-400 text-sm text-center py-6 border border-dashed border-gray-200 rounded-lg">
+          No images yet. The default static gallery images will be shown. Add images below to override them.
+        </p>
+      )}
+
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {current.gallery_images.map((img, idx) => (
+          <div key={idx} className="relative group">
+            <ImageUpload
+              value={img}
+              onChange={(url) => updateImage(idx, url)}
+              folder={`services/${current.slug}/gallery`}
+              label={`Image ${idx + 1}`}
+              variant="light"
+            />
+            <button
+              onClick={() => removeImage(idx)}
+              className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm z-10"
+            >
+              <Trash2 className="w-2.5 h-2.5" />
+            </button>
+          </div>
+        ))}
+      </div>
+
+      <button
+        onClick={addImage}
+        className="inline-flex items-center gap-1.5 text-[#10263C] text-xs font-semibold hover:text-[#10263C]/70"
+      >
+        <Plus className="w-3.5 h-3.5" /> Add Gallery Image
+      </button>
+    </div>
   );
 }
 

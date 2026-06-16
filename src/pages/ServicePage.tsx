@@ -287,6 +287,8 @@ export default function ServicePage() {
     hero_image?: string | null;
     warning_video?: string | null;
     photo_series?: Array<{ seriesLabel: string; caption: string; images: string[] }>;
+    gallery_images?: string[];
+    about_image?: string | null;
   } | null>(null);
 
   useEffect(() => { window.scrollTo(0, 0); }, [slug]);
@@ -295,7 +297,7 @@ export default function ServicePage() {
     if (!slug) return;
     supabase
       .from('services')
-      .select('title, tagline, about_title, description, highlights, before_after, faqs, hero_image, warning_video, photo_series')
+      .select('title, tagline, about_title, description, highlights, before_after, faqs, hero_image, warning_video, photo_series, gallery_images, about_image')
       .eq('slug', slug)
       .maybeSingle()
       .then(({ data }) => {
@@ -326,6 +328,10 @@ export default function ServicePage() {
         .map((ba) => ({ seriesLabel: ba.seriesLabel ?? '', caption: ba.caption, images: ba.images }));
     })(),
     faqs: cmsData?.faqs?.length ? cmsData.faqs : staticService.faqs,
+    galleryImages: cmsData?.gallery_images?.length
+      ? cmsData.gallery_images.map((img: string) => supabaseImgUrl(img, 600, 80))
+      : staticService.galleryImages,
+    aboutImage: cmsData?.about_image ? supabaseImgUrl(cmsData.about_image) : staticService.aboutImage,
   };
 
   return (
