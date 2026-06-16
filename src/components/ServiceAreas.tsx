@@ -14,10 +14,14 @@ const SERVICE_SLUGS = [
   { title: 'Staining', slug: 'staining' },
 ];
 
-function supabaseImgUrl(url: string, width = 400, quality = 75): string {
+// IMPORTANT: resize=contain is required. Without it, Supabase defaults to
+// resize=cover, which (with a width-only request) returns a distorted, cropped
+// file — e.g. a 1290x2796 portrait comes back as 400x2796 instead of 400x867.
+// contain scales proportionally and never crops the source image.
+function supabaseImgUrl(url: string, width = 600, quality = 78): string {
   if (!url || !url.includes('/storage/v1/object/public/')) return url;
   const base = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
-  return `${base}?width=${width}&quality=${quality}`;
+  return `${base}?width=${width}&quality=${quality}&resize=contain`;
 }
 
 interface ServiceItem {
@@ -46,7 +50,7 @@ export default function ServiceAreas() {
         for (const svc of SERVICE_SLUGS) {
           const row = dbMap.get(svc.slug);
           const img = row?.about_image || row?.hero_image;
-          if (img) loaded.push({ title: svc.title, slug: svc.slug, image: supabaseImgUrl(img, 400, 75) });
+          if (img) loaded.push({ title: svc.title, slug: svc.slug, image: supabaseImgUrl(img) });
         }
         setItems(loaded);
       });
