@@ -1,40 +1,60 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import interiorPainting1 from '../assets/interior-painting1.jpg';
-import screenshotMetal1 from '../assets/Screenshot_2026-05-22_at_8.56.25_PM.png';
-import screenshotStain from '../assets/Screenshot_2026-05-22_at_9.33.33_PM.png';
+import { supabase } from '../lib/supabase';
 
-const px = (id: number) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop`;
-const photoDec05 = px(2079234);
-const photoJun16 = px(1732414);
-const photoFeb27 = px(2121121);
-const photoMar13 = px(2251247);
-const photoNov30 = px(2098913);
-const photoOct26_16 = px(1571459);
-
-const serviceItems = [
-  { title: 'Interior Painting', slug: 'interior-painting', image: interiorPainting1 },
-  { title: 'Exterior Painting', slug: 'exterior-painting', image: photoDec05 },
-  { title: 'Lime Wash', slug: 'brick-and-stone-lime-wash', image: photoJun16 },
-  { title: 'Cabinet Refinishing', slug: 'cabinet-finishing-and-refinishing', image: photoFeb27 },
-  { title: 'Commercial Painting', slug: 'commercial-painting', image: photoMar13 },
-  { title: 'Drywall Repair', slug: 'drywall-repair-and-finishing', image: photoNov30 },
-  { title: 'Metal Finishing', slug: 'metal-finishing-and-refinishing', image: screenshotMetal1 },
-  { title: 'New Construction', slug: 'new-construction-painting', image: photoOct26_16 },
-  { title: 'Staining', slug: 'staining', image: screenshotStain },
+const SERVICE_SLUGS = [
+  { title: 'Interior Painting', slug: 'interior-painting' },
+  { title: 'Exterior Painting', slug: 'exterior-painting' },
+  { title: 'Lime Wash', slug: 'brick-and-stone-lime-wash' },
+  { title: 'Cabinet Refinishing', slug: 'cabinet-finishing-and-refinishing' },
+  { title: 'Commercial Painting', slug: 'commercial-painting' },
+  { title: 'Drywall Repair', slug: 'drywall-repair-and-finishing' },
+  { title: 'Metal Finishing', slug: 'metal-finishing-and-refinishing' },
+  { title: 'New Construction', slug: 'new-construction-painting' },
+  { title: 'Staining', slug: 'staining' },
 ];
+
+function supabaseImgUrl(url: string, width = 400, quality = 75): string {
+  if (!url || !url.includes('/storage/v1/object/public/')) return url;
+  const base = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
+  return `${base}?width=${width}&quality=${quality}`;
+}
+
+interface ServiceItem {
+  title: string;
+  slug: string;
+  image: string;
+}
+
+const MIN_TILES = 18;
 
 export default function ServiceAreas() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<number>(0);
   const isDragging = useRef(false);
   const startX = useRef(0);
-  const scrollLeft = useRef(0);
+  const [items, setItems] = useState<ServiceItem[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from('services')
+      .select('slug, about_image, hero_image')
+      .then(({ data }) => {
+        if (!data) return;
+        const dbMap = new Map(data.map((row) => [row.slug, row]));
+        const loaded: ServiceItem[] = [];
+        for (const svc of SERVICE_SLUGS) {
+          const row = dbMap.get(svc.slug);
+          const img = row?.about_image || row?.hero_image;
+          if (img) loaded.push({ title: svc.title, slug: svc.slug, image: supabaseImgUrl(img, 400, 75) });
+        }
+        setItems(loaded);
+      });
+  }, []);
 
   useEffect(() => {
     const container = scrollRef.current;
-    if (!container) return;
+    if (!container || items.length === 0) return;
 
     let scrollPos = 0;
     const speed = 0.4;
@@ -44,9 +64,7 @@ export default function ServiceAreas() {
       if (!paused && !isDragging.current) {
         scrollPos += speed;
         const halfWidth = container.scrollWidth / 2;
-        if (scrollPos >= halfWidth) {
-          scrollPos = 0;
-        }
+        if (scrollPos >= halfWidth) scrollPos = 0;
         container.style.transform = `translateX(-${scrollPos}px)`;
       }
       animationRef.current = requestAnimationFrame(animate);
@@ -68,7 +86,7 @@ export default function ServiceAreas() {
       container.removeEventListener('touchstart', pause);
       container.removeEventListener('touchend', resume);
     };
-  }, []);
+  }, [items]);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     isDragging.current = true;
@@ -77,16 +95,15 @@ export default function ServiceAreas() {
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging.current || !scrollRef.current) return;
-    const diff = startX.current - e.touches[0].clientX;
-    scrollLeft.current += diff;
     startX.current = e.touches[0].clientX;
   };
 
-  const handleTouchEnd = () => {
-    isDragging.current = false;
-  };
+  const handleTouchEnd = () => { isDragging.current = false; };
 
-  const allItems = [...serviceItems, ...serviceItems];
+  if (items.length === 0) return null;
+
+  const repeated = Array.from({ length: Math.ceil(MIN_TILES / items.length) }, () => items).flat();
+  const allItems = [...repeated, ...repeated];
 
   return (
     <section className="bg-navy-900 py-0 overflow-hidden">
