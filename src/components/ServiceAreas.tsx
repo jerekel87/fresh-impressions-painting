@@ -124,7 +124,7 @@ export default function ServiceAreas() {
             <img
               src={item.image}
               alt={item.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
               width={380}
               height={220}
               sizes="(max-width: 640px) 280px, 380px"
