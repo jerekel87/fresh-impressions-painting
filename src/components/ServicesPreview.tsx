@@ -14,10 +14,14 @@ const SERVICE_LIST = [
   { title: 'Staining', slug: 'staining', description: 'Protective finishes that preserve and beautify wood surfaces inside and out.' },
 ];
 
+// resize=contain is required — without it Supabase defaults to resize=cover,
+// which on a width-only request returns a distorted/cropped file (a portrait
+// 1290x2796 comes back as 600x2796 instead of proportional). contain scales
+// proportionally and never crops the source image.
 function supabaseImgUrl(url: string, width = 600, quality = 80): string {
   if (!url || !url.includes('/storage/v1/object/public/')) return url;
   const base = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
-  return `${base}?width=${width}&quality=${quality}`;
+  return `${base}?width=${width}&quality=${quality}&resize=contain`;
 }
 
 interface ServiceCard {

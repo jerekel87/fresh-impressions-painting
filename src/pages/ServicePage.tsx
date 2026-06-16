@@ -14,10 +14,14 @@ import { supabase } from '../lib/supabase';
 
 // Apply Supabase image transformation for any image stored in Supabase Storage.
 // Pexels and other external URLs pass through unchanged.
+// resize=contain is required — without it Supabase defaults to resize=cover,
+// which on a width-only request distorts/crops the file (a portrait image keeps
+// its full original height while the width is forced down). contain scales
+// proportionally and never crops.
 function supabaseImgUrl(url: string, width = 1400, quality = 75): string {
   if (!url || !url.includes('/storage/v1/object/public/')) return url;
   const base = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
-  return `${base}?width=${width}&quality=${quality}`;
+  return `${base}?width=${width}&quality=${quality}&resize=contain`;
 }
 
 /* ─── Before/After Slider ─────────────────────────────────────── */
