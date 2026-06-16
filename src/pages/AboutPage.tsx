@@ -4,9 +4,9 @@ import { useSeo } from '../lib/useSeo';
 import Navbar from '../components/Navbar';
 import EstimateForm from '../components/EstimateForm';
 import Footer from '../components/Footer';
-import familyPhoto from '../assets/Photo_Apr_27_2026,_5_25_00_PM.jpg';
-import sprayingPhoto from '../assets/Photo_Apr_27_2026,_4_53_17_PM_(1).jpg';
-import liftPhoto from '../assets/Photo_Nov_04_2025,_11_14_05_AM.jpg';
+const familyPhoto = 'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop';
+const sprayingPhoto = 'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop';
+const liftPhoto = 'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop';
 
 export default function AboutPage() {
   useSeo('about');
