@@ -109,7 +109,7 @@ export default function ServiceAreas() {
     <section className="bg-navy-900 py-0 overflow-hidden">
       <div
         ref={scrollRef}
-        className="flex gap-0 items-start will-change-transform"
+        className="flex gap-0 will-change-transform"
         style={{ width: 'max-content' }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -124,8 +124,9 @@ export default function ServiceAreas() {
             <img
               src={item.image}
               alt={item.title}
-              className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               width={280}
+              height={280}
               sizes="(max-width: 640px) 200px, 280px"
               loading="lazy"
               decoding="async"
