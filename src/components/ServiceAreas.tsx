@@ -46,7 +46,7 @@ export default function ServiceAreas() {
         for (const svc of SERVICE_SLUGS) {
           const row = dbMap.get(svc.slug);
           const img = row?.about_image || row?.hero_image;
-          if (img) loaded.push({ title: svc.title, slug: svc.slug, image: supabaseImgUrl(img, 400, 75) });
+          if (img) loaded.push({ title: svc.title, slug: svc.slug, image: supabaseImgUrl(img, 600, 80) });
         }
         setItems(loaded);
       });
@@ -119,15 +119,15 @@ export default function ServiceAreas() {
           <Link
             key={idx}
             to={`/services/${item.slug}`}
-            className="group relative w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] flex-shrink-0 overflow-hidden"
+            className="group relative w-[200px] sm:w-[280px] aspect-[4/5] flex-shrink-0 overflow-hidden"
           >
             <img
               src={item.image}
               alt={item.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-              width={300}
-              height={300}
-              sizes="(max-width: 640px) 200px, 300px"
+              width={280}
+              height={350}
+              sizes="(max-width: 640px) 200px, 280px"
               loading="lazy"
               decoding="async"
             />
