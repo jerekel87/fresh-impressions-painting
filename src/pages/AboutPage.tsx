@@ -6,15 +6,12 @@ import EstimateForm from '../components/EstimateForm';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
 
-const DEFAULT_FAMILY = 'https://images.pexels.com/photos/1648776/pexels-photo-1648776.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop';
-const DEFAULT_LIFT = 'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop';
-const DEFAULT_SPRAY = 'https://images.pexels.com/photos/2098913/pexels-photo-2098913.jpeg?auto=compress&cs=tinysrgb&w=1200&h=800&fit=crop';
-
 export default function AboutPage() {
   useSeo('about');
-  const [photo1, setPhoto1] = useState(DEFAULT_FAMILY);
-  const [photo2, setPhoto2] = useState(DEFAULT_LIFT);
-  const [photo3, setPhoto3] = useState(DEFAULT_SPRAY);
+  const [photo1, setPhoto1] = useState('');
+  const [photo2, setPhoto2] = useState('');
+  const [photo3, setPhoto3] = useState('');
+  const [photosLoaded, setPhotosLoaded] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -31,6 +28,7 @@ export default function AboutPage() {
           if (c.photo2) setPhoto2(c.photo2);
           if (c.photo3) setPhoto3(c.photo3);
         }
+        setPhotosLoaded(true);
       });
   }, []);
 
@@ -66,10 +64,12 @@ export default function AboutPage() {
       {/* Main Story Section */}
       <section className="py-16 sm:py-24 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            {/* Left: Photo collage */}
+          <div className={`grid grid-cols-1 ${photosLoaded && (photo1 || photo2 || photo3) ? 'lg:grid-cols-2' : ''} gap-12 lg:gap-20 items-start`}>
+            {/* Left: Photo collage — only render when photos are loaded and available */}
+            {photosLoaded && (photo1 || photo2 || photo3) && (
             <div className="relative">
               <div className="grid grid-cols-12 grid-rows-12 gap-3 sm:gap-4 h-[420px] sm:h-[640px] lg:h-[720px]">
+                {photo1 && (
                 <div className="col-span-7 row-span-12 overflow-hidden">
                   <img
                     src={photo1}
@@ -77,6 +77,8 @@ export default function AboutPage() {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                )}
+                {photo2 && (
                 <div className="col-span-5 row-span-6 overflow-hidden">
                   <img
                     src={photo2}
@@ -84,6 +86,8 @@ export default function AboutPage() {
                     className="w-full h-full object-cover object-top"
                   />
                 </div>
+                )}
+                {photo3 && (
                 <div className="col-span-5 row-span-6 overflow-hidden">
                   <img
                     src={photo3}
@@ -91,8 +95,10 @@ export default function AboutPage() {
                     className="w-full h-full object-cover"
                   />
                 </div>
+                )}
               </div>
             </div>
+            )}
 
             {/* Right: Story */}
             <div className="lg:pt-8">

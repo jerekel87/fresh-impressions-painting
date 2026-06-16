@@ -330,7 +330,7 @@ export default function ServicePage() {
     faqs: cmsData?.faqs?.length ? cmsData.faqs : staticService.faqs,
     galleryImages: cmsData?.gallery_images?.length
       ? cmsData.gallery_images.map((img: string) => supabaseImgUrl(img, 600, 80))
-      : staticService.galleryImages,
+      : [],
     aboutImage: cmsData?.about_image ? supabaseImgUrl(cmsData.about_image) : staticService.aboutImage,
   };
 
@@ -408,7 +408,9 @@ export default function ServicePage() {
       </section>
 
       {/* ── Scrolling Gallery ── */}
-      <ScrollingGallery images={service.galleryImages} />
+      {service.galleryImages.length > 0 && (
+        <ScrollingGallery images={service.galleryImages} />
+      )}
 
       {/* ── About Service ── */}
       <section id="about-service" className="py-20 sm:py-28 md:py-36 bg-white">
