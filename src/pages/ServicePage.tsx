@@ -500,7 +500,7 @@ export default function ServicePage() {
                 </div>
                 <div>
                   <span className="inline-block text-brand-yellow font-semibold text-xs uppercase tracking-[0.2em] mb-4">
-                    A bad movie
+                    What to avoid
                   </span>
                   <h2
                     className="font-display uppercase text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-7"
