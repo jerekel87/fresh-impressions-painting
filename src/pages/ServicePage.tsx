@@ -121,16 +121,19 @@ function PhotoSeriesSlider({ images, caption, seriesLabel }: { images: string[];
   return (
     <div className="space-y-3">
       <div className="relative w-full h-[280px] sm:h-[340px] overflow-hidden select-none rounded-sm bg-gray-200">
-        <img
-          src={images[current]}
-          alt={`${caption} — photo ${current + 1}`}
-          draggable={false}
-          className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
-          width={640}
-          height={340}
-          loading="lazy"
-          decoding="async"
-        />
+        {images.map((src, i) => (
+          <img
+            key={src}
+            src={src}
+            alt={`${caption} — photo ${i + 1}`}
+            draggable={false}
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-200 pointer-events-none ${i === current ? 'opacity-100' : 'opacity-0'}`}
+            width={640}
+            height={340}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        ))}
         <button
           onClick={prev}
           aria-label="Previous photo"
@@ -146,14 +149,14 @@ function PhotoSeriesSlider({ images, caption, seriesLabel }: { images: string[];
           <ChevronRight className="w-5 h-5" />
         </button>
         {seriesLabel && (
-          <span className="absolute top-3 left-3 bg-navy-900/80 text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none">
+          <span className="absolute top-3 left-3 bg-navy-900/80 text-white text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none z-10">
             {seriesLabel}
           </span>
         )}
-        <span className="absolute top-3 right-3 bg-brand-yellow text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none">
+        <span className="absolute top-3 right-3 bg-brand-yellow text-navy-900 text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 pointer-events-none z-10">
           {current + 1} / {images.length}
         </span>
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
           {images.map((_, i) => (
             <button
               key={i}
