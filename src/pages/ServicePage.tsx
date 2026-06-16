@@ -84,7 +84,7 @@ function BeforeAfterSlider({ before, after, caption }: { before: string; after: 
     <div className="space-y-3">
       <div
         ref={containerRef}
-        className="relative w-full aspect-square overflow-hidden select-none cursor-col-resize rounded-sm"
+        className="relative w-full h-[480px] sm:h-[540px] overflow-hidden select-none cursor-col-resize rounded-sm"
         onDragStart={(e) => e.preventDefault()}
       >
         <img src={after} alt={`After: ${caption}`} draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" width={640} height={340} loading="lazy" decoding="async" />
