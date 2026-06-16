@@ -29,7 +29,11 @@ export default function ScrollingGallery({ images }: ScrollingGalleryProps) {
     return () => cancelAnimationFrame(animationRef.current);
   }, []);
 
-  const allImages = [...images, ...images];
+  const MIN_TILES = 20;
+  const repeated = images.length > 0
+    ? Array.from({ length: Math.ceil(MIN_TILES / images.length) }, () => images).flat()
+    : images;
+  const allImages = [...repeated, ...repeated];
 
   return (
     <section className="bg-navy-900 py-0 overflow-hidden">
