@@ -46,18 +46,17 @@ export default function AdminManagement() {
 
     setCreating(true);
 
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      setError('You must be logged in.');
-      setCreating(false);
-      return;
-    }
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 20000);
 
-    let res: Response;
     try {
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 15000);
-      res = await fetch(
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+        setError('Your session expired. Please sign in again.');
+        return;
+      }
+
+      const res = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-admin`,
         {
           method: 'POST',
@@ -70,26 +69,38 @@ export default function AdminManagement() {
           signal: controller.signal,
         }
       );
-      clearTimeout(timeout);
-    } catch {
-      setError('Request timed out. Please try again.');
-      setCreating(false);
-      return;
-    }
 
-    const result = await res.json();
+      const rawBody = await res.text();
+      let result: { error?: string } = {};
+      if (rawBody) {
+        try {
+          result = JSON.parse(rawBody);
+        } catch {
+          result = {};
+        }
+      }
 
-    if (!res.ok) {
-      setError(result.error || 'Failed to create admin.');
-    } else {
+      if (!res.ok) {
+        setError(result.error || `Failed to create admin (status ${res.status}).`);
+        return;
+      }
+
       setSuccess(`Admin "${email}" created successfully.`);
       setEmail('');
       setPassword('');
       setShowForm(false);
       fetchAdmins();
       setTimeout(() => setSuccess(''), 4000);
+    } catch (err) {
+      if (err instanceof DOMException && err.name === 'AbortError') {
+        setError('Request timed out. Please try again.');
+      } else {
+        setError(err instanceof Error ? err.message : 'Failed to create admin.');
+      }
+    } finally {
+      clearTimeout(timeout);
+      setCreating(false);
     }
-    setCreating(false);
   };
 
   const handleDelete = async (admin: AdminUser) => {
