@@ -46,9 +46,6 @@ export default function AdminManagement() {
 
     setCreating(true);
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 20000);
-
     try {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
@@ -56,32 +53,27 @@ export default function AdminManagement() {
         return;
       }
 
-      const res = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-admin`,
-        {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${session.access_token}`,
-            'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-          signal: controller.signal,
-        }
-      );
+      const { data, error: fnError } = await supabase.functions.invoke('create-admin', {
+        body: { email, password },
+      });
 
-      const rawBody = await res.text();
-      let result: { error?: string } = {};
-      if (rawBody) {
-        try {
-          result = JSON.parse(rawBody);
-        } catch {
-          result = {};
+      if (fnError) {
+        let message = fnError.message || 'Failed to create admin.';
+        const context = (fnError as { context?: Response }).context;
+        if (context && typeof context.json === 'function') {
+          try {
+            const body = await context.json();
+            if (body?.error) message = body.error;
+          } catch {
+            // keep default message
+          }
         }
+        setError(message);
+        return;
       }
 
-      if (!res.ok) {
-        setError(result.error || `Failed to create admin (status ${res.status}).`);
+      if (data?.error) {
+        setError(data.error);
         return;
       }
 
@@ -92,13 +84,8 @@ export default function AdminManagement() {
       fetchAdmins();
       setTimeout(() => setSuccess(''), 4000);
     } catch (err) {
-      if (err instanceof DOMException && err.name === 'AbortError') {
-        setError('Request timed out. Please try again.');
-      } else {
-        setError(err instanceof Error ? err.message : 'Failed to create admin.');
-      }
+      setError(err instanceof Error ? err.message : 'Failed to create admin.');
     } finally {
-      clearTimeout(timeout);
       setCreating(false);
     }
   };
