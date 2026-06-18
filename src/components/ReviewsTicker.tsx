@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Star, X } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
@@ -25,7 +26,7 @@ function ReviewLightbox({ review, onClose }: { review: Review; onClose: () => vo
     };
   }, [onClose]);
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       <div
@@ -64,7 +65,8 @@ function ReviewLightbox({ review, onClose }: { review: Review; onClose: () => vo
           </span>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
