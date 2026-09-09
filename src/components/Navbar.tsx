@@ -248,7 +248,7 @@ export default function Navbar() {
               </a>
               <a
                 href="#contact"
-                className="group relative inline-flex items-center gap-2.5 px-7 py-3 bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase"
+                className="group relative inline-flex items-center gap-2.5 px-7 h-[50px] bg-brand-yellow text-navy-900 font-bold text-[13px] tracking-[0.12em] uppercase"
               >
                 GET ESTIMATE
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />

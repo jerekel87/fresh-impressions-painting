@@ -35,8 +35,15 @@ export default defineConfig({
       logStats: true,
     }),
   ],
+  // Forge starts the dev server with PORT set and passes port flags after a
+  // literal "--" (which Vite 5 ignores), so honor PORT from the environment.
+  server: {
+    port: Number(process.env.PORT) || 5173,
+    strictPort: Boolean(process.env.PORT),
+    host: "localhost",
+  },
   optimizeDeps: {
-    exclude: ['lucide-react'],
+    exclude: ["lucide-react"],
   },
   build: {
     target: 'es2020',

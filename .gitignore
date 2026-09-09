@@ -21,3 +21,11 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Forge desktop app working files (canvas state, chat attachments)
+.forge
+
+# Forge's local dev sidecar installs with pnpm; production (Vercel) builds with npm + package-lock.json.
+# Keep the pnpm files out of the repo so the live build toolchain does not change.
+pnpm-lock.yaml
+pnpm-workspace.yaml
