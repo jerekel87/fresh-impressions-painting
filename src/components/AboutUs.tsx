@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import aboutImg from '../assets/about-us.jpg';
-import { Star } from 'lucide-react';
+import { Award, MapPin, Star } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+
+// Stats are CMS-driven, so icons map by position: experience, coverage, rating.
+// All three stay line icons at the same stroke weight so the row reads as a set.
+const STAT_ICONS = [Award, MapPin, Star];
 
 interface AboutContent {
   headline: string;
@@ -38,12 +42,9 @@ export default function AboutUs() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left: Content */}
           <div>
-            <div className="inline-flex items-center gap-0.5 mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-              ))}
-              <span className="text-sm font-medium text-gray-600 ml-2">5-Star Rated</span>
-            </div>
+            <span className="inline-block text-brand-teal font-semibold text-xs uppercase tracking-[0.2em] mb-4">
+              About Us
+            </span>
 
             <h2
               className="font-display uppercase text-4xl md:text-5xl lg:text-7xl font-bold text-navy-900 mb-6"
@@ -57,21 +58,26 @@ export default function AboutUs() {
             </p>
 
             {/* Stats row */}
-            <div className="grid grid-cols-3 gap-4 sm:gap-8">
-              {content.stats.map((stat, idx) => (
-                <div key={idx}>
-                  <div className="flex items-center gap-1.5 sm:gap-2">
-                    <svg className="w-[18px] h-[18px] sm:w-[22px] sm:h-[22px] flex-shrink-0" viewBox="0 0 24 24" fill="#2b98be" xmlns="http://www.w3.org/2000/svg">
-                      {idx === 0 && <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm.5 11H11V7h1.5v4.68l4.03 2.42-.75 1.23L12.5 13z"/>}
-                      {idx === 1 && <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>}
-                      {idx === 2 && <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>}
-                      {idx > 2 && <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>}
-                    </svg>
-                    <p className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-navy-900">{stat.value}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 border-y border-[#e8e0d8] divide-y divide-[#e8e0d8] sm:divide-y-0 sm:divide-x">
+              {content.stats.map((stat, idx) => {
+                const Icon = STAT_ICONS[idx % STAT_ICONS.length];
+                return (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-4 py-5 sm:flex-col sm:items-start sm:gap-0 sm:py-8 sm:px-6 sm:first:pl-0 sm:last:pr-0"
+                  >
+                    <Icon className="w-8 h-8 flex-shrink-0 text-brand-teal sm:mb-5" strokeWidth={1.5} />
+                    <div className="min-w-0">
+                      <p className="font-display text-4xl lg:text-5xl font-bold text-navy-900 leading-none">
+                        {stat.value}
+                      </p>
+                      <p className="mt-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-gray-400 leading-snug">
+                        {stat.label}
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-gray-400 text-xs sm:text-sm mt-1">{stat.label}</p>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
           </div>
