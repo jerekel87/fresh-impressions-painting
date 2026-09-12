@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
-import aboutImg from '../assets/about-us.jpg';
 import { Award, MapPin, Star } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+
+// Served from public/ so it can carry a srcset. It was shipping at 1000x1251
+// to a phone that displays it around 380x507. Keep in sync with ABOUT_VERSION
+// in scripts/generate-image-variants.mjs.
+const ABOUT_IMG = '/about/about-v1-1000.jpg';
+const ABOUT_SRCSET =
+  '/about/about-v1-400.jpg 400w, /about/about-v1-800.jpg 800w, /about/about-v1-1000.jpg 1000w';
 
 // Stats are CMS-driven, so icons map by position: experience, coverage, rating.
 // All three stay line icons at the same stroke weight so the row reads as a set.
@@ -85,12 +91,13 @@ export default function AboutUs() {
           {/* Right: Image */}
           <div className="relative">
             <img
-              src={aboutImg}
+              src={ABOUT_IMG}
+              srcSet={ABOUT_SRCSET}
+              sizes="(max-width: 1024px) 100vw, 50vw"
               alt="Ian Rosenkranz, owner of Fresh Impressions Painting"
               className="w-full aspect-[4/5] object-cover object-top"
               width={640}
               height={800}
-              sizes="(max-width: 1024px) 100vw, 50vw"
               loading="lazy"
               decoding="async"
             />

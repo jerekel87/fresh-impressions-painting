@@ -31,15 +31,19 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <Hero />
+      <main>
+        <Hero />
+        <Suspense fallback={null}>
+          <ServiceAreas />
+          <AboutUs />
+          <ServicesPreview />
+          <ServiceAreaMap />
+          <ReviewsTicker />
+          <ReelsShowcase />
+          <EstimateForm />
+        </Suspense>
+      </main>
       <Suspense fallback={null}>
-        <ServiceAreas />
-        <AboutUs />
-        <ServicesPreview />
-        <ServiceAreaMap />
-        <ReviewsTicker />
-        <ReelsShowcase />
-        <EstimateForm />
         <Footer />
       </Suspense>
     </div>

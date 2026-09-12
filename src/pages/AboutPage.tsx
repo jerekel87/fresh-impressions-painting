@@ -40,6 +40,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen">
       <Navbar />
+      <main>
 
       {/* Hero Banner */}
       <section className="bg-navy-900 pt-[100px] sm:pt-[132px]">
@@ -255,6 +256,8 @@ export default function AboutPage() {
 
       <EstimateForm />
 
+
+      </main>
 
       <Footer />
     </div>

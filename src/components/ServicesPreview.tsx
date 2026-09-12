@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
-import { supabaseImgUrl } from '../lib/imageUrl';
+import { supabaseImgUrl, supabaseImgSrcSet } from '../lib/imageUrl';
 
 const SERVICE_LIST = [
   { title: 'Interior Painting', slug: 'interior-painting', description: 'Flawless finishes that transform living spaces with warmth and lasting beauty.' },
@@ -43,7 +43,8 @@ export default function ServicesPreview() {
           SERVICE_LIST.map((s) => {
             const row = dbMap.get(s.slug);
             const img = row?.about_image || row?.hero_image;
-            return { ...s, image: img ? supabaseImgUrl(img, 600, 80) : null };
+            // store the raw URL; widths are chosen at render time for the srcset
+            return { ...s, image: img || null };
           })
         );
       });
@@ -139,7 +140,8 @@ export default function ServicesPreview() {
           >
             {card.image ? (
               <img
-                src={card.image}
+                src={supabaseImgUrl(card.image, 600, 72)}
+                srcSet={supabaseImgSrcSet(card.image, [400, 600, 800], 72) || undefined}
                 alt={card.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 width={360}

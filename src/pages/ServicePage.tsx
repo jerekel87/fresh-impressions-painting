@@ -333,6 +333,7 @@ export default function ServicePage() {
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
+      <main>
 
       {/* ── Hero ── */}
       <section className="relative bg-navy-900 pt-[100px] sm:pt-[132px] overflow-hidden">
@@ -675,6 +676,8 @@ export default function ServicePage() {
       </section>
 
       <EstimateForm />
+      </main>
+
       <Footer />
     </div>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
-import { supabaseImgUrl } from '../lib/imageUrl';
+import { supabaseImgUrl, supabaseImgSrcSet } from '../lib/imageUrl';
 
 const SERVICE_SLUGS = [
   { title: 'Interior Painting', slug: 'interior-painting' },
@@ -45,7 +45,8 @@ export default function ServiceAreas() {
         for (const svc of SERVICE_SLUGS) {
           const row = dbMap.get(svc.slug);
           const img = row?.about_image || row?.hero_image;
-          if (img) found.push({ title: svc.title, slug: svc.slug, image: supabaseImgUrl(img) });
+          // store the raw URL; widths are chosen at render time for the srcset
+          if (img) found.push({ title: svc.title, slug: svc.slug, image: img });
         }
         setItems(found);
         setLoaded(true);
@@ -126,7 +127,8 @@ export default function ServiceAreas() {
             className="group relative w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] flex-shrink-0 overflow-hidden"
           >
             <img
-              src={item.image}
+              src={supabaseImgUrl(item.image, 600, 72)}
+              srcSet={supabaseImgSrcSet(item.image, [300, 450, 600], 72) || undefined}
               alt={item.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               width={300}

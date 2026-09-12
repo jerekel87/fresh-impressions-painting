@@ -59,7 +59,7 @@ export default function Hero() {
         <a
           href="#reviews"
           className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/10 backdrop-blur-md pl-3.5 pr-4 py-2 mb-6 sm:mb-8 shadow-[0_8px_30px_rgba(0,0,0,0.35)] hover:bg-white/15 transition-colors duration-300"
-          aria-label="Rated 5.0 on Google. Read our reviews"
+          aria-label="5.0 Google Rating. Read our reviews."
         >
           <span className="flex items-center gap-0.5 drop-shadow-[0_0_6px_rgba(250,207,16,0.45)]">
             {[...Array(5)].map((_, i) => (

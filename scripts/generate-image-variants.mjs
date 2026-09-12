@@ -32,6 +32,14 @@ const HERO_WIDTHS = [800, 1280, 1920];
 const HERO_VERSION = 'v1';
 const HERO_PUBLIC_DIR = join(PUBLIC, 'hero');
 
+// The About photo on the home page is shipped at 1000x1251 but shown at about
+// 380x507 on a phone. Same public/ treatment as the hero so it can carry a
+// srcset without the bundler renaming it every build.
+const ABOUT_SRC = join(ASSETS, 'about-us.jpg');
+const ABOUT_WIDTHS = [400, 800, 1000]; // 1000 is the source's own width
+const ABOUT_VERSION = 'v1';
+const ABOUT_PUBLIC_DIR = join(PUBLIC, 'about');
+
 // Navbar shows the logo at ~83x40 CSS px, footer at ~99x48. 400px covers 3x
 // pixel density with room to spare; the source is 800px.
 const LOGO_SRC = join(ASSETS, 'freshimpressionspainting-web-logo.png');
@@ -71,6 +79,17 @@ async function run() {
       .jpeg({ quality: 72, mozjpeg: true, progressive: true })
       .toFile(out);
     console.log(`  hero  ${String(w).padStart(4)}w  ${kb(heroBefore).padStart(8)} -> ${kb(await size(out)).padStart(8)}  ${out}`);
+  }
+
+  const aboutBefore = await size(ABOUT_SRC);
+  await mkdir(ABOUT_PUBLIC_DIR, { recursive: true });
+  for (const w of ABOUT_WIDTHS) {
+    const out = join(ABOUT_PUBLIC_DIR, `about-${ABOUT_VERSION}-${w}.jpg`);
+    await sharp(ABOUT_SRC)
+      .resize({ width: w, withoutEnlargement: true })
+      .jpeg({ quality: 72, mozjpeg: true, progressive: true })
+      .toFile(out);
+    console.log(`  about ${String(w).padStart(4)}w  ${kb(aboutBefore).padStart(8)} -> ${kb(await size(out)).padStart(8)}  ${out}`);
   }
 
   const logoOut = LOGO_SRC.replace(/\.png$/i, `-${LOGO_WIDTH}.png`);

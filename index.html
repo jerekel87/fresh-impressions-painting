@@ -49,7 +49,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <!-- Preconnect to Supabase -->
+    <!-- Two hints on purpose: images load without CORS, the REST reads are
+         CORS requests, and a preconnect only matches a request whose
+         crossorigin mode is the same. -->
     <link rel="preconnect" href="https://dpjucgfbquitdnkrqyll.supabase.co" />
+    <link rel="preconnect" href="https://dpjucgfbquitdnkrqyll.supabase.co" crossorigin />
     <link rel="dns-prefetch" href="https://dpjucgfbquitdnkrqyll.supabase.co" />
 
     <!-- Fonts - loaded async to avoid render-blocking -->

@@ -24,6 +24,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen">
       <Navbar />
+      <main>
 
       {/* Hero Banner */}
       <section className="bg-navy-900 pt-[100px] sm:pt-[132px]">
@@ -155,6 +156,8 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      </main>
 
       <Footer />
     </div>
