@@ -32,17 +32,28 @@
     <meta name="geo.region" content="US-TX" />
     <meta name="geo.placename" content="Granbury" />
 
-    <!-- Preload the LCP hero image so it starts downloading from the first
-         byte of HTML instead of waiting for the JS bundle to render. Must stay
-         in sync with HERO_SRC/HERO_SRCSET in src/components/Hero.tsx. -->
-    <link
-      rel="preload"
-      as="image"
-      href="/hero/hero-v1-1920.jpg"
-      imagesrcset="/hero/hero-v1-800.jpg 800w, /hero/hero-v1-1280.jpg 1280w, /hero/hero-v1-1920.jpg 1920w"
-      imagesizes="100vw"
-      fetchpriority="high"
-    />
+    <!-- Preload the LCP hero image so it starts downloading while the HTML is
+         still parsing, instead of waiting for the JS bundle to render it
+         (measured ~1.2s later). This is a single-page app, so index.html is
+         served for every route; injecting the link from an inline script keeps
+         inner pages from downloading a hero they never show. The script runs
+         during head parsing, so the request still starts long before the
+         bundle. Keep in sync with HERO_SRC/HERO_SRCSET in Hero.tsx. -->
+    <script>
+      if (location.pathname === '/') {
+        var heroPreload = document.createElement('link');
+        heroPreload.rel = 'preload';
+        heroPreload.as = 'image';
+        heroPreload.href = '/hero/hero-v1-1920.jpg';
+        heroPreload.setAttribute(
+          'imagesrcset',
+          '/hero/hero-v1-800.jpg 800w, /hero/hero-v1-1280.jpg 1280w, /hero/hero-v1-1920.jpg 1920w'
+        );
+        heroPreload.setAttribute('imagesizes', '100vw');
+        heroPreload.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(heroPreload);
+      }
+    </script>
 
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
