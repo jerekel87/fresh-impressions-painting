@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { Home, LogOut, Menu, X, Users, MapPin, Phone, Search, Paintbrush, Inbox, Settings, ShieldCheck, Globe } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
-import logo from '../../assets/freshimpressionspainting-web-logo-400.png';
+import BrandLogo from '../../components/BrandLogo';
 
 export default function AdminLayout() {
   const [user, setUser] = useState<{ email: string } | null>(null);
@@ -70,7 +70,7 @@ export default function AdminLayout() {
       {/* Sidebar */}
       <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-[#0F1E2E] flex flex-col transform transition-transform duration-300 lg:transform-none ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
         <div className="px-4 py-4 border-b border-white/[0.08] flex items-center justify-between">
-          <img src={logo} alt="Fresh Impressions" className="h-12 opacity-90" />
+          <BrandLogo className="h-12 opacity-90" alt="Fresh Impressions" />
           <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-white/40 hover:text-white">
             <X className="w-5 h-5" />
           </button>

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { X, Phone, ArrowRight, ChevronDown } from 'lucide-react';
-import logo from '../assets/freshimpressionspainting-web-logo-400.png';
+import BrandLogo from '../components/BrandLogo';
 
 const services = [
   { title: 'Interior Painting', slug: 'interior-painting' },
@@ -90,16 +90,25 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
+    // This positions the desktop Services dropdown, which is `hidden lg:block`
+    // and therefore never rendered on a phone. Reading getBoundingClientRect
+    // synchronously right after mount forced a layout recalculation that
+    // measured 72ms on a mid-range Android. Skip it below the lg breakpoint and
+    // defer it a frame everywhere else so it never blocks the first paint.
     const update = () => {
+      if (window.innerWidth < 1024) return;
       if (servicesBtnRef.current && navRef.current) {
         const btnRect = servicesBtnRef.current.getBoundingClientRect();
         const navRect = navRef.current.getBoundingClientRect();
         setDropdownLeft(btnRect.left - navRect.left);
       }
     };
-    update();
+    const raf = requestAnimationFrame(update);
     window.addEventListener('resize', update);
-    return () => window.removeEventListener('resize', update);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', update);
+    };
   }, []);
 
   const handleServicesEnter = () => {
@@ -168,15 +177,12 @@ export default function Navbar() {
           >
             {/* Logo */}
             <NavAnchor href="/" className="flex-shrink-0 relative">
-              <img
-                src={logo}
-                alt="Fresh Impressions Painting"
+              <BrandLogo
                 className={`w-auto max-w-[160px] sm:max-w-none transition-all duration-700 ${
                   scrolled ? 'h-8 sm:h-11 lg:h-12' : 'h-10 sm:h-13 lg:h-[60px]'
                 }`}
                 width={160}
                 height={60}
-                decoding="async"
               />
             </NavAnchor>
 
@@ -336,7 +342,7 @@ export default function Navbar() {
 
         {/* Mobile menu header */}
         <div className="flex items-center justify-between px-6 h-[72px] border-b border-white/[0.06]">
-          <img src={logo} alt="Fresh Impressions Painting" className="h-10 w-auto" width={107} height={40} loading="lazy" decoding="async" />
+          <BrandLogo className="h-10 w-auto" width={107} height={40} loading="lazy" />
           <button
             onClick={() => setIsOpen(false)}
             className="w-11 h-11 flex items-center justify-center text-white"

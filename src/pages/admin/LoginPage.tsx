@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
-import logo from '../../assets/freshimpressionspainting-web-logo-400.png';
+import BrandLogo from '../../components/BrandLogo';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -46,7 +46,7 @@ export default function LoginPage() {
     <div className="min-h-screen bg-[#0a1e30] flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-10">
-          <img src={logo} alt="Fresh Impressions Painting" className="h-10 mx-auto mb-8 opacity-80" />
+          <BrandLogo className="h-10 mx-auto mb-8 opacity-80" />
           <h1 className="font-display uppercase text-2xl font-bold text-white tracking-wide">
             Admin Portal
           </h1>

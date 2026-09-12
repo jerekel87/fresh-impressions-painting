@@ -8,6 +8,8 @@ import { supabase } from '../lib/supabase';
 const ABOUT_IMG = '/about/about-v1-1000.jpg';
 const ABOUT_SRCSET =
   '/about/about-v1-400.jpg 400w, /about/about-v1-800.jpg 800w, /about/about-v1-1000.jpg 1000w';
+const ABOUT_SRCSET_WEBP =
+  '/about/about-v1-400.webp 400w, /about/about-v1-800.webp 800w, /about/about-v1-1000.webp 1000w';
 
 // Stats are CMS-driven, so icons map by position: experience, coverage, rating.
 // All three stay line icons at the same stroke weight so the row reads as a set.
@@ -90,17 +92,24 @@ export default function AboutUs() {
 
           {/* Right: Image */}
           <div className="relative">
-            <img
-              src={ABOUT_IMG}
-              srcSet={ABOUT_SRCSET}
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              alt="Ian Rosenkranz, owner of Fresh Impressions Painting"
-              className="w-full aspect-[4/5] object-cover object-top"
-              width={640}
-              height={800}
-              loading="lazy"
-              decoding="async"
-            />
+            <picture>
+              <source
+                type="image/webp"
+                srcSet={ABOUT_SRCSET_WEBP}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <img
+                src={ABOUT_IMG}
+                srcSet={ABOUT_SRCSET}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                alt="Ian Rosenkranz, owner of Fresh Impressions Painting"
+                className="w-full aspect-[4/5] object-cover object-top"
+                width={640}
+                height={800}
+                loading="lazy"
+                decoding="async"
+              />
+            </picture>
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-navy-900/80 to-transparent pt-16 pb-6 px-6">
               <p className="text-white font-bold text-lg">{content.founder_name}</p>
               <p className="text-white/60 text-sm">{content.founder_title}</p>

@@ -43,7 +43,9 @@ const ABOUT_PUBLIC_DIR = join(PUBLIC, 'about');
 // Navbar shows the logo at ~83x40 CSS px, footer at ~99x48. 400px covers 3x
 // pixel density with room to spare; the source is 800px.
 const LOGO_SRC = join(ASSETS, 'freshimpressionspainting-web-logo.png');
-const LOGO_WIDTH = 400;
+const LOGO_WIDTHS = [200, 300, 400];
+const LOGO_VERSION = 'v1';
+const LOGO_PUBLIC_DIR = join(PUBLIC, 'logo');
 
 // Open Graph / Twitter share card. The tags already declare 1200x630.
 const OG_OUT = join(PUBLIC, 'og-image.jpg');
@@ -78,7 +80,12 @@ async function run() {
       .resize({ width: w, withoutEnlargement: true })
       .jpeg({ quality: 72, mozjpeg: true, progressive: true })
       .toFile(out);
-    console.log(`  hero  ${String(w).padStart(4)}w  ${kb(heroBefore).padStart(8)} -> ${kb(await size(out)).padStart(8)}  ${out}`);
+    const outWebp = out.replace(/\.jpg$/, '.webp');
+    await sharp(HERO_SRC)
+      .resize({ width: w, withoutEnlargement: true })
+      .webp({ quality: 72 })
+      .toFile(outWebp);
+    console.log(`  hero  ${String(w).padStart(4)}w  jpg ${kb(await size(out)).padStart(8)}   webp ${kb(await size(outWebp)).padStart(8)}`);
   }
 
   const aboutBefore = await size(ABOUT_SRC);
@@ -89,16 +96,28 @@ async function run() {
       .resize({ width: w, withoutEnlargement: true })
       .jpeg({ quality: 72, mozjpeg: true, progressive: true })
       .toFile(out);
-    console.log(`  about ${String(w).padStart(4)}w  ${kb(aboutBefore).padStart(8)} -> ${kb(await size(out)).padStart(8)}  ${out}`);
+    const outWebp = out.replace(/\.jpg$/, '.webp');
+    await sharp(ABOUT_SRC)
+      .resize({ width: w, withoutEnlargement: true })
+      .webp({ quality: 72 })
+      .toFile(outWebp);
+    console.log(`  about ${String(w).padStart(4)}w  jpg ${kb(await size(out)).padStart(8)}   webp ${kb(await size(outWebp)).padStart(8)}`);
   }
 
-  const logoOut = LOGO_SRC.replace(/\.png$/i, `-${LOGO_WIDTH}.png`);
-  const logoBefore = await size(LOGO_SRC);
-  await sharp(LOGO_SRC)
-    .resize({ width: LOGO_WIDTH, withoutEnlargement: true })
-    .png({ compressionLevel: 9, adaptiveFiltering: true, palette: true })
-    .toFile(logoOut);
-  console.log(`  logo  ${String(LOGO_WIDTH).padStart(4)}w  ${kb(logoBefore).padStart(8)} -> ${kb(await size(logoOut)).padStart(8)}  ${logoOut}`);
+  await mkdir(LOGO_PUBLIC_DIR, { recursive: true });
+  for (const w of LOGO_WIDTHS) {
+    const out = join(LOGO_PUBLIC_DIR, `logo-${LOGO_VERSION}-${w}.png`);
+    await sharp(LOGO_SRC)
+      .resize({ width: w, withoutEnlargement: true })
+      .png({ compressionLevel: 9, adaptiveFiltering: true, palette: true })
+      .toFile(out);
+    const outWebp = out.replace(/\.png$/, '.webp');
+    await sharp(LOGO_SRC)
+      .resize({ width: w, withoutEnlargement: true })
+      .webp({ quality: 82 })
+      .toFile(outWebp);
+    console.log(`  logo  ${String(w).padStart(4)}w  png ${kb(await size(out)).padStart(8)}   webp ${kb(await size(outWebp)).padStart(8)}`);
+  }
 
   await sharp(HERO_SRC)
     .resize({ width: 1200, height: 630, fit: 'cover', position: 'attention' })

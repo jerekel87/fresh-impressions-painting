@@ -44,10 +44,11 @@
         var heroPreload = document.createElement('link');
         heroPreload.rel = 'preload';
         heroPreload.as = 'image';
-        heroPreload.href = '/hero/hero-v1-1920.jpg';
+        heroPreload.type = 'image/webp';
+        heroPreload.href = '/hero/hero-v1-1920.webp';
         heroPreload.setAttribute(
           'imagesrcset',
-          '/hero/hero-v1-800.jpg 800w, /hero/hero-v1-1280.jpg 1280w, /hero/hero-v1-1920.jpg 1920w'
+          '/hero/hero-v1-800.webp 800w, /hero/hero-v1-1280.webp 1280w, /hero/hero-v1-1920.webp 1920w'
         );
         heroPreload.setAttribute('imagesizes', '100vw');
         heroPreload.setAttribute('fetchpriority', 'high');

@@ -8,6 +8,8 @@ import { supabase } from '../lib/supabase';
 const HERO_SRC = '/hero/hero-v1-1920.jpg';
 const HERO_SRCSET =
   '/hero/hero-v1-800.jpg 800w, /hero/hero-v1-1280.jpg 1280w, /hero/hero-v1-1920.jpg 1920w';
+const HERO_SRCSET_WEBP =
+  '/hero/hero-v1-800.webp 800w, /hero/hero-v1-1280.webp 1280w, /hero/hero-v1-1920.webp 1920w';
 
 interface HeroContent {
   headline: string;
@@ -39,17 +41,20 @@ export default function Hero() {
     <section id="home" className="relative min-h-[560px] h-[85vh] sm:h-screen sm:min-h-[680px] max-h-[1100px]">
       {/* Full-bleed background */}
       <div className="absolute inset-0">
-        <img
-          src={HERO_SRC}
-          srcSet={HERO_SRCSET}
-          sizes="100vw"
-          alt="Fresh Impressions Painting van in front of a home"
-          className="w-full h-full object-cover object-[center_70%] sm:object-center"
-          width={1920}
-          height={982}
-          fetchpriority="high"
-          decoding="async"
-        />
+        <picture className="block w-full h-full">
+          <source type="image/webp" srcSet={HERO_SRCSET_WEBP} sizes="100vw" />
+          <img
+            src={HERO_SRC}
+            srcSet={HERO_SRCSET}
+            sizes="100vw"
+            alt="Fresh Impressions Painting van in front of a home"
+            className="w-full h-full object-cover object-[center_70%] sm:object-center"
+            width={1920}
+            height={982}
+            fetchpriority="high"
+            decoding="async"
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-navy-900/80 via-navy-900/60 to-navy-900/80 sm:from-navy-900/70 sm:via-navy-900/50 sm:to-navy-900/80" />
       </div>
 
