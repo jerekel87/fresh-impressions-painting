@@ -33,7 +33,11 @@ export default function HomePage() {
       <Navbar />
       <main>
         <Hero />
-        <Suspense fallback={null}>
+        {/* Reserve a screenful while the below-the-fold sections load. Without
+            it the footer can paint inside the viewport for a moment and then
+            collapse away once the real sections arrive, which measured as a
+            0.15 layout shift on the runs where the footer chunk won the race. */}
+        <Suspense fallback={<div className="min-h-screen" />}>
           <ServiceAreas />
           <AboutUs />
           <ServicesPreview />
