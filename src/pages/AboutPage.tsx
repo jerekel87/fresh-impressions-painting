@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import EstimateForm from '../components/EstimateForm';
 import Footer from '../components/Footer';
 import { supabase } from '../lib/supabase';
+import { supabaseImgUrl, supabaseImgSrcSet } from '../lib/imageUrl';
 
 export default function AboutPage() {
   useSeo('about');
@@ -31,6 +32,10 @@ export default function AboutPage() {
         setPhotosLoaded(true);
       });
   }, []);
+
+  // Keep the two-column layout reserved while the photos are still being
+  // fetched; only collapse to one column once we know there are none.
+  const showPhotoColumn = !photosLoaded || !!(photo1 || photo2 || photo3);
 
   return (
     <div className="min-h-screen">
@@ -64,38 +69,52 @@ export default function AboutPage() {
       {/* Main Story Section */}
       <section className="py-16 sm:py-24 md:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`grid grid-cols-1 ${photosLoaded && (photo1 || photo2 || photo3) ? 'lg:grid-cols-2' : ''} gap-12 lg:gap-20 items-start`}>
-            {/* Left: Photo collage — only render when photos are loaded and available */}
-            {photosLoaded && (photo1 || photo2 || photo3) && (
+          <div className={`grid grid-cols-1 ${showPhotoColumn ? 'lg:grid-cols-2' : ''} gap-12 lg:gap-20 items-start`}>
+            {/* Left: Photo collage. The tiles keep their shape whether or not a
+                photo has arrived yet, so the story column never jumps sideways
+                or down when the fetch resolves. */}
+            {showPhotoColumn && (
             <div className="relative">
               <div className="grid grid-cols-12 grid-rows-12 gap-3 sm:gap-4 h-[420px] sm:h-[640px] lg:h-[720px]">
-                {photo1 && (
-                <div className="col-span-7 row-span-12 overflow-hidden">
+                <div className="col-span-7 row-span-12 overflow-hidden bg-gray-100">
+                  {photo1 && (
                   <img
-                    src={photo1}
+                    src={supabaseImgUrl(photo1, 800, 78)}
+                    srcSet={supabaseImgSrcSet(photo1, [400, 800, 1200]) || undefined}
+                    sizes="(max-width: 1024px) 58vw, 30vw"
                     alt="Ian Rosenkranz with his wife, daughter, and dog"
                     className="w-full h-full object-cover"
+                    fetchpriority="high"
+                    decoding="async"
                   />
+                  )}
                 </div>
-                )}
-                {photo2 && (
-                <div className="col-span-5 row-span-6 overflow-hidden">
+                <div className="col-span-5 row-span-6 overflow-hidden bg-gray-100">
+                  {photo2 && (
                   <img
-                    src={photo2}
+                    src={supabaseImgUrl(photo2, 600, 78)}
+                    srcSet={supabaseImgSrcSet(photo2, [300, 600, 900]) || undefined}
+                    sizes="(max-width: 1024px) 41vw, 21vw"
                     alt="Ian working on a lift"
                     className="w-full h-full object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
                   />
+                  )}
                 </div>
-                )}
-                {photo3 && (
-                <div className="col-span-5 row-span-6 overflow-hidden">
+                <div className="col-span-5 row-span-6 overflow-hidden bg-gray-100">
+                  {photo3 && (
                   <img
-                    src={photo3}
+                    src={supabaseImgUrl(photo3, 600, 78)}
+                    srcSet={supabaseImgSrcSet(photo3, [300, 600, 900]) || undefined}
+                    sizes="(max-width: 1024px) 41vw, 21vw"
                     alt="Ian spray painting an exterior"
                     className="w-full h-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
+                  )}
                 </div>
-                )}
               </div>
             </div>
             )}

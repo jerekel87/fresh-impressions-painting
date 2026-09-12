@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
-import logo from '../../assets/freshimpressionspainting-web-logo.png';
+import logo from '../../assets/freshimpressionspainting-web-logo-400.png';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');

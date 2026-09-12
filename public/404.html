@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, follow" />
+    <title>Page not found | Fresh Impressions Painting</title>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: #10263c;
+        color: #fff;
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+        text-align: center;
+      }
+      .wrap { max-width: 480px; }
+      .code {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #2b98be;
+        margin: 0 0 16px;
+      }
+      h1 {
+        font-size: clamp(2rem, 8vw, 3.25rem);
+        line-height: 1.08;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin: 0 0 16px;
+      }
+      p { color: rgba(255, 255, 255, 0.6); line-height: 1.75; margin: 0 0 32px; }
+      .actions { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+      a.btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 32px;
+        background: #facf10;
+        color: #10263c;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        width: 100%;
+      }
+      a.phone { color: #fff; text-decoration: none; font-weight: 600; }
+      a.phone:hover { color: #facf10; }
+      @media (min-width: 480px) {
+        .actions { flex-direction: row; justify-content: center; gap: 24px; }
+        a.btn { width: auto; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="code">Page not found</p>
+      <h1>That page isn't here</h1>
+      <p>
+        The link may be out of date or mistyped. Head back to the homepage, or
+        call and we'll point you the right way.
+      </p>
+      <div class="actions">
+        <a class="btn" href="/">Back to homepage</a>
+        <a class="phone" href="tel:+18172439116">(817) 243-9116</a>
+      </div>
+    </div>
+  </body>
+</html>

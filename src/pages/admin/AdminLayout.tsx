@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 import { Home, LogOut, Menu, X, Users, MapPin, Phone, Search, Paintbrush, Inbox, Settings, ShieldCheck, Globe } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
-import logo from '../../assets/freshimpressionspainting-web-logo.png';
+import logo from '../../assets/freshimpressionspainting-web-logo-400.png';
 
 export default function AdminLayout() {
   const [user, setUser] = useState<{ email: string } | null>(null);

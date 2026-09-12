@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { supabaseImgUrl } from '../lib/imageUrl';
 
 const SERVICE_SLUGS = [
   { title: 'Interior Painting', slug: 'interior-painting' },
@@ -13,16 +14,6 @@ const SERVICE_SLUGS = [
   { title: 'New Construction', slug: 'new-construction-painting' },
   { title: 'Staining', slug: 'staining' },
 ];
-
-// IMPORTANT: resize=contain is required. Without it, Supabase defaults to
-// resize=cover, which (with a width-only request) returns a distorted, cropped
-// file — e.g. a 1290x2796 portrait comes back as 400x2796 instead of 400x867.
-// contain scales proportionally and never crops the source image.
-function supabaseImgUrl(url: string, width = 600, quality = 78): string {
-  if (!url || !url.includes('/storage/v1/object/public/')) return url;
-  const base = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
-  return `${base}?width=${width}&quality=${quality}&resize=contain`;
-}
 
 interface ServiceItem {
   title: string;
@@ -38,21 +29,26 @@ export default function ServiceAreas() {
   const isDragging = useRef(false);
   const startX = useRef(0);
   const [items, setItems] = useState<ServiceItem[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     supabase
       .from('services')
       .select('slug, about_image, hero_image')
       .then(({ data }) => {
-        if (!data) return;
+        if (!data) {
+          setLoaded(true);
+          return;
+        }
         const dbMap = new Map(data.map((row) => [row.slug, row]));
-        const loaded: ServiceItem[] = [];
+        const found: ServiceItem[] = [];
         for (const svc of SERVICE_SLUGS) {
           const row = dbMap.get(svc.slug);
           const img = row?.about_image || row?.hero_image;
-          if (img) loaded.push({ title: svc.title, slug: svc.slug, image: supabaseImgUrl(img) });
+          if (img) found.push({ title: svc.title, slug: svc.slug, image: supabaseImgUrl(img) });
         }
-        setItems(loaded);
+        setItems(found);
+        setLoaded(true);
       });
   }, []);
 
@@ -104,7 +100,11 @@ export default function ServiceAreas() {
 
   const handleTouchEnd = () => { isDragging.current = false; };
 
-  if (items.length === 0) return null;
+  // The tiles are a fixed-height strip. Hold that height while they load so
+  // the sections below don't get shoved down when the images arrive.
+  if (items.length === 0) {
+    return loaded ? null : <section className="bg-navy-900 h-[200px] sm:h-[300px]" aria-hidden="true" />;
+  }
 
   const repeated = Array.from({ length: Math.ceil(MIN_TILES / items.length) }, () => items).flat();
   const allItems = [...repeated, ...repeated];

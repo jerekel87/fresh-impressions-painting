@@ -11,18 +11,7 @@ import Footer from '../components/Footer';
 import { services } from '../data/services';
 import type { BeforeAfterItem } from '../data/services';
 import { supabase } from '../lib/supabase';
-
-// Apply Supabase image transformation for any image stored in Supabase Storage.
-// Pexels and other external URLs pass through unchanged.
-// resize=contain is required — without it Supabase defaults to resize=cover,
-// which on a width-only request distorts/crops the file (a portrait image keeps
-// its full original height while the width is forced down). contain scales
-// proportionally and never crops.
-function supabaseImgUrl(url: string, width = 1400, quality = 75): string {
-  if (!url || !url.includes('/storage/v1/object/public/')) return url;
-  const base = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
-  return `${base}?width=${width}&quality=${quality}&resize=contain`;
-}
+import { supabaseImgUrl } from '../lib/imageUrl';
 
 /* ─── Before/After Slider ─────────────────────────────────────── */
 
@@ -338,7 +327,7 @@ export default function ServicePage() {
     galleryImages: cmsData?.gallery_images?.length
       ? cmsData.gallery_images.map((img: string) => supabaseImgUrl(img, 600, 80))
       : [],
-    aboutImage: cmsData?.about_image ? supabaseImgUrl(cmsData.about_image) : staticService.aboutImage,
+    aboutImage: cmsData?.about_image ? supabaseImgUrl(cmsData.about_image, 1400, 75) : staticService.aboutImage,
   };
 
   return (
@@ -348,7 +337,7 @@ export default function ServicePage() {
       {/* ── Hero ── */}
       <section className="relative bg-navy-900 pt-[100px] sm:pt-[132px] overflow-hidden">
         <div className="absolute inset-0">
-          <img src={service.heroImage} alt={service.title} className="w-full h-full object-cover opacity-40" style={service.heroImagePosition ? { objectPosition: service.heroImagePosition } : undefined} width={1920} height={1080} fetchPriority="high" decoding="async" />
+          <img src={service.heroImage} alt={service.title} className="w-full h-full object-cover opacity-40" style={service.heroImagePosition ? { objectPosition: service.heroImagePosition } : undefined} width={1920} height={1080} fetchpriority="high" decoding="async" />
           <div className="absolute inset-0 bg-gradient-to-r from-navy-900 via-navy-900/85 to-navy-900/60" />
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 md:py-28">
@@ -415,9 +404,14 @@ export default function ServicePage() {
       </section>
 
       {/* ── Scrolling Gallery ── */}
-      {service.galleryImages.length > 0 && (
+      {/* Gallery images only exist in the CMS, so hold the strip's fixed height
+          until the fetch resolves. Otherwise it pops in and shoves the rest of
+          the page down. */}
+      {service.galleryImages.length > 0 ? (
         <ScrollingGallery images={service.galleryImages} />
-      )}
+      ) : cmsData === null ? (
+        <section className="bg-navy-900 h-[200px] sm:h-[300px]" aria-hidden="true" />
+      ) : null}
 
       {/* ── About Service ── */}
       <section id="about-service" className="py-20 sm:py-28 md:py-36 bg-white">
@@ -554,7 +548,7 @@ export default function ServicePage() {
             {service.beforeAfter
               .filter((ba: BeforeAfterItem) => !('type' in ba && ba.type === 'series'))
               .map((ba: BeforeAfterItem, idx) => (
-                <BeforeAfterSlider key={idx} before={supabaseImgUrl((ba as any).before)} after={supabaseImgUrl((ba as any).after)} caption={ba.caption} />
+                <BeforeAfterSlider key={idx} before={supabaseImgUrl((ba as any).before, 1400, 75)} after={supabaseImgUrl((ba as any).after, 1400, 75)} caption={ba.caption} />
               ))}
           </div>
         </div>

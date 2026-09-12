@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Phone, Star } from 'lucide-react';
-import heroBg from '../assets/hero-bg-image.jpg';
+import heroBg1920 from '../assets/hero-bg-image-1920.jpg';
+import heroBg1280 from '../assets/hero-bg-image-1280.jpg';
+import heroBg800 from '../assets/hero-bg-image-800.jpg';
 import { supabase } from '../lib/supabase';
 
 interface HeroContent {
@@ -34,13 +36,15 @@ export default function Hero() {
       {/* Full-bleed background */}
       <div className="absolute inset-0">
         <img
-          src={heroBg}
+          src={heroBg1920}
+          srcSet={`${heroBg800} 800w, ${heroBg1280} 1280w, ${heroBg1920} 1920w`}
+          sizes="100vw"
           alt="Fresh Impressions Painting van in front of a home"
           className="w-full h-full object-cover object-[center_70%] sm:object-center"
           width={1920}
-          height={1080}
-          sizes="100vw"
-          fetchPriority="high"
+          height={982}
+          fetchpriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-navy-900/80 via-navy-900/60 to-navy-900/80 sm:from-navy-900/70 sm:via-navy-900/50 sm:to-navy-900/80" />
       </div>

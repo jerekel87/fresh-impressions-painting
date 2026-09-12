@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import logo from '../assets/freshimpressionspainting-web-logo.png';
+import logo from '../assets/freshimpressionspainting-web-logo-400.png';
 import { supabase } from '../lib/supabase';
 import { useSocialLinks } from '../lib/useSocialLinks';
 

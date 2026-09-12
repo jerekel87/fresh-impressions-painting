@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { X, Phone, ArrowRight, ChevronDown } from 'lucide-react';
-import logo from '../assets/freshimpressionspainting-web-logo.png';
+import logo from '../assets/freshimpressionspainting-web-logo-400.png';
 
 const services = [
   { title: 'Interior Painting', slug: 'interior-painting' },

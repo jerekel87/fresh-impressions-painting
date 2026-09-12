@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { supabaseImgUrl } from '../lib/imageUrl';
 
 const SERVICE_LIST = [
   { title: 'Interior Painting', slug: 'interior-painting', description: 'Flawless finishes that transform living spaces with warmth and lasting beauty.' },
@@ -13,16 +14,6 @@ const SERVICE_LIST = [
   { title: 'New Construction Painting', slug: 'new-construction-painting', description: 'Complete painting solutions for new builds — from primer to final coat.' },
   { title: 'Staining', slug: 'staining', description: 'Protective finishes that preserve and beautify wood surfaces inside and out.' },
 ];
-
-// resize=contain is required — without it Supabase defaults to resize=cover,
-// which on a width-only request returns a distorted/cropped file (a portrait
-// 1290x2796 comes back as 600x2796 instead of proportional). contain scales
-// proportionally and never crops the source image.
-function supabaseImgUrl(url: string, width = 600, quality = 80): string {
-  if (!url || !url.includes('/storage/v1/object/public/')) return url;
-  const base = url.replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
-  return `${base}?width=${width}&quality=${quality}&resize=contain`;
-}
 
 interface ServiceCard {
   title: string;
@@ -52,7 +43,7 @@ export default function ServicesPreview() {
           SERVICE_LIST.map((s) => {
             const row = dbMap.get(s.slug);
             const img = row?.about_image || row?.hero_image;
-            return { ...s, image: img ? supabaseImgUrl(img) : null };
+            return { ...s, image: img ? supabaseImgUrl(img, 600, 80) : null };
           })
         );
       });
