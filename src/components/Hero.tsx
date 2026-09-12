@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { ArrowRight, Phone, Star } from 'lucide-react';
-import heroBg1920 from '../assets/hero-bg-image-1920.jpg';
-import heroBg1280 from '../assets/hero-bg-image-1280.jpg';
-import heroBg800 from '../assets/hero-bg-image-800.jpg';
 import { supabase } from '../lib/supabase';
+
+// Served from public/ (not bundled) so index.html can preload it before the
+// JS has even downloaded. Keep these in sync with index.html's preload link
+// and with HERO_VERSION in scripts/generate-image-variants.mjs.
+const HERO_SRC = '/hero/hero-v1-1920.jpg';
+const HERO_SRCSET =
+  '/hero/hero-v1-800.jpg 800w, /hero/hero-v1-1280.jpg 1280w, /hero/hero-v1-1920.jpg 1920w';
 
 interface HeroContent {
   headline: string;
@@ -36,8 +40,8 @@ export default function Hero() {
       {/* Full-bleed background */}
       <div className="absolute inset-0">
         <img
-          src={heroBg1920}
-          srcSet={`${heroBg800} 800w, ${heroBg1280} 1280w, ${heroBg1920} 1920w`}
+          src={HERO_SRC}
+          srcSet={HERO_SRCSET}
           sizes="100vw"
           alt="Fresh Impressions Painting van in front of a home"
           className="w-full h-full object-cover object-[center_70%] sm:object-center"

@@ -10,7 +10,7 @@
  * the build's prebuild step rewrites `src/assets` in place and we want these
  * derived files to stay exactly as generated here.
  */
-import { stat } from 'node:fs/promises';
+import { stat, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const ASSETS = 'src/assets';
@@ -21,6 +21,16 @@ const PUBLIC = 'public';
 // most of its bytes.
 const HERO_SRC = join(ASSETS, 'hero-bg-image.jpg');
 const HERO_WIDTHS = [800, 1280, 1920];
+
+// The hero variants are written to public/ rather than imported through the
+// bundler. An imported image only gets its URL once the JS has loaded and
+// React has rendered, which measured ~1.4s on a throttled phone before the
+// browser even began fetching the largest-contentful-paint image. Serving it
+// from a stable public path lets index.html preload it from the first byte of
+// HTML. Bump HERO_VERSION when the source photo changes, since public/ files
+// are not content-hashed.
+const HERO_VERSION = 'v1';
+const HERO_PUBLIC_DIR = join(PUBLIC, 'hero');
 
 // Navbar shows the logo at ~83x40 CSS px, footer at ~99x48. 400px covers 3x
 // pixel density with room to spare; the source is 800px.
@@ -53,8 +63,9 @@ async function run() {
   console.log('\n[variants] generating derived images\n');
 
   const heroBefore = await size(HERO_SRC);
+  await mkdir(HERO_PUBLIC_DIR, { recursive: true });
   for (const w of HERO_WIDTHS) {
-    const out = HERO_SRC.replace(/\.jpg$/i, `-${w}.jpg`);
+    const out = join(HERO_PUBLIC_DIR, `hero-${HERO_VERSION}-${w}.jpg`);
     await sharp(HERO_SRC)
       .resize({ width: w, withoutEnlargement: true })
       .jpeg({ quality: 72, mozjpeg: true, progressive: true })

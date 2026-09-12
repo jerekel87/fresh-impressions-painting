@@ -32,6 +32,18 @@
     <meta name="geo.region" content="US-TX" />
     <meta name="geo.placename" content="Granbury" />
 
+    <!-- Preload the LCP hero image so it starts downloading from the first
+         byte of HTML instead of waiting for the JS bundle to render. Must stay
+         in sync with HERO_SRC/HERO_SRCSET in src/components/Hero.tsx. -->
+    <link
+      rel="preload"
+      as="image"
+      href="/hero/hero-v1-1920.jpg"
+      imagesrcset="/hero/hero-v1-800.jpg 800w, /hero/hero-v1-1280.jpg 1280w, /hero/hero-v1-1920.jpg 1920w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
