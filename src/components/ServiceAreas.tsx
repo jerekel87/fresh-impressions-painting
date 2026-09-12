@@ -128,7 +128,7 @@ export default function ServiceAreas() {
           >
             <img
               src={supabaseImgUrl(item.image, 600, 65)}
-              srcSet={supabaseImgSrcSet(item.image, [300, 450, 600], 65) || undefined}
+              srcSet={supabaseImgSrcSet(item.image, [250, 350, 450, 600], 65) || undefined}
               alt={item.title}
               className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
               width={300}

@@ -141,7 +141,7 @@ export default function ServicesPreview() {
             {card.image ? (
               <img
                 src={supabaseImgUrl(card.image, 600, 65)}
-                srcSet={supabaseImgSrcSet(card.image, [400, 600, 800], 65) || undefined}
+                srcSet={supabaseImgSrcSet(card.image, [350, 450, 550, 700], 65) || undefined}
                 alt={card.title}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 width={360}

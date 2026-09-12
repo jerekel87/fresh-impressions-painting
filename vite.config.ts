@@ -47,7 +47,11 @@ export default defineConfig({
   },
   build: {
     target: 'es2020',
-    cssCodeSplit: true,
+    // One stylesheet for the whole app. With code splitting on, Rollup also
+    // listed it as a dependency of the lazy route chunks, so the postbuild
+    // inliner could not actually remove the request. Tailwind produces a
+    // single global sheet anyway, so there is nothing to split.
+    cssCodeSplit: false,
     rollupOptions: {
       output: {
         manualChunks: {

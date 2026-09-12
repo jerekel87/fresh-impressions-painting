@@ -83,7 +83,7 @@ async function run() {
     const outWebp = out.replace(/\.jpg$/, '.webp');
     await sharp(HERO_SRC)
       .resize({ width: w, withoutEnlargement: true })
-      .webp({ quality: 72 })
+      .webp({ quality: 62 })
       .toFile(outWebp);
     console.log(`  hero  ${String(w).padStart(4)}w  jpg ${kb(await size(out)).padStart(8)}   webp ${kb(await size(outWebp)).padStart(8)}`);
   }
@@ -99,7 +99,7 @@ async function run() {
     const outWebp = out.replace(/\.jpg$/, '.webp');
     await sharp(ABOUT_SRC)
       .resize({ width: w, withoutEnlargement: true })
-      .webp({ quality: 72 })
+      .webp({ quality: 62 })
       .toFile(outWebp);
     console.log(`  about ${String(w).padStart(4)}w  jpg ${kb(await size(out)).padStart(8)}   webp ${kb(await size(outWebp)).padStart(8)}`);
   }
@@ -114,7 +114,7 @@ async function run() {
     const outWebp = out.replace(/\.png$/, '.webp');
     await sharp(LOGO_SRC)
       .resize({ width: w, withoutEnlargement: true })
-      .webp({ quality: 82 })
+      .webp({ quality: 70 })
       .toFile(outWebp);
     console.log(`  logo  ${String(w).padStart(4)}w  png ${kb(await size(out)).padStart(8)}   webp ${kb(await size(outWebp)).padStart(8)}`);
   }
